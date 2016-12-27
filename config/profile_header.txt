@@ -1,0 +1,13 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<style>
+@import url("../../style.css");
+</style>
+
+<title>#NAME's SOTW Gallery</title>
+</head>
+<body>
+<div class='big-block'>
+<div class='grand-title'>#NAME's Screenshot of the Week Gallery</div>
+<!--<div class='updated-text'>Last updated with the results of Screenshot of the Week <span style='font-weight:bold;'>###</span></div>-->

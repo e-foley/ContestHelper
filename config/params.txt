@@ -1,0 +1,33 @@
+// Whether to generate leaderboard data (true) or not (false).
+GENERATE_LEADERBOARD = true;
+
+// Format for each leaderboard is: ID, show as hidden, show details, link contests in details.
+// ID 1 is total votes, ID 2 is total points, ID 3 is total victories, and ID 4 is total entries.
+LEADERBOARD_CONFIG = 1, true, true, false; 2, true, true, false; 3, true, true, false; 4, true, true, false
+
+// Whether to separate leaderboards into multiple files (true) as opposed to combining them into one (false).
+SPLIT_LEADERBOARDS = true;
+
+// Whether to generate archives data (true) or not (false).
+// Output gets sent to the /archives/ directory.
+GENERATE_ARCHIVES = true;
+
+// What prefix to show for each contest title in the archives.
+TITLE_IN_ARCHIVES = Map of the Month
+
+// The default path for every image, appended to as needed for each image.
+// Zeros will be added as necessary to match hashes.
+// Example 1: "http://www.####.com" for contest 42 becomes "http://www.0042.com".
+// Example 2: "http://www.#.com for contest 42 becomes "http://www.42.com".
+DEFAULT_PATH = http://sotw.purezc.com/MOTM/##/
+
+// Whether to show point information in the archives.
+SHOW_POINTS_IN_ARCHIVES = true
+
+// How many contests to put in each archives output file.
+// Put "-1" to signify no limit.
+CONTESTS_PER_ARCHIVES_PAGE = 50
+
+// Whether to generate a list of the most recent names of members in the contest's history (true) or not (false).
+// Output gets sent to the /members/ directory.
+GENERATE_MEMBER_LIST = true

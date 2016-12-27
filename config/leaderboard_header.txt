@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<style>
+@import url("../style.css");
+</style>
+<script language="javascript">
+// Based on http://www.randomsnippets.com/2008/02/12/how-to-hide-and-show-your-div/
+function toggle(ID, show)
+{
+	var closed = document.getElementById(ID + "_closed");
+	var open = document.getElementById(ID + "_open");
+
+	if (show == 1)
+	{
+		closed.style.display = "none";
+		open.style.display = "block";
+	}
+
+	else
+	{
+		closed.style.display = "block";
+		open.style.display = "none";
+	}
+} 
+</script>
+<title>SOTW Leaderboards</title>
+</head>
+<body>
+<div class='big-block'>
+<div class='grand-title'>Screenshot of the Week Leaderboards</div>
+<div class='updated-text'>Last updated with the results of Screenshot of the Week <span style='font-weight:bold;'>###</span></div>
+
+
+<div class='leaderboard' style='display: show;' id='a_closed'>
+<table class='leaderboard-table stunt'><tr class='header-row'><td>
+<div class='tableheaderright'><a href='javascript:toggle("a", 1);'>
+<img src='https://dl.dropboxusercontent.com/u/10663130/PureZC/exp_plus.png' border='0' alt='Expand' /></a></div>
+<a class='green' href='javascript:toggle("a", 1);'>Frequently Asked Questions</a></td></tr></table></div>
+
+
+<div class='leaderboard' style='display: none;' id='a_open'>
+<table class='leaderboard-table'><tr class='header-row'><td>
+<div class='tableheaderright'><a href='javascript:toggle("a", 0);'>
+<img src='https://dl.dropboxusercontent.com/u/10663130/PureZC/exp_minus.png' border='0' alt='Collapse' /></a></div>
+<a class='green' href='javascript:toggle("a", 0);'>Frequently Asked Questions</a></td></tr>
+
+<tr><td class='intro'>
+<div class='faq-you'>What the heck is this?</div>
+<div class='answer-you'>You've found the Screenshot of the Week leaderboards. Each leaderboard ranks everybody who has entered the contest based on different criteria, such as votes, points, victories, and total entries.</div>
+<p/>
+<div class='faq-you'>What are points?</div>
+<div class='answer-you'>Good question! You get one point for each vote you receive in a contest, and an additional point for every vote by which you best your competitors, even if you don't win the contest as a whole. If I get 15 votes in a contest and I beat two opponents by 7 and 11 votes, I get 15 + 7 + 11 = <span style='font-weight: bold'>33</span>  points.</div>
+<p/>
+<div class='faq-you'>Why bother with points?</div>
+<div class='answer-you'>Votes are harder to come by in large contests because there are more options for voters to choose from. This makes each vote received in a large contest arguably more valuable than each vote received in a small contest. Points reflect this whereas a simple vote tally does not.</div>
+<p/>
+<div class='faq-you'>Some members have question marks (?) instead of votes and points in the details section. Why?</div>
+<div class='answer-you'>The polls in Screenshots of the Week 1-4 are lost. For these contests, entrants are formally given zero votes and zero points but get preference in the leaderboards over members who would otherwise have the same number of votes or points. This is denoted with a plus sign (+) beside the appropriate tally.</div>
+<p/>
+<!--<div class='faq-you'>How are names ordered in the case of a tie?</div>
+<div class='answer-you'>Do you really want to know? Okay, fine. Ties are broken by which member entered more recently. If both members last entered in the same contest, the upper hand is given to whoever got more votes in that contest. If both received the same number of votes, then whoever entered more recently prior to that contest is favored. The votes here are then compared if necessary. This algorithm works its way back to the start of the contest. If two members have identical records, then case-insensitive alphabetical order is the deciding factor. Don't expect this to happen often.</div>
+<p/>-->
+<div class='faq-you'>Should I take these leaderboards seriously?</div>
+<div class='answer-you'>The whole idea behind this page is to offer a unique retrospective on the history of the contest for <span style='font-weight: bold;'>fun</span>. There are errors on it. The list of categories is not comprehensive. Both the votes and the points systems are flawed to an extent. The answer is no: do not take these stats too seriously. If you want to base your value as a human being off the results shown here, take a step back and re-examine your priorities in life.</div>
+<p/>
+<div class='faq-you'>How is this page generated?</div>
+<div class='answer-you'>A Java applet forms HTML from the contest results as they are presented in a text file. The script takes only about one second to run.</div>
+<p/>
+<div class='faq-you'>Whom should I contact with comments, questions or error reports?</div>
+<div class='answer-you'><a class='green' href='http://www.purezc.net/forums/index.php?app=members&module=messaging&section=send&do=form&fromMemberID=2237'>Send a private message to nicklegends.</a> Thanks in advance for the feedback!</div>
+</td></tr></table>
+</div>
