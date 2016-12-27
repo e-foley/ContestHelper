@@ -59,3 +59,9 @@ bluej.pkh
 doc/resources/inherit.gif
 doc/logfile.txt
 *.jar
+
+# ELF: Project-specific excludes
+archives/
+backup/
+leaderboards/
+members/
