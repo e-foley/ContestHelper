@@ -47,7 +47,15 @@ Temporary Items
 .apdisk
 
 # ELF: BlueJ info files
-.ctxt
-.class
-.pkg
-.jar
+*.java#backup
+*.pkg
+bluej.pkh
+*.class
+*.ctxt
+*.html
+*.java~
+*.bluej
+*.css
+doc/resources/inherit.gif
+doc/logfile.txt
+*.jar
