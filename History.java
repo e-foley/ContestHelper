@@ -289,7 +289,7 @@ public class History
                         }
                         else
                         {
-                            out.write("<td class='votes'>—</td><td class='points'>—</td>");
+                            out.write("<td class='votes'>&mdash;</td><td class='points'>&mdash;</td>");
                         }
                         out.newLine();
                         out.write("</tr>");
