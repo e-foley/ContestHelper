@@ -76,11 +76,13 @@ abstract class UserProfile
     
     public static String getProfileURL(Member mem)
     {
-        return "../SOTW_Stats/profiles/" + getSafeName(mem.getMostRecentName()) + ".html";
+        return "output/profiles/" + getSafeName(mem.getMostRecentName()) + ".html";
     }
     
+    // I don't remember why I have this method.
     public static String getProfileDropboxURL(Member mem)
     {
-        return "https://dl.dropboxusercontent.com/u/10663130/PureZC/SOTW_Stats/profiles/" + getSafeName(mem.getMostRecentName()) + ".html";
+        return "profiles/" + getSafeName(mem.getMostRecentName()) + ".html";
+        // return "http://sotw.elfractal.com/profiles/" + getSafeName(mem.getMostRecentName()) + ".html";
     }
 }

@@ -246,7 +246,7 @@ public class History
                     for (int j=0; j<winners.size(); j++)
                     {
                         if (!winners.get(j).hasURL())
-                            out.write("<img class='picture-picture' title='The winner&#8217;s image is missing from the archives. Sorry.' src='images/no_image.gif'/>");
+                            out.write("<img class='picture-picture' title='The winner&#8217;s image is missing from the archives. Sorry.' src='../images/no_image.png'/>");
                         else
                             out.write("<img class='picture-picture' title='" + winners.get(j).getMember().getMostRecentName() + "' src='" + winners.get(j).getURL() + "'/>");
                     }

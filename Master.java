@@ -82,14 +82,14 @@ public abstract class Master
 //             }
                 
                 //fstream = new FileWriter("archives/archive-" + history.getLastContestName() + ".html");
-                fstream = new FileWriter("../SOTW_Stats/archives" + testText + ".html");
+                fstream = new FileWriter("output/archives" + testText + ".html");
                 out = new BufferedWriter(fstream);
                 Master.addFileToBuffer("config/archives_header.txt", out, swaps);
                 history.commitToFile(out);
                 Master.addFileToBuffer("config/archives_footer.txt", out, swaps);
                 out.close();
                 
-                fstream = new FileWriter("../SOTW_Stats/archives-digest" + testText + ".html");
+                fstream = new FileWriter("output/archives-digest" + testText + ".html");
                 out = new BufferedWriter(fstream);
                 Master.addFileToBuffer("config/archives_header.txt", out, swaps);
                 history.commitToFile(out, 15);
@@ -114,7 +114,7 @@ public abstract class Master
                     int contest_start = Math.max(i - CONTESTS_PER_PAGE + 1, 1);
                     int contest_end = i;
                     //fstream = new FileWriter("../SOTW_Stats/archives-" + contest_start + "-" + contest_end + testText + ".html");
-                    fstream = new FileWriter("../SOTW_Stats/archives-page" + p + ".html");
+                    fstream = new FileWriter("output/archives-page" + p + ".html");
                     out = new BufferedWriter(fstream);
                     Master.addFileToBuffer("config/archives_header.txt", out, swaps);
                     history.commitToFile(out, contest_start, contest_end);
@@ -127,7 +127,7 @@ public abstract class Master
 
             // LEADERBOARD
             //fstream = new FileWriter("leaderboards/leaderboard-" + history.getLastContestName() + ".html");
-            fstream = new FileWriter("../SOTW_Stats/leaderboards" + testText + ".html");
+            fstream = new FileWriter("output/leaderboards" + testText + ".html");
             out = new BufferedWriter(fstream);
             Master.addFileToBuffer("config/leaderboard_header.txt", out, swaps);
             Leaderboard.addLeaderboardToFile(history.getMembers(), new MemberSortVotes(), "Most votes (all-time)", "", " vote", " Votes", out, true, true, true, 1);
@@ -145,7 +145,7 @@ public abstract class Master
             Master.addFileToBuffer("config/leaderboard_footer.txt", out, swaps);
             out.close();
             
-            fstream = new FileWriter("../SOTW_Stats/leaderboards-digest" + testText + ".html");
+            fstream = new FileWriter("output/leaderboards-digest" + testText + ".html");
             out = new BufferedWriter(fstream);
             Master.addFileToBuffer("config/leaderboard_header.txt", out, swaps);
             Leaderboard.addLeaderboardToFile(history.getMembers(), new MemberSortVotes(), "Most votes (all-time)", "", " vote", " Votes", out, false, false, true, 1, DIGEST_LIST_LENGTH);
