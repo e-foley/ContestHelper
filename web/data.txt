@@ -2146,7 +2146,7 @@ skulduggery; png; 1
 Rover; png; 1
 
 #312 @ 49082
-Isdrakthï¿½l; Isdrakthul; png; 6
+Isdrakthül; Isdrakthul; png; 6
 Ornlu; png; 18
 Rover; png; 0
 Furion; png; 20
@@ -2230,7 +2230,7 @@ William; png; 19
 #324 @ 50312
 Sepulcher; png; 7
 King Harkinian; KingHarkinian; png; 5
-Isdrakthï¿½l; Isdrakthul; png; 3
+Isdrakthül; Isdrakthul; png; 3
 link1996; png; 7
 Yoshidude; png; 2
 Lynker; png; 5
@@ -2339,7 +2339,7 @@ trudatman; png; 4
 
 #337 @ 51657
 linktopower; jpg; 1
-Isdrakthï¿½l; Isdrakthul; png; 6
+Isdrakthül; Isdrakthul; png; 6
 Moo2wo; gif; 24
 Ornlu; png; 9
 
@@ -3947,7 +3947,7 @@ Avataro; png; 6
 #579 @ 70939
 Lunaria; png; 1
 Joelmacool; png; 10
-Lï¿½t; Lut; png; 28
+Lüt; Lut; png; 28
 Sephiroth; png; 10
 
 #580 @ 70971
@@ -3981,7 +3981,7 @@ Polaris; png; 13
 #585 @ 71191
 Joelmacool; png; 13
 Moosh; png; 11
-Lï¿½t; Lut; png; 19
+Lüt; Lut; png; 19
 
 #586 @ 71230
 Zaxarone; png; 2
@@ -4020,5 +4020,5 @@ Plutia; png; 1
 /*
 #591 @ 91440
 Joelmacool; png; 16
-Lï¿½t; Lut; png; 15
+Lüt; Lut; png; 15
 Dimentio; png; 2
