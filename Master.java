@@ -135,7 +135,8 @@ public abstract class Master
             Leaderboard.addLeaderboardToFile(history.getMembers(), new MemberSortVotesSingle(), "Most votes (single contest, by member)", "", " votes", " Votes", out, true, true, true, 3);
             Leaderboard.addLeaderboardToFile(history.getMembers(), new MemberSortPointsSingle(), "Most points (single contest, by member)", "", " points", " Points", out, true, true, true, 4);
             Leaderboard.addLeaderboardToFile(history.getMembers(), new MemberSortVictories(), "Most victories", "", " victory", " Wins", out, true, true, true, 5);
-            Leaderboard.addLeaderboardToFile(history.getMembers(), new MemberSortEntries(), "Most participation", "", " entry", " Entries", out, true, true, true, 6);
+            // NOTE: "Max entries" list has no details because the same information is available in the gallery.
+            Leaderboard.addLeaderboardToFile(history.getMembers(), new MemberSortEntries(), "Most participation", "", " entry", " Entries", out, true, false, true, 6);
             Leaderboard.addLeaderboardToFile(history.getMembers(), new MemberSortConsecutiveStrict(), "Longest winning streaks (in consecutive contests, by member)", "", " streak", " Streak", out, true, true, true, 7);
             Leaderboard.addLeaderboardToFile(history.getMembers(), new MemberSortConsecutiveLoose(), "Longest winning streaks (in consecutive attempts, by member)", "", " streak", " Streak", out, true, true, true, 8);
             Leaderboard.addLeaderboardToFile(history.getMembers(), new MemberSortWinRatio(), "Best win ratios (minimum 5 entries)", "", "", " Ratio", out, true, true, true, 9);
