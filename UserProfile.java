@@ -46,7 +46,7 @@ abstract class UserProfile
                 if (ent.hasURL()) {
                     out.write("<img class='picture-large' title='" + ent.getContest().getName() + "' src='" + ent.getURL() + "'/>");
                 } else {
-                    out.write("<img class='picture-large' title='" + ent.getContest().getName() + "' src='../images/no_image.gif'/>");
+                    out.write("<img class='picture-large' title='" + ent.getContest().getName() + "' src='../images/no_image.png'/>");
                 }
                 out.write("<div class='picture-large-caption'>");
                 if (cont.hasTopic()) {
