@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <style>
-@import url("../style.css");
+@import url("style.css");
 </style>
 <script language="javascript">
 // Based on http://www.randomsnippets.com/2008/02/12/how-to-hide-and-show-your-div/

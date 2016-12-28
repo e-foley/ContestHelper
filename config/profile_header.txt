@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <style>
-@import url("../../style.css");
+@import url("../style.css");
 </style>
 
 <title>#NAME's SOTW Gallery</title>
