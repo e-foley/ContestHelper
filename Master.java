@@ -36,12 +36,12 @@ public abstract class Master
         
         History history = new History();
         String strLine = new String();
-        if (!history.populateMembersFromFile("associations.txt"))
+        if (!history.populateMembersFromFile("web/associations.txt"))
         {
             JOptionPane.showMessageDialog(null, "Error while parsing associations.txt.\nPerhaps data aren't delimited correctly.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if (!history.populateEntriesFromFile("data.txt"))
+        if (!history.populateEntriesFromFile("web/data.txt"))
         {
             JOptionPane.showMessageDialog(null, "Error while parsing data.txt.\nPerhaps data aren't delimited correctly or a numeric value is misplaced.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -55,8 +55,8 @@ public abstract class Master
         try
         {        
             // make backups of input
-            Master.copyFile(new File("data.txt"),new File("backup/data-" + history.getLastContestName() + ".txt"));
-            Master.copyFile(new File("associations.txt"),new File("backup/associations-" + history.getLastContestName() + ".txt"));
+            Master.copyFile(new File("web/data.txt"),new File("backup/data-" + history.getLastContestName() + ".txt"));
+            Master.copyFile(new File("web/associations.txt"),new File("backup/associations-" + history.getLastContestName() + ".txt"));
             
             // Begin archives
 //             int index = STARTING_INDEX;
@@ -82,14 +82,14 @@ public abstract class Master
 //             }
                 
                 //fstream = new FileWriter("archives/archive-" + history.getLastContestName() + ".html");
-                fstream = new FileWriter("output/archives" + testText + ".html");
+                fstream = new FileWriter("web/archives" + testText + ".html");
                 out = new BufferedWriter(fstream);
                 Master.addFileToBuffer("config/archives_header.txt", out, swaps);
                 history.commitToFile(out);
                 Master.addFileToBuffer("config/archives_footer.txt", out, swaps);
                 out.close();
                 
-                fstream = new FileWriter("output/archives-digest" + testText + ".html");
+                fstream = new FileWriter("web/archives-digest" + testText + ".html");
                 out = new BufferedWriter(fstream);
                 Master.addFileToBuffer("config/archives_header.txt", out, swaps);
                 history.commitToFile(out, 15);
@@ -114,7 +114,7 @@ public abstract class Master
                     int contest_start = Math.max(i - CONTESTS_PER_PAGE + 1, 1);
                     int contest_end = i;
                     //fstream = new FileWriter("../SOTW_Stats/archives-" + contest_start + "-" + contest_end + testText + ".html");
-                    fstream = new FileWriter("output/archives-page" + p + ".html");
+                    fstream = new FileWriter("web/archives-page" + p + ".html");
                     out = new BufferedWriter(fstream);
                     Master.addFileToBuffer("config/archives_header.txt", out, swaps);
                     history.commitToFile(out, contest_start, contest_end);
@@ -127,7 +127,7 @@ public abstract class Master
 
             // LEADERBOARD
             //fstream = new FileWriter("leaderboards/leaderboard-" + history.getLastContestName() + ".html");
-            fstream = new FileWriter("output/leaderboards" + testText + ".html");
+            fstream = new FileWriter("web/leaderboards" + testText + ".html");
             out = new BufferedWriter(fstream);
             Master.addFileToBuffer("config/leaderboard_header.txt", out, swaps);
             Leaderboard.addLeaderboardToFile(history.getMembers(), new MemberSortVotes(), "Most votes (all-time)", "", " vote", " Votes", out, true, true, true, 1);
@@ -145,7 +145,7 @@ public abstract class Master
             Master.addFileToBuffer("config/leaderboard_footer.txt", out, swaps);
             out.close();
             
-            fstream = new FileWriter("output/leaderboards-digest" + testText + ".html");
+            fstream = new FileWriter("web/leaderboards-digest" + testText + ".html");
             out = new BufferedWriter(fstream);
             Master.addFileToBuffer("config/leaderboard_header.txt", out, swaps);
             Leaderboard.addLeaderboardToFile(history.getMembers(), new MemberSortVotes(), "Most votes (all-time)", "", " vote", " Votes", out, false, false, true, 1, DIGEST_LIST_LENGTH);
