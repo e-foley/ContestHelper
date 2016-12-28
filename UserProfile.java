@@ -76,7 +76,7 @@ abstract class UserProfile
     
     public static String getProfileURL(Member mem)
     {
-        return "output/profiles/" + getSafeName(mem.getMostRecentName()) + ".html";
+        return "web/profiles/" + getSafeName(mem.getMostRecentName()) + ".html";
     }
     
     // I don't remember why I have this method.
