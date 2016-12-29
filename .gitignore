@@ -55,7 +55,6 @@ bluej.pkh
 *.html
 *.java~
 *.bluej
-*.css
 doc/resources/inherit.gif
 doc/logfile.txt
 *.jar

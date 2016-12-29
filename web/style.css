@@ -1,0 +1,365 @@
+body
+{
+  font-family: Tahoma, Verdana, Times New Roman, Serif;
+  font-size: 11px;
+  
+  /*background-image:url('http://www.purezc.com/Images/PureZC-Green/background.png');*/
+  background-image: url('https://dl.dropbox.com/u/10663130/PureZC/new_quilt_subtle_2.jpg');
+  background-color: #355E3B;
+}
+
+div.big-block
+{
+  width: 900px;
+  background-color: #225522;
+  background-color: #779977;
+  background-color: #355E3B;
+  margin: 0 auto;
+  border-style: solid;
+  border-color: #C0C0C0;
+  border-width: 2px;
+}
+
+.contest-block {border-style: solid; border-width: 0px;}
+
+a.contest:link {color: #e5c006; text-decoration: none;}
+a.contest:visited {color: #e5c006; text-decoration: none;}
+a.contest:hover {color: #e5c006; text-decoration: underline;}
+
+a.image:link {color: #008000; text-decoration: none;}
+a.image:visited {color: #008000; text-decoration: none;}
+a.image:hover {color: #008000; text-decoration: underline;}
+
+a.green:link {color: #008000; text-decoration: none;}
+a.green:visited {color: #008000; text-decoration: none;}
+a.green:hover {color: #008000; text-decoration: underline;}
+
+a.alt:link {color: #AAFFAA; text-decoration: none;}
+a.alt:visited {color: #AAFFAA; text-decoration: none;}
+a.alt:hover {color: #AAFFAA; text-decoration: underline;}
+
+a.black:link {color: #000000; text-decoration: none;}
+a.black:visited {color: #000000; text-decoration: none;}
+a.black:hover {color: #000000; text-decoration: underline;}
+
+tr
+{
+  border-style: solid;
+  border-width: 1px;
+  border-color: #8FBC8F;
+}
+
+td
+{
+  padding: 0px 3px;
+}
+
+td.contest-cell
+{
+  padding: 10px;
+  height: 220px;
+}
+
+.contest-title
+{
+  background-color: #56825a;
+  background-image: url('http://www.purezc.com/Images/toprow.gif');
+  font-weight: bold;
+  color: #e5c006;
+  text-align: center;
+  height: 20px;
+}
+
+.sort-title
+{
+  background-color: #56825a;
+  background-image: url('http://www.purezc.com/Images/toprow.gif');
+  font-weight: bold;
+  color: #e5c006;
+  text-align: center;
+  height: 30px;
+  font-size: 1.5em;
+}
+
+.header-row
+{
+  background-color: #eeffee;
+  background-image: url('http://www.purezc.com/Images/catrow.gif');
+  font-weight: bold;
+  color: #008000;
+
+  text-align: center;
+  height: 20px;
+}
+
+.left
+{
+  text-align: left;
+}
+
+.center
+{
+  text-align: center;
+}
+
+.right
+{
+  text-align: center;
+}
+
+.results-table
+{
+  border-collapse: collapse;
+  background-color: #f7fff7;
+  margin-left: auto;
+  margin-right: auto;
+  width: 250px;
+  height: 100%;
+}
+
+.leaderboard-table
+{
+  border-collapse: collapse;
+  background-color: #f7fff7;
+  width: 700px;
+  margin: 10px auto;
+}
+
+.entry {text-align: left;}
+.name {}
+
+.winner
+{
+  font-weight: bold;
+  background-color: #ccffcc;
+}
+
+.info-row
+{
+  height: 20px;
+  background-color: #555555;
+  color: #FFFFFF;
+}
+
+.big-board
+{
+  margin: auto;
+}
+
+.sort-title
+{
+}
+
+.leaderboard
+{
+}
+
+.sort-title
+{
+}
+
+.place-cell
+{
+}
+
+.name-cell
+{
+}
+
+.details
+{
+  /*font-size: 0.75em;*/
+  font-size: 9px;
+  //width: 60%
+}
+
+.first
+{
+  /*background-color: #CFB53B;*/
+  /*background-color: #E8CB42;*/
+  /*background-color: #E3DA99;*/
+  /*background-color: #D4AF37;*/
+  background-color: #FFE8A0;
+  font-size: 2em;
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+  //height: 75px;
+}
+
+.second
+{
+  /*background-color: #A8A8B0;*/
+  /*background-color: #CFCFD9;*/
+  background-color: #D5D5D5;
+  font-size: 1.5em;
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+  //height: 75px;
+}
+
+.third
+{
+  /*background-color: #A67D3D;*/
+  /*background-color: #D19D4D;*/
+  /*background-color: #DFE4E1;*/
+  background-color: #FFCE9E;
+  font-size: 1.5em;
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+  //height: 75px;
+}
+
+.fourth
+{
+  font-size: 1em;
+}
+
+.place-cell
+{
+  text-align: center;
+  //width: 10%;
+}
+
+.number-cell
+{
+  text-align: center;
+  //width: 10%;
+}
+
+
+.performance
+{
+}
+
+.name-cell
+{
+  font-weight: bold;
+}
+
+.notes
+{
+  color: #DDFFDD;
+  font-style: italic;
+  text-align: center;
+  width: 700px;
+  margin: auto;
+}
+
+.tableheaderright
+{
+  float: right;
+  vertical-align: middle;
+}
+
+.stunt
+{
+  width: 700px;
+  //margin: 10px auto;
+}
+
+.votes {text-align: center;}
+.points {text-align: center;}
+.tie-note {font-size: 1.0em; font-style: italic;}
+.contest-cell {vertical-align: top;}
+
+.faq-you
+{
+  font-weight: bold;
+  //color: #FFFFFF;
+}
+
+.answer-you
+{
+  //color: #FFFFFF;
+}
+
+.intro
+{
+  //background-color: #ccffcc;
+  background-color: #eeffee;
+}
+
+/* todo: Grand title and updated text should be part of one div so margins make more sense */
+
+.grand-title
+{
+  font-size: 3em;
+  color: #FFFFFF;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+}
+
+.updated-text
+{
+  font-size: 1.5em;
+  color: #FFFFFF;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.stats
+{
+  text-align: right;
+}
+
+.picture-cell
+{
+}
+
+.picture-picture
+{
+   max-width: 256px;
+   min-height: 168px;
+   max-height: 224px;
+}
+
+.picture-large-list
+{
+   text-align: center;
+}
+
+.picture-large-div
+{
+	width: 512px;
+	
+	/* Maintains pixelated look */
+	image-rendering: -moz-crisp-edges;         /* Firefox */
+    image-rendering:   -o-crisp-edges;         /* Opera */
+    image-rendering: -webkit-optimize-contrast;/* Webkit (non-standard naming) */
+    image-rendering: crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor;  /* IE (non-standard property) */
+
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.picture-large
+{
+	width: 100%;
+	height: auto;
+	border: 10px #AAAAAA ridge;
+	margins: auto;
+}
+
+.picture-large-caption
+{
+	text-align: right;
+}
+
+.winnericon
+{
+	height: 1em;
+}
+
+.tooltip
+{
+	vertical-align: top;
+	font-size: 75%;
+}
