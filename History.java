@@ -246,7 +246,7 @@ public class History
                     for (int j=0; j<winners.size(); j++)
                     {
                         if (!winners.get(j).hasURL())
-                            out.write("<img class='picture-picture' title='The winner&#8217;s image is missing from the archives. Sorry.' src='../images/no_image.png'/>");
+                            out.write("<img class='picture-picture' title='The winner&#8217;s image is missing from the archives. Sorry.' src='images/no_image.png'/>");
                         else
                             out.write("<img class='picture-picture' title='" + winners.get(j).getMember().getMostRecentName() + "' src='" + winners.get(j).getURL() + "'/>");
                     }
@@ -274,6 +274,12 @@ public class History
                         out.write(entry.getMember().getMostRecentName());
                         if (entry.hasURL())
                             out.write("</a>");
+                            
+                        // Add an icon if the shot won the contest
+                        if (isWinner) {
+                            out.write(" <img class='winnericon' title='Winner!' src='images/star.png'/>");
+                        }
+                            
                         out.write("</td>");
 
                         if (entry.hasVotes())
