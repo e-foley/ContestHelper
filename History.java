@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  */
 public class History
 {
-    public static final int CONTESTS_PER_LINE = 3;
+    public static final int CONTESTS_PER_LINE = 2;
 
     private ArrayList<Contest> contests;
     private ArrayList<Member> members;

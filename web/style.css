@@ -1,7 +1,7 @@
 body
 {
   font-family: Tahoma, Verdana, Times New Roman, Serif;
-  font-size: 11px;
+  font-size: 16px;
   
   /*background-image:url('http://www.purezc.com/Images/PureZC-Green/background.png');*/
   background-image: url('https://dl.dropbox.com/u/10663130/PureZC/new_quilt_subtle_2.jpg');
@@ -10,9 +10,7 @@ body
 
 div.big-block
 {
-  width: 900px;
-  background-color: #225522;
-  background-color: #779977;
+  width: 1100px;
   background-color: #355E3B;
   margin: 0 auto;
   border-style: solid;
@@ -57,39 +55,41 @@ td
 td.contest-cell
 {
   padding: 10px;
-  height: 220px;
 }
 
 .contest-title
 {
   background-color: #56825a;
-  background-image: url('http://www.purezc.com/Images/toprow.gif');
+  // background-image: url('http://www.purezc.net/Images/toprow.gif');
   font-weight: bold;
   color: #e5c006;
+  text-shadow: 1px 1px 1px #503800;
   text-align: center;
-  height: 20px;
+  height: 1.75em;
 }
 
 .sort-title
 {
   background-color: #56825a;
-  background-image: url('http://www.purezc.com/Images/toprow.gif');
+  // background-image: url('http://www.purezc.net/Images/toprow.gif');
   font-weight: bold;
   color: #e5c006;
+  text-shadow: 1px 1px 1px #503800;
   text-align: center;
-  height: 30px;
   font-size: 1.5em;
+  height: 1.7em;
 }
 
 .header-row
 {
   background-color: #eeffee;
-  background-image: url('http://www.purezc.com/Images/catrow.gif');
+  background-image: url('http://www.purezc.net/Images/catrow.gif');
   font-weight: bold;
   color: #008000;
 
   text-align: center;
-  height: 20px;
+  font-size: 1.0em;
+  height: 1.7em;
 }
 
 .left
@@ -113,15 +113,14 @@ td.contest-cell
   background-color: #f7fff7;
   margin-left: auto;
   margin-right: auto;
-  width: 250px;
-  height: 100%;
+  width: 512px;
 }
 
 .leaderboard-table
 {
   border-collapse: collapse;
   background-color: #f7fff7;
-  width: 700px;
+  width: 900px;
   margin: 10px auto;
 }
 
@@ -136,7 +135,7 @@ td.contest-cell
 
 .info-row
 {
-  height: 20px;
+  height: 1.5em;
   background-color: #555555;
   color: #FFFFFF;
 }
@@ -146,15 +145,7 @@ td.contest-cell
   margin: auto;
 }
 
-.sort-title
-{
-}
-
 .leaderboard
-{
-}
-
-.sort-title
 {
 }
 
@@ -232,6 +223,7 @@ td.contest-cell
 
 .performance
 {
+  height: 2em;
 }
 
 .name-cell
@@ -244,8 +236,8 @@ td.contest-cell
   color: #DDFFDD;
   font-style: italic;
   text-align: center;
-  width: 700px;
-  margin: auto;
+  width: 900px;
+  margin: 1.5em auto;
 }
 
 .tableheaderright
@@ -256,7 +248,7 @@ td.contest-cell
 
 .stunt
 {
-  width: 700px;
+  width: 900px;
   //margin: 10px auto;
 }
 
@@ -309,13 +301,22 @@ td.contest-cell
 
 .picture-cell
 {
+  padding: 0px;
 }
 
 .picture-picture
 {
-   max-width: 256px;
-   min-height: 168px;
-   max-height: 224px;
+  width: 512px;
+
+  /* Maintains pixelated look */
+  image-rendering: -moz-crisp-edges;         /* Firefox */
+  image-rendering:   -o-crisp-edges;         /* Opera */
+  image-rendering: -webkit-optimize-contrast;/* Webkit (non-standard naming) */
+  image-rendering: crisp-edges;
+  -ms-interpolation-mode: nearest-neighbor;  /* IE (non-standard property) */
+
+  /* Gets rid of reserved "baseline" margin of ~3px */
+  vertical-align: middle;
 }
 
 .picture-large-list
@@ -325,19 +326,19 @@ td.contest-cell
 
 .picture-large-div
 {
-	width: 512px;
+  width: 512px;
 	
-	/* Maintains pixelated look */
-	image-rendering: -moz-crisp-edges;         /* Firefox */
-    image-rendering:   -o-crisp-edges;         /* Opera */
-    image-rendering: -webkit-optimize-contrast;/* Webkit (non-standard naming) */
-    image-rendering: crisp-edges;
-    -ms-interpolation-mode: nearest-neighbor;  /* IE (non-standard property) */
+  /* Maintains pixelated look */
+  image-rendering: -moz-crisp-edges;         /* Firefox */
+  image-rendering:   -o-crisp-edges;         /* Opera */
+  image-rendering: -webkit-optimize-contrast;/* Webkit (non-standard naming) */
+  image-rendering: crisp-edges;
+  -ms-interpolation-mode: nearest-neighbor;  /* IE (non-standard property) */
 
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 20px;
-	margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .picture-large
