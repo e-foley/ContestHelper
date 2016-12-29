@@ -245,10 +245,13 @@ public class History
                     out.write("<tr><td class='picture-cell' colspan=3>");
                     for (int j=0; j<winners.size(); j++)
                     {
-                        if (!winners.get(j).hasURL())
+                        if (!winners.get(j).hasURL()) {
                             out.write("<img class='picture-picture' title='The winner&#8217;s image is missing from the archives. Sorry.' src='images/no_image.png'/>");
-                        else
+                        } else {
+                            out.write("<a href='" + winners.get(j).getURL() + "'>");
                             out.write("<img class='picture-picture' title='" + winners.get(j).getMember().getMostRecentName() + "' src='" + winners.get(j).getURL() + "'/>");
+                            out.write("</a>");
+                        }
                     }
                     out.write("</td></tr>");
 
