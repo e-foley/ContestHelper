@@ -231,17 +231,10 @@ public class History
                     out.write("<table class='results-table'>");
                     //out.write("<div class='contest-block'>");
                     out.newLine();
-                    out.write("<tr><td class='contest-title' colspan=3>");
-                    if (contest.hasTopic())
-                        out.write("<a class='contest' href='http://www.purezc.net/forums/index.php?showtopic=" + contest.getTopic() + "'>");
-                    //out.write("(" + contest.getSynch() + ") "); // TEMPORARY!
-                    out.write("Screenshot of the Week " + contest.getName());
-                    if (contest.hasTopic())
-                        out.write("</a>");
-                    out.write("</td></tr>");
-
+                    
+                    
+                    
                     //New code to show the pictures
-                    out.newLine();
                     out.write("<tr><td class='picture-cell' colspan=3>");
                     for (int j=0; j<winners.size(); j++)
                     {
@@ -254,7 +247,18 @@ public class History
                         }
                     }
                     out.write("</td></tr>");
+                    out.newLine();
 
+                    // Contest title
+                    out.write("<tr><td class='contest-title' colspan=3>");
+                    if (contest.hasTopic())
+                        out.write("<a class='contest' href='http://www.purezc.net/forums/index.php?showtopic=" + contest.getTopic() + "'>");
+                    //out.write("(" + contest.getSynch() + ") "); // TEMPORARY!
+                    out.write("Screenshot of the Week " + contest.getName());
+                    if (contest.hasTopic())
+                        out.write("</a>");
+                    out.write("</td></tr>");
+                    
                     out.newLine();
                     out.write("<tr class='header-row'><td class='left'>Name</td><td class='center'>Votes</td><td class='center'>Points");
                     out.write("<span class='tooltip' title='Votes plus sum of vote margins over lower-ranking shots'>[?]</span>");
