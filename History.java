@@ -256,7 +256,9 @@ public class History
                     out.write("</td></tr>");
 
                     out.newLine();
-                    out.write("<tr class='header-row'><td class='left'>Name</td><td class='center'>Votes</td><td class='center'>Points</td></tr>");
+                    out.write("<tr class='header-row'><td class='left'>Name</td><td class='center'>Votes</td><td class='center'>Points");
+                    out.write("<span class='tooltip' title='Votes plus sum of vote margins over lower-ranking shots'>[?]</span>");
+                    out.write("</td></tr>");
                     out.newLine();
 
                     for (int j=0; j<contests.get(i).numEntries(); j++)
