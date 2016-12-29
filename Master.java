@@ -17,6 +17,7 @@ public abstract class Master
     public static final int PAGE_LENGTH = 50;
     public static final int STARTING_INDEX = 1;
     public static final int DIGEST_LIST_LENGTH = 10;  // Number of members to list in "digest" version of the leaderboards
+    public static final int NUM_ARCHIVES_DIGEST_ENTRIES = 10;
     
     /**
      * An example of a method - replace this comment with your own
@@ -92,7 +93,7 @@ public abstract class Master
                 fstream = new FileWriter("web/archives-digest" + testText + ".html");
                 out = new BufferedWriter(fstream);
                 Master.addFileToBuffer("config/archives_header.txt", out, swaps);
-                history.commitToFile(out, 15);
+                history.commitToFile(out, NUM_ARCHIVES_DIGEST_ENTRIES);
                 Master.addFileToBuffer("config/archives_footer.txt", out, swaps);
                 out.close();
                 
