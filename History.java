@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  */
 public class History
 {
-    public static final int CONTESTS_PER_LINE = 3;
+    public static final int CONTESTS_PER_LINE = 2;
 
     private ArrayList<Contest> contests;
     private ArrayList<Member> members;
@@ -231,6 +231,25 @@ public class History
                     out.write("<table class='results-table'>");
                     //out.write("<div class='contest-block'>");
                     out.newLine();
+                    
+                    
+                    
+                    //New code to show the pictures
+                    out.write("<tr><td class='picture-cell' colspan=3>");
+                    for (int j=0; j<winners.size(); j++)
+                    {
+                        if (!winners.get(j).hasURL()) {
+                            out.write("<img class='picture-picture' title='The winner&#8217;s image is missing from the archives. Sorry.' src='images/no_image.png'/>");
+                        } else {
+                            out.write("<a href='" + winners.get(j).getURL() + "'>");
+                            out.write("<img class='picture-picture' title='" + winners.get(j).getMember().getMostRecentName() + "' src='" + winners.get(j).getURL() + "'/>");
+                            out.write("</a>");
+                        }
+                    }
+                    out.write("</td></tr>");
+                    out.newLine();
+
+                    // Contest title
                     out.write("<tr><td class='contest-title' colspan=3>");
                     if (contest.hasTopic())
                         out.write("<a class='contest' href='http://www.purezc.net/forums/index.php?showtopic=" + contest.getTopic() + "'>");
@@ -239,21 +258,11 @@ public class History
                     if (contest.hasTopic())
                         out.write("</a>");
                     out.write("</td></tr>");
-
-                    //New code to show the pictures
+                    
                     out.newLine();
-                    out.write("<tr><td class='picture-cell' colspan=3>");
-                    for (int j=0; j<winners.size(); j++)
-                    {
-                        if (!winners.get(j).hasURL())
-                            out.write("<img class='picture-picture' title='The winner&#8217;s image is missing from the archives. Sorry.' src='../images/no_image.png'/>");
-                        else
-                            out.write("<img class='picture-picture' title='" + winners.get(j).getMember().getMostRecentName() + "' src='" + winners.get(j).getURL() + "'/>");
-                    }
+                    out.write("<tr class='header-row'><td class='left'>Name</td><td class='center'>Votes</td><td class='center'>Points");
+                    out.write("<span class='tooltip' title='Votes plus sum of vote margins over lower-ranking shots'>[?]</span>");
                     out.write("</td></tr>");
-
-                    out.newLine();
-                    out.write("<tr class='header-row'><td class='left'>Name</td><td class='center'>Votes</td><td class='center'>Points</td></tr>");
                     out.newLine();
 
                     for (int j=0; j<contests.get(i).numEntries(); j++)
@@ -274,6 +283,12 @@ public class History
                         out.write(entry.getMember().getMostRecentName());
                         if (entry.hasURL())
                             out.write("</a>");
+                            
+                        // Add an icon if the shot won the contest
+                        if (isWinner) {
+                            out.write(" <img class='winnericon' title='Winner!' src='images/star.png'/>");
+                        }
+                            
                         out.write("</td>");
 
                         if (entry.hasVotes())
