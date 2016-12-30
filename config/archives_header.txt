@@ -27,6 +27,6 @@ function toggle(ID, show)
 <title>SOTW Archives</title>
 </head>
 <body>
-<div class='big-block'>
+<div class='big-block archives'>
 <div class='grand-title'>Screenshot of the Week Archives</div>
 <div class='updated-text'>Last updated with the results of Screenshot of the Week <span style='font-weight:bold;'>###</span></div>
