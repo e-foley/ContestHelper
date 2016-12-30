@@ -303,7 +303,7 @@ public class History
                     //                         out.write("<span class='tie-note'>Screenshot of the Week " + contest.getName() + " ended in a draw.</span>");
                     //                     }
 
-                    out.write("<tr class='info-row'><td>");
+                    out.write("<tr class='info-row'><td class='numentries'>");
                     out.write(contest.numEntries() + " entr");
                     if (contest.numEntries() != 1)
                         out.write("ies");
