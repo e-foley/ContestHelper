@@ -213,10 +213,7 @@ public class History
                 {
                     winners = contest.getWinners();
                     out.write("<table class='results-table'>");
-                    //out.write("<div class='contest-block'>");
                     out.newLine();
-                    
-                    
                     
                     //New code to show the pictures
                     out.write("<tr><td class='picture-cell' colspan=3>");
@@ -259,8 +256,6 @@ public class History
                         else
                             out.write("<tr class='entry'>");
 
-                        //out.newLine();
-
                         out.write("<td class='name'>");
                         if (entry.hasURL())
                             out.write("<a class='image' href='" + entry.getURL() + "'>");
@@ -278,13 +273,7 @@ public class History
                         if (entry.hasVotes())
                         {
                             out.write("<td class='votes'>"+ entry.getVotes() + "</td>");
-                            //                             if (entry.getVotes() != 1)
-                            //                                 out.write("s");
-                            //                             out.write("</td>");
                             out.write("<td class='points'>" + entry.getPoints() + "</td>");
-                            //                             if (entry.getPoints() != 1)
-                            //                                 out.write("s");
-                            //                             out.write(")</span>");
                         }
                         else
                         {
@@ -292,9 +281,6 @@ public class History
                         }
                         out.newLine();
                         out.write("</tr>");
-                        //else
-                        //out.write(" – ? votes (? points)");
-                        //out.write("</span>");
                     }
                     //                     if (winners.size() >= 2)
                     //                     {
@@ -317,8 +303,6 @@ public class History
 
                     out.write("</table>");
                     out.newLine();
-                    //out.write("</div>");
-                    //out.newLine();
                     out.newLine();
                     
                     countUp++;
