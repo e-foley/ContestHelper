@@ -119,7 +119,6 @@ td.contest-cell
   border-collapse: collapse;
   background-color: #f7fff7;
   margin: 10px;
-  width: 512px;
   display: inline-block;
   vertical-align: top;
 }
