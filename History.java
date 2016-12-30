@@ -13,8 +13,6 @@ import javax.swing.JOptionPane;
  */
 public class History
 {
-    public static final int CONTESTS_PER_LINE = 2;
-
     private ArrayList<Contest> contests;
     private ArrayList<Member> members;
 
@@ -202,8 +200,8 @@ public class History
             Contest contest;
             boolean isWinner;
             ArrayList<Entry> winners;
-            //int currentSynch;
-            out.write("<table class='big-board'>");
+            // Big board used to be a table whose cells contained individual contests; now it is just one big cell
+            out.write("<table class='big-board'><tr><td style='text-align: center;'><span>");
             out.newLine();
             int countUp = 0;
             //for (int i=0; i<contests.size(); i++)
@@ -213,26 +211,9 @@ public class History
 
                 if (contest.getApparentContestNumber() >= contestStart && contest.getApparentContestNumber() <= contestEnd)
                 {
-
-                    //The below block of code used to be above the if statement checking apparent contest numbers... why? 
-                    //countUp = contests.size()-1-i;
-
-                    if (countUp % CONTESTS_PER_LINE == 0) {
-                        out.write("<tr>");
-                    }
-                    //if((contests.size()-1-i)%CONTESTS_PER_LINE == 0)
-                    //    out.write("<tr>");
-                    //countUp++;
-                    out.write("<td class='contest-cell'>");
-
-                    //END BLOCK OF CODE
-
                     winners = contest.getWinners();
                     out.write("<table class='results-table'>");
-                    //out.write("<div class='contest-block'>");
                     out.newLine();
-                    
-                    
                     
                     //New code to show the pictures
                     out.write("<tr><td class='picture-cell' colspan=3>");
@@ -275,8 +256,6 @@ public class History
                         else
                             out.write("<tr class='entry'>");
 
-                        //out.newLine();
-
                         out.write("<td class='name'>");
                         if (entry.hasURL())
                             out.write("<a class='image' href='" + entry.getURL() + "'>");
@@ -294,13 +273,7 @@ public class History
                         if (entry.hasVotes())
                         {
                             out.write("<td class='votes'>"+ entry.getVotes() + "</td>");
-                            //                             if (entry.getVotes() != 1)
-                            //                                 out.write("s");
-                            //                             out.write("</td>");
                             out.write("<td class='points'>" + entry.getPoints() + "</td>");
-                            //                             if (entry.getPoints() != 1)
-                            //                                 out.write("s");
-                            //                             out.write(")</span>");
                         }
                         else
                         {
@@ -308,9 +281,6 @@ public class History
                         }
                         out.newLine();
                         out.write("</tr>");
-                        //else
-                        //out.write(" – ? votes (? points)");
-                        //out.write("</span>");
                     }
                     //                     if (winners.size() >= 2)
                     //                     {
@@ -319,7 +289,7 @@ public class History
                     //                         out.write("<span class='tie-note'>Screenshot of the Week " + contest.getName() + " ended in a draw.</span>");
                     //                     }
 
-                    out.write("<tr class='info-row'><td>");
+                    out.write("<tr class='info-row'><td class='numentries'>");
                     out.write(contest.numEntries() + " entr");
                     if (contest.numEntries() != 1)
                         out.write("ies");
@@ -333,27 +303,14 @@ public class History
 
                     out.write("</table>");
                     out.newLine();
-                    //out.write("</div>");
-                    //out.newLine();
                     out.newLine();
-
-                    // end if synchs, etc.
-
-                    out.write("</td>");
-                    //if (countUp%CONTESTS_PER_LINE >= CONTESTS_PER_LINE-1  ||  countUp == contests.size()-1)
-                    if (countUp % CONTESTS_PER_LINE >= CONTESTS_PER_LINE - 1) {
-                        out.write("</tr>");
-                    }
-
+                    
                     countUp++;
                 }
             }
-            
-            if (countUp % CONTESTS_PER_LINE != 1) {
-                out.write("</tr>");
-            }
-            
-            out.write("</table>");
+
+            // Closing 'big-board'-class table
+            out.write("</span></td></tr></table>");
         }
         catch (Exception e)
         {
