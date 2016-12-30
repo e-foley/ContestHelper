@@ -13,8 +13,6 @@ import javax.swing.JOptionPane;
  */
 public class History
 {
-    public static final int CONTESTS_PER_LINE = 2;
-
     private ArrayList<Contest> contests;
     private ArrayList<Member> members;
 
@@ -202,8 +200,8 @@ public class History
             Contest contest;
             boolean isWinner;
             ArrayList<Entry> winners;
-            //int currentSynch;
-            out.write("<table class='big-board'>");
+            // Big board used to be a table whose cells contained individual contests; now it is just one big cell
+            out.write("<table class='big-board'><tr><td style='text-align: center;'><span>");
             out.newLine();
             int countUp = 0;
             //for (int i=0; i<contests.size(); i++)
@@ -213,20 +211,6 @@ public class History
 
                 if (contest.getApparentContestNumber() >= contestStart && contest.getApparentContestNumber() <= contestEnd)
                 {
-
-                    //The below block of code used to be above the if statement checking apparent contest numbers... why? 
-                    //countUp = contests.size()-1-i;
-
-                    if (countUp % CONTESTS_PER_LINE == 0) {
-                        out.write("<tr>");
-                    }
-                    //if((contests.size()-1-i)%CONTESTS_PER_LINE == 0)
-                    //    out.write("<tr>");
-                    //countUp++;
-                    out.write("<td class='contest-cell'>");
-
-                    //END BLOCK OF CODE
-
                     winners = contest.getWinners();
                     out.write("<table class='results-table'>");
                     //out.write("<div class='contest-block'>");
@@ -336,24 +320,13 @@ public class History
                     //out.write("</div>");
                     //out.newLine();
                     out.newLine();
-
-                    // end if synchs, etc.
-
-                    out.write("</td>");
-                    //if (countUp%CONTESTS_PER_LINE >= CONTESTS_PER_LINE-1  ||  countUp == contests.size()-1)
-                    if (countUp % CONTESTS_PER_LINE >= CONTESTS_PER_LINE - 1) {
-                        out.write("</tr>");
-                    }
-
+                    
                     countUp++;
                 }
             }
-            
-            if (countUp % CONTESTS_PER_LINE != 1) {
-                out.write("</tr>");
-            }
-            
-            out.write("</table>");
+
+            // Closing 'big-board'-class table
+            out.write("</span></td></tr></table>");
         }
         catch (Exception e)
         {
