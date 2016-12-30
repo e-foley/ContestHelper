@@ -17,7 +17,7 @@ public abstract class Master
     public static final int PAGE_LENGTH = 50;
     public static final int STARTING_INDEX = 1;
     public static final int DIGEST_LIST_LENGTH = 10;  // Number of members to list in "digest" version of the leaderboards
-    public static final int NUM_ARCHIVES_DIGEST_ENTRIES = 10;
+    public static final int NUM_ARCHIVES_DIGEST_ENTRIES = 12;
     
     /**
      * An example of a method - replace this comment with your own
