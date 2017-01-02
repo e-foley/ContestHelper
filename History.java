@@ -177,7 +177,7 @@ public class History
 
                 if (parse.hasMemberInfo && !blockComment)
                 {
-                    addEntry(currentContestName, parse.memberName, "", parse.hasURL, parse.URL, parse.hasVotes, parse.votes, !parse.hasVotes, parse.overrideCode);
+                    addEntry(currentContestName, parse.memberName, parse.tag, parse.hasURL, parse.URL, parse.hasVotes, parse.votes, !parse.hasVotes, parse.overrideCode);
                 }   
 
                 blockComment &= !strLine.endsWith(blockClose);
