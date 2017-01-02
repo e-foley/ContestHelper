@@ -73,6 +73,7 @@ td.contest-cell
   text-shadow: 1px 1px 1px #503800;
   text-align: center;
   height: 1.75em;
+  width: 512px;
 }
 
 .sort-title
@@ -119,9 +120,9 @@ td.contest-cell
   border-collapse: collapse;
   background-color: #f7fff7;
   margin: 10px;
-  width: 512px;
   display: inline-block;
   vertical-align: top;
+  width: 514px;  /* 512 px for picture plus two 1-px borders */
 }
 
 .leaderboard-table
@@ -311,6 +312,7 @@ td.contest-cell
 .picture-cell
 {
   padding: 0px;
+  background-color: #000000;
 }
 
 .picture-picture
