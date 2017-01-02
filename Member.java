@@ -25,6 +25,15 @@ public class Member
         isTagged = false;
     }
     
+    public Member(String myTag, String myName)
+    {
+        names = new ArrayList<String>();
+        names.add(myName);
+        entries = new ArrayList<Entry>();
+        tag = myTag;
+        isTagged = true;
+    }
+    
     public Member(ArrayList<String> myNames)
     {
         names = myNames;

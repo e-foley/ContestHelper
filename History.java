@@ -5,22 +5,12 @@ import java.util.Comparator;
 
 import javax.swing.JOptionPane;
 
-/**
- * Write a description of class History here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class History
 {
     private ArrayList<Contest> contests;
     private ArrayList<Member> members;
-
     String lastContestName;
 
-    /**
-     * Constructor for objects of class History
-     */
     public History()
     {
         members = new ArrayList<Member>();
@@ -28,28 +18,32 @@ public class History
         lastContestName = "";
     }
 
-    public void addEntry(String contestName, String memberName, boolean myHasURL, String URL, boolean myHasVotes, int myVotes, boolean myHasUncertainty, int overrideCode)
-    {
+    public void addEntry(String contestName, String memberName, String tag, boolean myHasURL, String URL, boolean myHasVotes, int myVotes, boolean myHasUncertainty, int overrideCode) {
         Contest contestRetrieved;
         // check if the contest being requested hasn't been formed yet
-        if ((contestRetrieved = getContestByName(contestName)) == null)
-        {
+        if ((contestRetrieved = getContestByName(contestName)) == null) {
             // if it hasn't, add it
             contestRetrieved = new Contest(contestName);
             contests.add(contestRetrieved);
         }
 
         Member memberRetrieved;
-        // check if the member being requested hasn't been formed yet
-        if ((memberRetrieved = getMemberByName(memberName)) == null)
-        {
-            // if it hasn't, add it
-            memberRetrieved = new Member(memberName);
-            members.add(memberRetrieved);
+        // Prefer to look up by tag since tags are intended to be unique; otherwise, look up by name
+        if (!tag.isEmpty()) {
+            if ((memberRetrieved = getMemberByTag(tag)) == null) {
+                // If there is no member with this tag, create a new member that has this tag
+                memberRetrieved = new Member(tag, memberName);
+                members.add(memberRetrieved);
+            }
+        } else {
+            if ((memberRetrieved = getMemberByName(memberName)) == null) {
+                // If there is no member with this name, create a new member with this name
+                memberRetrieved = new Member(memberName);
+                members.add(memberRetrieved);
+            }
         }
 
         Entry entryAdding = new Entry(memberRetrieved, contestRetrieved, myHasURL, URL, myHasVotes, myVotes, myHasUncertainty, overrideCode);
-        //System.out.println("Adding entry: " + memberRetrieved.getMostRecentName());
 
         // regardless of the above, add the entry to the member's and contest's records
         contestRetrieved.addEntry(entryAdding);
@@ -183,7 +177,7 @@ public class History
 
                 if (parse.hasMemberInfo && !blockComment)
                 {
-                    addEntry(currentContestName, parse.memberName, parse.hasURL, parse.URL, parse.hasVotes, parse.votes, !parse.hasVotes, parse.overrideCode);
+                    addEntry(currentContestName, parse.memberName, "", parse.hasURL, parse.URL, parse.hasVotes, parse.votes, !parse.hasVotes, parse.overrideCode);
                 }   
 
                 blockComment &= !strLine.endsWith(blockClose);
