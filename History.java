@@ -65,6 +65,15 @@ public class History
         }
         return null;
     }
+    
+    public Member getMemberByTag(String memberTag) {
+        for (int i = 0; i < members.size(); ++i) {
+            if (members.get(i).hasTag() && members.get(i).getTag() == memberTag) {
+                return members.get(i);
+            }
+        }
+        return null;
+    }
 
     public Contest getContestByName(String nameGetting)
     {
