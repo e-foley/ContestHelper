@@ -36,6 +36,7 @@ public abstract class Master
         long startTime = System.nanoTime();        
         
         History history = new History();
+        ArchivesGenerator archivesGenerator = new ArchivesGenerator();
         String strLine = new String();
         if (!history.populateMembersFromFile("web/associations.txt"))
         {
@@ -75,7 +76,7 @@ public abstract class Master
 //                 out = new BufferedWriter(fstream);
 //                 if (index <= STARTING_INDEX)
 //                     Master.addFileToBuffer("config/archives_header.txt", out, swaps);
-//                 history.commitToFile(out, low, high);
+//                 archivesGenerator.generate(history, out, low, high);
 //                 if (index >= numContests-PAGE_LENGTH)
 //                     Master.addFileToBuffer("config/archives_footer.txt", out, swaps);
 //                 out.close();
@@ -86,14 +87,14 @@ public abstract class Master
                 fstream = new FileWriter("web/archives" + testText + ".html");
                 out = new BufferedWriter(fstream);
                 Master.addFileToBuffer("config/archives_header.txt", out, swaps);
-                history.commitToFile(out);
+                archivesGenerator.generate(history, out);
                 Master.addFileToBuffer("config/archives_footer.txt", out, swaps);
                 out.close();
                 
                 fstream = new FileWriter("web/archives-digest" + testText + ".html");
                 out = new BufferedWriter(fstream);
                 Master.addFileToBuffer("config/archives_header.txt", out, swaps);
-                history.commitToFile(out, NUM_ARCHIVES_DIGEST_ENTRIES);
+                archivesGenerator.generate(history, out, NUM_ARCHIVES_DIGEST_ENTRIES);
                 Master.addFileToBuffer("config/archives_footer.txt", out, swaps);
                 out.close();
                 
@@ -118,7 +119,7 @@ public abstract class Master
                     fstream = new FileWriter("web/archives-page" + p + ".html");
                     out = new BufferedWriter(fstream);
                     Master.addFileToBuffer("config/archives_header.txt", out, swaps);
-                    history.commitToFile(out, contest_start, contest_end);
+                    archivesGenerator.generate(history, out, contest_start, contest_end);
                     Master.addFileToBuffer("config/archives_footer.txt", out, swaps);
                     out.close();
                 }
