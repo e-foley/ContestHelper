@@ -1,26 +1,20 @@
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Write a description of class Member here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class Member
 {
-    // instance variables - replace the example below with your own
     private ArrayList<String> names;
     private ArrayList<Entry> entries;
+    private String tag;
+    private boolean isTagged;
 
-    /**
-     * Constructor for objects of class Member
-     */
     public Member()
     {
         // initialise instance variables
         names = new ArrayList<String>();
         entries = new ArrayList<Entry>();
+        tag = new String();
+        isTagged = false;
     }
     
     public Member(String myName)
@@ -28,23 +22,25 @@ public class Member
         names = new ArrayList<String>();
         names.add(myName);
         entries = new ArrayList<Entry>();
+        tag = new String();
+        isTagged = false;
     }
     
-    /**
-     * Constructor for objects of class Member
-     */
     public Member(ArrayList<String> myNames)
     {
         names = myNames;
         entries = new ArrayList<Entry>();
+        tag = new String();
+        isTagged = false;
+    }
+    
+    public Member(String myTag, ArrayList<String> myNames) {
+        names = myNames;
+        entries = new ArrayList<Entry>();
+        tag = myTag;
+        isTagged = true;
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
     public void addEntry(Entry entryAdding)
     {
         entries.add(entryAdding);
@@ -73,6 +69,24 @@ public class Member
     public String getMostRecentName()
     {
         return names.get(names.size()-1);
+    }
+    
+    public void setTag(String setting) {
+        tag = setting;
+        isTagged = true;
+    }
+    
+    public void removeTag() {
+        tag = new String();
+        isTagged = false;
+    }
+    
+    public String getTag() {
+        return tag;
+    }
+    
+    public boolean hasTag() {
+        return isTagged;
     }
     
     public int getTotalVotes()
