@@ -10,7 +10,6 @@ public class Member
 
     public Member()
     {
-        // initialise instance variables
         names = new ArrayList<String>();
         entries = new ArrayList<Entry>();
         tag = new String();

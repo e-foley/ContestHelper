@@ -86,7 +86,8 @@ public class History
             DataInputStream in = new DataInputStream(fstream);
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
             String strLine; // String in which to place new lines as they are read
-            String regex = "(\\s+)?>(\\s+)?";   // regular expression to divide associations file
+            String nameRegex = "(\\s+)?>(\\s+)?";   // regular expression to divide associations file
+            String tagRegex = "(\\s+)?\\:(\\s+)?";  // Regular expression that divides lines into a tag section and a names section
             String[] namesRead; // array for the output of the regex split
 
             //Read File Line By Line
@@ -95,10 +96,21 @@ public class History
                 // Ignore empty lines and those starting with two slashes
                 if (!strLine.equals("")  &&  !strLine.startsWith("//"))
                 {
-                    // put the split up names in an array
-                    namesRead = strLine.split(regex);
-                    // incorporate these names into new Member objects (not pretty...)
-                    members.add(new Member(new ArrayList<String>(Arrays.asList(namesRead))));
+                    // If the line contains a colon, we treat all before it as the "tag" for that member.
+                    // If there are multiple colons, everything at and beyond the second colon is ignored.
+                    if (strLine.contains(":")) {
+                        // Divide line into two strings: the tag and the names associated with that tag.
+                        String[] tagSplit = strLine.split(tagRegex);
+                        // Place the split-up names in an array.
+                        namesRead = tagSplit[1].split(nameRegex);
+                        // Incorporate the tag and names into a new Member object.  (Not pretty.)
+                        members.add(new Member(tagSplit[0], new ArrayList<String>(Arrays.asList(namesRead))));                        
+                    } else {
+                        // Place the split-up names in an array.
+                        namesRead = strLine.split(nameRegex);
+                        // Incorporate these names into a new untagged Member object. (Not pretty.)
+                        members.add(new Member(new ArrayList<String>(Arrays.asList(namesRead))));
+                    }
                 }
             }
             //Close the input stream
