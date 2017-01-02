@@ -102,7 +102,10 @@ Midnight_King > Shane > Charizard > Shane > Polaris
 UpbeatPenguin > UBP > 744 > Quicksilver > SilverDragon > Noir > Ame > Bengal > Bagel > Ben
 Hero Link > Angeal > Pinkie Pie > Rydia > Angeal > Lana > Linkle
 Koishi > Nekoishi > Plutia
+
+// Problematic due to names shared with other distinct members
 benmw02190 > Ben > Ramblin' Evil Mushroom > Rambly > Truckroid > Rambly
+FlameCursed > Chungus > FlameCursed > Matthew
 
 // EDUCATED GUESSES
 DarkSFK > Bob
