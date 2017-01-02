@@ -173,6 +173,9 @@ public abstract class Master
             for (int i=0; i<history.getMembers().size(); i++)
             {
                 out.write(history.getMembers().get(i).getMostRecentName());
+                if (history.getMembers().get(i).hasTag()) {
+                    out.write(" [" + history.getMembers().get(i).getTag() + "]");
+                }
                 out.newLine();
             }
             out.newLine();
