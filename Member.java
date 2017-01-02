@@ -243,7 +243,7 @@ public class Member
     public ArrayList<Entry> getEntriesWithMostVotes()
     {
         int max = 0;
-        ArrayList maxList = new ArrayList<Entry>();
+        ArrayList<Entry> maxList = new ArrayList<Entry>();
         for (int i=0; i<entries.size(); i++)
         {
             if (entries.get(i).getVotes() == max)
@@ -275,7 +275,7 @@ public class Member
     public ArrayList<Entry> getEntriesWithMostPoints()
     {
         int max = 0;
-        ArrayList maxList = new ArrayList<Entry>();
+        ArrayList<Entry> maxList = new ArrayList<Entry>();
         for (int i=0; i<entries.size(); i++)
         {
             if (entries.get(i).getPoints() == max)
