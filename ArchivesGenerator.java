@@ -6,6 +6,14 @@ public class ArchivesGenerator {
 
     }
 
+    public void generate(History history, BufferedWriter out) {
+        generate(history, out, 1, (int)(history.getContests().get(history.getContests().size()-1).getApparentContestNumber()));  // This plays better with row breaks in generic commitToFile()
+    }
+
+    public void generate(History history, BufferedWriter out, int totalEntriesToShow) {
+        generate(history, out, (int)(history.getContests().get(history.getContests().size()-1).getApparentContestNumber()-totalEntriesToShow+1), Integer.MAX_VALUE);
+    }
+    
     public void generate(History history, BufferedWriter out, int contestStart, int contestEnd) {
         try
         {
