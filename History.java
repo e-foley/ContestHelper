@@ -108,7 +108,7 @@ public class History
                         // Place the split-up names in an array.
                         namesRead = tagSplit[1].split(nameRegex);
                         // Incorporate the tag and names into a new Member object.  (Not pretty.)
-                        members.add(new Member(tagSplit[0], new ArrayList<String>(Arrays.asList(namesRead))));                        
+                        members.add(new Member(tagSplit[0], new ArrayList<String>(Arrays.asList(namesRead))));
                     } else {
                         // Place the split-up names in an array.
                         namesRead = strLine.split(nameRegex);
