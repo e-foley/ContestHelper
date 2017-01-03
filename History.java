@@ -31,9 +31,10 @@ public class History
         // Prefer to look up by tag since tags are intended to be unique; otherwise, look up by name
         if (!tag.isEmpty()) {
             if ((memberRetrieved = getMemberByTag(tag)) == null) {
-                // If there is no member with this tag, create a new member that has this tag
+                // If there is no member with this tag, create a new member that has this tag.  (Is this kosher or will we run into duplication issues?)
                 memberRetrieved = new Member(tag, memberName);
                 members.add(memberRetrieved);
+                System.out.println("Warning: tag \"" + tag + "\" in data file does not exist in associations file.");
             }
         } else {
             if ((memberRetrieved = getMemberByName(memberName)) == null) {
