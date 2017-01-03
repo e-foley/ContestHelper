@@ -28,7 +28,6 @@ XdragonSB > NineLives
 dlbrooks34 > Koh
 Petoe > Peteo
 DragonBoy > /M/
-pikaguy900 > Matthew > Nimono
 Old-Skool > King Aquamentus
 Shiek > Sheik > Sheik91 > Yoshimi > Sheik
 Nuvo > Strato
@@ -99,13 +98,16 @@ joelmacool12 > Joelmacool12 > Joelmacool
 // bmc10011 > TheRock  MAY ONLY APPLY TO MOTM -- look at this further
 sonicfan350 > Zephyr_Eevee > Goriya > Nexas > Eins
 Midnight_King > Shane > Charizard > Shane > Polaris
-UpbeatPenguin > UBP > 744 > Quicksilver > SilverDragon > Noir > Ame > Bengal > Bagel > Ben
 Hero Link > Angeal > Pinkie Pie > Rydia > Angeal > Lana > Linkle
 Koishi > Nekoishi > Plutia
 
-// Problematic due to names shared with other distinct members
-benmw02190 > Ben > Ramblin' Evil Mushroom > Rambly > Truckroid > Rambly
-FlameCursed > Chungus > FlameCursed > Matthew
+// Tagged members: refer to these tags in data.txt when a member's username has been used by a different person
+//   Shared "Ben"
+91: UpbeatPenguin > UBP > 744 > Quicksilver > SilverDragon > Noir > Ame > Bengal > Bagel > Ben
+958: benmw02190 > Ben > Ramblin' Evil Mushroom > Rambly > Truckroid > Rambly
+//   Shared "Matthew"
+3571: pikaguy900 > Matthew > Nimono
+294314: FlameCursed > Chungus > FlameCursed > Matthew
 
 // EDUCATED GUESSES
 DarkSFK > Bob
