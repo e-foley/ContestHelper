@@ -33,7 +33,7 @@ public class ParsedLine
         // Regular expression that divides names and tags.  Note that both [ and ] are treated the same way, so tags
         // don't strictly need to be enclosed by brackets as long as there is at least one present.  For example, the
         // strings "nicklegends[2237]" and "nicklegends[2237" and "nicklegends  ]2237 [" are all treated the same way.
-        String regexTag = "(\\s+)?\\[|\\](\\s+)?";
+        String regexTag = "\\s*(\\[|\\])\\s*";
         String[] splits;
         
         isBlank = line.equals("");
@@ -100,8 +100,6 @@ public class ParsedLine
                     tag = "";
                     memberName = tagSplit[0];
                 }
-                
-                System.out.println(hasTag + " " + tag + " " + memberName);
             }
             
             if (splits.length == 2)
