@@ -62,7 +62,7 @@ public class History
     
     public Member getMemberByTag(String memberTag) {
         for (int i = 0; i < members.size(); ++i) {
-            if (members.get(i).hasTag() && members.get(i).getTag() == memberTag) {
+            if (members.get(i).hasTag() && members.get(i).getTag().equals(memberTag)) {
                 return members.get(i);
             }
         }
