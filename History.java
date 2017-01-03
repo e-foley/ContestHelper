@@ -5,22 +5,12 @@ import java.util.Comparator;
 
 import javax.swing.JOptionPane;
 
-/**
- * Write a description of class History here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class History
 {
     private ArrayList<Contest> contests;
     private ArrayList<Member> members;
-
     String lastContestName;
 
-    /**
-     * Constructor for objects of class History
-     */
     public History()
     {
         members = new ArrayList<Member>();
@@ -28,28 +18,33 @@ public class History
         lastContestName = "";
     }
 
-    public void addEntry(String contestName, String memberName, boolean myHasURL, String URL, boolean myHasVotes, int myVotes, boolean myHasUncertainty, int overrideCode)
-    {
+    public void addEntry(String contestName, String memberName, String tag, boolean myHasURL, String URL, boolean myHasVotes, int myVotes, boolean myHasUncertainty, int overrideCode) {
         Contest contestRetrieved;
         // check if the contest being requested hasn't been formed yet
-        if ((contestRetrieved = getContestByName(contestName)) == null)
-        {
+        if ((contestRetrieved = getContestByName(contestName)) == null) {
             // if it hasn't, add it
             contestRetrieved = new Contest(contestName);
             contests.add(contestRetrieved);
         }
 
         Member memberRetrieved;
-        // check if the member being requested hasn't been formed yet
-        if ((memberRetrieved = getMemberByName(memberName)) == null)
-        {
-            // if it hasn't, add it
-            memberRetrieved = new Member(memberName);
-            members.add(memberRetrieved);
+        // Prefer to look up by tag since tags are intended to be unique; otherwise, look up by name
+        if (!tag.isEmpty()) {
+            if ((memberRetrieved = getMemberByTag(tag)) == null) {
+                // If there is no member with this tag, create a new member that has this tag.  (Is this kosher or will we run into duplication issues?)
+                memberRetrieved = new Member(tag, memberName);
+                members.add(memberRetrieved);
+                System.out.println("Warning: tag \"" + tag + "\" in data file does not exist in associations file.");
+            }
+        } else {
+            if ((memberRetrieved = getMemberByName(memberName)) == null) {
+                // If there is no member with this name, create a new member with this name
+                memberRetrieved = new Member(memberName);
+                members.add(memberRetrieved);
+            }
         }
 
         Entry entryAdding = new Entry(memberRetrieved, contestRetrieved, myHasURL, URL, myHasVotes, myVotes, myHasUncertainty, overrideCode);
-        //System.out.println("Adding entry: " + memberRetrieved.getMostRecentName());
 
         // regardless of the above, add the entry to the member's and contest's records
         contestRetrieved.addEntry(entryAdding);
@@ -62,6 +57,15 @@ public class History
         {
             if (members.get(i).hasName(memberName))
                 return members.get(i);
+        }
+        return null;
+    }
+    
+    public Member getMemberByTag(String memberTag) {
+        for (int i = 0; i < members.size(); ++i) {
+            if (members.get(i).hasTag() && members.get(i).getTag().equals(memberTag)) {
+                return members.get(i);
+            }
         }
         return null;
     }
@@ -86,7 +90,8 @@ public class History
             DataInputStream in = new DataInputStream(fstream);
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
             String strLine; // String in which to place new lines as they are read
-            String regex = "(\\s+)?>(\\s+)?";   // regular expression to divide associations file
+            String nameRegex = "(\\s+)?>(\\s+)?";   // regular expression to divide associations file
+            String tagRegex = "(\\s+)?\\:(\\s+)?";  // Regular expression that divides lines into a tag section and a names section
             String[] namesRead; // array for the output of the regex split
 
             //Read File Line By Line
@@ -95,10 +100,21 @@ public class History
                 // Ignore empty lines and those starting with two slashes
                 if (!strLine.equals("")  &&  !strLine.startsWith("//"))
                 {
-                    // put the split up names in an array
-                    namesRead = strLine.split(regex);
-                    // incorporate these names into new Member objects (not pretty...)
-                    members.add(new Member(new ArrayList<String>(Arrays.asList(namesRead))));
+                    // If the line contains a colon, we treat all before it as the "tag" for that member.
+                    // If there are multiple colons, everything at and beyond the second colon is ignored.
+                    if (strLine.contains(":")) {
+                        // Divide line into two strings: the tag and the names associated with that tag.
+                        String[] tagSplit = strLine.split(tagRegex);
+                        // Place the split-up names in an array.
+                        namesRead = tagSplit[1].split(nameRegex);
+                        // Incorporate the tag and names into a new Member object.  (Not pretty.)
+                        members.add(new Member(tagSplit[0], new ArrayList<String>(Arrays.asList(namesRead))));
+                    } else {
+                        // Place the split-up names in an array.
+                        namesRead = strLine.split(nameRegex);
+                        // Incorporate these names into a new untagged Member object. (Not pretty.)
+                        members.add(new Member(new ArrayList<String>(Arrays.asList(namesRead))));
+                    }
                 }
             }
             //Close the input stream
@@ -162,7 +178,7 @@ public class History
 
                 if (parse.hasMemberInfo && !blockComment)
                 {
-                    addEntry(currentContestName, parse.memberName, parse.hasURL, parse.URL, parse.hasVotes, parse.votes, !parse.hasVotes, parse.overrideCode);
+                    addEntry(currentContestName, parse.memberName, parse.tag, parse.hasURL, parse.URL, parse.hasVotes, parse.votes, !parse.hasVotes, parse.overrideCode);
                 }   
 
                 blockComment &= !strLine.endsWith(blockClose);

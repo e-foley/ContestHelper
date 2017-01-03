@@ -526,7 +526,7 @@ Shoelace; SOTW65-Shoelace; gif; 1
 Ccc; SOTW65-Ccc; gif; 0
 DragonAtma; SOTW65-DragonAtma; png; 1
 Hero Link; SOTW65-HeroLink; gif; 4
-Ben; SOTW65-Ben; gif; 4
+Ben[958]; SOTW65-Ben; gif; 4
 codelinker; SOTW65-codelinker; GIF; 5
 skateboarder11; SOTW65-skateboarder11; GIF; 0
 
@@ -1084,7 +1084,7 @@ Link75; png; 3
 Linkus Mastii; gif; 31
 
 #147 @ 24469
-Matthew; gif; 1
+Matthew[3571]; gif; 1
 EatinCake; png; 9
 Sir Pimpalot; png; 7
 Blue Link 2007; png; 3
@@ -1186,7 +1186,7 @@ Revfan9; gif; 18
 
 #162 @ 28363
 ennonfenom; jpg; 14
-Matthew; MatthewPZC; gif; 7
+Matthew[3571]; MatthewPZC; gif; 7
 Taco Chopper; jpg; 3
 Trimaster001; jpg; 9
 Turbon714; png; 6
