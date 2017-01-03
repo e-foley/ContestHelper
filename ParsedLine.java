@@ -10,6 +10,8 @@ public class ParsedLine
     
     public boolean hasMemberInfo;
     public String memberName;
+    public boolean hasTag;
+    public String tag;
     public boolean hasURL;
     public String URL;
     public boolean hasVotes;
@@ -28,6 +30,10 @@ public class ParsedLine
         
         String regexMember = "(\\s+)?;(\\s+)?";   // regular expression to divide associations file
         String regexContest = "(\\s+)?@(\\s+)?";    // regular expression for the contest number and topic
+        // Regular expression that divides names and tags.  Note that both [ and ] are treated the same way, so tags
+        // don't strictly need to be enclosed by brackets as long as there is at least one present.  For example, the
+        // strings "nicklegends[2237]" and "nicklegends[2237" and "nicklegends  ]2237 [" are all treated the same way.
+        String regexTag = "\\s*(\\[|\\])\\s*";
         String[] splits;
         
         isBlank = line.equals("");
@@ -37,7 +43,10 @@ public class ParsedLine
         contestName = "";
         hasTopicInfo = false;
         topic = -1;
+        hasMemberInfo = false;
         memberName = "";
+        hasTag = false;
+        tag = "";
         hasURL = false;
         URL = "";
         hasVotes = false;
@@ -79,7 +88,18 @@ public class ParsedLine
             if (splits.length > 0)
             {
                 hasMemberInfo = true;
-                memberName = splits[0];
+                
+                // Split the member into name and tag sections as appropriate nicklegends[2237]
+                String[] tagSplit = splits[0].split(regexTag);
+                if (tagSplit.length > 1) {
+                    hasTag = true;
+                    tag = tagSplit[1];
+                    memberName = tagSplit[0];
+                } else {
+                    hasTag = false;
+                    tag = "";
+                    memberName = tagSplit[0];
+                }
             }
             
             if (splits.length == 2)
