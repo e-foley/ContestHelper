@@ -4022,4 +4022,21 @@ Plutia; png; 1
 Joelmacool; png; 26
 Lüt; Lut; png; 16
 Dimentio; png; 2
+
+#592 @ 71488
+Ganondorf; png; 11
+Joelmacool; png; 4
+Demonlink; png; 28
+
+#593 @ 71548
+Jared; png; 14
+Sheik; png; 13
+Ganondorf; png; 5
+Joelmacool; png; 2
+Naru; png; 5
+/*
+#594 @ 71590
+Naru; png; 7
+NewJourneysFire; png; 9
+Joelmacool; png; 0
 /*
