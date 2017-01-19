@@ -65,7 +65,7 @@ public abstract class Master
 			int p = 0;  // Page index.  Page number for URLs is one greater than this.
             for (int e = num_contests - 1; e >= 0; e -= CONTESTS_PER_PAGE) {
 			    final int contest_end = e;
-				final int contest_start = Math.max(contest_end - CONTESTS_PER_PAGE, 0);
+				final int contest_start = Math.max(contest_end - CONTESTS_PER_PAGE + 1, 0);
                 fstream = new FileWriter("web/archives-page" + Integer.toString(p + 1) + ".html");
                 out = new BufferedWriter(fstream);
                 Master.addFileToBuffer("config/archives_header.txt", out, swaps);
