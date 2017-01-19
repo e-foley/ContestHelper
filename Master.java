@@ -112,7 +112,7 @@ public abstract class Master
 // 
 // final int contest_start = p * CONTESTS_PER_PAGE;
                     
-                    fstream = new FileWriter("web/archives-page" + p + ".html");
+                    fstream = new FileWriter("web/archives-page" + Integer.toString(p + 1) + ".html");
                     out = new BufferedWriter(fstream);
                     Master.addFileToBuffer("config/archives_header.txt", out, swaps);
                     archivesGenerator.generate(history, out, contest_start, contest_end);
