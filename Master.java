@@ -100,11 +100,17 @@ public abstract class Master
                 out.close();
                 
                 final int num_contests = history.getContests().size();
+				int p = 0;
+				//final int num_pages = (num_contests + CONTESTS_PER_PAGE - 1) / CONTESTS_PER_PAGE;
                 // int max_contest = (int)(Math.ceil(history.getContests().get(num_contests-1).getApparentContestNumber()));  // Still a terrible method
                 //for (int i=1; i<num_contests; i+=CONTESTS_PER_PAGE) {
-                for (int p = 0; p * CONTESTS_PER_PAGE < num_contests; ++p) {
-                    final int contest_start = p * CONTESTS_PER_PAGE;
-                    final int contest_end = Math.min(num_contests - 1, (p+1) * CONTESTS_PER_PAGE - 1);
+                for (int e = num_contests - 1; e >= 0; e -= CONTESTS_PER_PAGE) {
+					final int contest_end = e;
+					final int contest_start = Math.max(contest_end - CONTESTS_PER_PAGE, 0);
+
+//                     final int contest_end = Math.min(num_contests - 1, (p+1) * CONTESTS_PER_PAGE - 1);
+// 
+// final int contest_start = p * CONTESTS_PER_PAGE;
                     
                     fstream = new FileWriter("web/archives-page" + p + ".html");
                     out = new BufferedWriter(fstream);
@@ -112,7 +118,7 @@ public abstract class Master
                     archivesGenerator.generate(history, out, contest_start, contest_end);
                     Master.addFileToBuffer("config/archives_footer.txt", out, swaps);
                     out.close();
-                    
+                    ++p;
                     
                     
                 }
