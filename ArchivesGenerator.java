@@ -7,11 +7,11 @@ public class ArchivesGenerator {
     }
 
     public void generate(History history, BufferedWriter out) {
-        generate(history, out, 1, (int)(history.getContests().get(history.getContests().size()-1).getApparentContestNumber()));  // This plays better with row breaks in generic commitToFile()
+        generate(history, out, 1, history.getContests().size());
     }
 
     public void generate(History history, BufferedWriter out, int totalEntriesToShow) {
-        generate(history, out, (int)(history.getContests().get(history.getContests().size()-1).getApparentContestNumber()-totalEntriesToShow+1), Integer.MAX_VALUE);
+        generate(history, out, history.getContests().size() - totalEntriesToShow, history.getContests().size() - 1);
     }
     
     public void generate(History history, BufferedWriter out, int contestStart, int contestEnd) {
@@ -29,8 +29,7 @@ public class ArchivesGenerator {
             for (int i=history.getContests().size()-1; i>=0; i--)
             {
                 contest = history.getContests().get(i);
-
-                if (contest.getApparentContestNumber() >= contestStart && contest.getApparentContestNumber() <= contestEnd)
+                if (i >= contestStart && i <= contestEnd)
                 {
                     winners = contest.getWinners();
                     out.write("<table class='results-table'>");
