@@ -113,7 +113,7 @@ public abstract class Master
             Master.addFileToBuffer("config/leaderboard_footer.txt", out, swaps);
             out.close();
             
-            // MEMBER LIST (temp)
+            // MEMBER LIST
             fstream = new FileWriter("members/members-" + history.getLastContestName() + ".txt");
             out = new BufferedWriter(fstream);
             Collections.sort(history.getMembers(), new MemberSortAlphabetical());
@@ -129,6 +129,12 @@ public abstract class Master
             out.write(history.getMembers().size() + " unique members in all.");
             out.close();
             
+            // PROFILES
+            ArrayList<Member> mems = history.getMembers();
+            for (int i=0; i<mems.size(); i++) {
+                UserProfile.createProfilePage(mems.get(i));
+            }
+
             long endTime = System.nanoTime();
             long duration = endTime - startTime;
             JOptionPane.showMessageDialog(null, "Archive output saved to archives\\archive-" + history.getLastContestName() + testText + ".html.\nLeaderboard output saved to leaderboards\\leaderboards-" + history.getLastContestName() + testText + ".html.\nTime elapsed: " + ((double)(duration))/1000000000.0 + " seconds.", "Success!", JOptionPane.INFORMATION_MESSAGE);
@@ -137,13 +143,6 @@ public abstract class Master
         {
             System.err.println("Error: " + e.getMessage());
             JOptionPane.showMessageDialog(null, "A strange problem occurred. Talk to nicklegends about it.\n\"" + e.getMessage() + "\"", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        
-        
-        // PROFILES
-        ArrayList<Member> mems = history.getMembers();
-        for (int i=0; i<mems.size(); i++) {
-            UserProfile.createProfilePage(mems.get(i));
         }
     }
 
