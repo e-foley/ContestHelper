@@ -354,24 +354,58 @@ td.contest-cell
 
 .picture-large
 {
-	width: 100%;
-	height: auto;
-	border: 10px #AAAAAA ridge;
-	margins: auto;
+  width: 100%;
+  height: auto;
+  border: 10px #AAAAAA ridge;
+  margins: auto;
 }
 
 .picture-large-caption
 {
-	text-align: right;
+  text-align: right;
 }
 
 .winnericon
 {
-	height: 1em;
+  height: 1em;
 }
 
 .tooltip
 {
-	vertical-align: top;
-	font-size: 75%;
+  vertical-align: top;
+  font-size: 75%;
+}
+
+/* Parts of this copy header-row */
+.navtable
+{
+  margin: 20px auto;
+  font-size: 1em;
+  background-color: #eeffee;
+  background-image: url('http://www.purezc.net/Images/catrow.gif');
+  border-width: 1px;
+  border-style: solid;
+}
+
+.navtable-cell
+{
+  padding: 0px 20px;
+  font-weight: bold;
+}
+
+.current-page
+{
+  font-weight: bold;
+}
+
+/* Pretty much just copying contest-title */
+.navtable-header
+{
+  background-color: #56825a;
+  // background-image: url('http://www.purezc.net/Images/toprow.gif');
+  font-weight: bold;
+  color: #e5c006;
+  text-shadow: 1px 1px 1px #503800;
+  text-align: center;
+  height: 1.75em;
 }
