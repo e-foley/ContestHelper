@@ -19,6 +19,8 @@ public abstract class Master
         testText = "";
         // testText = "-test";  // Comment out when done experimenting with things
         
+        boolean generate_user_galleries = true;
+        
         long startTime = System.nanoTime();        
         
         History history = new History();
@@ -126,9 +128,11 @@ public abstract class Master
             out.close();
             
             // PROFILES
-            ArrayList<Member> mems = history.getMembers();
-            for (int i=0; i<mems.size(); i++) {
-                UserProfile.createProfilePage(mems.get(i));
+            if (generate_user_galleries) {
+                ArrayList<Member> mems = history.getMembers();
+                for (int i=0; i<mems.size(); i++) {
+                    UserProfile.createProfilePage(mems.get(i));
+                }
             }
 
             long endTime = System.nanoTime();
