@@ -354,20 +354,20 @@ td.contest-cell
 
 .picture-large
 {
-	width: 100%;
-	height: auto;
-	border: 10px #AAAAAA ridge;
-	margins: auto;
+  width: 100%;
+  height: auto;
+  border: 10px #AAAAAA ridge;
+  margins: auto;
 }
 
 .picture-large-caption
 {
-	text-align: right;
+  text-align: right;
 }
 
 .winnericon
 {
-	height: 1em;
+  height: 1em;
 }
 
 .tooltip
