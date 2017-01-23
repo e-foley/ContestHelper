@@ -7,11 +7,11 @@ public class ArchivesGenerator {
     }
 
     public void generate(History history, BufferedWriter out) {
-        generate(history, out, 1, (int)(history.getContests().get(history.getContests().size()-1).getApparentContestNumber()));  // This plays better with row breaks in generic commitToFile()
+        generate(history, out, 1, history.getContests().size());
     }
 
     public void generate(History history, BufferedWriter out, int totalEntriesToShow) {
-        generate(history, out, (int)(history.getContests().get(history.getContests().size()-1).getApparentContestNumber()-totalEntriesToShow+1), Integer.MAX_VALUE);
+        generate(history, out, history.getContests().size() - totalEntriesToShow, history.getContests().size() - 1);
     }
     
     public void generate(History history, BufferedWriter out, int contestStart, int contestEnd) {
@@ -21,6 +21,7 @@ public class ArchivesGenerator {
             Contest contest;
             boolean isWinner;
             ArrayList<Entry> winners;
+            
             // Big board used to be a table whose cells contained individual contests; now it is just one big cell
             out.write("<table class='big-board'><tr><td style='text-align: center;'><span>");
             out.newLine();
@@ -29,8 +30,7 @@ public class ArchivesGenerator {
             for (int i=history.getContests().size()-1; i>=0; i--)
             {
                 contest = history.getContests().get(i);
-
-                if (contest.getApparentContestNumber() >= contestStart && contest.getApparentContestNumber() <= contestEnd)
+                if (i >= contestStart && i <= contestEnd)
                 {
                     winners = contest.getWinners();
                     out.write("<table class='results-table'>");
@@ -139,6 +139,41 @@ public class ArchivesGenerator {
         {
             //Catch exception if any
             System.err.println("Error: " + e.getMessage());
+        }
+    }
+    
+    // In this function, `current_page` is 1-indexed.
+    public void insertNavigationBar(BufferedWriter out, int current_page, int num_pages) {
+        try {
+            out.write("<table class='navtable'>");
+            out.newLine();
+            
+            /*
+            // Add nice "Navigation" heading to the top.  Colspan needs to be calculated based on number of navigation links later.
+            final int colspan = 1 + ((current_page > 1) ? 2 : 0) + ((current_page < num_pages) ? 2 : 0);
+            out.write("<tr><td class='navtable-header' colspan='" + colspan + "'>Navigation</td></tr>");
+            out.newLine();
+            */
+            
+            out.write("<tr>");
+            // If a previous page, create links to it and the first page
+            if (current_page > 1) {
+                out.write("<td class='navtable-cell'><a class='green' href='archives-page" + 1 + ".html'>&lt;&lt; Newest</a></td>");
+                out.write("<td class='navtable-cell'><a class='green' href='archives-page" + (current_page - 1) + ".html'>&lt; Newer</a></td>");
+            }
+            // We can always declare the current page...
+            out.write("<td class='navtable-cell'><span class='current-page'>Page " + current_page + "</span></td>");
+            // If a next page, create a link to it and the oldest page
+            if (current_page < num_pages) {
+                out.write("<td class='navtable-cell'><a class='green' href='archives-page" + (current_page + 1) + ".html'>Older &gt;</a></td>");
+                out.write("<td class='navtable-cell'><a class='green' href='archives-page" + num_pages + ".html'>Oldest &gt;&gt;</a></td>");
+            }
+            out.write("</tr>");
+            out.newLine();
+            out.write("</table>");
+            out.newLine();
+        } catch (Exception e) {
+            System.err.println("Error inserting navigation bar...");
         }
     }
 }
