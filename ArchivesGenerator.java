@@ -150,21 +150,23 @@ public class ArchivesGenerator {
             
             /*
             // Add nice "Navigation" heading to the top.  Colspan needs to be calculated based on number of navigation links later.
-            final int colspan = 1 + ((current_page > 1) ? 1 : 0) + ((current_page < num_pages) ? 1 : 0);
+            final int colspan = 1 + ((current_page > 1) ? 2 : 0) + ((current_page < num_pages) ? 2 : 0);
             out.write("<tr><td class='navtable-header' colspan='" + colspan + "'>Navigation</td></tr>");
             out.newLine();
             */
             
             out.write("<tr>");
-            // If a previous page, create a link to it
+            // If a previous page, create links to it and the first page
             if (current_page > 1) {
+                out.write("<td class='navtable-cell'><a class='green' href='archives-page" + 1 + ".html'>&lt;&lt; Newest</a></td>");
                 out.write("<td class='navtable-cell'><a class='green' href='archives-page" + (current_page - 1) + ".html'>&lt; Newer</a></td>");
             }
             // We can always declare the current page...
             out.write("<td class='navtable-cell'><span class='current-page'>Page " + current_page + "</span></td>");
-            // If a next page, create a link to it
+            // If a next page, create a link to it and the oldest page
             if (current_page < num_pages) {
                 out.write("<td class='navtable-cell'><a class='green' href='archives-page" + (current_page + 1) + ".html'>Older &gt;</a></td>");
+                out.write("<td class='navtable-cell'><a class='green' href='archives-page" + num_pages + ".html'>Oldest &gt;&gt;</a></td>");
             }
             out.write("</tr>");
             out.newLine();
