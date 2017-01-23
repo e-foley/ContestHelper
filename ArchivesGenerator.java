@@ -21,6 +21,7 @@ public class ArchivesGenerator {
             Contest contest;
             boolean isWinner;
             ArrayList<Entry> winners;
+            
             // Big board used to be a table whose cells contained individual contests; now it is just one big cell
             out.write("<table class='big-board'><tr><td style='text-align: center;'><span>");
             out.newLine();
@@ -138,6 +139,39 @@ public class ArchivesGenerator {
         {
             //Catch exception if any
             System.err.println("Error: " + e.getMessage());
+        }
+    }
+    
+    // In this function, `current_page` is 1-indexed.
+    public void insertNavigationBar(BufferedWriter out, int current_page, int num_pages) {
+        try {
+            out.write("<table class='navtable'>");
+            out.newLine();
+            
+            /*
+            // Add nice "Navigation" heading to the top.  Colspan needs to be calculated based on number of navigation links later.
+            final int colspan = 1 + ((current_page > 1) ? 1 : 0) + ((current_page < num_pages) ? 1 : 0);
+            out.write("<tr><td class='navtable-header' colspan='" + colspan + "'>Navigation</td></tr>");
+            out.newLine();
+            */
+            
+            out.write("<tr>");
+            // If a previous page, create a link to it
+            if (current_page > 1) {
+                out.write("<td class='navtable-cell'><a class='green' href='archives-page" + (current_page - 1) + ".html'>&lt; Newer</a></td>");
+            }
+            // We can always declare the current page...
+            out.write("<td class='navtable-cell'><span class='current-page'>Page " + current_page + "</span></td>");
+            // If a next page, create a link to it
+            if (current_page < num_pages) {
+                out.write("<td class='navtable-cell'><a class='green' href='archives-page" + (current_page + 1) + ".html'>Older &gt;</a></td>");
+            }
+            out.write("</tr>");
+            out.newLine();
+            out.write("</table>");
+            out.newLine();
+        } catch (Exception e) {
+            System.err.println("Error inserting navigation bar...");
         }
     }
 }
