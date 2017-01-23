@@ -4034,9 +4034,15 @@ Sheik; png; 13
 Ganondorf; png; 5
 Joelmacool; png; 2
 Naru; png; 5
-/*
+
 #594 @ 71590
-Naru; png; 7
-NewJourneysFire; png; 9
-Joelmacool; png; 0
+Naru; png; 21
+NewJourneysFire; png; 22
+Joelmacool; png; 3
 /*
+#595 @ 71678
+Zaxarone; png; 
+Dimentio; png; 
+Aslion; png; 
+Polaris; png; 
+GrantGreif; png; 
