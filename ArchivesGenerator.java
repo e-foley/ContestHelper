@@ -38,7 +38,7 @@ public class ArchivesGenerator {
                     
                     // If there are no winners in the contest, don't create a cell for the winners' pictures lest we accumulate borders.
                     if (!winners.isEmpty()) {
-                        out.write("<tr><td class='picture-cell' colspan=3>");
+                        out.write("<tr><td class='picture-cell' colspan=4>");
                         for (int j=0; j<winners.size(); j++)
                         {
                             if (!winners.get(j).hasURL()) {
@@ -54,7 +54,7 @@ public class ArchivesGenerator {
                     }
 
                     // Contest title
-                    out.write("<tr><td class='contest-title' colspan=3>");
+                    out.write("<tr><td class='contest-title' colspan=4>");
                     if (contest.hasTopic())
                         out.write("<a class='contest' href='http://www.purezc.net/forums/index.php?showtopic=" + contest.getTopic() + "'>");
                     //out.write("(" + contest.getSynch() + ") "); // TEMPORARY!
@@ -64,7 +64,7 @@ public class ArchivesGenerator {
                     out.write("</td></tr>");
                     
                     out.newLine();
-                    out.write("<tr class='header-row'><td class='left'>Name</td><td class='center'>Votes</td><td class='center'>Points");
+                    out.write("<tr class='header-row'><td></td><td class='left'>Name</td><td class='center'>Votes</td><td class='center'>Points");
                     out.write("<span class='tooltip' title='Votes plus sum of vote margins over lower-ranking shots'>[?]</span>");
                     out.write("</td></tr>");
                     out.newLine();
@@ -79,11 +79,14 @@ public class ArchivesGenerator {
                         else
                             out.write("<tr class='entry'>");
 
-                        out.write("<td class='name'>");
+                        out.write("<td class='center'>");
                         if (entry.hasURL()) {
                             out.write("<a href='" + entry.getURL() + "'>");
-                            out.write("<img class='has-shot-icon' src='images/camera.png'/></a>&nbsp;");
+                            out.write("<img class='has-shot-icon' src='images/camera.png'/></a>");
                         }
+                        out.write("</td>");
+                        
+                        out.write("<td class='name'>");
                         // TODO: Rename 'image' class.  It's a holdover from a much older version of the page.
                         out.write("<a class='image' href='" + UserProfile.getProfileDropboxURL(entry.getMember()) + "'>");
                         out.write(entry.getMember().getMostRecentName());
@@ -113,7 +116,7 @@ public class ArchivesGenerator {
                     //                         out.write("<span class='tie-note'>Screenshot of the Week " + contest.getName() + " ended in a draw.</span>");
                     //                     }
 
-                    out.write("<tr class='info-row'><td class='numentries'>");
+                    out.write("<tr class='info-row'><td></td><td class='numentries'>");
                     out.write(contest.numEntries() + " entr");
                     if (contest.numEntries() != 1)
                         out.write("ies");
