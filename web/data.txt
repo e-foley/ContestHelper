@@ -3856,7 +3856,7 @@ RedTribeLink; png; 1
 Astromeow; png; 14
 
 #563 @ 70351
-RecketGrunt; png; 7
+RocketGrunt; png; 7
 Shane; png; 30
 Saffith; png; 5
 Joelmacool; png; 8
@@ -3958,14 +3958,14 @@ GrantGreif; png; 0
 
 #581 @ 71029
 MrPow; png; 26
-Mitsukara; png; 5
+Mitsukara; gif; 5
 Alestance; png; 13
 Joelmacool; png; 5
 
 #582 @ 71086
 MrPow; png; 19
 Sheik; png; 18
-Russ; png; 13
+Russ; gif; 13
 Joelmacool; png; 3
 
 #583 @ 71126
