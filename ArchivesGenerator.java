@@ -79,7 +79,7 @@ public class ArchivesGenerator {
                         else
                             out.write("<tr class='entry'>");
 
-                        out.write("<td class='center'>");
+                        out.write("<td class='center has-shot-icon-cell'>");
                         if (entry.hasURL()) {
                             out.write("<a href='" + entry.getURL() + "'>");
                             out.write("<img class='has-shot-icon' src='images/camera.png'/></a>");
