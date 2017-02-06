@@ -3985,11 +3985,11 @@ Lüt; Lut; png; 19
 
 #586 @ 71230
 Zaxarone; png; 2
-Polaris; png; 11
+Polaris; gif; 11
 Avataro; png; 2
 Sheik; png; 13
 Joelmacool; png; 5
-Dimentio; png; 2
+Dimentio; jpg; 2
 Shoelace; png; 16
 
 #587 @ 71271
@@ -4015,7 +4015,7 @@ Anthus; png; 12
 ywkls; png; 4
 Omega; png; 7
 Joelmacool; png; 16
-Dimentio; png; 3
+Dimentio; gif; 3
 Plutia; png; 1
 
 #591 @ 91440
