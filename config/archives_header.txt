@@ -37,7 +37,10 @@ function hover(e, image)
 
 function hideHover()
 {
+    hoverimg.style.left = "0px";
+    hoverimg.style.bottom = window.innerHeight + "px";
     hoverimg.style.visibility = "hidden";
+    hoverimg.src = null;
 }
 </script>
 <title>SOTW Archives</title>
