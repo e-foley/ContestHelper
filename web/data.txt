@@ -3856,7 +3856,7 @@ RedTribeLink; png; 1
 Astromeow; png; 14
 
 #563 @ 70351
-RecketGrunt; png; 7
+RocketGrunt; png; 7
 Shane; png; 30
 Saffith; png; 5
 Joelmacool; png; 8
@@ -3958,14 +3958,14 @@ GrantGreif; png; 0
 
 #581 @ 71029
 MrPow; png; 26
-Mitsukara; png; 5
+Mitsukara; gif; 5
 Alestance; png; 13
 Joelmacool; png; 5
 
 #582 @ 71086
 MrPow; png; 19
 Sheik; png; 18
-Russ; png; 13
+Russ; gif; 13
 Joelmacool; png; 3
 
 #583 @ 71126
@@ -3985,11 +3985,11 @@ Lüt; Lut; png; 19
 
 #586 @ 71230
 Zaxarone; png; 2
-Polaris; png; 11
+Polaris; gif; 11
 Avataro; png; 2
 Sheik; png; 13
 Joelmacool; png; 5
-Dimentio; png; 2
+Dimentio; jpg; 2
 Shoelace; png; 16
 
 #587 @ 71271
@@ -4015,7 +4015,7 @@ Anthus; png; 12
 ywkls; png; 4
 Omega; png; 7
 Joelmacool; png; 16
-Dimentio; png; 3
+Dimentio; gif; 3
 Plutia; png; 1
 
 #591 @ 91440
@@ -4039,10 +4039,20 @@ Naru; png; 5
 Naru; png; 21
 NewJourneysFire; png; 22
 Joelmacool; png; 3
-/*
+
 #595 @ 71678
-Zaxarone; png; 
-Dimentio; png; 
-Aslion; png; 
-Polaris; png; 
-GrantGreif; png; 
+Zaxarone; png; 4
+Dimentio; png; 2
+Aslion; png; 15
+Polaris; png; 22
+GrantGreif; png; 7
+
+#596 @ 71716
+NewJourneysFire; png; 26
+Omega; png; 0
+Polaris; png; 19
+/*
+#597 @ 71762
+Ganondorf; png; 
+Joelmacool; png; 
+Russ; png; 
