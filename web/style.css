@@ -409,3 +409,8 @@ td.contest-cell
   text-align: center;
   height: 1.75em;
 }
+
+.has-shot-icon
+{
+  height: 1em;
+}

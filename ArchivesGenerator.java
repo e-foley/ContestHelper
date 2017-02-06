@@ -80,8 +80,10 @@ public class ArchivesGenerator {
                             out.write("<tr class='entry'>");
 
                         out.write("<td class='name'>");
-                        if (entry.hasURL())
+                        if (entry.hasURL()) {
                             out.write("<a class='image' href='" + entry.getURL() + "'>");
+                            out.write("<img class='has-shot-icon' src='images/camera.png'/>&nbsp;");
+                        }
                         out.write(entry.getMember().getMostRecentName());
                         if (entry.hasURL())
                             out.write("</a>");
