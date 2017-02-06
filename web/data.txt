@@ -4039,10 +4039,20 @@ Naru; png; 5
 Naru; png; 21
 NewJourneysFire; png; 22
 Joelmacool; png; 3
-/*
+
 #595 @ 71678
-Zaxarone; png; 
-Dimentio; png; 
-Aslion; png; 
-Polaris; png; 
-GrantGreif; png; 
+Zaxarone; png; 4
+Dimentio; png; 2
+Aslion; png; 15
+Polaris; png; 22
+GrantGreif; png; 7
+
+#596 @ 71716
+NewJourneysFire; png; 26
+Omega; png; 0
+Polaris; png; 19
+/*
+#597 @ 71762
+Ganondorf; png; 
+Joelmacool; png; 
+Russ; png; 
