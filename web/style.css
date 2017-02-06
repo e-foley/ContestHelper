@@ -413,4 +413,5 @@ td.contest-cell
 .has-shot-icon
 {
   height: 1em;
+  vertical-align: -10%;  /* This is relative to the text, not the cell, because images are inline. */
 }
