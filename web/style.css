@@ -420,3 +420,9 @@ td.contest-cell
 {
   width: 0px;
 }
+
+#hoverimg
+{
+  position: absolute;
+  visibility: hidden;
+}
