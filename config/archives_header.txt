@@ -30,7 +30,7 @@ function hover(e, image)
     var y = e.pageY;
     var hoverimg = document.getElementById("hoverimg");
     hoverimg.style.left = (x + 10) + "px";
-    hoverimg.style.bottom = (window.innerHeight - (y - 10)) + "px";
+    hoverimg.style.bottom = (window.innerHeight - (y - 30)) + "px";
     hoverimg.src = image;
     hoverimg.style.visibility = "visible";
 }

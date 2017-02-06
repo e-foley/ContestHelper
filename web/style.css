@@ -425,4 +425,7 @@ td.contest-cell
 {
   position: absolute;
   visibility: hidden;
+  /*border-style: solid;
+  border-width: 1px;*/
+  box-shadow: 0px 0px 30px 30px #FFFFFF;
 }
