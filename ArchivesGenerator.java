@@ -81,13 +81,12 @@ public class ArchivesGenerator {
 
                         out.write("<td class='name'>");
                         if (entry.hasURL()) {
-                            out.write("<a class='image' href='" + entry.getURL() + "'>");
-                            out.write("<img class='has-shot-icon' src='images/camera.png'/>&nbsp;");
+                            out.write("<a href='" + entry.getURL() + "'>");
+                            out.write("<img class='has-shot-icon' src='images/camera.png'/></a>&nbsp;");
                         }
+                        // TODO: Rename 'image' class.  It's a holdover from a much older version of the page.
+                        out.write("<a class='image' href='" + UserProfile.getProfileDropboxURL(entry.getMember()) + "'>");
                         out.write(entry.getMember().getMostRecentName());
-                        if (entry.hasURL())
-                            out.write("</a>");
-                            
                         // Add an icon if the shot won the contest
                         if (isWinner) {
                             out.write(" <img class='winnericon' title='Winner!' src='images/star.png'/>");
