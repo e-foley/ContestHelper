@@ -22,7 +22,7 @@ div.big-block.archives
 {
   max-width: none;  /* Overrides div.big-block */
   min-width: 550px;
-  margin: 0 100px;  /* Used to be margin: 0 auto; */
+  margin: 0 5%;  /* Used to be margin: 0 auto; */
 }
 
 .contest-block {border-style: solid; border-width: 0px;}
@@ -408,4 +408,30 @@ td.contest-cell
   text-shadow: 1px 1px 1px #503800;
   text-align: center;
   height: 1.75em;
+}
+
+.has-shot-icon
+{
+  height: 1em;
+  vertical-align: -10%;  /* This is relative to the text, not the cell, because images are inline. */
+}
+
+.has-shot-icon-cell
+{
+  width: 0px;
+}
+
+#hoverimg
+{
+  position: absolute;
+  visibility: hidden;
+  box-shadow: 0px 0px 30px 30px #FFFFFF;
+
+  /* The below copied from picture-large-div */
+  width: 512px;
+  image-rendering: -moz-crisp-edges;         /* Firefox */
+  image-rendering:   -o-crisp-edges;         /* Opera */
+  image-rendering: -webkit-optimize-contrast;/* Webkit (non-standard naming) */
+  image-rendering: crisp-edges;
+  -ms-interpolation-mode: nearest-neighbor;  /* IE (non-standard property) */
 }
