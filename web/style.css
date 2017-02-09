@@ -22,7 +22,7 @@ div.big-block.archives
 {
   max-width: none;  /* Overrides div.big-block */
   min-width: 550px;
-  margin: 0 100px;  /* Used to be margin: 0 auto; */
+  margin: 0 5%;  /* Used to be margin: 0 auto; */
 }
 
 .contest-block {border-style: solid; border-width: 0px;}
