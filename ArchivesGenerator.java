@@ -82,7 +82,7 @@ public class ArchivesGenerator {
                         out.write("<td class='center has-shot-icon-cell'>");
                         if (entry.hasURL()) {
                             out.write("<a href='" + entry.getURL() + "'>");
-                            out.write("<img class='has-shot-icon' title='Click to view this member&#8217;s shot' src='images/camera.png' onmousemove='hover(event, \"" + entry.getURL() + "\")' onmouseleave='hideHover()'/>");
+                            out.write("<img class='has-shot-icon' title='Click to view this member&#8217;s shot' src='images/camera.png' onmouseenter='enterCamera(\"" + entry.getURL() + "\")' onmousemove='hover(event)' onmouseout='exitCamera()'/>");
                             out.write("</a>");
                         }
                         out.write("</td>");

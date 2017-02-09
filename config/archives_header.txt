@@ -24,29 +24,46 @@ function toggle(ID, show)
 	}
 }
 
-function hover(e, image)
+var hover_requested = false;
+
+function hoverLoad()
+{
+    if (hover_requested) {
+      var hoverimg = document.getElementById("hoverimg");
+    	hoverimg.style.visibility = "visible";
+    }
+}
+
+function enterCamera(image)
+{
+    var hoverimg = document.getElementById("hoverimg");
+    hoverimg.src = image;
+    hover_requested = true;
+}
+
+function hover(e)
 {
     var x = e.pageX;
     var y = e.pageY;
     var hoverimg = document.getElementById("hoverimg");
     hoverimg.style.left = (x + 10) + "px";
     hoverimg.style.bottom = (window.innerHeight - (y - 30)) + "px";
-    hoverimg.src = image;
-    hoverimg.style.visibility = "visible";
 }
 
-function hideHover()
+function exitCamera()
 {
+    var hoverimg = document.getElementById("hoverimg");
+    hoverimg.style.visibility = "hidden";
+    hoverimg.src = "images/blank.png";
     hoverimg.style.left = "0px";
     hoverimg.style.bottom = window.innerHeight + "px";
-    hoverimg.style.visibility = "hidden";
-    hoverimg.src = null;
+    hover_requested = false;
 }
 </script>
 <title>SOTW Archives</title>
 </head>
 <body>
-<img id='hoverimg' src=''/>
+<img id='hoverimg' onload='hoverLoad()' src='images/blank.png'/>
 <div class='big-block archives'>
 <div class='grand-title'>Screenshot of the Week Archives</div>
 <div class='updated-text'>Last updated with the results of Screenshot of the Week <span style='font-weight:bold;'>###</span></div>
