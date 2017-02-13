@@ -89,7 +89,7 @@ public abstract class Master
             Leaderboard.addLeaderboardToFile(history.getMembers(), new MemberSortWinRatio(), "Best win ratios (minimum 5 entries)", "", "", " Ratio", out, true, true, true, 9);
             Leaderboard.addLeaderboardToFile(history.getMembers(), new MemberSortPlusMinusPoints(), "Best plus/minus records (head-to-head vote basis)", "", "", " +/- votes", out, true, true, true, 10);
             Leaderboard.addLeaderboardToFile(history.getMembers(), new MemberSortPlusMinusHeads(), "Best plus/minus records (head-to-head victory basis)", "", "", " +/- wins", out, true, true, true, 11);
-            Leaderboard.addLeaderboardToFile(history.getMembers(), new MemberSortFormidable(), "Most formidable opponents", "", "", " Rating", out, true, false, true, 12);
+            Leaderboard.addLeaderboardToFile(history.getMembers(), new MemberSortNewFormidable(), "Most formidable opponents", "", "", " Rating", out, true, false, true, 12);
             Master.addFileToBuffer("config/leaderboard_footer.txt", out, swaps);
             out.close();
             
@@ -107,7 +107,7 @@ public abstract class Master
             //Leaderboard.addLeaderboardToFile(history.getMembers(), new MemberSortWinRatio(), "Best win ratios (minimum 5 entries)", "", "", " Ratio", out, false, true, true, 9, DIGEST_LIST_LENGTH);
             //Leaderboard.addLeaderboardToFile(history.getMembers(), new MemberSortPlusMinusPoints(), "Best plus/minus records (head-to-head vote basis)", "", "", " +/- votes", out, false, false, true, 10, DIGEST_LIST_LENGTH);
             //Leaderboard.addLeaderboardToFile(history.getMembers(), new MemberSortPlusMinusHeads(), "Best plus/minus records (head-to-head victory basis)", "", "", " +/- wins", out, false, false, true, 11, DIGEST_LIST_LENGTH);
-            Leaderboard.addLeaderboardToFile(history.getMembers(), new MemberSortFormidable(), "Most formidable opponents", "", "", " Rating", out, false, false, true, 12, DIGEST_LIST_LENGTH);
+            Leaderboard.addLeaderboardToFile(history.getMembers(), new MemberSortNewFormidable(), "Most formidable opponents", "", "", " Rating", out, false, false, true, 12, DIGEST_LIST_LENGTH);
             Master.addFileToBuffer("config/leaderboard_footer.txt", out, swaps);
             out.close();
             
