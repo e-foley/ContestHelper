@@ -70,7 +70,6 @@ rocksfan13 > Link
 Sir Pimpalot > Mr. Pimpy
 Snort > Sephiroth
 XxGamasterxX > Cameron
-Yoshi > Tails > Pikachu > Fluttershy
 ZeeLiam > William
 gray0x > Lithium > Breast Cancer Awareness > Lithium > Alison > Aslion
 Beta Link > Bayta
@@ -89,7 +88,6 @@ Lord Settra! > Rastael
 Twinblake > Obderhode
 LunarRedMage > Nokutaa-chan
 Migokalle > Galactic President Superstar McAwesomeville > Robin > Migokalle > Robin
-Yoshidude > Dragonite > Tingle > Jacques > Duck
 blackbishop89 > LordVolcanon > Palpaleos > Zecora > Freyja > Freya > Mero
 EddyTheOliveira > Eddy
 green-kirby > Lunaria
@@ -108,6 +106,9 @@ Koishi > Nekoishi > Plutia
 //   Shared "Matthew"
 3571: pikaguy900 > Matthew > Nimono
 294314: FlameCursed > Chungus > FlameCursed > Matthew
+//   Shared "Yoshi"
+1245: Yoshi > Tails > Pikachu > Fluttershy
+48320: Yoshidude > Dragonite > Tingle > Jacques > Duck > Homura > Can Dogs Eat Kiwi? > Yoshi
 
 // EDUCATED GUESSES
 DarkSFK > Bob
