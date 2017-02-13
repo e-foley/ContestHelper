@@ -309,4 +309,16 @@ public class Member
     {
         return Math.round(1000 + 25 * getTotalPlusMinusPoints() / (getTotalEntries() + 3));
     }
+    
+    public int getTotalNumOpponents() {
+        int opponent_count = 0;
+        for (int i = 0; i < entries.size(); ++i) {
+            opponent_count += (entries.get(i).getContest().numEntries() - 1);
+        }
+        return opponent_count;
+    }
+    
+    public int getNewFormidableRating() {
+        return Math.round(5000.0f + 5000.0f * getTotalPlusMinusHeads() / (getTotalNumOpponents() + 10));
+    }
 }
