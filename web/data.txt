@@ -395,7 +395,7 @@ Wild Bill; SOTW52-WildBill; png; 17
 a guy and his game; SOTW52-aguyandhisgame; gif; 1
 PolygonX8; SOTW52-PolygonX8; gif; 0
 Hero Link; SOTW52-HeroLink; GIF; 2
-Yoshi; SOTW52-Yoshi; jpg; 0
+Yoshi[1245]; SOTW52-Yoshi; jpg; 0
 Teilyr; 13
 link3505; SOTW52-link3505; gif; 8
 skateboarder11; SOTW52-skateboarder11; gif; 0
@@ -4051,8 +4051,14 @@ GrantGreif; png; 7
 NewJourneysFire; png; 26
 Omega; png; 0
 Polaris; png; 19
-/*
+
 #597 @ 71762
-Ganondorf; png; 
+Ganondorf; png; 24
+Joelmacool; png; 15
+Russ; png; 7
+/*
+#598 @ 71802
+Naru; png; 
 Joelmacool; png; 
-Russ; png; 
+Dimentio; gif; 
+Aslion; png; 
