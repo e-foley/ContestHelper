@@ -305,7 +305,7 @@ public class Member
         return getTotalWinningness() / getTotalEntries();
     }
     
-    public int getFormidableRating()
+    public int getOldFormidableRating()
     {
         return Math.round(1000 + 25 * getTotalPlusMinusPoints() / (getTotalEntries() + 3));
     }

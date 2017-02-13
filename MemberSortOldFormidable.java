@@ -2,10 +2,10 @@ import java.util.Comparator;
 import java.util.ArrayList;
 import java.text.NumberFormat;
 
-public class MemberSortFormidable implements MemberDataRetriever
+public class MemberSortOldFormidable implements MemberDataRetriever
 {
     public int compare(Member m1, Member m2) {
-        int result = new Integer(m2.getFormidableRating()).compareTo(m1.getFormidableRating());
+        int result = new Integer(m2.getOldFormidableRating()).compareTo(m1.getOldFormidableRating());
         //if (result == 0)
         //    result = (new MemberSortUncertainty()).compare(m1, m2);
         if (result == 0)
@@ -19,7 +19,7 @@ public class MemberSortFormidable implements MemberDataRetriever
     {
         //if (m.hasUncertainty())
         //    return ""+NumberFormat.getInstance().format(m.getTotalPlusMinusPoints())+"+";
-        return ""+NumberFormat.getInstance().format(m.getFormidableRating());
+        return ""+NumberFormat.getInstance().format(m.getOldFormidableRating());
     }
     
     public String getDetails(Member m, boolean linkTopics)
