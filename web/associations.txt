@@ -98,6 +98,7 @@ sonicfan350 > Zephyr_Eevee > Goriya > Nexas > Eins
 Midnight_King > Shane > Charizard > Shane > Polaris
 Hero Link > Angeal > Pinkie Pie > Rydia > Angeal > Lana > Linkle
 Koishi > Nekoishi > Plutia
+Franky > Omega
 
 // Tagged members: refer to these tags in data.txt when a member's username has been used by a different person
 //   Shared "Ben"
