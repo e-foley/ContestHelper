@@ -17,6 +17,7 @@ public class Contest
     boolean hasTopic;
     private int topic;
     private int synch;
+    private ArrayList<String> notes;
     
     /**
      * Constructor for objects of class Member
@@ -29,6 +30,7 @@ public class Contest
         topic = -1;
         hasTopic = false;
         synch = DEFAULT_SYNCH;
+        notes = new ArrayList<String>();
     }
     
     public Contest(String myName)
@@ -38,6 +40,7 @@ public class Contest
         topic = -1;
         hasTopic = false;
         synch = DEFAULT_SYNCH;
+        notes = new ArrayList<String>();
     }
       
     public Contest(String myName, int mySynch)
@@ -47,6 +50,7 @@ public class Contest
         topic = -1;
         hasTopic = false;
         synch = mySynch;
+        notes = new ArrayList<String>();
     }
     
     public Contest(String myName, boolean myHasTopic, int myTopic)
@@ -56,6 +60,7 @@ public class Contest
         topic = myTopic;
         hasTopic = myHasTopic;
         synch = DEFAULT_SYNCH;
+        notes = new ArrayList<String>();
     }
     
     public Contest(String myName, boolean myHasTopic, int myTopic, int mySynch)
@@ -65,6 +70,7 @@ public class Contest
         topic = myTopic;
         hasTopic = myHasTopic;
         synch = mySynch;
+        notes = new ArrayList<String>();
     }
 
     public boolean hasTopic()
@@ -191,5 +197,21 @@ public class Contest
         } else {
             return new String();
         }
+    }
+    
+    public ArrayList<String> getNotes() {
+        return notes;
+    }
+    
+    public void addNote(String note) {
+        notes.add(note);
+    }
+    
+    public String getNote(int index) {
+        return notes.get(index);
+    }
+    
+    public int numNotes() {
+        return notes.size();
     }
 }
