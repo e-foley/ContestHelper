@@ -435,3 +435,26 @@ td.contest-cell
   image-rendering: crisp-edges;
   -ms-interpolation-mode: nearest-neighbor;  /* IE (non-standard property) */
 }
+
+.contest-notes-cell
+{
+  text-align: left;
+  font-size: 0.75em;
+  border-top-color: #FFFFFF;
+  border-top-style: none;
+  /* Background color and text color borrowed from info-row */
+  background-color: #000033;
+  color: #FFFFFF;
+}
+
+.contest-notes-list
+{
+  margin: 3px;
+  list-style-position: inside;
+  padding-left: 0;
+}
+
+.contest-notes-item
+{
+
+}

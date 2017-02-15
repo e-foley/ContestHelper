@@ -129,6 +129,15 @@ public class ArchivesGenerator {
                     out.write(""+contest.numPoints());
                     out.write("</td></tr>");
 
+                    if (contest.numNotes() > 0) {
+                        out.write("<tr><td class='contest-notes-cell' colspan=4><ul class='contest-notes-list'>");
+                        for (int j = 0; j < contest.numNotes(); ++j) {
+                            out.write("<li class='contest-notes-item'>" + contest.getNote(j) + "</li>");
+                        }
+                        out.write("</ul>");
+                        out.write("</td></tr>");
+                    }
+                    
                     out.write("</table>");
                     out.newLine();
                     out.newLine();
