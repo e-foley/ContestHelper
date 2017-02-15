@@ -144,7 +144,7 @@ public class History
             String[] splits; // array for the output of the regex split
             String currentContestName = "";
             int currentSynch = 0;
-            Contest contestRetrieved;
+            Contest contestRetrieved = null;
 
             ParsedLine parse;
 
@@ -179,7 +179,11 @@ public class History
                 if (parse.hasMemberInfo && !blockComment)
                 {
                     addEntry(currentContestName, parse.memberName, parse.tag, parse.hasURL, parse.URL, parse.hasVotes, parse.votes, !parse.hasVotes, parse.overrideCode);
-                }   
+                }
+                
+                if (parse.isContestNote && !blockComment && contestRetrieved != null) {
+                    contestRetrieved.addNote(parse.note);
+                }
 
                 blockComment &= !strLine.endsWith(blockClose);
             }
