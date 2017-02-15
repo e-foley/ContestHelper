@@ -481,7 +481,7 @@ Mr. Z; SOTW58-MrZ; GIF; 3
 Hero Link; SOTW58-HeroLink; gif; 3
 NoeL; SOTW58-NoeL; GIF; 2
 UpbeatPenguin; SOTW58-UpbeatPenguin; gif; 0
-* Extra votes were cast for Radien after Praethus had already declared a tie between IaN and Radien.
+* Extra votes were cast after Praethus declared a tie between IaN and Radien.  These extra votes resulted in Radien's finishing ahead of IaN in the vote tally.
 
 #59 @ 6718
 PolygonX8; SOTW59-PolygonX8; jpg; 4
