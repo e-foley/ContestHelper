@@ -62,6 +62,7 @@ public class ParsedLine
         
         if (isContestNote) {
             note = line.substring(line.indexOf('*')).trim();
+            return;
         }
             
         if (line.startsWith("#") || (synchronous=line.startsWith("&")))
