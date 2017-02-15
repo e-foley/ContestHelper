@@ -61,7 +61,7 @@ public class ParsedLine
             return;
         
         if (isContestNote) {
-            note = line.substring(line.indexOf('*')).trim();
+            note = line.substring(line.indexOf('*') + 1).trim();
             return;
         }
             
