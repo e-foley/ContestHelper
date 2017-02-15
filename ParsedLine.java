@@ -17,10 +17,10 @@ public class ParsedLine
     public boolean hasVotes;
     public int votes;
     public int overrideCode;
-    
     public boolean synchronous;
-    
     public boolean hasUncertainty;
+    public boolean isContestNote;
+    public String note;
     
     private static final double URL_DIGITS = 2;
     
@@ -38,6 +38,7 @@ public class ParsedLine
         
         isBlank = line.equals("");
         isComment = line.startsWith("//");
+        isContestNote = line.startsWith("*");
         
         hasContestInfo = false;
         contestName = "";
@@ -54,10 +55,16 @@ public class ParsedLine
         overrideCode = 0;
         synchronous = false;
         hasUncertainty = true;
+        note = "";
         
         if (isBlank || isComment)
             return;
         
+        if (isContestNote) {
+            note = line.substring(line.indexOf('*') + 1).trim();
+            return;
+        }
+            
         if (line.startsWith("#") || (synchronous=line.startsWith("&")))
         {
             splits = line.split(regexContest);

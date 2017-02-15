@@ -26,12 +26,14 @@ DarkSFK;L
 Praethus;L
 ZeldaLord;L
 K-Teclis;http://sotw.purezc.net/SOTWArchive/Teclis01.gif;W
+* The poll for SotW 1 is lost, but we know Teclis won the contest.
 
 #2 @ 276
 Wild Bill;W
 DarkSFK;L
 Happyman;L
 Praethus;L
+* The poll for SotW 2 is lost, but we know Wild Bill won the contest.
 
 #3 @ 312
 blckscab;L
@@ -39,9 +41,11 @@ zeldalord;L
 plith;L
 Wild Bill;W
 Praethus;L
+* The poll for SotW 3 is lost, but we know Wild Bill won the contest.
 
 #4
 blckscab;http://sotw.purezc.net/SOTWArchive/blckscab01.gif;W
+* The entire topic for SotW 4 is missing.  We know blckscab won, but we don't know who his competitors were.
 
 #5 @ 613
 DarkFlameWolf;2
@@ -50,6 +54,7 @@ MountainDrew;http://sotw.purezc.net/SOTWArchive/MountainDrew01.gif;5
 StarFox;3
 Praethus;1
 Teilyr;http://sotw.purezc.net/SOTWArchive/Teilyr02.gif;5
+* SotW 5 ended in a tie.
 
 #6 @ 668
 MountainDrew;0
@@ -74,6 +79,7 @@ Lotus Eater; 1
 Setzer; 0
 Wild Bill; 6
 Praethus; 0
+* SotW 8 ended in a tie.
 
 #9 @ 929
 Happyman; 2
@@ -81,6 +87,7 @@ UpbeatPenguin; http://sotw.purezc.net/SOTWArchive/UPB01.gif; 5W
 Setzer; 1
 Lotus Eater; 5
 Wild Bill; 1
+* Ben and Lotus Eater finished with the same vote tally, but Lotus Eater requested that Ben be declared the sole winner, a request that SotW leader Praethus honored.
 
 #10 @ 1040
 blckscab; 1
@@ -111,6 +118,7 @@ Blake; 0
 DarkFlameWolf; 4
 zoraman; 7
 Praethus; 2
+* Extra votes were cast after Praethus declared Nick the winner.  These extra votes resulted in zoraman's being tied with Nick in the vote tally.
 
 #14 @ 1473
 PrinceMSC; http://sotw.purezc.net/SOTWArchive/PrinceMSC01.gif; 7
@@ -143,6 +151,7 @@ jman2050; 8
 Stungun; 0
 Praethus; 1
 Demimore; 8W
+* Extra votes were cast after Praethus declared Demimore the winner.  These extra votes resulted in jman2050's being tied with Demimore in the vote tally.
 
 #19 @ 2078
 Demimore; 3
@@ -238,6 +247,7 @@ Jonathan; http://sotw.purezc.net/SOTWArchive/Jonathan01.gif; 10W
 Wild Bill; 2
 StarFox; 10
 KingdomChamp225; 1
+* Extra votes were cast after Praethus declared Jonathan the winner.  These extra votes resulted in Fox' being tied with Jonathan in the vote tally.
 
 #32 @ 3472
 Nick; 1
@@ -272,6 +282,7 @@ Blonde799; 9W
 Darkmatt; 0
 Petoe; 9
 Praethus; 9
+* Extra votes were cast after Praethus declared Blonde799 the winner.  These extra votes resulted in Peteo and Praethus' being tied with Blonde799 in the vote tally.
 
 #37 @ 4020
 Blonde799; 5
@@ -280,6 +291,7 @@ jman2050; 12
 Mr. Z; 1
 Javaiz867; 0
 Nick; 12W
+* Extra votes were cast after Praethus declared Nick the winner.  These extra votes resulted in jman2050's being tied with Nick in the vote tally.
 
 #38 @ 4111
 Mr. Z; 7
@@ -332,6 +344,7 @@ Mr. Z; 4
 Nick; 0
 Petoe; 11
 Hero Link; 2
+* Extra votes were cast after Praethus declared ShadowTiger the winner.  These extra votes resulted in Peteo's being tied with ShadowTiger in the vote tally.
 
 #45 @ 4893
 BH4; 6
@@ -359,10 +372,11 @@ Wild Bill; SOTW47-WildBill; gif; 11
 Whhthe2; SOTW47-Whhthe2; gif; 3
 
 #48 @ 5247
-Happyman; SOTW48-Happyman; GIF; 10
+Happyman; SOTW48-Happyman; GIF; 10W
 Nick; SOTW48-Nick; gif; 5
 Whhthe2; SOTW48-Whhthe2; gif; 10
 skateboarder11; SOTW48-skateboarder11; gif; 4
+* Extra votes were cast after Praethus declared HappyPuppet the winner.  These extra votes resulted in Whhthe2's being tied with HappyPuppet in the vote tally.
 
 #49 @ 5404
 Arathorn21st; SOTW49-Arathorn21; gif; 1
@@ -382,6 +396,7 @@ codelinker8705; SOTW50-codelinker8705; gif; 2
 jman2050; SOTW50-jman2050; PNG; 0
 link3505; SOTW50-link3505andBH4; gif; 2
 BH4; SOTW50-link3505andBH4; gif; 2
+* Relic and ShadowTiger submitted a joint shot.
 
 #51 @ 5598
 Ccc; SOTW51-Ccc; jpg; 1
@@ -421,6 +436,7 @@ Jaivaz; SOTW54-Jaivaz; gif; 2L
 masterlink3000; SOTW54-masterlink3000; jpg; 2L
 Mr. Z; SOTW54-MrZ; gif; 2L
 skateboarder11; SOTW54-skateboarder11; gif; 4L
+* Due to a large volume of entrants, SotW 54 was split into two polls.  The top finishers in each poll competed in a second round, which Teilyr won.
 
 &54B @ 5910
 blckscab; SOTW54-blckscab; jpg; 6
@@ -430,6 +446,7 @@ PolygonX8; SOTW54-PolygonX8; gif; 8
 GameLink7; SOTW54-GameLink7; gif; 0
 BH4; SOTW54-BH4; GIF; 7
 Aegis Runestone; SOTW54-AegisRunestone; gif; 2
+* Due to a large volume of entrants, SotW 54 was split into two polls.  The top finishers in each poll competed in a second round, which Teilyr won.
 
 #55 @ 6194
 Mr. Z; SOTW55-MrZ; GIF; 24
@@ -464,6 +481,7 @@ Mr. Z; SOTW58-MrZ; GIF; 3
 Hero Link; SOTW58-HeroLink; gif; 3
 NoeL; SOTW58-NoeL; GIF; 2
 UpbeatPenguin; SOTW58-UpbeatPenguin; gif; 0
+* Extra votes were cast after Praethus declared a tie between IaN and Radien.  These extra votes resulted in Radien's finishing ahead of IaN in the vote tally.
 
 #59 @ 6718
 PolygonX8; SOTW59-PolygonX8; jpg; 4
@@ -508,6 +526,7 @@ Ian; SOTW63-Ian; gif; 14
 System Error; SOTW63-SystemError; gif; 14W
 FireStorm; SOTW63-FireStorm; gif; 0
 skateboarder11; SOTW63-skateboarder11; GIF; 2
+* Extra votes were cast after Praethus declared System Error the winner.  These extra votes resulted in IaN's being tied with System Error in the vote tally.
 
 #64 @ 7693
 Nick; SOTW64-Nick; gif; 0
@@ -555,6 +574,7 @@ Shoelace; gif; 0
 Radien; gif; 18W
 Vargen; gif; 20
 Darklink813; gif; 2
+* Extra votes were cast after PrinceMSC declared Radien the winner.  These extra votes resulted in Vargen's finishing ahead of Radien in the vote tally.
 
 #69 @ 8220
 Snort; snort; gif; 4
@@ -615,6 +635,7 @@ IaN; gif; 10
 Radien; gif; 12
 FireStorm; Firestorm; gif; 3
 codelinker; gif; 11W
+* Extra votes were cast after PrinceMSC declared codelinker the winner.  These extra votes resulted in Dart Zaidyer and Radien's finishing ahead of codelinker in the vote tally.
 
 #77 @ 9720
 BH4; BH41; gif; 40
@@ -659,6 +680,7 @@ Gashin; gif; 24W
 PrinceMSC; gif; 27
 Shoelace; gif; 1
 Snort; gif; 0
+* Extra votes were cast after PrinceMSC declared Relic the winner.  These extra votes resulted in PrinceMSC's finishing ahead of Relic in the vote tally.
 
 #83 @ 10974
 Drari; gif; 0
@@ -730,6 +752,7 @@ Tobias Daboi; gif; 0
 Jonathan; gif; 22
 Mr. Z; MrZ; gif; 22W
 PolygonX8; gif; 2
+* Extra votes were cast after PrinceMSC declared Mr. Z the winner.  These extra votes resulted in Jonathan's being tied with Mr. Z in the vote tally.
 
 #94 @ 13259
 Comix; gif; 0
@@ -741,6 +764,7 @@ Linkus Mastii; LinkusMastii; gif; 0
 PolygonX8; gif; 6
 Shoelace; gif; 0
 Tobias Daboi; TobiasDaboi; gif; 0
+* Extra votes were cast after PrinceMSC declared Jonathan the winner.  These extra votes resulted in Relic's being tied with Jonathan in the vote tally.
 
 #95 @ 13483
 Jonathan; gif; 25
@@ -1357,6 +1381,7 @@ Nuvo; zelda029pe1; png; 3
 Link75; hillsnb9; gif; 16W
 CastChaos; ccsotw186cv8tn9; png; 11
 Nuvo; zelda0081px1; png; 16
+* Extra votes were cast after Shoelace declared Link75 the winner.  These extra votes resulted in Strato's being tied with Link75 in the vote tally.
 
 #187 @ 33211
 ennonfenom; SotW187ennonfenom; png; 11
@@ -1373,6 +1398,7 @@ Ebola Zaire; zelda013jx4zl9; png; 36
 zmaster; png; 21W
 CastChaos; png; 21
 billy ronald; jpg; 2
+* Extra votes were cast after Shoelace declared Zenith the winner.  These extra votes resulted in CastChaos's being tied with Zenith in the vote tally.
 
 #190 @ 33642
 billy ronald; SotW190billyronald; gif; 1
@@ -1445,6 +1471,7 @@ Gleeok; png; 2
 Joe123; png; 28
 LinkMystro; png; 0
 LostInHyru1e; LostInHyrule; jpg; 4
+* Due to a large volume of entrants, SotW 200 was split into two polls.  The top finishers in each poll competed in a second round, which Joe123 won.
 
 &200C @ 34998
 Majora; gif; 14L
@@ -1453,6 +1480,7 @@ Octorockoncrack; octorockoncrack; jpg; 0L
 russadwan; gif; 1L
 Shoelace; gif; 21L
 ThunderSpeed; png; 2L
+* Due to a large volume of entrants, SotW 200 was split into two polls.  The top finisher in each poll competed in a second round, which Joe123 won.
 
 #201 @ 35096
 CastChaos; castchaosdh1; png; 1
@@ -1933,6 +1961,7 @@ Sheik; http://sotw.purezc.net/SOTW278.5%20%28Christmas%29/Sheik.png; 9
 Silver; http://sotw.purezc.net/SOTW278.5%20%28Christmas%29/Silver.png; 1
 Rem; http://sotw.purezc.net/SOTW278.5%20%28Christmas%29/Rem.png; 2
 Ebola Zaire; http://sotw.purezc.net/SOTW278.5%20%28Christmas%29/Ebola%20Zaire.gif; 5
+* This was a special Christmas-themed SotW, a sort of predecessor to Screenshot: Challenge Accepted.
 
 #279 @ 43800
 Ebola Zaire; Ebola_Zaire; gif; 23
@@ -2170,6 +2199,7 @@ catfriedrice; http://sotw.purezc.net/SOTW315A/catfriedrice.png; 2
 Saffith; http://sotw.purezc.net/SOTW315A/Saffith.png; 7
 Giggidy; http://sotw.purezc.net/SOTW315A/Giggidy.png; 9
 SpacemanDan; http://sotw.purezc.net/SOTW315A/SpacemanDan.png; 20
+* Due to a large volume of entrants, SotW 315 was split into two polls.  Each poll's top finisher was deemed a winner, and no follow-up round was held.
 
 &315C @ 49343
 Midnight_King; http://sotw.purezc.net/SOTW315C/Midnight_King.png; 9
@@ -2178,6 +2208,7 @@ William; http://sotw.purezc.net/SOTW315C/William.jpg; 8
 Russ; http://sotw.purezc.net/SOTW315C/Russ.jpg; 4
 Orin XD; http://sotw.purezc.net/SOTW315C/Orin%20XD.png; 3
 Ebola Zaire; http://sotw.purezc.net/SOTW315C/Ebola%20Zaire.gif; 25
+* Due to a large volume of entrants, SotW 315 was split into two polls.  Each poll's top finisher was deemed a winner, and no follow-up round was held.
 
 #316 @ 49454
 Moo2wo; http://sotw.purezc.net/SOTW316%20(Real)/Moo2wo.png; 24
@@ -2732,6 +2763,7 @@ Dawnlight; png; 16
 Jared; png; 9
 -DuCkTApE-; jpg; 2
 Dragonite; png; 5
+* Sheik and Supindahood submitted a joint shot.
 
 #392 @ 57386
 Dragonite; png; 4
