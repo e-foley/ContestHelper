@@ -9,7 +9,6 @@ zeldalord > ZeldaLord
 K-Teclis > Teclis
 Happyman > HappyPuppet
 King Cool Link > JoshSim > DashSim
-link3505 > Gashin > Relic
 PrinceMSC > PrettyBoy > PrinceMSC
 BH4 > ShadowTiger
 PolygonX8 > DarthExater > PolygonX8 > Exate
@@ -99,6 +98,7 @@ Midnight_King > Shane > Charizard > Shane > Polaris
 Hero Link > Angeal > Pinkie Pie > Rydia > Angeal > Lana > Linkle
 Koishi > Nekoishi > Plutia
 Franky > Omega
+link3505 > Gashin > Relic > link3505
 
 // Tagged members: refer to these tags in data.txt when a member's username has been used by a different person
 //   Shared "Ben"
