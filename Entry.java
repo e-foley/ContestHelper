@@ -13,6 +13,7 @@ public class Entry
     private boolean hasUncertainty;
     private int overrideCode;
     private boolean hasVotes;
+    private String nameSubmittedUnder;
     
     private int points;
     private boolean pointsAssigned;
@@ -21,7 +22,7 @@ public class Entry
     private int plusMinusHeads;
     private boolean plusMinusHeadsAssigned;
     
-    public Entry(Member myMember, Contest myContest, boolean myHasURL, String myURL, boolean myHasVotes, int votesSet, boolean myHasUncertainty, int myOverrideCode)
+    public Entry(Member myMember, Contest myContest, boolean myHasURL, String myURL, boolean myHasVotes, int votesSet, boolean myHasUncertainty, int myOverrideCode, String myNameSubmittedUnder)
     {
         member = myMember;
         contest = myContest;
@@ -31,6 +32,7 @@ public class Entry
         hasUncertainty = myHasUncertainty;
         overrideCode = myOverrideCode;
         hasVotes = myHasVotes;
+        nameSubmittedUnder = myNameSubmittedUnder;
         points = 0;
         pointsAssigned = false;
         plusMinusPoints = 0;
@@ -72,6 +74,16 @@ public class Entry
     public boolean hasUncertainty()
     {
         return hasUncertainty;
+    }
+    
+    public String getNameSubmittedUnder()
+    {
+        return nameSubmittedUnder;
+    }
+    
+    public void setNameSubmittedUnder(String name)
+    {
+        nameSubmittedUnder = name;
     }
     
     public int getPoints()
