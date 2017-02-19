@@ -1,11 +1,5 @@
 import java.util.ArrayList;
 
-/**
- * Write a description of class MOTMData here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class Entry
 {
     public static final int AUTO_WIN = 1;
@@ -44,32 +38,6 @@ public class Entry
         plusMinusHeads = 0;
         plusMinusPointsAssigned = false;
     }
-    
-    /*public Entry(Member myMember, Contest myContest, int myContestNumber, String myURLName, String myURLExtension, int myVotes)
-    {
-        member = myMember;
-        contest = myContest;
-        URL = generateURL("http://sotw.purezc.com/MOTM/", myContestNumber, myURLName, myURLExtension);
-        hasURL = true;
-        votes = myVotes;
-    }
-    
-    public Entry(Member myMember, Contest myContest, int myVotes)
-    {
-        member = myMember;
-        contest = myContest;
-        URL = new String();
-        hasURL = false;
-        votes = myVotes;
-    }
-    
-    public static String generateURL(String base, int myContestNumber, String URLName, String URLExtension)
-    {
-        String contestIDString = "" + myContestNumber;
-        while (contestIDString.length() < URL_DIGITS)    // note: this check should use a constant
-            contestIDString = "0" + contestIDString;
-        return ("http://sotw.purezc.com/MOTM/" + contestIDString + "/" + URLName.replace(" ","%20").replace(".","") + "." + URLExtension);
-    }*/
     
     public Member getMember()
     {
@@ -121,13 +89,6 @@ public class Entry
             pointsAssigned = true;
         }
         return points;
-            
-        
-        /*int points = contest.numVotes();
-        for (int i=0; i<entries.size(); i++)
-        {
-            points += (votes - entries.get(i).getVotes());
-        }*/
     }
     
     public int getPlusMinusPoints()
@@ -179,7 +140,6 @@ public class Entry
     public boolean isWinner()
     {
         return contest.getWinners().contains(this);
-        //return (votes >= contest.getWinners().get(0).getVotes());
     }
     
     public boolean hasURL()
