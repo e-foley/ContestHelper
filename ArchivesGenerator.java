@@ -95,8 +95,13 @@ public class ArchivesGenerator {
                         if (isWinner) {
                             out.write(" <img class='winnericon' title='Winner!' src='images/star.png'/>");
                         }
-                            
-                        out.write("</td>");
+                        
+                        // List the member's old name if they use a different name now
+                        if (!entry.getMember().getMostRecentName().equals(entry.getNameSubmittedUnder())) {
+                            out.write("<br/><span class='old-name'>(as " + entry.getNameSubmittedUnder() + ")</span>");
+                        }
+                        
+                        out.write("</a></td>");
 
                         if (entry.hasVotes())
                         {

@@ -140,7 +140,12 @@ td.contest-cell
 }
 
 .entry {text-align: left;}
-.name {}
+
+.name
+{
+  /* Short line height helps with spacing between current name and old name, if applicable. */
+  line-height: 85%;
+}
 
 .winner
 {
@@ -457,4 +462,9 @@ td.contest-cell
 .contest-notes-item
 {
 
+}
+
+.old-name
+{
+  font-size: 0.65em;
 }

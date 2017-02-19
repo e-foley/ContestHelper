@@ -44,7 +44,7 @@ public class History
             }
         }
 
-        Entry entryAdding = new Entry(memberRetrieved, contestRetrieved, myHasURL, URL, myHasVotes, myVotes, myHasUncertainty, overrideCode);
+        Entry entryAdding = new Entry(memberRetrieved, contestRetrieved, myHasURL, URL, myHasVotes, myVotes, myHasUncertainty, overrideCode, memberName);
 
         // regardless of the above, add the entry to the member's and contest's records
         contestRetrieved.addEntry(entryAdding);
