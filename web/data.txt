@@ -396,7 +396,7 @@ codelinker8705; SOTW50-codelinker8705; gif; 2
 jman2050; SOTW50-jman2050; PNG; 0
 link3505; SOTW50-link3505andBH4; gif; 2
 BH4; SOTW50-link3505andBH4; gif; 2
-* Relic and ShadowTiger submitted a joint shot.
+* link3505 and ShadowTiger submitted a joint shot.
 
 #51 @ 5598
 Ccc; SOTW51-Ccc; jpg; 1
@@ -680,7 +680,7 @@ Gashin; gif; 24W
 PrinceMSC; gif; 27
 Shoelace; gif; 1
 Snort; gif; 0
-* Extra votes were cast after PrinceMSC declared Relic the winner.  These extra votes resulted in PrinceMSC's finishing ahead of Relic in the vote tally.
+* Extra votes were cast after PrinceMSC declared link3505 the winner.  These extra votes resulted in PrinceMSC's finishing ahead of link3505 in the vote tally.
 
 #83 @ 10974
 Drari; gif; 0
@@ -764,7 +764,7 @@ Linkus Mastii; LinkusMastii; gif; 0
 PolygonX8; gif; 6
 Shoelace; gif; 0
 Tobias Daboi; TobiasDaboi; gif; 0
-* Extra votes were cast after PrinceMSC declared Jonathan the winner.  These extra votes resulted in Relic's being tied with Jonathan in the vote tally.
+* Extra votes were cast after PrinceMSC declared Jonathan the winner.  These extra votes resulted in link3505's being tied with Jonathan in the vote tally.
 
 #95 @ 13483
 Jonathan; gif; 25
