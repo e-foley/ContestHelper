@@ -3755,7 +3755,7 @@ Joelmacool; png; 26
 Russ; png; 25
 
 #543 @ 69162
-Shane; png; 8
+Shane; gif; 8
 Anthus; png; 22
 Joelmacool; png; 17
 Russ; png; 4
@@ -3788,7 +3788,7 @@ Rambly; png; 3
 Jared; png; 3
 Shane; png; 33
 Feenicks; png; 0
-Aevin; png; 4
+Aevin; gif; 4
 
 #548 @ 69549
 Joelmacool; png; 21
