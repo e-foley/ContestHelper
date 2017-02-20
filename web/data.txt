@@ -4090,9 +4090,15 @@ Polaris; png; 19
 Ganondorf; png; 24
 Joelmacool; png; 15
 Russ; png; 7
-/*
+
 #598 @ 71802
+Naru; png; 5
+Joelmacool; png; 6
+Dimentio; gif; 18
+Aslion; png; 15
+/*
+#599 @ 71836
 Naru; png; 
+Omega; png; 
+Demonlink; png; 
 Joelmacool; png; 
-Dimentio; gif; 
-Aslion; png; 
