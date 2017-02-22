@@ -4,15 +4,7 @@ import java.util.ArrayList;
 public class MemberSortEntries implements MemberDataRetriever
 {
     public int compare(Member m1, Member m2) {
-        int result = new Integer(m2.getTotalEntries()).compareTo(m1.getTotalEntries());
-        /*
-        if (result == 0)
-            result = (new MemberSortUncertainty()).compare(m1, m2);*/ // not necessary for victories or entries
-        if (result == 0)
-            result = (new MemberSortRecent()).compare(m1, m2);
-        if (result == 0)
-            result = (new MemberSortAlphabetical()).compare(m1, m2);
-        return result;
+        return new Integer(m2.getTotalEntries()).compareTo(m1.getTotalEntries());
     }
     
     public String getData(Member m)

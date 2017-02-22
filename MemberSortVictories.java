@@ -5,14 +5,7 @@ import java.util.ArrayList;
 public class MemberSortVictories implements MemberDataRetriever
 {
     public int compare(Member m1, Member m2) {
-        int result = new Float(m2.getTotalWinningness()).compareTo(m1.getTotalWinningness());
-        /*if (result == 0)
-            result = (new MemberSortUncertainty()).compare(m1, m2);*/ //not necessary for victories or entries
-        if (result == 0)
-            result = (new MemberSortRecent()).compare(m1, m2);
-        if (result == 0)
-            result = (new MemberSortAlphabetical()).compare(m1, m2);
-        return result;
+        return new Float(m2.getTotalWinningness()).compareTo(m1.getTotalWinningness());
     }
     
     public String getData(Member m)

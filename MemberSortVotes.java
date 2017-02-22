@@ -6,12 +6,9 @@ public class MemberSortVotes implements MemberDataRetriever
 {
     public int compare(Member m1, Member m2) {
         int result = new Integer(m2.getTotalVotes()).compareTo(m1.getTotalVotes());
-        if (result == 0)
+        if (result == 0) {
             result = (new MemberSortUncertainty()).compare(m1, m2);
-        if (result == 0)
-            result = (new MemberSortRecent()).compare(m1, m2);
-        if (result == 0)
-            result = (new MemberSortAlphabetical()).compare(m1, m2);
+        }
         return result;
     }
     

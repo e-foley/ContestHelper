@@ -8,14 +8,9 @@ public class MemberSortVotesSingle implements MemberDataRetriever
         ArrayList<Entry> listOne = m1.getEntriesWithMostVotes();
         ArrayList<Entry> listTwo = m2.getEntriesWithMostVotes();
         int result = new Integer(Member.getMostVotesSingle(listTwo)).compareTo(Member.getMostVotesSingle(listOne));
-        if (result == 0)
+        if (result == 0) {
             result = Member.getNumberOfEntriesWithMostVotes(listTwo) - Member.getNumberOfEntriesWithMostVotes(listOne);
-        /*if (result == 0)
-            result = (new MemberSortUncertainty()).compare(m1, m2);*/ //not necessary for victories or entries
-        if (result == 0)
-            result = (new MemberSortRecent()).compare(m1, m2);
-        if (result == 0)
-            result = (new MemberSortAlphabetical()).compare(m1, m2);
+        }
         return result;
     }
     
@@ -23,12 +18,7 @@ public class MemberSortVotesSingle implements MemberDataRetriever
     {
         ArrayList<Entry> list = m.getEntriesWithMostVotes();
         DecimalFormat df = new DecimalFormat("#.##");
-        
-//         if (Member.getNumberOfEntriesWithMostVotes(list) > 1)
-//             return df.format(Member.getMostVotesSingle(list)) + "×" + Member.getNumberOfEntriesWithMostVotes(list);
-//         else
-            return df.format(Member.getMostVotesSingle(list));
-        //return Member.getNumberOfLongestStreaks(list) + "×" + df.format(Member.getLongestStreak(list));
+        return df.format(Member.getMostVotesSingle(list));
     }
     
     public String getDetails(Member m, boolean linkTopics)

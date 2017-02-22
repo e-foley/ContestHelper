@@ -8,14 +8,9 @@ public class MemberSortConsecutiveStrict implements MemberDataRetriever
         ArrayList<ArrayList<Entry>> listOne = m1.getEntriesInLongestStreak(true);
         ArrayList<ArrayList<Entry>> listTwo = m2.getEntriesInLongestStreak(true);
         int result = new Float(Member.getLongestStreak(listTwo)).compareTo(Member.getLongestStreak(listOne));
-        if (result == 0)
+        if (result == 0) {
             result = Member.getNumberOfLongestStreaks(listTwo) - Member.getNumberOfLongestStreaks(listOne);
-        /*if (result == 0)
-            result = (new MemberSortUncertainty()).compare(m1, m2);*/ //not necessary for victories or entries
-        if (result == 0)
-            result = (new MemberSortRecent()).compare(m1, m2);
-        if (result == 0)
-            result = (new MemberSortAlphabetical()).compare(m1, m2);
+        }
         return result;
     }
     
