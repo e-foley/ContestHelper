@@ -31,6 +31,7 @@ public class Leaderboard
     }
     
     // Problem: if you ask for a place that is smothered by a tie at a different place, not everybody at the same rank will be represented
+    // Note: this method is 0-indexed for the moment, meaning "first place" has index 0
     public ArrayList<Member> getMembersAtPlace(int place) {
         Member initial = members.get(place);
         if (initial == null) {
@@ -58,10 +59,10 @@ public class Leaderboard
         addToFile(title, prefix, suffixSingular, suffixPlural, out, hidden, details, linksInDetails, ID, Integer.MAX_VALUE);
     }
     
+    // TODO: Order tied members by most recent entry date (or any other metric we want to use)
     public void addToFile(String title, String prefix, String suffixSingular, String suffixPlural, BufferedWriter out, boolean hidden, boolean details, boolean linksInDetails, int ID, int limit)
     {
         sort();
-        Member member;
         
         try
         {
@@ -98,39 +99,17 @@ public class Leaderboard
                 
             out.write("</tr>");
             
-            float lastData = Integer.MIN_VALUE;
-            float thisData = Integer.MIN_VALUE;
-            int lastPlace = 0;
-            int thisPlace = 0;
-            String dataString;
-            boolean unresolvedTie = false;
-            
             //NOTE: Deciding places really shouldn't be the responsibility of this section... Oh well.
-            
-            for (int p = 0; p < members.size() && (p < limit || unresolvedTie); p++)
-            {                
-                member = members.get(p);
-                
-                dataString = metric.getData(member);
-                thisData = Float.parseFloat(dataString.replace(",","").replace("+","")); //THIS IS ESPECIALLY CRAPPY
-                if (thisData == lastData)               //NOT SUPPOSED TO USE EQUALS WITH FLOATS...
-                {
-                    thisPlace = lastPlace;
-                    unresolvedTie = true;
-                }
-                else
-                {
-                    thisPlace = p + 1;
-                    unresolvedTie = false;
-                }
+            int p = 0;
+            while (p < Math.min(members.size(), limit)) {
+                ArrayList<Member> coplacers = getMembersAtPlace(p);
+                for (int c = 0; c < coplacers.size(); ++c) {
+                    Member member = coplacers.get(c);
                     
-                if (p < limit || unresolvedTie)
-                {
                     out.newLine();
                     out.write("<tr class='");
     
-                    switch(thisPlace)
-                    {
+                    switch(p + 1) {
                         case 1:
                             out.write("performance first");
                             break;
@@ -148,35 +127,36 @@ public class Leaderboard
                     }
                     
                     out.write("'>");
-                    out.write("<td class='place-cell'>");
-                    if (thisPlace == lastPlace)
-                        out.write("");
-                    else
-                        out.write("" + thisPlace);
-                    out.write("</td>");
-                    out.write("</td>");
-                    out.write("<td class='name-cell'>");
                     
+                    // Place column
+                    if (c == 0) {
+                        out.write("<td class='place-cell'>" + (p + 1) + "</td>");
+                    } else {
+                        out.write("<td></td>");
+                    }
+                    
+                    // Name column
+                    out.write("<td class='name-cell'>");
                     out.write("<a class='black' href='" + UserProfile.getProfileDropboxURL(member) + "'>");
                     out.write(member.getMostRecentName());
                     out.write("</a>");
-                    
                     out.write("</td>");
+                    
+                    // Data column
                     out.write("<td class='number-cell'>");
-                    out.write(dataString);
+                    out.write(metric.getData(member));
                     out.write("</td>");
 
-                    if (details)
-                    {
+                    // Details column
+                    if (details) {
                         out.write("<td class='details'>");
                         out.write(metric.getDetails(member, linksInDetails));
                         out.write("</td>");
                     }
                     out.write("</tr>");
-                    
-                    lastPlace = thisPlace;
-                    lastData = thisData;
                 }
+                
+                p += coplacers.size();
             }
             
             out.write("</table>");
