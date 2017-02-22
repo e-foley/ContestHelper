@@ -107,9 +107,9 @@ public class Leaderboard
             
             //NOTE: Deciding places really shouldn't be the responsibility of this section... Oh well.
             
-            for (int i=0; i<members.size() && (i<limit || unresolvedTie); i++)
+            for (int p = 0; p < members.size() && (p < limit || unresolvedTie); p++)
             {                
-                member = members.get(i);
+                member = members.get(p);
                 
                 dataString = metric.getData(member);
                 thisData = Float.parseFloat(dataString.replace(",","").replace("+","")); //THIS IS ESPECIALLY CRAPPY
@@ -120,11 +120,11 @@ public class Leaderboard
                 }
                 else
                 {
-                    thisPlace = i+1;
+                    thisPlace = p + 1;
                     unresolvedTie = false;
                 }
                     
-                if (i < limit || unresolvedTie)
+                if (p < limit || unresolvedTie)
                 {
                     out.newLine();
                     out.write("<tr class='");
