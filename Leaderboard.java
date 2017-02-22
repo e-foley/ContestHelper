@@ -13,8 +13,8 @@ public class Leaderboard
     private boolean is_sorted;
     
     // TODO: Clone the members_set field so that additions to the list made outside this class don't mess up our assumptions about sorting
-    public Leaderboard(ArrayList<Member> members_set, MemberDataRetriever metric_set) {
-        members = members_set;
+    public Leaderboard(History history_set, MemberDataRetriever metric_set) {
+        members = history_set.getMembers();
         metric = metric_set;
         is_sorted = false;
     }
