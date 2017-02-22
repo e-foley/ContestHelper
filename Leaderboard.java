@@ -60,7 +60,7 @@ public class Leaderboard
     
     public void addToFile(String title, String prefix, String suffixSingular, String suffixPlural, BufferedWriter out, boolean hidden, boolean details, boolean linksInDetails, int ID, int limit)
     {
-       sort();
+        sort();
         Member member;
         
         try
