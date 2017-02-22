@@ -14,18 +14,25 @@ import java.text.DecimalFormat;
  */
 public class Leaderboard
 {
-    /*private ArrayList<Member> orderedMembers;
-
-    public Leaderboard(ArrayList<Member> myMembers, MemberDataRetriever myMethod)
-    {
-        orderedMembers = myMembers;
-        Collections.sort(orderedMembers, myMethod);
-    }*/
-
-    /*public static void addLeaderboardToFile(ArrayList<Member> members, MemberDataRetriever c, String prefix, String suffixSingular, String suffixPlural, BufferedWriter out)
-    {
-        addLeaderboardToFile(members, c, prefix, suffixSingular, suffixPlural, out, false, "", );
-    }*/
+    private ArrayList<Member> members;
+    private MemberDataRetriever metric;
+    
+    public void Leaderboard(ArrayList<Member> members_set, MemberDataRetriever metric_set) {
+        members = members_set;
+        metric = metric_set;
+    }
+    
+    public void sort() {
+        Collections.sort(members, metric);
+    }
+    
+    public void addToFile(String title, String prefix, String suffixSingular, String suffixPlural, BufferedWriter out, boolean hidden, boolean details, boolean linksInDetails, int ID) {
+        addLeaderboardToFile(members, metric, title, prefix, suffixSingular, suffixPlural, out, hidden, details, linksInDetails, ID);
+    }
+    
+    public void addToFile(ArrayList<Member> members, MemberDataRetriever c,  String title, String prefix, String suffixSingular, String suffixPlural, BufferedWriter out, boolean hidden, boolean details, boolean linksInDetails, int ID, int limit) {
+        addLeaderboardToFile(members, metric, title, prefix, suffixSingular, suffixPlural, out, hidden, details, linksInDetails, ID, limit);
+    }
     
     // NOTE: Not even sure I use prefix anymore.
     public static void addLeaderboardToFile(ArrayList<Member> members, MemberDataRetriever c,  String title, String prefix, String suffixSingular, String suffixPlural, BufferedWriter out, boolean hidden, boolean details, boolean linksInDetails, int ID)
@@ -35,7 +42,7 @@ public class Leaderboard
     
     public static void addLeaderboardToFile(ArrayList<Member> members, MemberDataRetriever c,  String title, String prefix, String suffixSingular, String suffixPlural, BufferedWriter out, boolean hidden, boolean details, boolean linksInDetails, int ID, int limit)
     {
-        Collections.sort(members, c);
+       Collections.sort(members, c);
         Member member;
         
         try
