@@ -11,7 +11,7 @@ public class Leaderboard
     private ArrayList<Member> members;
     private MemberDataRetriever metric;
     
-    public void Leaderboard(ArrayList<Member> members_set, MemberDataRetriever metric_set) {
+    public Leaderboard(ArrayList<Member> members_set, MemberDataRetriever metric_set) {
         members = members_set;
         metric = metric_set;
     }
@@ -22,22 +22,12 @@ public class Leaderboard
     
     // NOTE: `prefix` is not presently used
     public void addToFile(String title, String prefix, String suffixSingular, String suffixPlural, BufferedWriter out, boolean hidden, boolean details, boolean linksInDetails, int ID) {
-        addToFile(title, prefix, suffixSingular, suffixPlural, out, hidden, details, linksInDetails, ID);
+        addToFile(title, prefix, suffixSingular, suffixPlural, out, hidden, details, linksInDetails, ID, Integer.MAX_VALUE);
     }
     
-    public void addToFile(String title, String prefix, String suffixSingular, String suffixPlural, BufferedWriter out, boolean hidden, boolean details, boolean linksInDetails, int ID, int limit) {
-        addLeaderboardToFile(members, metric, title, prefix, suffixSingular, suffixPlural, out, hidden, details, linksInDetails, ID, limit);
-    }
-    
-    
-    public static void addLeaderboardToFile(ArrayList<Member> members, MemberDataRetriever c,  String title, String prefix, String suffixSingular, String suffixPlural, BufferedWriter out, boolean hidden, boolean details, boolean linksInDetails, int ID)
+    public void addToFile(String title, String prefix, String suffixSingular, String suffixPlural, BufferedWriter out, boolean hidden, boolean details, boolean linksInDetails, int ID, int limit)
     {
-        addLeaderboardToFile(members, c, title, prefix, suffixSingular, suffixPlural, out, hidden, details, linksInDetails, ID, Integer.MAX_VALUE);
-    }
-    
-    public static void addLeaderboardToFile(ArrayList<Member> members, MemberDataRetriever c,  String title, String prefix, String suffixSingular, String suffixPlural, BufferedWriter out, boolean hidden, boolean details, boolean linksInDetails, int ID, int limit)
-    {
-       Collections.sort(members, c);
+       sort();
         Member member;
         
         try
@@ -88,7 +78,7 @@ public class Leaderboard
             {                
                 member = members.get(i);
                 
-                dataString = c.getData(member);
+                dataString = metric.getData(member);
                 thisData = Float.parseFloat(dataString.replace(",","").replace("+","")); //THIS IS ESPECIALLY CRAPPY
                 if (thisData == lastData)               //NOT SUPPOSED TO USE EQUALS WITH FLOATS...
                 {
@@ -146,7 +136,7 @@ public class Leaderboard
                     if (details)
                     {
                         out.write("<td class='details'>");
-                        out.write(c.getDetails(member, linksInDetails));
+                        out.write(metric.getDetails(member, linksInDetails));
                         out.write("</td>");
                     }
                     out.write("</tr>");
