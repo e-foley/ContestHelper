@@ -20,15 +20,16 @@ public class Leaderboard
         Collections.sort(members, metric);
     }
     
+    // NOTE: `prefix` is not presently used
     public void addToFile(String title, String prefix, String suffixSingular, String suffixPlural, BufferedWriter out, boolean hidden, boolean details, boolean linksInDetails, int ID) {
-        addLeaderboardToFile(members, metric, title, prefix, suffixSingular, suffixPlural, out, hidden, details, linksInDetails, ID);
+        addToFile(title, prefix, suffixSingular, suffixPlural, out, hidden, details, linksInDetails, ID);
     }
     
-    public void addToFile(ArrayList<Member> members, MemberDataRetriever c,  String title, String prefix, String suffixSingular, String suffixPlural, BufferedWriter out, boolean hidden, boolean details, boolean linksInDetails, int ID, int limit) {
+    public void addToFile(String title, String prefix, String suffixSingular, String suffixPlural, BufferedWriter out, boolean hidden, boolean details, boolean linksInDetails, int ID, int limit) {
         addLeaderboardToFile(members, metric, title, prefix, suffixSingular, suffixPlural, out, hidden, details, linksInDetails, ID, limit);
     }
     
-    // NOTE: Not even sure I use prefix anymore.
+    
     public static void addLeaderboardToFile(ArrayList<Member> members, MemberDataRetriever c,  String title, String prefix, String suffixSingular, String suffixPlural, BufferedWriter out, boolean hidden, boolean details, boolean linksInDetails, int ID)
     {
         addLeaderboardToFile(members, c, title, prefix, suffixSingular, suffixPlural, out, hidden, details, linksInDetails, ID, Integer.MAX_VALUE);
