@@ -6,12 +6,6 @@ import java.text.DecimalFormat;
 
 //?&#9650;  ?&#9660;  ?&#9670;
 
-/**
- * Write a description of class Leaderboard here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class Leaderboard
 {
     private ArrayList<Member> members;
@@ -62,13 +56,6 @@ public class Leaderboard
             else
                 out.write("<div class='leaderboard' style='display: show;' id='" + ID + "_open'>");
             
-//             if (hidden)
-//                 out.write("[hidden=[size=4]" + title + "[/size]]");
-//             else
-//             {
-//             out.newLine();
-//             out.write("<span class='sort-title'>" + title + "</span>");
-//             }
             out.write("<table class='leaderboard-table'><tr class='sort-title'><td colspan=");
             
             if (details)
@@ -80,15 +67,12 @@ public class Leaderboard
             out.write("<a class='contest' href='javascript:toggle(" + ID + ", 0);'>" + title + "</a></td></tr>");
             out.newLine();
             out.write("<tr class='header-row'><td>Rank</td>");
-            //out.write("<td>Chg</td>");
             out.write("<td>Name</td><td>" + suffixPlural + "</td>");
             
             if (details)
                 out.write("<td>Details</td>");
                 
             out.write("</tr>");
-            
-            //out.write("[size=3][list=1]");
             
             float lastData = Integer.MIN_VALUE;
             float thisData = Integer.MIN_VALUE;
@@ -116,8 +100,6 @@ public class Leaderboard
                     unresolvedTie = false;
                 }
                     
-                    
-                //out.write("[*]");
                 if (i < limit || unresolvedTie)
                 {
                     out.newLine();
@@ -126,19 +108,15 @@ public class Leaderboard
                     switch(thisPlace)
                     {
                         case 1:
-                            //out.write("[b][shadow=#000][color=#CFB53B]");
                             out.write("performance first");
                             break;
                         case 2:
-                            //out.write("[b][shadow=#000][color=#A8A8B0]");
                             out.write("performance second");
                             break;
                         case 3:
-                            //out.write("[b][shadow=#000][color=#A67D3D]");
                             out.write("performance third");
                             break;
                         case 4:
-                            //out.write("[shadow=#000]");
                             out.write("performance fourth");
                             break;
                         default:
@@ -152,13 +130,9 @@ public class Leaderboard
                     else
                         out.write("" + thisPlace);
                     out.write("</td>");
-                    //out.write("<td class='change-cell'>");
-                    //out.write("XX");
                     out.write("</td>");
                     out.write("<td class='name-cell'>");
                     
-                    
-                    //out.write(member.getMostRecentName());
                     out.write("<a class='black' href='" + UserProfile.getProfileDropboxURL(member) + "'>");
                     out.write(member.getMostRecentName());
                     out.write("</a>");
@@ -167,20 +141,7 @@ public class Leaderboard
                     out.write("<td class='number-cell'>");
                     out.write(dataString);
                     out.write("</td>");
-                
-                
-                /*out.write(member.getMostRecentName() + " – " + prefix + c.getData(member));
-                if (c.getData(member).equals("1"))   // SLOPPY
-                    out.write(suffixSingular);
-                else
-                    out.write(suffixPlural);   
-                if (i <= 2)
-                    out.write("[/color][/shadow][/b]");
-                if (i == 3)
-                    out.write("[/shadow]");*/
-                
-//                 if (details)
-//                     out.write(" [size=1][color=#CCC](" + c.getDetails(member, linksInDetails) + ")[/color][/size]");
+
                     if (details)
                     {
                         out.write("<td class='details'>");
@@ -188,23 +149,13 @@ public class Leaderboard
                         out.write("</td>");
                     }
                     out.write("</tr>");
-                    //out.newLine();
                     
                     lastPlace = thisPlace;
                     lastData = thisData;
                 }
             }
-            //out.write("[/list][/size]");
-            
-            
-            //JUST FOR NOW!!!!!!
-            //out.write("<tr class='sort-title'><td colspan=4><div class='tableheaderright'><a href='javascript:toggle(" + ID + ", 0);'><img src='https://dl.dropboxusercontent.com/u/10663130/PureZC/exp_minus.png' border='0'  alt='Collapse' /></a></div></td></tr>");
             
             out.write("</table>");
-            
-//             if (hidden)
-//                 out.write("[/hidden]");
-                
             out.write("</div>"); // end leaderboard-div
         }
         catch (Exception e)
