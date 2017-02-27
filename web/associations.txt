@@ -86,7 +86,6 @@ OOTFan > Sepulcher > Xenix
 Lord Settra! > Rastael
 Twinblake > Obderhode
 LunarRedMage > Nokutaa-chan
-Migokalle > Galactic President Superstar McAwesomeville > Robin > Migokalle > Robin
 blackbishop89 > LordVolcanon > Palpaleos > Zecora > Freyja > Freya > Mero
 EddyTheOliveira > Eddy
 green-kirby > Lunaria
@@ -99,6 +98,7 @@ Hero Link > Angeal > Pinkie Pie > Rydia > Angeal > Lana > Linkle
 Koishi > Nekoishi > Plutia
 Franky > Omega
 link3505 > Gashin > Relic > link3505
+Migokalle > Galactic President Superstar McAwesomeville > Robin > Migokalle > Robin > Asstwat > Robin > Migokalle
 
 // Tagged members: refer to these tags in data.txt when a member's username has been used by a different person
 //   Shared "Ben"
