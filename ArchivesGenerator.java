@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.text.DecimalFormat;
 
 public class ArchivesGenerator {
     public ArchivesGenerator() {
@@ -38,7 +39,7 @@ public class ArchivesGenerator {
                     
                     // If there are no winners in the contest, don't create a cell for the winners' pictures lest we accumulate borders.
                     if (!winners.isEmpty()) {
-                        out.write("<tr><td class='picture-cell' colspan=4>");
+                        out.write("<tr><td class='picture-cell' colspan=5>");
                         for (int j=0; j<winners.size(); j++)
                         {
                             if (!winners.get(j).hasURL()) {
@@ -54,7 +55,7 @@ public class ArchivesGenerator {
                     }
 
                     // Contest title
-                    out.write("<tr><td class='contest-title' colspan=4>");
+                    out.write("<tr><td class='contest-title' colspan=5>");
                     if (contest.hasTopic())
                         out.write("<a class='contest' href='http://www.purezc.net/forums/index.php?showtopic=" + contest.getTopic() + "'>");
                     //out.write("(" + contest.getSynch() + ") "); // TEMPORARY!
@@ -64,7 +65,7 @@ public class ArchivesGenerator {
                     out.write("</td></tr>");
                     
                     out.newLine();
-                    out.write("<tr class='header-row'><td></td><td class='left'>Name</td><td class='center'>Votes</td><td class='center'>Points");
+                    out.write("<tr class='header-row'><td></td><td class='left'>Name</td><td class='center'>Votes</td><td class='center'>Pct</td><td class='center'>Points");
                     out.write("<span class='tooltip' title='Votes plus sum of vote margins over lower-ranking shots'>[?]</span>");
                     out.write("</td></tr>");
                     out.newLine();
@@ -106,11 +107,18 @@ public class ArchivesGenerator {
                         if (entry.hasVotes())
                         {
                             out.write("<td class='votes'>"+ entry.getVotes() + "</td>");
-                            out.write("<td class='points'>" + entry.getPoints() + "</td>");
+                            out.write("<td class='percentage'>");
+                            if (contest.numVotes() > 0) {
+                                DecimalFormat df = new DecimalFormat("##0.00%");
+                                out.write(df.format((double)(entry.getVotes()) / contest.numVotes()));
+                            } else {
+                                out.write("&mdash;");
+                            }
+                            out.write("</td><td class='points'>" + entry.getPoints() + "</td>");
                         }
                         else
                         {
-                            out.write("<td class='votes'>&mdash;</td><td class='points'>&mdash;</td>");
+                            out.write("<td class='votes'>&mdash;</td><td class='percentage'>&mdash;</td><td class='points'>&mdash;</td>");
                         }
                         out.newLine();
                         out.write("</tr>");
@@ -130,12 +138,13 @@ public class ArchivesGenerator {
                         out.write("y");
                     out.write("</td><td class='votes'>");
                     out.write(""+contest.numVotes());
+                    out.write("</td><td>");  // percentage doesn't need a total
                     out.write("</td><td class='points'>");
                     out.write(""+contest.numPoints());
                     out.write("</td></tr>");
 
                     if (contest.numNotes() > 0) {
-                        out.write("<tr><td class='contest-notes-cell' colspan=4><ul class='contest-notes-list'>");
+                        out.write("<tr><td class='contest-notes-cell' colspan=5><ul class='contest-notes-list'>");
                         for (int j = 0; j < contest.numNotes(); ++j) {
                             out.write("<li class='contest-notes-item'>" + contest.getNote(j) + "</li>");
                         }

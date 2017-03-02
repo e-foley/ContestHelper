@@ -268,6 +268,7 @@ td.contest-cell
 
 .numentries {text-align: left;}
 .votes {text-align: center;}
+.percentage {text-align: center; font-size: 0.8em;}
 .points {text-align: center;}
 .tie-note {font-size: 1.0em; font-style: italic;}
 .contest-cell {vertical-align: top;}
