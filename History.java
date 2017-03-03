@@ -18,12 +18,27 @@ public class History
         lastContestName = "";
     }
 
-    public void addEntry(String contestName, String memberName, String tag, boolean myHasURL, String URL, boolean myHasVotes, int myVotes, boolean myHasUncertainty, int overrideCode) {
+    public void addEntry(Entry entry_adding) {
+        addEntry(entry_adding.getContest().getName(),
+                 entry_adding.getContest().hasTopic(),
+                 entry_adding.getContest().getTopic(),
+                 entry_adding.getContest().getSynch(),
+                 entry_adding.getNameSubmittedUnder(),
+                 entry_adding.getMember().getTag(),
+                 entry_adding.hasURL(),
+                 entry_adding.getURL(),
+                 entry_adding.hasVotes(),
+                 entry_adding.getVotes(),
+                 entry_adding.hasUncertainty(),
+                 entry_adding.getOverrideCode());
+    }
+    
+    public void addEntry(String contestName, boolean hasTopicInfo, int topic, int currentSynch, String memberName, String tag, boolean myHasURL, String URL, boolean myHasVotes, int myVotes, boolean myHasUncertainty, int overrideCode) {
         Contest contestRetrieved;
         // check if the contest being requested hasn't been formed yet
         if ((contestRetrieved = getContestByName(contestName)) == null) {
             // if it hasn't, add it
-            contestRetrieved = new Contest(contestName);
+            contestRetrieved = new Contest(contestName, hasTopicInfo, topic, currentSynch);
             contests.add(contestRetrieved);
         }
 
@@ -49,6 +64,24 @@ public class History
         // regardless of the above, add the entry to the member's and contest's records
         contestRetrieved.addEntry(entryAdding);
         memberRetrieved.addEntry(entryAdding);
+    }
+    
+    // Creates a new history that possesses cloned members and contests from this history (over a given span of contests).
+    public History getSubhistory(int index_start, int index_end) {
+        History returning = new History();
+        
+        for (int i = index_start; i <= index_end; ++i) {
+            ArrayList<Entry> entries_at_contest_index = contests.get(i).getEntries();
+            System.out.println("Size: " + entries_at_contest_index.size());
+            for (int j = 0; j < entries_at_contest_index.size(); ++j) {
+                returning.addEntry(entries_at_contest_index.get(j));
+                System.out.println("i" + i + "j" + j + " Adding entry..." + entries_at_contest_index.get(j).getNameSubmittedUnder());
+            }
+        }
+        
+        returning.setLastContestName(returning.getContests().get(returning.getContests().size() - 1).getName());
+        
+        return returning;
     }
 
     public Member getMemberByName(String memberName)
@@ -178,7 +211,7 @@ public class History
 
                 if (parse.hasMemberInfo && !blockComment)
                 {
-                    addEntry(currentContestName, parse.memberName, parse.tag, parse.hasURL, parse.URL, parse.hasVotes, parse.votes, !parse.hasVotes, parse.overrideCode);
+                    addEntry(currentContestName, parse.hasTopicInfo, parse.topic, currentSynch, parse.memberName, parse.tag, parse.hasURL, parse.URL, parse.hasVotes, parse.votes, !parse.hasVotes, parse.overrideCode);
                 }
                 
                 if (parse.isContestNote && !blockComment && contestRetrieved != null) {
@@ -224,5 +257,9 @@ public class History
     public String getLastContestName()
     {
         return lastContestName;
+    }
+    
+    private void setLastContestName(String lastContestNameSetting) {
+        lastContestName = lastContestNameSetting;
     }
 }
