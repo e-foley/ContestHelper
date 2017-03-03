@@ -72,10 +72,8 @@ public class History
         
         for (int i = index_start; i <= index_end; ++i) {
             ArrayList<Entry> entries_at_contest_index = contests.get(i).getEntries();
-            System.out.println("Size: " + entries_at_contest_index.size());
             for (int j = 0; j < entries_at_contest_index.size(); ++j) {
                 returning.addEntry(entries_at_contest_index.get(j));
-                System.out.println("i" + i + "j" + j + " Adding entry..." + entries_at_contest_index.get(j).getNameSubmittedUnder());
             }
         }
         
