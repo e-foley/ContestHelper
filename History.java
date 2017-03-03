@@ -18,13 +18,15 @@ public class History
         lastContestName = "";
     }
 
-    public void addEntry(Entry entry_adding) {
+    public void addEntry(Entry entry_adding, boolean requestId, int memberId) {
         addEntry(entry_adding.getContest().getName(),
                  entry_adding.getContest().hasTopic(),
                  entry_adding.getContest().getTopic(),
                  entry_adding.getContest().getSynch(),
                  entry_adding.getNameSubmittedUnder(),
                  entry_adding.getMember().getTag(),
+                 requestId,
+                 memberId,
                  entry_adding.hasURL(),
                  entry_adding.getURL(),
                  entry_adding.hasVotes(),
@@ -33,7 +35,7 @@ public class History
                  entry_adding.getOverrideCode());
     }
     
-    public void addEntry(String contestName, boolean hasTopicInfo, int topic, int currentSynch, String memberName, String tag, boolean myHasURL, String URL, boolean myHasVotes, int myVotes, boolean myHasUncertainty, int overrideCode) {
+    public void addEntry(String contestName, boolean hasTopicInfo, int topic, int currentSynch, String memberName, String tag, boolean requestId, int memberId, boolean myHasURL, String URL, boolean myHasVotes, int myVotes, boolean myHasUncertainty, int overrideCode) {
         Contest contestRetrieved;
         // check if the contest being requested hasn't been formed yet
         if ((contestRetrieved = getContestByName(contestName)) == null) {
@@ -48,6 +50,11 @@ public class History
             if ((memberRetrieved = getMemberByTag(tag)) == null) {
                 // If there is no member with this tag, create a new member that has this tag.  (Is this kosher or will we run into duplication issues?)
                 memberRetrieved = new Member(tag, memberName);
+                if (requestId) {
+                    memberRetrieved.setId(members.size());
+                } else {
+                    memberRetrieved.setId(memberId);
+                }
                 members.add(memberRetrieved);
                 System.out.println("Warning: tag \"" + tag + "\" in data file does not exist in associations file.");
             }
@@ -55,6 +62,11 @@ public class History
             if ((memberRetrieved = getMemberByName(memberName)) == null) {
                 // If there is no member with this name, create a new member with this name
                 memberRetrieved = new Member(memberName);
+                if (requestId) {
+                    memberRetrieved.setId(members.size());
+                } else {
+                    memberRetrieved.setId(memberId);
+                }
                 members.add(memberRetrieved);
             }
         }
@@ -73,7 +85,7 @@ public class History
         for (int i = index_start; i <= index_end; ++i) {
             ArrayList<Entry> entries_at_contest_index = contests.get(i).getEntries();
             for (int j = 0; j < entries_at_contest_index.size(); ++j) {
-                returning.addEntry(entries_at_contest_index.get(j));
+                returning.addEntry(entries_at_contest_index.get(j), false, entries_at_contest_index.get(j).getMember().getId());
             }
         }
         
@@ -139,12 +151,16 @@ public class History
                         // Place the split-up names in an array.
                         namesRead = tagSplit[1].split(nameRegex);
                         // Incorporate the tag and names into a new Member object.  (Not pretty.)
-                        members.add(new Member(tagSplit[0], new ArrayList<String>(Arrays.asList(namesRead))));
+                        Member memberAdding = new Member(tagSplit[0], new ArrayList<String>(Arrays.asList(namesRead)));
+                        memberAdding.setId(members.size());
+                        members.add(memberAdding);
                     } else {
                         // Place the split-up names in an array.
                         namesRead = strLine.split(nameRegex);
                         // Incorporate these names into a new untagged Member object. (Not pretty.)
-                        members.add(new Member(new ArrayList<String>(Arrays.asList(namesRead))));
+                        Member memberAdding = new Member(new ArrayList<String>(Arrays.asList(namesRead)));
+                        memberAdding.setId(members.size());
+                        members.add(memberAdding);
                     }
                 }
             }
@@ -209,7 +225,7 @@ public class History
 
                 if (parse.hasMemberInfo && !blockComment)
                 {
-                    addEntry(currentContestName, parse.hasTopicInfo, parse.topic, currentSynch, parse.memberName, parse.tag, parse.hasURL, parse.URL, parse.hasVotes, parse.votes, !parse.hasVotes, parse.overrideCode);
+                    addEntry(currentContestName, parse.hasTopicInfo, parse.topic, currentSynch, parse.memberName, parse.tag, true, -1, parse.hasURL, parse.URL, parse.hasVotes, parse.votes, !parse.hasVotes, parse.overrideCode);
                 }
                 
                 if (parse.isContestNote && !blockComment && contestRetrieved != null) {
@@ -234,6 +250,7 @@ public class History
 
     public void addMember(Member memberAdding)
     {
+        memberAdding.setId(members.size());
         members.add(memberAdding);
     }
 

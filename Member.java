@@ -7,6 +7,8 @@ public class Member
     private ArrayList<Entry> entries;
     private String tag;
     private boolean isTagged;
+    private boolean hasId;
+    private int id;
 
     public Member()
     {
@@ -95,6 +97,19 @@ public class Member
     
     public boolean hasTag() {
         return isTagged;
+    }
+    
+    public void setId(int idSetting) {
+        id = idSetting;
+        hasId = true;
+    }
+    
+    public int getId() {
+        return id;
+    }
+    
+    public boolean hasId() {
+        return hasId;
     }
     
     public int getTotalVotes()
