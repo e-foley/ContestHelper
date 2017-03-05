@@ -33,6 +33,8 @@ public class Leaderboard
     // Problem: if you ask for a place that is smothered by a tie at a different place, not everybody at the same rank will be represented
     // Note: this method is 0-indexed for the moment, meaning "first place" has index 0
     public ArrayList<Member> getMembersAtPlace(int place) {
+        ensureOrder();
+        
         Member initial = members.get(place);
         if (initial == null) {
             return new ArrayList<Member>();
