@@ -7,6 +7,8 @@ import java.text.DecimalFormat;
 
 public class Leaderboard
 {
+    public static final int NO_PLACE = -1;
+    
     private ArrayList<Member> members;
     private MemberDataRetriever metric;
     private boolean is_sorted;
@@ -53,6 +55,20 @@ public class Leaderboard
         }
         
         return returning;
+    }
+    
+    public int getPlaceOfMember(int id) {
+        // TODO: This is really, really inefficient as written, but I know I'll be replacing it once we rework our handling of Entrys
+        for (int p = 0; p < members.size(); ++p) {
+            ArrayList<Member> members_at_rank = getMembersAtPlace(p);
+            for (int m = 0; m < members_at_rank.size(); ++m) {
+                if (members_at_rank.get(m).getId() == id) {
+                    return p;
+                }
+            }
+        }
+        
+        return NO_PLACE;
     }
     
     public ArrayList<Member> getMembers() {
