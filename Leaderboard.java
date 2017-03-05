@@ -12,9 +12,11 @@ public class Leaderboard
     private ArrayList<Member> members;
     private MemberDataRetriever metric;
     private boolean is_sorted;
+    private History history;
     
     // TODO: Clone the members_set field so that additions to the list made outside this class don't mess up our assumptions about sorting
     public Leaderboard(History history_set, MemberDataRetriever metric_set) {
+        history = history_set;
         members = history_set.getMembers();
         metric = metric_set;
         is_sorted = false;
@@ -77,5 +79,9 @@ public class Leaderboard
     
     public MemberDataRetriever getMetric() {
         return metric;
+    }
+    
+    public History getHistory() {
+        return history;
     }
 }
