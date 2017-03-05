@@ -6,14 +6,18 @@ public class LeaderboardFormatter {
     public LeaderboardFormatter() {}
 
     // NOTE: `prefix` is not presently used
-    public void addToFile(Leaderboard leaderboard, String title, String prefix, String suffixSingular, String suffixPlural, BufferedWriter out, boolean hidden, boolean details, boolean linksInDetails, int ID) {
-        addToFile(leaderboard, title, prefix, suffixSingular, suffixPlural, out, hidden, details, linksInDetails, ID, Integer.MAX_VALUE);
+    public void addToFile(Leaderboard leaderboard, int delta, String title, String prefix, String suffixSingular, String suffixPlural, BufferedWriter out, boolean hidden, boolean details, boolean linksInDetails, int ID) {
+        addToFile(leaderboard, delta, title, prefix, suffixSingular, suffixPlural, out, hidden, details, linksInDetails, ID, Integer.MAX_VALUE);
     }
     
     // TODO: Order tied members by most recent entry date (or any other metric we want to use)
-    public void addToFile(Leaderboard leaderboard, String title, String prefix, String suffixSingular, String suffixPlural, BufferedWriter out, boolean hidden, boolean details, boolean linksInDetails, int ID, int limit) {
+    public void addToFile(Leaderboard leaderboard, int delta, String title, String prefix, String suffixSingular, String suffixPlural, BufferedWriter out, boolean hidden, boolean details, boolean linksInDetails, int ID, int limit) {
         ArrayList<Member> members = leaderboard.getMembers();
         MemberDataRetriever metric = leaderboard.getMetric();
+        History history = leaderboard.getHistory();
+        int subhistory_start = 0;
+        int subhistory_end = Math.max(0, history.getContests().size() - delta - 1);
+        Leaderboard comparison = new Leaderboard(history.getSubhistory(subhistory_start, subhistory_end), metric);
         
         try
         {
@@ -81,7 +85,12 @@ public class LeaderboardFormatter {
                     
                     // Place column
                     if (c == 0) {
-                        out.write("<td class='place-cell'>" + (p + 1) + "</td>");
+                        out.write("<td class='place-cell'>" + (p + 1));
+                        int comparison_place = comparison.getPlaceOfMember(member.getId());
+                        if (comparison_place != Leaderboard.NO_PLACE) {
+                           out.write(" (was " + (comparison_place + 1) + ")");
+                        }
+                        out.write("</td>");
                     } else {
                         out.write("<td></td>");
                     }
