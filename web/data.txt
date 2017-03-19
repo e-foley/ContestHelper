@@ -4117,7 +4117,7 @@ GrantGreif; png; 3
 ywkls; png; 0
 Orithan; png; 0
 Alestance; png; 1
-Lüt; png; 2
+Lüt; Lut; png; 2
 Eddy; png; 1
 
 #601 @ 71911
