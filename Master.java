@@ -11,6 +11,7 @@ public abstract class Master
     public static final int DIGEST_LIST_LENGTH = 10;  // Number of members to list in "digest" version of the leaderboards
     public static final int NUM_ARCHIVES_DIGEST_ENTRIES = 12;
     public static final int CONTESTS_PER_PAGE = 12;
+    public static final int DELTA = 10;
     
     public static void main(String[] args)
     {
@@ -89,8 +90,9 @@ public abstract class Master
             board_format.addToFile(new Leaderboard(history, new MemberSortConsecutiveStrict()), DELTA, "Longest winning streaks (in consecutive contests, by member)", "", " streak", " Streak", out, true, true, true, 7);
             board_format.addToFile(new Leaderboard(history, new MemberSortConsecutiveLoose()), DELTA, "Longest winning streaks (in consecutive attempts, by member)", "", " streak", " Streak", out, true, true, true, 8);
             board_format.addToFile(new Leaderboard(history, new MemberSortWinRatio()), DELTA, "Best win ratios (minimum 5 entries)", "", "", " Ratio", out, true, true, true, 9);
-            board_format.addToFile(new Leaderboard(history, new MemberSortPlusMinusPoints()), DELTA, "Best plus/minus records (head-to-head vote basis)", "", "", " +/- votes", out, true, true, true, 10);
-            board_format.addToFile(new Leaderboard(history, new MemberSortPlusMinusHeads()), DELTA, "Best plus/minus records (head-to-head victory basis)", "", "", " +/- wins", out, true, true, true, 11);
+            // Below TEMPORARILY commented out to keep file size under 2 MiB.
+            // board_format.addToFile(new Leaderboard(history, new MemberSortPlusMinusPoints()), DELTA, "Best plus/minus records (head-to-head vote basis)", "", "", " +/- votes", out, true, true, true, 10);
+            // board_format.addToFile(new Leaderboard(history, new MemberSortPlusMinusHeads()), DELTA, "Best plus/minus records (head-to-head victory basis)", "", "", " +/- wins", out, true, true, true, 11);
             board_format.addToFile(new Leaderboard(history, new MemberSortNewFormidable()), DELTA, "Most formidable opponents", "", "", " Rating", out, true, false, true, 12);
             Master.addFileToBuffer("config/leaderboard_footer.txt", out, swaps);
             out.close();
