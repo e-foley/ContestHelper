@@ -2,9 +2,7 @@ body
 {
   font-family: Tahoma, Verdana, Times New Roman, Serif;
   font-size: 16px;
-  
-  /*background-image:url('http://www.purezc.com/Images/PureZC-Green/background.png');*/
-  background-image: url('https://dl.dropbox.com/u/10663130/PureZC/new_quilt_subtle_2.jpg');
+  background-image: url('http://sotw.elfractal.com/images/new_quilt_subtle_2.jpg');
   background-color: #355E3B;
 }
 
@@ -67,7 +65,7 @@ td.contest-cell
 .contest-title
 {
   background-color: #56825a;
-  // background-image: url('http://www.purezc.net/Images/toprow.gif');
+  // background-image: url('http://sotw.elfractal.com/images/toprow.gif');
   font-weight: bold;
   color: #e5c006;
   text-shadow: 1px 1px 1px #503800;
@@ -79,7 +77,7 @@ td.contest-cell
 .sort-title
 {
   background-color: #56825a;
-  // background-image: url('http://www.purezc.net/Images/toprow.gif');
+  // background-image: url('http://sotw.elfractal.com/images/toprow.gif');
   font-weight: bold;
   color: #e5c006;
   text-shadow: 1px 1px 1px #503800;
@@ -91,7 +89,7 @@ td.contest-cell
 .header-row
 {
   background-color: #eeffee;
-  background-image: url('http://www.purezc.net/Images/catrow.gif');
+  background-image: url('http://sotw.elfractal.com/images/catrow.gif');
   font-weight: bold;
   color: #008000;
 
@@ -388,7 +386,7 @@ td.contest-cell
   margin: 20px auto;
   font-size: 1em;
   background-color: #eeffee;
-  background-image: url('http://www.purezc.net/Images/catrow.gif');
+  background-image: url('http://sotw.elfractal.com/images/catrow.gif');
   border-width: 1px;
   border-style: solid;
 }
@@ -408,7 +406,7 @@ td.contest-cell
 .navtable-header
 {
   background-color: #56825a;
-  // background-image: url('http://www.purezc.net/Images/toprow.gif');
+  // background-image: url('http://sotw.elfractal.com/images/toprow.gif');
   font-weight: bold;
   color: #e5c006;
   text-shadow: 1px 1px 1px #503800;

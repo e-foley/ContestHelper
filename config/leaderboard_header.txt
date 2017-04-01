@@ -35,14 +35,14 @@ function toggle(ID, show)
 <div class='leaderboard' style='display: show;' id='a_closed'>
 <table class='leaderboard-table stunt'><tr class='header-row'><td>
 <div class='tableheaderright'><a href='javascript:toggle("a", 1);'>
-<img src='https://dl.dropboxusercontent.com/u/10663130/PureZC/exp_plus.png' border='0' alt='Expand' /></a></div>
+<img src='images/exp_plus.png' border='0' alt='Expand' /></a></div>
 <a class='green' href='javascript:toggle("a", 1);'>Frequently Asked Questions</a></td></tr></table></div>
 
 
 <div class='leaderboard' style='display: none;' id='a_open'>
 <table class='leaderboard-table'><tr class='header-row'><td>
 <div class='tableheaderright'><a href='javascript:toggle("a", 0);'>
-<img src='https://dl.dropboxusercontent.com/u/10663130/PureZC/exp_minus.png' border='0' alt='Collapse' /></a></div>
+<img src='images/exp_minus.png' border='0' alt='Collapse' /></a></div>
 <a class='green' href='javascript:toggle("a", 0);'>Frequently Asked Questions</a></td></tr>
 
 <tr><td class='intro'>
