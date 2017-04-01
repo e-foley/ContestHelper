@@ -4127,7 +4127,7 @@ Russ; png; 19
 
 #602 @ 71932
 Alestance; png; 5
-Russ; png; 22
+Russ; gif; 22
 Feenicks; png; 21
 
 #603 @ 71964
