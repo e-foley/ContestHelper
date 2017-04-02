@@ -3,6 +3,8 @@ import java.nio.channels.FileChannel;
 import javax.swing.JOptionPane;
 import java.util.Collections;
 import java.util.ArrayList;
+import java.nio.file.Files;
+import java.util.Arrays;
 
 public abstract class Master
 {
@@ -135,7 +137,7 @@ public abstract class Master
             if (generate_user_galleries) {
                 ArrayList<Member> mems = history.getMembers();
                 for (int i=0; i<mems.size(); i++) {
-                    UserProfile.createProfilePage(mems.get(i));
+                    UserProfile.createProfilePage(mems.get(i), false);
                 }
             }
 
@@ -211,5 +213,18 @@ public abstract class Master
                 fOut.close();
             }
         }
+    }
+    
+        // Borrowed from http://stackoverflow.com/questions/27379059/determine-if-two-files-store-the-same-content
+    public static boolean fileEquals(File file1, File file2) {
+        byte[] f1;
+        byte[] f2;
+        try {
+            f1 = Files.readAllBytes(file1.toPath());
+            f2 = Files.readAllBytes(file2.toPath());
+        } catch(Exception e) {
+            return false;
+        }
+        return Arrays.equals(f1, f2);
     }
 }
