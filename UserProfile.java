@@ -1,7 +1,8 @@
 import java.io.*;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
-//import java.nio.channels.FileChannel;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 /**
  * Write a description of class UserProfile here.
@@ -11,9 +12,7 @@ import java.util.ArrayList;
  */
 abstract class UserProfile
 {
-    // instance variables - replace the example below with your own
-    //private Member mem;
-
+    public static final String TEMP_PATH = "temp.txt";
 
     /**
      * An example of a method - replace this comment with your own
@@ -21,17 +20,24 @@ abstract class UserProfile
      * @param  y   a sample parameter for a method
      * @return     the sum of x and y 
      */
-    public static void createProfilePage(Member mem)
+    public static void createProfilePage(Member mem, boolean explicit)
     {
         String recent_name = mem.getMostRecentName();
         //String safe_name = getSafeName(recent_name);
         String[][] swaps = new String[][] {{"###","test"}, {"#NAME", recent_name}};
         //String[][] swaps = new String[][] {{}};
         
+        String initial_target;
+        if (explicit) {
+            initial_target = getProfileURL(mem);
+        } else {
+            initial_target = TEMP_PATH;
+        }
+        
         try
         {
             System.out.println("Attempting to write file " + getProfileURL(mem) + "...");
-            FileWriter fstream = new FileWriter(getProfileURL(mem));
+            FileWriter fstream = new FileWriter(initial_target);
             BufferedWriter out = new BufferedWriter(fstream);
             Master.addFileToBuffer("config/profile_header.txt", out, swaps);
             
@@ -67,6 +73,25 @@ abstract class UserProfile
         {
             System.err.println("Error: " + e.getMessage());
             //JOptionPane.showMessageDialog(null, "User profile could not be generated. Talk to nicklegends about it.\n\"" + e.getMessage() + "\"", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        if (explicit) {
+            return;
+        } else {
+            File temp_file = new File(TEMP_PATH);
+            File profile_file = new File(getProfileURL(mem));
+            if (Master.fileEquals(temp_file, profile_file)) {
+                try {
+                    Files.deleteIfExists(temp_file.toPath());
+                } catch (Exception e) {}
+                return;
+            } else {
+                try {
+                    Master.copyFile(temp_file, profile_file);
+                } catch (Exception e) {
+                    System.err.println("Could not copy file...");
+                }
+            }
         }
     }
     
