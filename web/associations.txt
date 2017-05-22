@@ -102,6 +102,7 @@ Hero Link > Angeal > Pinkie Pie > Rydia > Angeal > Rydia > Lana > Linkle > Neptu
 HeavyTitanium > Titanium Justice
 GrantGreif > MarinaraSauce
 jetbox > JetBox
+Bombos > Ecruteak
 
 // Tagged members: refer to these tags in data.txt when a member's username has been used by a different person
 //   Shared "Ben"
