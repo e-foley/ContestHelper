@@ -4163,7 +4163,7 @@ TheRock; png; 2
 Zaxaphone; png; 12
 Joelmacool; png; 13
 Russ; png; 11
-Lüt; Lut, png; 10
+Lüt; Lut; png; 10
 
 #609 @ 72216
 Eggman666; gif; 9
