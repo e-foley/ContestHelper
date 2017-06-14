@@ -4182,12 +4182,32 @@ Joelmacool; png; 24
 Maikeru D. Shinigami; Maikeru%20D.%20Shinigami; png; 4
 ywkls; png; 13
 Eggman666; gif; 9
-/*
+
 #612 @ 72351
-Ventus; png; 
-Ecruteak; png; 
-Zaxaphone; png; 
-Joelmacool; png; 
-ywkls; png; 
-Dimentio; png; 
+Ventus; png; 1
+Ecruteak; png; 3
+Zaxaphone; png; 4
+Joelmacool; png; 10
+ywkls; png; 4
+Dimentio; png; 14
+Demonlink; png; 13
+
+#613 @ 72401
+Avataro; png; 9
+Joelmacool; png; 14
+Dimentio; png; 26
+
+#614 @ 72443
+Twilight-Prince; png; 6
+Ecruteak; png; 13
+FireSeraphim; png; 22
+Joelmacool; png; 9
+Alestance; png; 6
+/*
+#615 @ 72502
+Eddy; png; 
 Demonlink; png; 
+Avataro; png; 
+TheRock; png; 
+Sheik; png; 
+Alestance; png; 
