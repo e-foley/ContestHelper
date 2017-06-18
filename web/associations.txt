@@ -75,7 +75,6 @@ Beta Link > Bayta
 Orin XD > Orithan
 demonlink14 > Demonlink
 linkmystro100 > LinkMystro > Rafael > ElLibertador
-linktopower > Ventus > Benji
 JJ83 > TK8305
 
 // More recent
@@ -92,7 +91,6 @@ green-kirby > Lunaria
 joelmacool12 > Joelmacool12 > Joelmacool
 bmc10011 > TheRock
 sonicfan350 > Zephyr_Eevee > Goriya > Nexas > Eins
-Midnight_King > Shane > Charizard > Shane > Polaris
 Koishi > Nekoishi > Plutia
 Franky > Omega
 link3505 > Gashin > Relic > link3505
@@ -103,6 +101,8 @@ HeavyTitanium > Titanium Justice
 GrantGreif > MarinaraSauce
 jetbox > JetBox
 Bombos > Ecruteak
+linktopower > Ventus > Benji > Ventus > FireBlazeWolf > Ventus
+Midnight_King > Shane > Charizard > Shane > Polaris > Shane
 
 // Tagged members: refer to these tags in data.txt when a member's username has been used by a different person
 //   Shared "Ben"
