@@ -83,15 +83,18 @@ public class History
     // Creates a new history that possesses cloned members and polls from this history (over a given span of polls).
     public History getSubhistory(int index_start, int index_end) {
         History returning = new History();
-        
+
         for (int i = index_start; i <= index_end; ++i) {
-            ArrayList<Entry> entries_at_poll_index = polls.get(i).getEntries();
-            for (int j = 0; j < entries_at_poll_index.size(); ++j) {
-                returning.addEntry(entries_at_poll_index.get(j), false, entries_at_poll_index.get(j).getMember().getId());
-            }
+          returning.polls.add(this.polls.get(i));
         }
         
-        returning.setLastPollName(returning.getPolls().get(returning.getPolls().size() - 1).getName());
+        // Need to handle members... Would want same association, but ignore all entries from excluded contests
+        
+        
+        
+        if (!returning.polls.isEmpty()) {
+            returning.lastPollName = returning.polls.get(returning.polls.size() - 1).getName();
+        }
         
         return returning;
     }
