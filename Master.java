@@ -43,13 +43,13 @@ public abstract class Master
         FileWriter fstream;
         BufferedWriter out;
         
-        String[][] swaps = new String[][] {{"###",""+history.getLastContestName()}};
+        String[][] swaps = new String[][] {{"###",""+history.getLastPollName()}};
         
         try
         {        
             // make backups of input
-            Master.copyFile(new File("web/data.txt"),new File("backup/data-" + history.getLastContestName() + ".txt"));
-            Master.copyFile(new File("web/associations.txt"),new File("backup/associations-" + history.getLastContestName() + ".txt"));
+            Master.copyFile(new File("web/data.txt"),new File("backup/data-" + history.getLastPollName() + ".txt"));
+            Master.copyFile(new File("web/associations.txt"),new File("backup/associations-" + history.getLastPollName() + ".txt"));
             
             // ARCHIVES
             fstream = new FileWriter("web/archives" + testText + ".html");
@@ -59,17 +59,17 @@ public abstract class Master
             Master.addFileToBuffer("config/archives_footer.txt", out, swaps);
             out.close();
 
-            final int num_contests = history.getContests().size();
-            final int num_pages = (num_contests + CONTESTS_PER_PAGE - 1) / CONTESTS_PER_PAGE;
+            final int num_polls = history.getPolls().size();
+            final int num_pages = (num_polls + CONTESTS_PER_PAGE - 1) / CONTESTS_PER_PAGE;
             int p = 0;  // Page index.  Page number for URLs is one greater than this.
-            for (int e = num_contests - 1; e >= 0; e -= CONTESTS_PER_PAGE) {
-                final int contest_end = e;
-                final int contest_start = Math.max(contest_end - CONTESTS_PER_PAGE + 1, 0);
+            for (int e = num_polls - 1; e >= 0; e -= CONTESTS_PER_PAGE) {
+                final int poll_end = e;
+                final int poll_start = Math.max(poll_end - CONTESTS_PER_PAGE + 1, 0);
                 fstream = new FileWriter("web/archives-page" + Integer.toString(p + 1) + ".html");
                 out = new BufferedWriter(fstream);
                 Master.addFileToBuffer("config/archives_header.txt", out, swaps);
                 archivesGenerator.insertNavigationBar(out, p + 1, num_pages);
-                archivesGenerator.generate(history, out, contest_start, contest_end);
+                archivesGenerator.generate(history, out, poll_start, poll_end);
                 archivesGenerator.insertNavigationBar(out, p + 1, num_pages);
                 Master.addFileToBuffer("config/archives_footer.txt", out, swaps);
                 out.close();
@@ -118,7 +118,7 @@ public abstract class Master
             out.close();
             
             // MEMBER LIST
-            fstream = new FileWriter("members/members-" + history.getLastContestName() + ".txt");
+            fstream = new FileWriter("members/members-" + history.getLastPollName() + ".txt");
             out = new BufferedWriter(fstream);
             Collections.sort(history.getMembers(), new MemberSortAlphabetical());
             for (int i=0; i<history.getMembers().size(); i++)
@@ -143,7 +143,7 @@ public abstract class Master
 
             long endTime = System.nanoTime();
             long duration = endTime - startTime;
-            JOptionPane.showMessageDialog(null, "Archive output saved to archives\\archive-" + history.getLastContestName() + testText + ".html.\nLeaderboard output saved to leaderboards\\leaderboards-" + history.getLastContestName() + testText + ".html.\nTime elapsed: " + ((double)(duration))/1000000000.0 + " seconds.", "Success!", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Archive output saved to archives\\archive-" + history.getLastPollName() + testText + ".html.\nLeaderboard output saved to leaderboards\\leaderboards-" + history.getLastPollName() + testText + ".html.\nTime elapsed: " + ((double)(duration))/1000000000.0 + " seconds.", "Success!", JOptionPane.INFORMATION_MESSAGE);
         }
         catch (Exception e)
         {

@@ -7,22 +7,22 @@ import javax.swing.JOptionPane;
 
 public class History
 {
-    private ArrayList<Contest> contests;
+    private ArrayList<Poll> polls;
     private ArrayList<Member> members;
-    String lastContestName;
+    String lastPollName;
 
     public History()
     {
         members = new ArrayList<Member>();
-        contests = new ArrayList<Contest>();
-        lastContestName = "";
+        polls = new ArrayList<Poll>();
+        lastPollName = "";
     }
 
     public void addEntry(Entry entry_adding, boolean requestId, int memberId) {
-        addEntry(entry_adding.getContest().getName(),
-                 entry_adding.getContest().hasTopic(),
-                 entry_adding.getContest().getTopic(),
-                 entry_adding.getContest().getSynch(),
+        addEntry(entry_adding.getPoll().getName(),
+                 entry_adding.getPoll().hasTopic(),
+                 entry_adding.getPoll().getTopic(),
+                 entry_adding.getPoll().getSynch(),
                  entry_adding.getNameSubmittedUnder(),
                  entry_adding.getMember().getTag(),
                  requestId,
@@ -35,13 +35,13 @@ public class History
                  entry_adding.getOverrideCode());
     }
     
-    public void addEntry(String contestName, boolean hasTopicInfo, int topic, int currentSynch, String memberName, String tag, boolean requestId, int memberId, boolean myHasURL, String URL, boolean myHasVotes, int myVotes, boolean myHasUncertainty, int overrideCode) {
-        Contest contestRetrieved;
-        // check if the contest being requested hasn't been formed yet
-        if ((contestRetrieved = getContestByName(contestName)) == null) {
+    public void addEntry(String pollName, boolean hasTopicInfo, int topic, int currentSynch, String memberName, String tag, boolean requestId, int memberId, boolean myHasURL, String URL, boolean myHasVotes, int myVotes, boolean myHasUncertainty, int overrideCode) {
+        Poll pollRetrieved;
+        // check if the poll being requested hasn't been formed yet
+        if ((pollRetrieved = getPollByName(pollName)) == null) {
             // if it hasn't, add it
-            contestRetrieved = new Contest(contestName, hasTopicInfo, topic, currentSynch);
-            contests.add(contestRetrieved);
+            pollRetrieved = new Poll(pollName, hasTopicInfo, topic, currentSynch);
+            polls.add(pollRetrieved);
         }
 
         Member memberRetrieved;
@@ -71,25 +71,25 @@ public class History
             }
         }
 
-        Entry entryAdding = new Entry(memberRetrieved, contestRetrieved, myHasURL, URL, myHasVotes, myVotes, myHasUncertainty, overrideCode, memberName);
+        Entry entryAdding = new Entry(memberRetrieved, pollRetrieved, myHasURL, URL, myHasVotes, myVotes, myHasUncertainty, overrideCode, memberName);
 
-        // regardless of the above, add the entry to the member's and contest's records
-        contestRetrieved.addEntry(entryAdding);
+        // regardless of the above, add the entry to the member's and poll's records
+        pollRetrieved.addEntry(entryAdding);
         memberRetrieved.addEntry(entryAdding);
     }
     
-    // Creates a new history that possesses cloned members and contests from this history (over a given span of contests).
+    // Creates a new history that possesses cloned members and polls from this history (over a given span of polls).
     public History getSubhistory(int index_start, int index_end) {
         History returning = new History();
         
         for (int i = index_start; i <= index_end; ++i) {
-            ArrayList<Entry> entries_at_contest_index = contests.get(i).getEntries();
-            for (int j = 0; j < entries_at_contest_index.size(); ++j) {
-                returning.addEntry(entries_at_contest_index.get(j), false, entries_at_contest_index.get(j).getMember().getId());
+            ArrayList<Entry> entries_at_poll_index = polls.get(i).getEntries();
+            for (int j = 0; j < entries_at_poll_index.size(); ++j) {
+                returning.addEntry(entries_at_poll_index.get(j), false, entries_at_poll_index.get(j).getMember().getId());
             }
         }
         
-        returning.setLastContestName(returning.getContests().get(returning.getContests().size() - 1).getName());
+        returning.setLastPollName(returning.getPolls().get(returning.getPolls().size() - 1).getName());
         
         return returning;
     }
@@ -113,12 +113,12 @@ public class History
         return null;
     }
 
-    public Contest getContestByName(String nameGetting)
+    public Poll getPollByName(String nameGetting)
     {
-        for (int i=0; i<contests.size(); i++)
+        for (int i=0; i<polls.size(); i++)
         {
-            if (contests.get(i).getName().equals(nameGetting))
-                return contests.get(i);
+            if (polls.get(i).getName().equals(nameGetting))
+                return polls.get(i);
         }
         return null;
     }
@@ -178,7 +178,7 @@ public class History
     }
 
     public boolean populateEntriesFromFile(String filename)
-    {   //IT might be possible in this method to pass references to individual contests instead of "current contest names" and so forth
+    {   //IT might be possible in this method to pass references to individual polls instead of "current poll names" and so forth
         try
         {
             // allocate new stream object
@@ -189,9 +189,9 @@ public class History
             String strLine; // String in which to place new lines as they are read
 
             String[] splits; // array for the output of the regex split
-            String currentContestName = "";
+            String currentPollName = "";
             int currentSynch = 0;
-            Contest contestRetrieved = null;
+            Poll pollRetrieved = null;
 
             ParsedLine parse;
 
@@ -204,37 +204,37 @@ public class History
             while ((strLine = br.readLine()) != null)
             {
                 blockComment |= strLine.startsWith(blockOpen);
-                parse = new ParsedLine(strLine, currentContestName);
+                parse = new ParsedLine(strLine, currentPollName);
 
-                if (parse.hasContestInfo && !blockComment)
+                if (parse.hasPollInfo && !blockComment)
                 {
-                    currentContestName = parse.contestName; // will change this
+                    currentPollName = parse.pollName; // will change this
 
-                    if ((contestRetrieved = getContestByName(currentContestName)) == null)
+                    if ((pollRetrieved = getPollByName(currentPollName)) == null)
                     {
                         if (!parse.synchronous)
                             currentSynch++;
 
                         if (parse.hasTopicInfo)
-                            contestRetrieved = new Contest(currentContestName, parse.hasTopicInfo, parse.topic, currentSynch);
+                            pollRetrieved = new Poll(currentPollName, parse.hasTopicInfo, parse.topic, currentSynch);
                         else
-                            contestRetrieved = new Contest(currentContestName, currentSynch);
-                        contests.add(contestRetrieved);
+                            pollRetrieved = new Poll(currentPollName, currentSynch);
+                        polls.add(pollRetrieved);
                     }
                 }
 
                 if (parse.hasMemberInfo && !blockComment)
                 {
-                    addEntry(currentContestName, parse.hasTopicInfo, parse.topic, currentSynch, parse.memberName, parse.tag, true, -1, parse.hasURL, parse.URL, parse.hasVotes, parse.votes, !parse.hasVotes, parse.overrideCode);
+                    addEntry(currentPollName, parse.hasTopicInfo, parse.topic, currentSynch, parse.memberName, parse.tag, true, -1, parse.hasURL, parse.URL, parse.hasVotes, parse.votes, !parse.hasVotes, parse.overrideCode);
                 }
                 
-                if (parse.isContestNote && !blockComment && contestRetrieved != null) {
-                    contestRetrieved.addNote(parse.note);
+                if (parse.isPollNote && !blockComment && pollRetrieved != null) {
+                    pollRetrieved.addNote(parse.note);
                 }
 
                 blockComment &= !strLine.endsWith(blockClose);
             }
-            lastContestName = currentContestName;   // this is so we can name the output files intelligently
+            lastPollName = currentPollName;   // this is so we can name the output files intelligently
             //Close the input stream
             in.close(); 
         }
@@ -254,9 +254,9 @@ public class History
         members.add(memberAdding);
     }
 
-    public void addContest(Contest contestAdding)
+    public void addPoll(Poll pollAdding)
     {
-        contests.add(contestAdding);
+        polls.add(pollAdding);
     }
 
     public ArrayList<Member> getMembers()
@@ -264,17 +264,17 @@ public class History
         return members;
     }
 
-    public ArrayList<Contest> getContests()
+    public ArrayList<Poll> getPolls()
     {
-        return contests;
+        return polls;
     }
 
-    public String getLastContestName()
+    public String getLastPollName()
     {
-        return lastContestName;
+        return lastPollName;
     }
     
-    private void setLastContestName(String lastContestNameSetting) {
-        lastContestName = lastContestNameSetting;
+    private void setLastPollName(String lastPollNameSetting) {
+        lastPollName = lastPollNameSetting;
     }
 }

@@ -218,7 +218,7 @@ public class Member
             entry = entries.get(i);
             if (entry.getWinningness() > 0.0f) // if a winner...
             {
-                if (!strict || (entry.getContest().getSynch() - lastWinSynch) <= 1)
+                if (!strict || (entry.getPoll().getSynch() - lastWinSynch) <= 1)
                 {
                     current += entry.getWinningness();
                     currentList.add(entry);
@@ -229,7 +229,7 @@ public class Member
                     currentList = new ArrayList<Entry>();
                     currentList.add(entry);
                 }
-                lastWinSynch = entry.getContest().getSynch();
+                lastWinSynch = entry.getPoll().getSynch();
             }
             else // if not a winner
             {
@@ -328,7 +328,7 @@ public class Member
     public int getTotalNumOpponents() {
         int opponent_count = 0;
         for (int i = 0; i < entries.size(); ++i) {
-            opponent_count += (entries.get(i).getContest().numEntries() - 1);
+            opponent_count += (entries.get(i).getPoll().numEntries() - 1);
         }
         return opponent_count;
     }

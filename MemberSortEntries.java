@@ -25,10 +25,10 @@ public class MemberSortEntries implements MemberDataRetriever
         
         for (int i=0; i<entries.size(); i++)
         {   // The below will strip contests of their letters in the case of multi-thread contests
-            if (linkTopics && entries.get(i).getContest().hasTopic())
-                building += ("<a class='green' href='http://www.purezc.net/forums/index.php?showtopic=" + entries.get(i).getContest().getTopic() + "'>#" + entries.get(i).getContest().getName() + "</a>");
+            if (linkTopics && entries.get(i).getPoll().hasTopic())
+                building += ("<a class='green' href='http://www.purezc.net/forums/index.php?showtopic=" + entries.get(i).getPoll().getTopic() + "'>#" + entries.get(i).getPoll().getName() + "</a>");
             else
-                building += ("#" + entries.get(i).getContest().getName());
+                building += ("#" + entries.get(i).getPoll().getName());
             if (i < entries.size()-2)
                 building += ", ";
             else if (i == entries.size()-2)

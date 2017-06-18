@@ -48,10 +48,10 @@ public class MemberSortVotesSingle implements MemberDataRetriever
 //                 {
 //                     building += (df.format(winners.get(h).get(i).getWinningness()) + " in ");
 //                 }
-            if (linkTopics && winners.get(i).getContest().hasTopic()) // NOTE: The below should strip the A and B designations from multi-thread contests
-                building += ("<a class='green' href='http://www.purezc.net/forums/index.php?showtopic=" + winners.get(i).getContest().getTopic() + "'>#" + winners.get(i).getContest().getName() + "</a>");
+            if (linkTopics && winners.get(i).getPoll().hasTopic()) // NOTE: The below should strip the A and B designations from multi-thread contests
+                building += ("<a class='green' href='http://www.purezc.net/forums/index.php?showtopic=" + winners.get(i).getPoll().getTopic() + "'>#" + winners.get(i).getPoll().getName() + "</a>");
             else
-                building += ("#" + winners.get(i).getContest().getName());
+                building += ("#" + winners.get(i).getPoll().getName());
             if (i < winners.size()-2)
                 building += ", ";
             else if (i == winners.size()-2)

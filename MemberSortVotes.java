@@ -32,10 +32,10 @@ public class MemberSortVotes implements MemberDataRetriever
                 building += "?";
             else
                 building += ""+entry.getVotes();
-            if (linkTopics && entry.getContest().hasTopic())
-                building += (" in <a class='green' href='http://www.purezc.net/forums/index.php?showtopic=" + entry.getContest().getTopic() + "'>#" + entry.getContest().getName() + "</a>");
+            if (linkTopics && entry.getPoll().hasTopic())
+                building += (" in <a class='green' href='http://www.purezc.net/forums/index.php?showtopic=" + entry.getPoll().getTopic() + "'>#" + entry.getPoll().getName() + "</a>");
             else
-                building += (" in #" + entry.getContest().getName());
+                building += (" in #" + entry.getPoll().getName());
             if (i < entries.size()-2)
                 building += ", ";
             else if (i == entries.size()-2)

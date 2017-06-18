@@ -34,10 +34,10 @@ public class MemberSortVictories implements MemberDataRetriever
         
         for (int i=0; i<winners.size(); i++)
         {
-            if (linkTopics && winners.get(i).getContest().hasTopic()) // NOTE: The below should strip the A and B designations from multi-thread contests
-                building += ("<a class='green' href='http://www.purezc.net/forums/index.php?showtopic=" + winners.get(i).getContest().getTopic() + "'>#" + winners.get(i).getContest().getName() + "</a>");
+            if (linkTopics && winners.get(i).getPoll().hasTopic()) // NOTE: The below should strip the A and B designations from multi-thread contests
+                building += ("<a class='green' href='http://www.purezc.net/forums/index.php?showtopic=" + winners.get(i).getPoll().getTopic() + "'>#" + winners.get(i).getPoll().getName() + "</a>");
             else
-                building += ("#" + winners.get(i).getContest().getName());
+                building += ("#" + winners.get(i).getPoll().getName());
             if (winners.get(i).getWinningness() < 1.0f)
             {
                 building += " (" + df.format(winners.get(i).getWinningness()) + ")";

@@ -16,7 +16,7 @@ public class LeaderboardFormatter {
         MemberDataRetriever metric = leaderboard.getMetric();
         History history = leaderboard.getHistory();
         int subhistory_start = 0;
-        int subhistory_end = Math.max(0, history.getContests().size() - delta - 1);
+        int subhistory_end = Math.max(0, history.getPolls().size() - delta - 1);
         Leaderboard comparison = new Leaderboard(history.getSubhistory(subhistory_start, subhistory_end), metric);
         
         try

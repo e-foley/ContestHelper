@@ -53,10 +53,10 @@ public class MemberSortConsecutiveLoose implements MemberDataRetriever
 //                 {
 //                     building += (df.format(winners.get(h).get(i).getWinningness()) + " in ");
 //                 }
-                if (linkTopics && winners.get(h).get(i).getContest().hasTopic()) // NOTE: The below should strip the A and B designations from multi-thread contests
-                    building += ("<a class='green' href='http://www.purezc.net/forums/index.php?showtopic=" + winners.get(h).get(i).getContest().getTopic() + "'>#" + winners.get(h).get(i).getContest().getName() + "</a>");
+                if (linkTopics && winners.get(h).get(i).getPoll().hasTopic()) // NOTE: The below should strip the A and B designations from multi-thread contests
+                    building += ("<a class='green' href='http://www.purezc.net/forums/index.php?showtopic=" + winners.get(h).get(i).getPoll().getTopic() + "'>#" + winners.get(h).get(i).getPoll().getName() + "</a>");
                 else
-                    building += ("#" + winners.get(h).get(i).getContest().getName());
+                    building += ("#" + winners.get(h).get(i).getPoll().getName());
                 if (winners.get(h).get(i).getWinningness() < 1.0f)
                 {
                     building += " (" + df.format(winners.get(h).get(i).getWinningness()) + ")";
