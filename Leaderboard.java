@@ -15,9 +15,10 @@ public class Leaderboard
     private History history;
     
     // TODO: Clone the members_set field so that additions to the list made outside this class don't mess up our assumptions about sorting
+    // Follow-up: did we do this when we switched to a HashMap for Members?
     public Leaderboard(History history_set, MemberDataRetriever metric_set) {
         history = history_set;
-        members = history_set.getMembers();
+        members = new ArrayList<Member>(history_set.getMembers());
         metric = metric_set;
         is_sorted = false;
     }

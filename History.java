@@ -2,18 +2,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.io.*;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Collection;
 
 import javax.swing.JOptionPane;
 
 public class History
 {
     private ArrayList<Poll> polls;
-    private ArrayList<Member> members;
+    private HashMap<Integer, Member> members;  // Key is member ID, which should also be held by the Members themselves
     String lastPollName;
 
     public History()
     {
-        members = new ArrayList<Member>();
+        members = new HashMap<Integer, Member>();
         polls = new ArrayList<Poll>();
         lastPollName = "";
     }
@@ -55,7 +57,7 @@ public class History
                 } else {
                     memberRetrieved.setId(memberId);
                 }
-                members.add(memberRetrieved);
+                members.put(memberRetrieved.getId(), memberRetrieved);
                 System.out.println("Warning: tag \"" + tag + "\" in data file does not exist in associations file.");
             }
         } else {
@@ -67,7 +69,7 @@ public class History
                 } else {
                     memberRetrieved.setId(memberId);
                 }
-                members.add(memberRetrieved);
+                members.put(memberRetrieved.getId(), memberRetrieved);
             }
         }
 
@@ -153,14 +155,14 @@ public class History
                         // Incorporate the tag and names into a new Member object.  (Not pretty.)
                         Member memberAdding = new Member(tagSplit[0], new ArrayList<String>(Arrays.asList(namesRead)));
                         memberAdding.setId(members.size());
-                        members.add(memberAdding);
+                        members.put(memberAdding.getId(), memberAdding);
                     } else {
                         // Place the split-up names in an array.
                         namesRead = strLine.split(nameRegex);
                         // Incorporate these names into a new untagged Member object. (Not pretty.)
                         Member memberAdding = new Member(new ArrayList<String>(Arrays.asList(namesRead)));
                         memberAdding.setId(members.size());
-                        members.add(memberAdding);
+                        members.put(memberAdding.getId(), memberAdding);
                     }
                 }
             }
@@ -251,7 +253,7 @@ public class History
     public void addMember(Member memberAdding)
     {
         memberAdding.setId(members.size());
-        members.add(memberAdding);
+        members.put(memberAdding.getId(), memberAdding);
     }
 
     public void addPoll(Poll pollAdding)
@@ -259,9 +261,9 @@ public class History
         polls.add(pollAdding);
     }
 
-    public ArrayList<Member> getMembers()
+    public Collection<Member> getMembers()
     {
-        return members;
+        return members.values();
     }
 
     public ArrayList<Poll> getPolls()

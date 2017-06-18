@@ -120,22 +120,23 @@ public abstract class Master
             // MEMBER LIST
             fstream = new FileWriter("members/members-" + history.getLastPollName() + ".txt");
             out = new BufferedWriter(fstream);
-            Collections.sort(history.getMembers(), new MemberSortAlphabetical());
-            for (int i=0; i<history.getMembers().size(); i++)
+            ArrayList<Member> member_list = new ArrayList<Member>(history.getMembers());
+            Collections.sort(member_list, new MemberSortAlphabetical());
+            for (int i=0; i<member_list.size(); i++)
             {
-                out.write(history.getMembers().get(i).getMostRecentName());
-                if (history.getMembers().get(i).hasTag()) {
-                    out.write(" [" + history.getMembers().get(i).getTag() + "]");
+                out.write(member_list.get(i).getMostRecentName());
+                if (member_list.get(i).hasTag()) {
+                    out.write(" [" + member_list.get(i).getTag() + "]");
                 }
                 out.newLine();
             }
             out.newLine();
-            out.write(history.getMembers().size() + " unique members in all.");
+            out.write(member_list.size() + " unique members in all.");
             out.close();
             
             // PROFILES
             if (generate_user_galleries) {
-                ArrayList<Member> mems = history.getMembers();
+                ArrayList<Member> mems = member_list;
                 for (int i=0; i<mems.size(); i++) {
                     UserProfile.createProfilePage(mems.get(i), false);
                 }
