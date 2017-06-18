@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Collection;
+import java.util.Iterator;
 
 import javax.swing.JOptionPane;
 
@@ -84,6 +85,28 @@ public class History
     public History getSubhistory(int index_start, int index_end) {
         History returning = new History();
 
+        // TODO: Does this clone the way I want it to??
+        returning.members = new HashMap<Integer, Member>(this.members);
+        
+        Iterator it = returning.members.entrySet().iterator();
+        while (it.hasNext()) {
+            HashMap.Entry<Integer, Member> pair = (HashMap.Entry<Integer, Member>)it.next();
+            // Retrieve the member's entries
+            ArrayList<Entry> entries_to_remove = new ArrayList<Entry>();
+            ArrayList<Entry> entries = pair.getValue().getEntries();
+            for (Entry ent : entries) {
+                int index = polls.indexOf(ent.getPoll());
+                // If any entry has an index outside our bounds, remove it from the member's list of entries
+                if (index != -1 && (index < index_start || index > index_end)) {
+                    entries_to_remove.add(ent);
+                }
+            }
+            // Now actually remove these entries from the Member
+            for (Entry ent_rem : entries_to_remove) {
+                pair.getValue().removeEntry(ent_rem);
+            }
+        }
+        
         for (int i = index_start; i <= index_end; ++i) {
           returning.polls.add(this.polls.get(i));
         }

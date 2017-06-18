@@ -56,6 +56,10 @@ public class Member
         entries.add(entryAdding);
     }
     
+    public boolean removeEntry(Entry removing) {
+        return entries.remove(removing);
+    }
+    
     public void addName(String nameAdding)
     {
         names.add(nameAdding);
