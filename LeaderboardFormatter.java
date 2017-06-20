@@ -82,30 +82,25 @@ public class LeaderboardFormatter {
                     }
                     
                     out.write("'>");
-                    
-                    // Place column
-                    //  if (c == 0) {
                         
-                        out.write("<td class='place-cell'>");
-                        if (coplacers.size() > 1) {
-                            out.write("T&#8209;");
+                    // Place column
+                    out.write("<td class='place-cell'>");
+                    if (coplacers.size() > 1) {
+                        out.write("T&#8209;");  // &#8209 is non-breaking hyphen
+                    }
+                    out.write(Integer.toString(p + 1));
+                    int comparison_place = comparison.getPlaceOfMember(member.getId());
+                    if (comparison_place != Leaderboard.NO_PLACE) {
+                        int gain = (comparison_place + 1) - (p + 1);  // Written this way for consistency.  Note that gain is good (lower place).
+                        if (gain > 0) {
+                            out.write("&nbsp;<span class='place-delta'>(<span class='gain-arrow'>&#9650;</span>" + gain + ")</span>");
+                        } else if (gain < 0) {
+                            out.write("&nbsp;<span class='place-delta'>(<span class='loss-arrow'>&#9660;</span>" + (-gain) + ")</span>");
+                        } else {
+                            // out.write("(<span class='same-arrow'>&#177;</span>0)");
                         }
-                        out.write(Integer.toString(p + 1));
-                        int comparison_place = comparison.getPlaceOfMember(member.getId());
-                        if (comparison_place != Leaderboard.NO_PLACE) {
-                            int gain = (comparison_place + 1) - (p + 1);  // Written this way for consistency.  Note that gain is good (lower place).
-                            if (gain > 0) {
-                                out.write("&nbsp;<span class='place-delta'>(<span class='gain-arrow'>&#9650;</span>" + gain + ")</span>");
-                            } else if (gain < 0) {
-                                out.write("&nbsp;<span class='place-delta'>(<span class='loss-arrow'>&#9660;</span>" + (-gain) + ")</span>");
-                            } else {
-                                // out.write("(<span class='same-arrow'>&#177;</span>0)");
-                            }
-                        }
-                        out.write("</td>");
-//                     } else {
-//                         out.write("<td></td>");
-//                     }
+                    }
+                    out.write("</td>");
                     
                     // Name column
                     out.write("<td class='name-cell'>");
