@@ -467,3 +467,23 @@ td.contest-cell
 {
   font-size: 0.65em;
 }
+
+.place-delta
+{
+  font-size: 0.7em;
+}
+
+.gain-arrow
+{
+  color: #00AA00;
+}
+
+.loss-arrow
+{
+  color: #AA0000;
+}
+
+.same-arrow
+{
+  color: #0000AA;
+}

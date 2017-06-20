@@ -85,10 +85,20 @@ public class LeaderboardFormatter {
                     
                     // Place column
                     if (c == 0) {
-                        out.write("<td class='place-cell'>" + (p + 1));
+                        out.write("<td class='place-cell'>" + (p + 1) + "&nbsp;");
                         int comparison_place = comparison.getPlaceOfMember(member.getId());
                         if (comparison_place != Leaderboard.NO_PLACE) {
-                           out.write(" (was " + (comparison_place + 1) + ")");
+                            out.write("<span class='place-delta'>");
+                            int gain = (comparison_place + 1) - (p + 1);  // Written this way for consistency.  Note that gain is good (lower place).
+                            if (gain > 0) {
+                                out.write("(<span class='gain-arrow'>&#9650;</span>" + gain + ")");
+                            } else if (gain < 0) {
+                                out.write("(<span class='loss-arrow'>&#9660;</span>" + (-gain) + ")");
+                            } else {
+                                out.write("(<span class='same-arrow'>&#177;</span>0)");
+                            }
+                            out.write("</span>");
+                            //out.write(" (was " + (comparison_place + 1) + ")");
                         }
                         out.write("</td>");
                     } else {
