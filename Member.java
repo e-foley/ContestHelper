@@ -18,6 +18,16 @@ public class Member
         isTagged = false;
     }
     
+    // Incomplete clone
+    public Member(Member mem) {
+        names = new ArrayList<String>(mem.names);
+        entries = new ArrayList<Entry>(mem.entries);
+        tag = mem.tag;
+        isTagged = mem.isTagged;
+        hasId = mem.hasId;
+        id = mem.id;
+    }
+    
     public Member(String myName)
     {
         names = new ArrayList<String>();

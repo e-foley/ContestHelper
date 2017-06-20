@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Set;
 
 import javax.swing.JOptionPane;
 
@@ -85,35 +86,30 @@ public class History
     public History getSubhistory(int index_start, int index_end) {
         History returning = new History();
 
-        // TODO: Does this clone the way I want it to??
-        returning.members = new HashMap<Integer, Member>(this.members);
+        returning.members = new HashMap<Integer, Member>();
         
-        Iterator it = returning.members.entrySet().iterator();
-        while (it.hasNext()) {
-            HashMap.Entry<Integer, Member> pair = (HashMap.Entry<Integer, Member>)it.next();
-            // Retrieve the member's entries
+        Set<Integer> member_ids = members.keySet();
+        for (Integer member_id : member_ids) {
+            Member member = new Member(members.get(member_id));  // Performs incomplete clone per custom Member constructor
+            returning.members.put(member.getId(), member);  // Populate a sort of copy of the members array
             ArrayList<Entry> entries_to_remove = new ArrayList<Entry>();
-            ArrayList<Entry> entries = pair.getValue().getEntries();
+            ArrayList<Entry> entries = member.getEntries();
             for (Entry ent : entries) {
-                int index = polls.indexOf(ent.getPoll());
-                // If any entry has an index outside our bounds, remove it from the member's list of entries
-                if (index != -1 && (index < index_start || index > index_end)) {
+                int contest_index = polls.indexOf(ent.getPoll());
+                if (contest_index != -1 && (contest_index < index_start || contest_index > index_end)) {
                     entries_to_remove.add(ent);
                 }
             }
             // Now actually remove these entries from the Member
             for (Entry ent_rem : entries_to_remove) {
-                pair.getValue().removeEntry(ent_rem);
+                // System.out.println("Entry removed!" + ent_rem.getURL());
+                member.removeEntry(ent_rem);
             }
         }
         
         for (int i = index_start; i <= index_end; ++i) {
           returning.polls.add(this.polls.get(i));
         }
-        
-        // Need to handle members... Would want same association, but ignore all entries from excluded contests
-        
-        
         
         if (!returning.polls.isEmpty()) {
             returning.lastPollName = returning.polls.get(returning.polls.size() - 1).getName();
