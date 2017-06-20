@@ -109,7 +109,7 @@ public class LeaderboardFormatter {
                             } else if (gain < 0) {
                                 out.write("<span class='place-delta'><span class='loss-arrow'>&#9660;</span>" + (-gain) + "</span>");
                             } else {
-                                // out.write("<span class='place-delta'><span class='same-arrow'>&#177;</span>0</span>");
+                                // out.write("<span class='place-delta'><span class='same-arrow'>&#9671;</span></span>");
                             }
                         }
                     }
