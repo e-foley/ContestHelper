@@ -85,10 +85,12 @@ public class LeaderboardFormatter {
                         
                     // Place column
                     out.write("<td class='place-cell'>");
-                    if (coplacers.size() > 1) {
-                        out.write("T&#8209;");  // &#8209 is non-breaking hyphen
+//                     if (coplacers.size() > 1) {
+//                         out.write("T&#8209;");  // &#8209 is non-breaking hyphen
+//                     }
+                    if (c == 0) {
+                        out.write(Integer.toString(p + 1) + ".");
                     }
-                    out.write(Integer.toString(p + 1));
                     out.write("</td>");
                     
                     // Delta place column
