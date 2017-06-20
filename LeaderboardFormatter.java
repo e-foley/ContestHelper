@@ -84,8 +84,13 @@ public class LeaderboardFormatter {
                     out.write("'>");
                     
                     // Place column
-                    if (c == 0) {
-                        out.write("<td class='place-cell'>" + (p + 1) + "&nbsp;");
+                    //  if (c == 0) {
+                        
+                        out.write("<td class='place-cell'>");
+                        if (coplacers.size() > 1) {
+                            out.write("T&#8209;");
+                        }
+                        out.write((p + 1) + "&nbsp;");
                         int comparison_place = comparison.getPlaceOfMember(member.getId());
                         if (comparison_place != Leaderboard.NO_PLACE) {
                             out.write("<span class='place-delta'>");
@@ -98,12 +103,11 @@ public class LeaderboardFormatter {
                                 out.write("(<span class='same-arrow'>&#177;</span>0)");
                             }
                             out.write("</span>");
-                            //out.write(" (was " + (comparison_place + 1) + ")");
                         }
                         out.write("</td>");
-                    } else {
-                        out.write("<td></td>");
-                    }
+//                     } else {
+//                         out.write("<td></td>");
+//                     }
                     
                     // Name column
                     out.write("<td class='name-cell'>");
