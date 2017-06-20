@@ -473,6 +473,13 @@ td.contest-cell
   font-size: 0.7em;
 }
 
+.new-text
+{
+  font-size: 0.85em;
+  color: #0000AA;
+  font-weight: bold;
+}
+
 .gain-arrow
 {
   color: #00AA00;
