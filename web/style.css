@@ -167,10 +167,6 @@ td.contest-cell
 {
 }
 
-.place-cell
-{
-}
-
 .name-cell
 {
 }
@@ -228,16 +224,18 @@ td.contest-cell
 
 .place-cell
 {
-  text-align: center;
-  //width: 10%;
+  text-align: right;
+}
+
+.delta-cell
+{
+  text-align: left;
 }
 
 .number-cell
 {
   text-align: center;
-  //width: 10%;
 }
-
 
 .performance
 {
