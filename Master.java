@@ -14,6 +14,7 @@ public abstract class Master
     public static final int NUM_ARCHIVES_DIGEST_ENTRIES = 12;
     public static final int CONTESTS_PER_PAGE = 12;
     public static final int DELTA = 10;
+    public static final int WIN_RATIO_MIN_ENTRIES = 5;
     
     public static void main(String[] args)
     {
@@ -91,7 +92,7 @@ public abstract class Master
             board_format.addToFile(new Leaderboard(history, new MemberSortEntries()), DELTA, "Most participation", "", " entry", " Entries", out, true, false, true, 6);
             board_format.addToFile(new Leaderboard(history, new MemberSortConsecutiveStrict()), DELTA, "Longest winning streaks (in consecutive contests, by member)", "", " streak", " Streak", out, true, true, true, 7);
             board_format.addToFile(new Leaderboard(history, new MemberSortConsecutiveLoose()), DELTA, "Longest winning streaks (in consecutive attempts, by member)", "", " streak", " Streak", out, true, true, true, 8);
-            board_format.addToFile(new Leaderboard(history, new MemberSortWinRatio()), DELTA, "Best win ratios (minimum 5 entries)", "", "", " Ratio", out, true, true, true, 9);
+            board_format.addToFile(new Leaderboard(history, new MemberSortWinRatio(WIN_RATIO_MIN_ENTRIES)), DELTA, "Best win ratios (minimum " + WIN_RATIO_MIN_ENTRIES + " entries)", "", "", " Ratio", out, true, true, true, 9);
             // Below TEMPORARILY commented out to keep file size under 2 MiB.
             // board_format.addToFile(new Leaderboard(history, new MemberSortPlusMinusPoints()), DELTA, "Best plus/minus records (head-to-head vote basis)", "", "", " +/- votes", out, true, true, true, 10);
             // board_format.addToFile(new Leaderboard(history, new MemberSortPlusMinusHeads()), DELTA, "Best plus/minus records (head-to-head victory basis)", "", "", " +/- wins", out, true, true, true, 11);
