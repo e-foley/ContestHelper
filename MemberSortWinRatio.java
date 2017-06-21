@@ -2,10 +2,19 @@ import java.util.Comparator;
 import java.util.ArrayList;
 import java.text.NumberFormat;
 
-public class MemberSortWinRatio implements MemberDataRetriever
+public class MemberSortWinRatio implements MemberDataRetriever<Float>
 {
+    public MemberSortWinRatio(int min_entries) {
+        min_entries_ = min_entries;
+    }
+    
+    // Note: this sort of ignores the minimum entry requirement...
+    public Float getValue(Member member) {
+        return member.getWinRatio();
+    }
+    
     public int compare(Member m1, Member m2) {
-        int result = new MemberSortMinEntries(5).compare(m1, m2);
+        int result = new MemberSortMinEntries(min_entries_).compare(m1, m2);
         if (result == 0) {
             result = new Float(m2.getWinRatio()).compareTo(m1.getWinRatio());
         } else if (result == 0) {
@@ -30,4 +39,6 @@ public class MemberSortWinRatio implements MemberDataRetriever
             building += "s";
         return building;
     }
+    
+    private int min_entries_;
 }

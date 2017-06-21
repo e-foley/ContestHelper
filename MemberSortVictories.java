@@ -2,8 +2,12 @@ import java.util.Comparator;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class MemberSortVictories implements MemberDataRetriever
+public class MemberSortVictories implements MemberDataRetriever<Float>
 {
+    public Float getValue(Member member) {
+        return member.getTotalWinningness();
+    }
+    
     public int compare(Member m1, Member m2) {
         return new Float(m2.getTotalWinningness()).compareTo(m1.getTotalWinningness());
     }

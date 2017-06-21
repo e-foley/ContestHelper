@@ -2,8 +2,13 @@ import java.util.Comparator;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class MemberSortVotesSingle implements MemberDataRetriever
+public class MemberSortVotesSingle implements MemberDataRetriever<Integer>
 {
+    public Integer getValue(Member member) {
+        ArrayList<Entry> list = member.getEntriesWithMostVotes();
+        return Member.getMostVotesSingle(list);
+    }
+    
     public int compare(Member m1, Member m2) {
         ArrayList<Entry> listOne = m1.getEntriesWithMostVotes();
         ArrayList<Entry> listTwo = m2.getEntriesWithMostVotes();

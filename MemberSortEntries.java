@@ -1,8 +1,12 @@
 import java.util.Comparator;
 import java.util.ArrayList;
 
-public class MemberSortEntries implements MemberDataRetriever
+public class MemberSortEntries implements MemberDataRetriever<Integer>
 {
+    public Integer getValue(Member member) {
+        return member.getTotalEntries();
+    }
+    
     public int compare(Member m1, Member m2) {
         return new Integer(m2.getTotalEntries()).compareTo(m1.getTotalEntries());
     }

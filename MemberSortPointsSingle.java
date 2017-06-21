@@ -2,8 +2,13 @@ import java.util.Comparator;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class MemberSortPointsSingle implements MemberDataRetriever
+public class MemberSortPointsSingle implements MemberDataRetriever<Integer>
 {
+    public Integer getValue(Member member) {
+        ArrayList<Entry> list = member.getEntriesWithMostPoints();
+        return Member.getMostPointsSingle(list);
+    }
+    
     public int compare(Member m1, Member m2) {
         ArrayList<Entry> listOne = m1.getEntriesWithMostPoints();
         ArrayList<Entry> listTwo = m2.getEntriesWithMostPoints();

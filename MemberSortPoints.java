@@ -2,8 +2,12 @@ import java.util.Comparator;
 import java.util.ArrayList;
 import java.text.NumberFormat;
 
-public class MemberSortPoints implements MemberDataRetriever
+public class MemberSortPoints implements MemberDataRetriever<Integer>
 {
+    public Integer getValue(Member member) {
+        return member.getTotalPoints();
+    }
+    
     public int compare(Member m1, Member m2) {
         int result = new Integer(m2.getTotalPoints()).compareTo(m1.getTotalPoints());
         if (result == 0) {

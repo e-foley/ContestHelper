@@ -2,8 +2,13 @@ import java.util.Comparator;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class MemberSortConsecutiveStrict implements MemberDataRetriever
+public class MemberSortConsecutiveStrict implements MemberDataRetriever<Float>
 {
+    public Float getValue(Member member) {
+        ArrayList<ArrayList<Entry>> list = member.getEntriesInLongestStreak(true);
+        return Member.getLongestStreak(list);
+    }
+    
     public int compare(Member m1, Member m2) {
         ArrayList<ArrayList<Entry>> listOne = m1.getEntriesInLongestStreak(true);
         ArrayList<ArrayList<Entry>> listTwo = m2.getEntriesInLongestStreak(true);
