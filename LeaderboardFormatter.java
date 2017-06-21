@@ -39,15 +39,15 @@ public class LeaderboardFormatter {
             out.write("<table class='leaderboard-table'><tr class='sort-title'><td colspan=");
             
             if (details)
-                out.write("5>");
+                out.write("6>");
             else
-                out.write("4>");
+                out.write("5>");
 
             out.write("<div class='tableheaderright'><a href='javascript:toggle(" + ID + ", 0);'><img src='https://dl.dropboxusercontent.com/u/10663130/PureZC/exp_minus.png' border='0'  alt='Collapse' /></a></div>");
             out.write("<a class='contest' href='javascript:toggle(" + ID + ", 0);'>" + title + "</a></td></tr>");
             out.newLine();
             out.write("<tr class='header-row'><td>Rank</td><td>&#177;</td>");
-            out.write("<td>Name</td><td>" + suffixPlural + "</td>");
+            out.write("<td>Name</td><td>" + suffixPlural + "</td><td>&#177;</td>");
             
             if (details)
                 out.write("<td>Details</td>");
@@ -127,6 +127,11 @@ public class LeaderboardFormatter {
                     out.write(metric.getData(member));
                     out.write("</td>");
 
+                    // Data delta column
+                    out.write("<td class='data-delta-cell'>");
+                    // out.write(Float.toString(new Float(leaderboard.getMetric().getValue(member)) - new Float(comparison.getMetric().getValue(member))));
+                    out.write("</td>");
+                    
                     // Details column
                     if (details) {
                         out.write("<td class='details'>");
