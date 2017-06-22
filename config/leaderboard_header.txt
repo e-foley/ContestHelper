@@ -29,8 +29,8 @@ function toggle(ID, show)
 <body>
 <div class='big-block'>
 <div class='grand-title'>Screenshot of the Week Leaderboards</div>
-<div class='updated-text'>Last updated with the results of Screenshot of the Week <span style='font-weight:bold;'>###</span></div>
-
+<div class='updated-text'>Last updated with the results of Screenshot of the Week <span style='font-weight:bold;'>###</span><br/>
+All deltas calculated over last <span style='font-weight:bold;'>10</span> contests</div>
 
 <div class='leaderboard' style='display: show;' id='a_closed'>
 <table class='leaderboard-table stunt'><tr class='header-row'><td>
