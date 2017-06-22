@@ -129,8 +129,20 @@ public class LeaderboardFormatter {
 
                     // Data delta column
                     out.write("<td class='data-delta-cell'>");
-                    out.write(metric.getFormat().format(metric.getValue(member) - metric.getValue(comparison.getHistory().getMemberById(member.getId()))));
-                    // out.write(Float.toString(new Float(leaderboard.getMetric().getValue(member)) - new Float(comparison.getMetric().getValue(member))));
+                    // Only write a delta if the member existed before.
+                    if (comparison.getHistory().getMemberMap().containsKey(member.getId()) && comparison.getHistory().getMemberMap().get(member.getId()).getTotalEntries() > 0) {
+                        // Record old and new values for future use...
+                        float old_value = metric.getValue(comparison.getHistory().getMemberById(member.getId()));
+                        float new_value = metric.getValue(member);
+                        if (new_value == old_value) {
+                            // Nothing?
+                        } else if (new_value > old_value) {
+                            out.write("(<span class='good-delta'>+" + metric.getFormat().format(new_value - old_value) + "</span>)");
+                        } else {
+                            out.write("(<span class='bad-delta'>" + metric.getFormat().format(new_value - old_value) + "</span>)");  // Same thing, but can format differently...
+                        }
+                        //out.write(metric.getFormat().format(metric.getValue(member) - metric.getValue(comparison.getHistory().getMemberById(member.getId()))));
+                    }
                     out.write("</td>");
                     
                     // Details column

@@ -491,3 +491,19 @@ td.contest-cell
 .same-arrow
 {
 }
+
+.data-delta-cell
+{
+  font-size: 0.7em;
+  text-align: center;
+}
+
+.good-delta
+{
+  color: #00AA00;
+}
+
+.bad-delta
+{
+  color: #AA0000;
+}

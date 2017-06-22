@@ -291,6 +291,10 @@ public class History
     {
         return members.values();
     }
+    
+    public HashMap<Integer, Member> getMemberMap() {
+        return members;
+    }
 
     public ArrayList<Poll> getPolls()
     {
