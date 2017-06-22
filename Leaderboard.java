@@ -10,7 +10,7 @@ public class Leaderboard
     public static final int NO_PLACE = -1;
     
     private ArrayList<Member> members;
-    private MemberDataRetriever<?> metric;
+    private MemberDataRetriever metric;
     private boolean is_sorted;
     private History history;
     
@@ -78,7 +78,7 @@ public class Leaderboard
         return members;
     }
     
-    public MemberDataRetriever<?> getMetric() {
+    public MemberDataRetriever getMetric() {
         return metric;
     }
     

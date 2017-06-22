@@ -3,9 +3,9 @@ import java.text.NumberFormat;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class MemberSortPointsSingle implements MemberDataRetriever<Integer>
+public class MemberSortPointsSingle implements MemberDataRetriever
 {
-    public Integer getValue(Member member) {
+    public float getValue(Member member) {
         ArrayList<Entry> list = member.getEntriesWithMostPoints();
         return Member.getMostPointsSingle(list);
     }

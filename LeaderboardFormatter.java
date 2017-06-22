@@ -129,6 +129,7 @@ public class LeaderboardFormatter {
 
                     // Data delta column
                     out.write("<td class='data-delta-cell'>");
+                    out.write(metric.getFormat().format(metric.getValue(member) - metric.getValue(comparison.getHistory().getMemberById(member.getId()))));
                     // out.write(Float.toString(new Float(leaderboard.getMetric().getValue(member)) - new Float(comparison.getMetric().getValue(member))));
                     out.write("</td>");
                     

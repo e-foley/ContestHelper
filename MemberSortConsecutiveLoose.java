@@ -3,9 +3,9 @@ import java.text.NumberFormat;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class MemberSortConsecutiveLoose implements MemberDataRetriever<Float>
+public class MemberSortConsecutiveLoose implements MemberDataRetriever
 {
-    public Float getValue(Member member) {
+    public float getValue(Member member) {
         ArrayList<ArrayList<Entry>> list = member.getEntriesInLongestStreak(false);
         return Member.getLongestStreak(list);
     }

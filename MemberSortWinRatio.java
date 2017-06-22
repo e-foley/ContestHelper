@@ -2,14 +2,14 @@ import java.util.Comparator;
 import java.util.ArrayList;
 import java.text.NumberFormat;
 
-public class MemberSortWinRatio implements MemberDataRetriever<Float>
+public class MemberSortWinRatio implements MemberDataRetriever
 {
     public MemberSortWinRatio(int min_entries) {
         min_entries_ = min_entries;
     }
     
     // Note: this sort of ignores the minimum entry requirement...
-    public Float getValue(Member member) {
+    public float getValue(Member member) {
         return member.getWinRatio();
     }
     

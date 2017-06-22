@@ -136,6 +136,10 @@ public class History
         }
         return null;
     }
+    
+    public Member getMemberById(int id) {
+        return members.get(id);
+    }
 
     public Poll getPollByName(String nameGetting)
     {

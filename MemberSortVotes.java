@@ -2,9 +2,9 @@ import java.util.Comparator;
 import java.util.ArrayList;
 import java.text.NumberFormat;
 
-public class MemberSortVotes implements MemberDataRetriever<Integer>
+public class MemberSortVotes implements MemberDataRetriever
 {
-    public Integer getValue(Member member) {
+    public float getValue(Member member) {
         return member.getTotalVotes();
     }
     

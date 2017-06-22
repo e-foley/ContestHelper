@@ -3,9 +3,9 @@ import java.text.NumberFormat;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class MemberSortConsecutiveStrict implements MemberDataRetriever<Float>
+public class MemberSortConsecutiveStrict implements MemberDataRetriever
 {
-    public Float getValue(Member member) {
+    public float getValue(Member member) {
         ArrayList<ArrayList<Entry>> list = member.getEntriesInLongestStreak(true);
         return Member.getLongestStreak(list);
     }

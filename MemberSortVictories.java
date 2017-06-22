@@ -3,9 +3,9 @@ import java.text.NumberFormat;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class MemberSortVictories implements MemberDataRetriever<Float>
+public class MemberSortVictories implements MemberDataRetriever
 {
-    public Float getValue(Member member) {
+    public float getValue(Member member) {
         return member.getTotalWinningness();
     }
     
