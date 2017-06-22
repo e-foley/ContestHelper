@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class LeaderboardFormatter {
+    public static final boolean SHOW_MEMBER_IDS = false;
     
     public LeaderboardFormatter() {}
 
@@ -118,7 +119,7 @@ public class LeaderboardFormatter {
                     // Name column
                     out.write("<td class='name-cell'>");
                     out.write("<a class='black' href='" + UserProfile.getProfileDropboxURL(member) + "'>");
-                    out.write(member.getMostRecentName() + " (" + member.getId() + ")");
+                    out.write(member.getMostRecentName() + (SHOW_MEMBER_IDS ? " (" + member.getId() + ")" : ""));
                     out.write("</a>");
                     out.write("</td>");
                     
@@ -139,7 +140,7 @@ public class LeaderboardFormatter {
                         } else if (new_value > old_value) {
                             out.write("<span class='good-delta'>+" + metric.getFormat().format(new_value - old_value) + "</span>");
                         } else {
-                            out.write("<span class='bad-delta'>" + metric.getFormat().format(new_value - old_value) + "</span>");  // Same thing, but can format differently...
+                            out.write("<span class='bad-delta'>" + metric.getFormat().format(new_value - old_value) + "</span>");
                         }
                         //out.write(metric.getFormat().format(metric.getValue(member) - metric.getValue(comparison.getHistory().getMemberById(member.getId()))));
                     }
