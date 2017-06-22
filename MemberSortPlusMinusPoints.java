@@ -46,4 +46,8 @@ public class MemberSortPlusMinusPoints implements MemberDataRetriever<Integer>
         }
         return building;
     }
+    
+    public NumberFormat getFormat() {
+        return NumberFormat.getInstance();
+    }
 }

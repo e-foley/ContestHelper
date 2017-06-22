@@ -1,5 +1,6 @@
 import java.util.Comparator;
 import java.util.ArrayList;
+import java.text.NumberFormat;
 
 public class MemberSortEntries implements MemberDataRetriever<Integer>
 {
@@ -44,5 +45,9 @@ public class MemberSortEntries implements MemberDataRetriever<Integer>
             }
         }
         return building;
+    }
+    
+    public NumberFormat getFormat() {
+        return NumberFormat.getInstance();
     }
 }

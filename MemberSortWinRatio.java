@@ -40,5 +40,9 @@ public class MemberSortWinRatio implements MemberDataRetriever<Float>
         return building;
     }
     
+    public NumberFormat getFormat() {
+        return NumberFormat.getInstance();
+    }
+    
     private int min_entries_;
 }

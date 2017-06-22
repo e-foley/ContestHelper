@@ -21,4 +21,8 @@ public class MemberSortNewFormidable implements MemberDataRetriever<Integer>
     {
         return "";
     }
+    
+    public NumberFormat getFormat() {
+        return NumberFormat.getInstance();
+    }
 }

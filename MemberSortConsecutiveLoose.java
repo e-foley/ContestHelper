@@ -1,4 +1,5 @@
 import java.util.Comparator;
+import java.text.NumberFormat;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -80,5 +81,9 @@ public class MemberSortConsecutiveLoose implements MemberDataRetriever<Float>
                 building += "; ";
         }
         return building;
+    }
+    
+    public NumberFormat getFormat() {
+        return new DecimalFormat("#.##");
     }
 }

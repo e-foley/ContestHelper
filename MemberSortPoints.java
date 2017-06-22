@@ -52,4 +52,8 @@ public class MemberSortPoints implements MemberDataRetriever<Integer>
         }
         return building;
     }
+    
+    public NumberFormat getFormat() {
+        return NumberFormat.getInstance();
+    }
 }
