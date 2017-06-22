@@ -137,9 +137,9 @@ public class LeaderboardFormatter {
                         if (new_value == old_value) {
                             // Nothing?
                         } else if (new_value > old_value) {
-                            out.write("(<span class='good-delta'>+" + metric.getFormat().format(new_value - old_value) + "</span>)");
+                            out.write("<span class='good-delta'>+" + metric.getFormat().format(new_value - old_value) + "</span>");
                         } else {
-                            out.write("(<span class='bad-delta'>" + metric.getFormat().format(new_value - old_value) + "</span>)");  // Same thing, but can format differently...
+                            out.write("<span class='bad-delta'>" + metric.getFormat().format(new_value - old_value) + "</span>");  // Same thing, but can format differently...
                         }
                         //out.write(metric.getFormat().format(metric.getValue(member) - metric.getValue(comparison.getHistory().getMemberById(member.getId()))));
                     }

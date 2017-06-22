@@ -229,7 +229,7 @@ td.contest-cell
 
 .delta-cell
 {
-  text-align: left;
+  text-align: center;
 }
 
 .number-cell
@@ -500,10 +500,10 @@ td.contest-cell
 
 .good-delta
 {
-  color: #00AA00;
+  /*color: #00AA00;*/
 }
 
 .bad-delta
 {
-  color: #AA0000;
+  /*color: #AA0000;*/
 }
