@@ -9,10 +9,11 @@ public class Leaderboard
 {
     public static final int NO_PLACE = -1;
     
+    private History history;
     private ArrayList<Member> members;
     private MemberDataRetriever metric;
+    private ArrayList<Comparator<Member>> tiebreakers;
     private boolean is_sorted;
-    private History history;
     
     // TODO: Clone the members_set field so that additions to the list made outside this class don't mess up our assumptions about sorting
     // Follow-up: did we do this when we switched to a HashMap for Members?
@@ -20,11 +21,33 @@ public class Leaderboard
         history = history_set;
         members = new ArrayList<Member>(history_set.getMembers());
         metric = metric_set;
+        tiebreakers = new ArrayList<Comparator<Member>>();
+        is_sorted = false;
+    }
+    
+    public Leaderboard(History history_set, MemberDataRetriever metric_set, Comparator<Member> tiebreaker_set) {
+        history = history_set;
+        members = new ArrayList<Member>(history_set.getMembers());
+        metric = metric_set;
+        tiebreakers = new ArrayList<Comparator<Member>>();
+        tiebreakers.add(tiebreaker_set);
+        is_sorted = false;
+    }
+    
+    public Leaderboard(History history_set, MemberDataRetriever metric_set, ArrayList<Comparator<Member>> tiebreakers_set) {
+        history = history_set;
+        members = new ArrayList<Member>(history_set.getMembers());
+        metric = metric_set;
+        tiebreakers = tiebreakers_set;
         is_sorted = false;
     }
     
     private void sort() {
-        Collections.sort(members, metric);
+        // Compile comparator list.  @TODO: For speed, do this outside of sort() whenever the chief metric or tiebreaking metrics change.
+        ArrayList<Comparator<Member>> comparators = new ArrayList<Comparator<Member>>();
+        comparators.add(metric);  // The "metric" in the constructor is the chief comparator
+        comparators.addAll(tiebreakers);
+        Collections.sort(members, new AggregateSort(comparators));
         is_sorted = true;
     }
     
