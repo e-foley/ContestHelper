@@ -138,7 +138,9 @@ public class LeaderboardFormatter {
                     // Data delta column
                     out.write("<td class='data-delta-cell'>");
                     // Only write a delta if the member existed before.
-                    if (comparison.getHistory().getMemberMap().containsKey(member.getId()) && comparison.getHistory().getMemberMap().get(member.getId()).getTotalEntries() > 0) {
+                    if (comparison.getHistory().getMemberMap().containsKey(member.getId()) &&
+                        comparison.getHistory().getMemberMap().get(member.getId()).getTotalEntries() > 0 &&
+                        comparison.getPlaceOfMember(member.getId()) != Leaderboard.NO_PLACE) {
                         // Record old and new values for future use...
                         float old_value = metric.getValue(comparison.getHistory().getMemberById(member.getId()));
                         float new_value = metric.getValue(member);
