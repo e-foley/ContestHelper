@@ -1,18 +1,16 @@
 import java.util.Comparator;
+import java.text.NumberFormat;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class MemberSortVictories implements MemberDataRetriever
 {
+    public float getValue(Member member) {
+        return member.getTotalWinningness();
+    }
+    
     public int compare(Member m1, Member m2) {
-        int result = new Float(m2.getTotalWinningness()).compareTo(m1.getTotalWinningness());
-        /*if (result == 0)
-            result = (new MemberSortUncertainty()).compare(m1, m2);*/ //not necessary for victories or entries
-        if (result == 0)
-            result = (new MemberSortRecent()).compare(m1, m2);
-        if (result == 0)
-            result = (new MemberSortAlphabetical()).compare(m1, m2);
-        return result;
+        return new Float(m2.getTotalWinningness()).compareTo(m1.getTotalWinningness());
     }
     
     public String getData(Member m)
@@ -41,10 +39,10 @@ public class MemberSortVictories implements MemberDataRetriever
         
         for (int i=0; i<winners.size(); i++)
         {
-            if (linkTopics && winners.get(i).getContest().hasTopic()) // NOTE: The below should strip the A and B designations from multi-thread contests
-                building += ("<a class='green' href='http://www.purezc.net/forums/index.php?showtopic=" + winners.get(i).getContest().getTopic() + "'>#" + winners.get(i).getContest().getName() + "</a>");
+            if (linkTopics && winners.get(i).getPoll().hasTopic()) // NOTE: The below should strip the A and B designations from multi-thread contests
+                building += ("<a class='green' href='http://www.purezc.net/forums/index.php?showtopic=" + winners.get(i).getPoll().getTopic() + "'>#" + winners.get(i).getPoll().getName() + "</a>");
             else
-                building += ("#" + winners.get(i).getContest().getName());
+                building += ("#" + winners.get(i).getPoll().getName());
             if (winners.get(i).getWinningness() < 1.0f)
             {
                 building += " (" + df.format(winners.get(i).getWinningness()) + ")";
@@ -60,5 +58,13 @@ public class MemberSortVictories implements MemberDataRetriever
             }
         }
         return building;
+    }
+    
+    public NumberFormat getFormat() {
+        return new DecimalFormat("#.##");
+    }
+    
+    public boolean qualifies(Member mem) {
+        return true;
     }
 }

@@ -6,7 +6,7 @@ public class Entry
     public static final int AUTO_LOSE = -1;
     
     private Member member;
-    private Contest contest;
+    private Poll poll;
     private String URL;
     private boolean hasURL;
     private int votes;
@@ -22,10 +22,10 @@ public class Entry
     private int plusMinusHeads;
     private boolean plusMinusHeadsAssigned;
     
-    public Entry(Member myMember, Contest myContest, boolean myHasURL, String myURL, boolean myHasVotes, int votesSet, boolean myHasUncertainty, int myOverrideCode, String myNameSubmittedUnder)
+    public Entry(Member myMember, Poll myPoll, boolean myHasURL, String myURL, boolean myHasVotes, int votesSet, boolean myHasUncertainty, int myOverrideCode, String myNameSubmittedUnder)
     {
         member = myMember;
-        contest = myContest;
+        poll = myPoll;
         URL = myURL;
         hasURL = myHasURL;
         votes = votesSet;
@@ -46,9 +46,9 @@ public class Entry
         return member;
     }
     
-    public Contest getContest()
+    public Poll getPoll()
     {
-        return contest;
+        return poll;
     }
     
     public void setMember(Member memberSetting)
@@ -90,7 +90,7 @@ public class Entry
     {
         if (!pointsAssigned)
         {
-            ArrayList<Entry> entries = contest.getEntries();          
+            ArrayList<Entry> entries = poll.getEntries();          
             int pointsNow = votes;
             for (int i=0; i<entries.size(); i++)
             {
@@ -107,7 +107,7 @@ public class Entry
     {
         if (!plusMinusPointsAssigned)
         {
-            ArrayList<Entry> entries = contest.getEntries();          
+            ArrayList<Entry> entries = poll.getEntries();          
             int plusMinusPointsNow = 0;
             for (int i=0; i<entries.size(); i++)
             {
@@ -123,7 +123,7 @@ public class Entry
     {
         if (!plusMinusHeadsAssigned)
         {
-            ArrayList<Entry> entries = contest.getEntries();          
+            ArrayList<Entry> entries = poll.getEntries();          
             int plusMinusHeadsNow = 0;
             for (int i=0; i<entries.size(); i++)
             {
@@ -139,7 +139,7 @@ public class Entry
     public float getWinningness()
     {
         if (isWinner())
-            return (1.0f / contest.getWinners().size());
+            return (1.0f / poll.getWinners().size());
         return 0.0f;
     }
 
@@ -151,7 +151,7 @@ public class Entry
     // This method is fishy... think about it.
     public boolean isWinner()
     {
-        return contest.getWinners().contains(this);
+        return poll.getWinners().contains(this);
     }
     
     public boolean hasURL()

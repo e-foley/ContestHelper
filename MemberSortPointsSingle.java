@@ -1,21 +1,22 @@
 import java.util.Comparator;
+import java.text.NumberFormat;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class MemberSortPointsSingle implements MemberDataRetriever
 {
+    public float getValue(Member member) {
+        ArrayList<Entry> list = member.getEntriesWithMostPoints();
+        return Member.getMostPointsSingle(list);
+    }
+    
     public int compare(Member m1, Member m2) {
         ArrayList<Entry> listOne = m1.getEntriesWithMostPoints();
         ArrayList<Entry> listTwo = m2.getEntriesWithMostPoints();
         int result = new Integer(Member.getMostPointsSingle(listTwo)).compareTo(Member.getMostPointsSingle(listOne));
-        if (result == 0)
+        if (result == 0) {
             result = Member.getNumberOfEntriesWithMostPoints(listTwo) - Member.getNumberOfEntriesWithMostPoints(listOne);
-        /*if (result == 0)
-            result = (new MemberSortUncertainty()).compare(m1, m2);*/ //not necessary for victories or entries
-        if (result == 0)
-            result = (new MemberSortRecent()).compare(m1, m2);
-        if (result == 0)
-            result = (new MemberSortAlphabetical()).compare(m1, m2);
+        }
         return result;
     }
     
@@ -23,12 +24,7 @@ public class MemberSortPointsSingle implements MemberDataRetriever
     {
         ArrayList<Entry> list = m.getEntriesWithMostPoints();
         DecimalFormat df = new DecimalFormat("#.##");
-        
-//         if (Member.getNumberOfEntriesWithMostPoints(list) > 1)
-//             return df.format(Member.getMostPointsSingle(list)) + "×" + Member.getNumberOfEntriesWithMostPoints(list);
-//         else
-            return df.format(Member.getMostPointsSingle(list));
-        //return Member.getNumberOfLongestStreaks(list) + "×" + df.format(Member.getLongestStreak(list));
+        return df.format(Member.getMostPointsSingle(list));
     }
     
     public String getDetails(Member m, boolean linkTopics)
@@ -58,10 +54,10 @@ public class MemberSortPointsSingle implements MemberDataRetriever
 //                 {
 //                     building += (df.format(winners.get(h).get(i).getWinningness()) + " in ");
 //                 }
-            if (linkTopics && winners.get(i).getContest().hasTopic()) // NOTE: The below should strip the A and B designations from multi-thread contests
-                building += ("<a class='green' href='http://www.purezc.net/forums/index.php?showtopic=" + winners.get(i).getContest().getTopic() + "'>#" + winners.get(i).getContest().getName() + "</a>");
+            if (linkTopics && winners.get(i).getPoll().hasTopic()) // NOTE: The below should strip the A and B designations from multi-thread contests
+                building += ("<a class='green' href='http://www.purezc.net/forums/index.php?showtopic=" + winners.get(i).getPoll().getTopic() + "'>#" + winners.get(i).getPoll().getName() + "</a>");
             else
-                building += ("#" + winners.get(i).getContest().getName());
+                building += ("#" + winners.get(i).getPoll().getName());
             if (i < winners.size()-2)
                 building += ", ";
             else if (i == winners.size()-2)
@@ -76,5 +72,13 @@ public class MemberSortPointsSingle implements MemberDataRetriever
 //                 building += "; ";
 //         }
         return building;
+    }
+    
+    public NumberFormat getFormat() {
+        return new DecimalFormat("#.##");
+    }
+    
+    public boolean qualifies(Member mem) {
+        return true;
     }
 }

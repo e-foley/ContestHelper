@@ -47,19 +47,19 @@ abstract class UserProfile
             // Note: this assumes that the entries have been ordered chronologically
             for (int i = entries.size()-1; i >= 0; i--) {
                 Entry ent = entries.get(i);
-                Contest cont = ent.getContest();
+                Poll poll = ent.getPoll();
                 
                 out.write("<div class='picture-large-div'>");
                 if (ent.hasURL()) {
-                    out.write("<img class='picture-large' title='" + ent.getContest().getName() + "' src='" + ent.getURL() + "'/>");
+                    out.write("<img class='picture-large' title='" + ent.getPoll().getName() + "' src='" + ent.getURL() + "'/>");
                 } else {
-                    out.write("<img class='picture-large' title='" + ent.getContest().getName() + "' src='../images/no_image.png'/>");
+                    out.write("<img class='picture-large' title='" + ent.getPoll().getName() + "' src='../images/no_image.png'/>");
                 }
                 out.write("<div class='picture-large-caption'>");
-                if (cont.hasTopic()) {
-                    out.write("<a class='alt' href='" + cont.getURL() + "'>" + cont.getName() + "</a>");
+                if (poll.hasTopic()) {
+                    out.write("<a class='alt' href='" + poll.getURL() + "'>" + poll.getName() + "</a>");
                 } else {
-                    out.write(cont.getName());
+                    out.write(poll.getName());
                 }
                 out.write("</div></div>");
             }

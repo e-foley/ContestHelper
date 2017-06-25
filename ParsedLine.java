@@ -3,8 +3,8 @@ public class ParsedLine
     public boolean isBlank;
     public boolean isComment;
     
-    public boolean hasContestInfo;
-    public String contestName;
+    public boolean hasPollInfo;
+    public String pollName;
     public boolean hasTopicInfo;
     public int topic;
     
@@ -19,17 +19,17 @@ public class ParsedLine
     public int overrideCode;
     public boolean synchronous;
     public boolean hasUncertainty;
-    public boolean isContestNote;
+    public boolean isPollNote;
     public String note;
     
     private static final double URL_DIGITS = 2;
     
-    public ParsedLine(String line, String currentContestName)
+    public ParsedLine(String line, String currentPollName)
     {
         //System.out.println("Starting parse of \"" + line + "\"");
         
         String regexMember = "(\\s+)?;(\\s+)?";   // regular expression to divide associations file
-        String regexContest = "(\\s+)?@(\\s+)?";    // regular expression for the contest number and topic
+        String regexPoll = "(\\s+)?@(\\s+)?";    // regular expression for the poll number and topic
         // Regular expression that divides names and tags.  Note that both [ and ] are treated the same way, so tags
         // don't strictly need to be enclosed by brackets as long as there is at least one present.  For example, the
         // strings "nicklegends[2237]" and "nicklegends[2237" and "nicklegends  ]2237 [" are all treated the same way.
@@ -38,10 +38,10 @@ public class ParsedLine
         
         isBlank = line.equals("");
         isComment = line.startsWith("//");
-        isContestNote = line.startsWith("*");
+        isPollNote = line.startsWith("*");
         
-        hasContestInfo = false;
-        contestName = "";
+        hasPollInfo = false;
+        pollName = "";
         hasTopicInfo = false;
         topic = -1;
         hasMemberInfo = false;
@@ -60,18 +60,18 @@ public class ParsedLine
         if (isBlank || isComment)
             return;
         
-        if (isContestNote) {
+        if (isPollNote) {
             note = line.substring(line.indexOf('*') + 1).trim();
             return;
         }
             
         if (line.startsWith("#") || (synchronous=line.startsWith("&")))
         {
-            splits = line.split(regexContest);
+            splits = line.split(regexPoll);
             if (splits.length >= 1)
             {
-                hasContestInfo = true;
-                contestName = (splits[0].substring(1));  // this will be changed as soon contest names are implemented
+                hasPollInfo = true;
+                pollName = (splits[0].substring(1));  // this will be changed as soon poll names are implemented
             }
             if (splits.length >= 2)
             {
@@ -127,12 +127,12 @@ public class ParsedLine
                 else
                 {
                      // treat as extension
-                     String contestIDString = currentContestName.replaceAll("\\D","");  /** REVIEW ME!!!*/
-                     while (contestIDString.length() < URL_DIGITS)    // note: this check should use a constant
-                        contestIDString = "0" + contestIDString;
+                     String pollIDString = currentPollName.replaceAll("\\D","");  /** REVIEW ME!!!*/
+                     while (pollIDString.length() < URL_DIGITS)    // note: this check should use a constant
+                        pollIDString = "0" + pollIDString;
                      
                     hasURL = true;
-                    URL = "http://sotw.purezc.net/SOTW" + contestIDString + "/" + memberName.replace(" ","%20").replace("'","%27") + "." + splits[1];
+                    URL = "http://sotw.purezc.net/SOTW" + pollIDString + "/" + memberName.replace(" ","%20").replace("'","%27") + "." + splits[1];
                 }
             }
             
@@ -141,11 +141,11 @@ public class ParsedLine
                 voteIndex = 3;
                 hasURL = true;
                 
-                String contestIDString = currentContestName.replaceAll("\\D","");
-                while (contestIDString.length() < URL_DIGITS)    // note: this check should use a constant
-                    contestIDString = "0" + contestIDString;
+                String pollIDString = currentPollName.replaceAll("\\D","");
+                while (pollIDString.length() < URL_DIGITS)    // note: this check should use a constant
+                    pollIDString = "0" + pollIDString;
                 
-                URL = "http://sotw.purezc.net/SOTW" + contestIDString + "/" + splits[1].replace(" ","%20").replace("'","%27") + "." + splits[2];
+                URL = "http://sotw.purezc.net/SOTW" + pollIDString + "/" + splits[1].replace(" ","%20").replace("'","%27") + "." + splits[2];
             }
 
             String voteString = new String();
