@@ -83,38 +83,38 @@ public abstract class Master
             Master.addFileToBuffer("config/leaderboard_header.txt", out, swaps);
             
             LeaderboardFormatter board_format = new LeaderboardFormatter();
-            board_format.addToFile(new Leaderboard(history, new MemberSortVotes()), DELTA, "Most votes (all-time)", "", " vote", " Votes", out, true, true, true, 1);
-            board_format.addToFile(new Leaderboard(history, new MemberSortPoints()), DELTA, "Most points (all-time)", "", " point", " Points", out, true, true, true, 2);
-            board_format.addToFile(new Leaderboard(history, new MemberSortVotesSingle()), DELTA, "Most votes (single contest, by member)", "", " votes", " Votes", out, true, true, true, 3);
-            board_format.addToFile(new Leaderboard(history, new MemberSortPointsSingle()), DELTA, "Most points (single contest, by member)", "", " points", " Points", out, true, true, true, 4);
-            board_format.addToFile(new Leaderboard(history, new MemberSortVictories()), DELTA, "Most victories", "", " victory", " Wins", out, true, true, true, 5);
+            board_format.addToFile(new Leaderboard(history, new MemberSortVotes(), new MemberSortRecent()), DELTA, "Most votes (all-time)", "", " vote", " Votes", out, true, true, true, 1);
+            board_format.addToFile(new Leaderboard(history, new MemberSortPoints(), new MemberSortRecent()), DELTA, "Most points (all-time)", "", " point", " Points", out, true, true, true, 2);
+            board_format.addToFile(new Leaderboard(history, new MemberSortVotesSingle(), new MemberSortRecent()), DELTA, "Most votes (single contest, by member)", "", " votes", " Votes", out, true, true, true, 3);
+            board_format.addToFile(new Leaderboard(history, new MemberSortPointsSingle(), new MemberSortRecent()), DELTA, "Most points (single contest, by member)", "", " points", " Points", out, true, true, true, 4);
+            board_format.addToFile(new Leaderboard(history, new MemberSortVictories(), new MemberSortRecent()), DELTA, "Most victories", "", " victory", " Wins", out, true, true, true, 5);
             // NOTE: "Max entries" list has no details because the same information is available in the gallery.
-            board_format.addToFile(new Leaderboard(history, new MemberSortEntries()), DELTA, "Most participation", "", " entry", " Entries", out, true, false, true, 6);
-            board_format.addToFile(new Leaderboard(history, new MemberSortConsecutiveStrict()), DELTA, "Longest winning streaks (in consecutive contests, by member)", "", " streak", " Streak", out, true, true, true, 7);
-            board_format.addToFile(new Leaderboard(history, new MemberSortConsecutiveLoose()), DELTA, "Longest winning streaks (in consecutive attempts, by member)", "", " streak", " Streak", out, true, true, true, 8);
-            board_format.addToFile(new Leaderboard(history, new MemberSortWinRatio(WIN_RATIO_MIN_ENTRIES)), DELTA, "Best win ratios (minimum " + WIN_RATIO_MIN_ENTRIES + " entries)", "", "", " Ratio", out, true, true, true, 9);
+            board_format.addToFile(new Leaderboard(history, new MemberSortEntries(), new MemberSortRecent()), DELTA, "Most participation", "", " entry", " Entries", out, true, false, true, 6);
+            board_format.addToFile(new Leaderboard(history, new MemberSortConsecutiveStrict(), new MemberSortRecent()), DELTA, "Longest winning streaks (in consecutive contests, by member)", "", " streak", " Streak", out, true, true, true, 7);
+            board_format.addToFile(new Leaderboard(history, new MemberSortConsecutiveLoose(), new MemberSortRecent()), DELTA, "Longest winning streaks (in consecutive attempts, by member)", "", " streak", " Streak", out, true, true, true, 8);
+            board_format.addToFile(new Leaderboard(history, new MemberSortWinRatio(WIN_RATIO_MIN_ENTRIES), new MemberSortRecent()), DELTA, "Best win ratios (minimum " + WIN_RATIO_MIN_ENTRIES + " entries)", "", "", " Ratio", out, true, true, true, 9);
             // Below TEMPORARILY commented out to keep file size under 2 MiB.
-            // board_format.addToFile(new Leaderboard(history, new MemberSortPlusMinusPoints()), DELTA, "Best plus/minus records (head-to-head vote basis)", "", "", " +/- votes", out, true, true, true, 10);
-            // board_format.addToFile(new Leaderboard(history, new MemberSortPlusMinusHeads()), DELTA, "Best plus/minus records (head-to-head victory basis)", "", "", " +/- wins", out, true, true, true, 11);
-            board_format.addToFile(new Leaderboard(history, new MemberSortNewFormidable()), DELTA, "Most formidable opponents", "", "", " Rating", out, true, false, true, 12);
+            // board_format.addToFile(new Leaderboard(history, new MemberSortPlusMinusPoints(), new MemberSortRecent()), DELTA, "Best plus/minus records (head-to-head vote basis)", "", "", " +/- votes", out, true, true, true, 10);
+            // board_format.addToFile(new Leaderboard(history, new MemberSortPlusMinusHeads(), new MemberSortRecent()), DELTA, "Best plus/minus records (head-to-head victory basis)", "", "", " +/- wins", out, true, true, true, 11);
+            board_format.addToFile(new Leaderboard(history, new MemberSortNewFormidable(), new MemberSortRecent()), DELTA, "Most formidable opponents", "", "", " Rating", out, true, false, true, 12);
             Master.addFileToBuffer("config/leaderboard_footer.txt", out, swaps);
             out.close();
             
             fstream = new FileWriter("web/leaderboards-digest" + testText + ".html");
             out = new BufferedWriter(fstream);
             Master.addFileToBuffer("config/leaderboard_header.txt", out, swaps);
-            board_format.addToFile(new Leaderboard(history, new MemberSortVotes()), DELTA, "Most votes (all-time)", "", " vote", " Votes", out, false, false, true, 1, DIGEST_LIST_LENGTH);
-            // board_format.addToFile(new Leaderboard(history, new MemberSortPoints()), DELTA, "Most points (all-time)", "", " point", " Points", out, false, false, true, 2, DIGEST_LIST_LENGTH);
-            board_format.addToFile(new Leaderboard(history, new MemberSortVotesSingle()), DELTA, "Most votes (single contest, by member)", "", " votes", " Votes", out, false, true, true, 3, DIGEST_LIST_LENGTH);
-            // board_format.addToFile(new Leaderboard(history, new MemberSortPointsSingle()), DELTA, "Most points (single contest, by member)", "", " points", " Points", out, false, true, true, 4, DIGEST_LIST_LENGTH);
-            board_format.addToFile(new Leaderboard(history, new MemberSortVictories()), DELTA, "Most victories", "", " victory", " Wins", out, false, false, true, 5, DIGEST_LIST_LENGTH);
-            board_format.addToFile(new Leaderboard(history, new MemberSortEntries()), DELTA, "Most participation", "", " entry", " Entries", out, false, false, true, 6, DIGEST_LIST_LENGTH);
-            // board_format.addToFile(new Leaderboard(history, new MemberSortConsecutiveStrict()), DELTA, "Longest winning streaks (in consecutive contests, by member)", "", " streak", " Streak", out, false, true, true, 7, DIGEST_LIST_LENGTH);
-            // board_format.addToFile(new Leaderboard(history, new MemberSortConsecutiveLoose()), DELTA, "Longest winning streaks (in consecutive attempts, by member)", "", " streak", " Streak", out, false, true, true, 8, DIGEST_LIST_LENGTH);
-            // board_format.addToFile(new Leaderboard(history, new MemberSortWinRatio()), DELTA, "Best win ratios (minimum 5 entries)", "", "", " Ratio", out, false, true, true, 9, DIGEST_LIST_LENGTH);
-            // board_format.addToFile(new Leaderboard(history, new MemberSortPlusMinusPoints()), DELTA, "Best plus/minus records (head-to-head vote basis)", "", "", " +/- votes", out, false, false, true, 10, DIGEST_LIST_LENGTH);
-            // board_format.addToFile(new Leaderboard(history, new MemberSortPlusMinusHeads()), DELTA, "Best plus/minus records (head-to-head victory basis)", "", "", " +/- wins", out, false, false, true, 11, DIGEST_LIST_LENGTH);
-            board_format.addToFile(new Leaderboard(history, new MemberSortNewFormidable()), DELTA, "Most formidable opponents", "", "", " Rating", out, false, false, true, 12, DIGEST_LIST_LENGTH);
+            board_format.addToFile(new Leaderboard(history, new MemberSortVotes(), new MemberSortRecent()), DELTA, "Most votes (all-time)", "", " vote", " Votes", out, false, false, true, 1, DIGEST_LIST_LENGTH);
+            // board_format.addToFile(new Leaderboard(history, new MemberSortPoints(), new MemberSortRecent()), DELTA, "Most points (all-time)", "", " point", " Points", out, false, false, true, 2, DIGEST_LIST_LENGTH);
+            board_format.addToFile(new Leaderboard(history, new MemberSortVotesSingle(), new MemberSortRecent()), DELTA, "Most votes (single contest, by member)", "", " votes", " Votes", out, false, true, true, 3, DIGEST_LIST_LENGTH);
+            // board_format.addToFile(new Leaderboard(history, new MemberSortPointsSingle(), new MemberSortRecent()), DELTA, "Most points (single contest, by member)", "", " points", " Points", out, false, true, true, 4, DIGEST_LIST_LENGTH);
+            board_format.addToFile(new Leaderboard(history, new MemberSortVictories(), new MemberSortRecent()), DELTA, "Most victories", "", " victory", " Wins", out, false, false, true, 5, DIGEST_LIST_LENGTH);
+            board_format.addToFile(new Leaderboard(history, new MemberSortEntries(), new MemberSortRecent()), DELTA, "Most participation", "", " entry", " Entries", out, false, false, true, 6, DIGEST_LIST_LENGTH);
+            // board_format.addToFile(new Leaderboard(history, new MemberSortConsecutiveStrict(), new MemberSortRecent()), DELTA, "Longest winning streaks (in consecutive contests, by member)", "", " streak", " Streak", out, false, true, true, 7, DIGEST_LIST_LENGTH);
+            // board_format.addToFile(new Leaderboard(history, new MemberSortConsecutiveLoose(), new MemberSortRecent()), DELTA, "Longest winning streaks (in consecutive attempts, by member)", "", " streak", " Streak", out, false, true, true, 8, DIGEST_LIST_LENGTH);
+            // board_format.addToFile(new Leaderboard(history, new MemberSortWinRatio(), new MemberSortRecent()), DELTA, "Best win ratios (minimum 5 entries)", "", "", " Ratio", out, false, true, true, 9, DIGEST_LIST_LENGTH);
+            // board_format.addToFile(new Leaderboard(history, new MemberSortPlusMinusPoints(), new MemberSortRecent()), DELTA, "Best plus/minus records (head-to-head vote basis)", "", "", " +/- votes", out, false, false, true, 10, DIGEST_LIST_LENGTH);
+            // board_format.addToFile(new Leaderboard(history, new MemberSortPlusMinusHeads(), new MemberSortRecent()), DELTA, "Best plus/minus records (head-to-head victory basis)", "", "", " +/- wins", out, false, false, true, 11, DIGEST_LIST_LENGTH);
+            board_format.addToFile(new Leaderboard(history, new MemberSortNewFormidable(), new MemberSortRecent()), DELTA, "Most formidable opponents", "", "", " Rating", out, false, false, true, 12, DIGEST_LIST_LENGTH);
             Master.addFileToBuffer("config/leaderboard_footer.txt", out, swaps);
             out.close();
             
