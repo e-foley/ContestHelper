@@ -7,6 +7,8 @@ public class Member
     private ArrayList<Entry> entries;
     private String tag;
     private boolean isTagged;
+    private boolean hasId;
+    private int id;
 
     public Member()
     {
@@ -14,6 +16,16 @@ public class Member
         entries = new ArrayList<Entry>();
         tag = new String();
         isTagged = false;
+    }
+    
+    // Incomplete clone
+    public Member(Member mem) {
+        names = new ArrayList<String>(mem.names);
+        entries = new ArrayList<Entry>(mem.entries);
+        tag = mem.tag;
+        isTagged = mem.isTagged;
+        hasId = mem.hasId;
+        id = mem.id;
     }
     
     public Member(String myName)
@@ -52,6 +64,10 @@ public class Member
     public void addEntry(Entry entryAdding)
     {
         entries.add(entryAdding);
+    }
+    
+    public boolean removeEntry(Entry removing) {
+        return entries.remove(removing);
     }
     
     public void addName(String nameAdding)
@@ -95,6 +111,19 @@ public class Member
     
     public boolean hasTag() {
         return isTagged;
+    }
+    
+    public void setId(int idSetting) {
+        id = idSetting;
+        hasId = true;
+    }
+    
+    public int getId() {
+        return id;
+    }
+    
+    public boolean hasId() {
+        return hasId;
     }
     
     public int getTotalVotes()
@@ -203,7 +232,7 @@ public class Member
             entry = entries.get(i);
             if (entry.getWinningness() > 0.0f) // if a winner...
             {
-                if (!strict || (entry.getContest().getSynch() - lastWinSynch) <= 1)
+                if (!strict || (entry.getPoll().getSynch() - lastWinSynch) <= 1)
                 {
                     current += entry.getWinningness();
                     currentList.add(entry);
@@ -214,7 +243,7 @@ public class Member
                     currentList = new ArrayList<Entry>();
                     currentList.add(entry);
                 }
-                lastWinSynch = entry.getContest().getSynch();
+                lastWinSynch = entry.getPoll().getSynch();
             }
             else // if not a winner
             {
@@ -313,7 +342,7 @@ public class Member
     public int getTotalNumOpponents() {
         int opponent_count = 0;
         for (int i = 0; i < entries.size(); ++i) {
-            opponent_count += (entries.get(i).getContest().numEntries() - 1);
+            opponent_count += (entries.get(i).getPoll().numEntries() - 1);
         }
         return opponent_count;
     }

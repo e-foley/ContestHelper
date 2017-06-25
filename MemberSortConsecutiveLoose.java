@@ -1,21 +1,22 @@
 import java.util.Comparator;
+import java.text.NumberFormat;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class MemberSortConsecutiveLoose implements MemberDataRetriever
 {
+    public float getValue(Member member) {
+        ArrayList<ArrayList<Entry>> list = member.getEntriesInLongestStreak(false);
+        return Member.getLongestStreak(list);
+    }
+    
     public int compare(Member m1, Member m2) {
         ArrayList<ArrayList<Entry>> listOne = m1.getEntriesInLongestStreak(false);
         ArrayList<ArrayList<Entry>> listTwo = m2.getEntriesInLongestStreak(false);
         int result = new Float(Member.getLongestStreak(listTwo)).compareTo(Member.getLongestStreak(listOne));
-        if (result == 0)
+        if (result == 0) {
             result = Member.getNumberOfLongestStreaks(listTwo) - Member.getNumberOfLongestStreaks(listOne);
-        /*if (result == 0)
-            result = (new MemberSortUncertainty()).compare(m1, m2);*/ //not necessary for victories or entries
-        if (result == 0)
-            result = (new MemberSortRecent()).compare(m1, m2);
-        if (result == 0)
-            result = (new MemberSortAlphabetical()).compare(m1, m2);
+        }
         return result;
     }
     
@@ -58,10 +59,10 @@ public class MemberSortConsecutiveLoose implements MemberDataRetriever
 //                 {
 //                     building += (df.format(winners.get(h).get(i).getWinningness()) + " in ");
 //                 }
-                if (linkTopics && winners.get(h).get(i).getContest().hasTopic()) // NOTE: The below should strip the A and B designations from multi-thread contests
-                    building += ("<a class='green' href='http://www.purezc.net/forums/index.php?showtopic=" + winners.get(h).get(i).getContest().getTopic() + "'>#" + winners.get(h).get(i).getContest().getName() + "</a>");
+                if (linkTopics && winners.get(h).get(i).getPoll().hasTopic()) // NOTE: The below should strip the A and B designations from multi-thread contests
+                    building += ("<a class='green' href='http://www.purezc.net/forums/index.php?showtopic=" + winners.get(h).get(i).getPoll().getTopic() + "'>#" + winners.get(h).get(i).getPoll().getName() + "</a>");
                 else
-                    building += ("#" + winners.get(h).get(i).getContest().getName());
+                    building += ("#" + winners.get(h).get(i).getPoll().getName());
                 if (winners.get(h).get(i).getWinningness() < 1.0f)
                 {
                     building += " (" + df.format(winners.get(h).get(i).getWinningness()) + ")";
@@ -80,5 +81,13 @@ public class MemberSortConsecutiveLoose implements MemberDataRetriever
                 building += "; ";
         }
         return building;
+    }
+    
+    public NumberFormat getFormat() {
+        return new DecimalFormat("#.##");
+    }
+    
+    public boolean qualifies(Member mem) {
+        return true;
     }
 }

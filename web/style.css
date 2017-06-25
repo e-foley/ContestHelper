@@ -167,10 +167,6 @@ td.contest-cell
 {
 }
 
-.place-cell
-{
-}
-
 .name-cell
 {
 }
@@ -228,16 +224,18 @@ td.contest-cell
 
 .place-cell
 {
+  text-align: right;
+}
+
+.delta-cell
+{
   text-align: center;
-  //width: 10%;
 }
 
 .number-cell
 {
-  text-align: center;
-  //width: 10%;
+  text-align: right;
 }
-
 
 .performance
 {
@@ -466,4 +464,46 @@ td.contest-cell
 .old-name
 {
   font-size: 0.65em;
+}
+
+.place-delta
+{
+  font-size: 0.7em;
+}
+
+.new-text
+{
+  font-size: 0.85em;
+  color: #0000AA;
+  font-weight: bold;
+}
+
+.gain-arrow
+{
+  color: #00AA00;
+}
+
+.loss-arrow
+{
+  color: #AA0000;
+}
+
+.same-arrow
+{
+}
+
+.data-delta-cell
+{
+  font-size: 0.7em;
+  text-align: center;
+}
+
+.good-delta
+{
+  /*color: #00AA00;*/
+}
+
+.bad-delta
+{
+  /*color: #AA0000;*/
 }

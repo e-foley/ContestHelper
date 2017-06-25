@@ -8,36 +8,36 @@ public class ArchivesGenerator {
     }
 
     public void generate(History history, BufferedWriter out) {
-        generate(history, out, 1, history.getContests().size());
+        generate(history, out, 1, history.getPolls().size());
     }
 
     public void generate(History history, BufferedWriter out, int totalEntriesToShow) {
-        generate(history, out, history.getContests().size() - totalEntriesToShow, history.getContests().size() - 1);
+        generate(history, out, history.getPolls().size() - totalEntriesToShow, history.getPolls().size() - 1);
     }
     
-    public void generate(History history, BufferedWriter out, int contestStart, int contestEnd) {
+    public void generate(History history, BufferedWriter out, int pollStart, int pollEnd) {
         try
         {
             Entry entry;
-            Contest contest;
+            Poll poll;
             boolean isWinner;
             ArrayList<Entry> winners;
             
-            // Big board used to be a table whose cells contained individual contests; now it is just one big cell
+            // Big board used to be a table whose cells contained individual polls; now it is just one big cell
             out.write("<table class='big-board'><tr><td style='text-align: center;'><span>");
             out.newLine();
             int countUp = 0;
-            //for (int i=0; i<contests.size(); i++)
-            for (int i=history.getContests().size()-1; i>=0; i--)
+            //for (int i=0; i<polls.size(); i++)
+            for (int i=history.getPolls().size()-1; i>=0; i--)
             {
-                contest = history.getContests().get(i);
-                if (i >= contestStart && i <= contestEnd)
+                poll = history.getPolls().get(i);
+                if (i >= pollStart && i <= pollEnd)
                 {
-                    winners = contest.getWinners();
+                    winners = poll.getWinners();
                     out.write("<table class='results-table'>");
                     out.newLine();
                     
-                    // If there are no winners in the contest, don't create a cell for the winners' pictures lest we accumulate borders.
+                    // If there are no winners in the poll, don't create a cell for the winners' pictures lest we accumulate borders.
                     if (!winners.isEmpty()) {
                         out.write("<tr><td class='picture-cell' colspan=5>");
                         for (int j=0; j<winners.size(); j++)
@@ -54,13 +54,13 @@ public class ArchivesGenerator {
                         out.newLine();
                     }
 
-                    // Contest title
+                    // Poll title
                     out.write("<tr><td class='contest-title' colspan=5>");
-                    if (contest.hasTopic())
-                        out.write("<a class='contest' href='http://www.purezc.net/forums/index.php?showtopic=" + contest.getTopic() + "'>");
-                    //out.write("(" + contest.getSynch() + ") "); // TEMPORARY!
-                    out.write("Screenshot of the Week " + contest.getName());
-                    if (contest.hasTopic())
+                    if (poll.hasTopic())
+                        out.write("<a class='contest' href='http://www.purezc.net/forums/index.php?showtopic=" + poll.getTopic() + "'>");
+                    //out.write("(" + poll.getSynch() + ") "); // TEMPORARY!
+                    out.write("Screenshot of the Week " + poll.getName());
+                    if (poll.hasTopic())
                         out.write("</a>");
                     out.write("</td></tr>");
                     
@@ -70,9 +70,9 @@ public class ArchivesGenerator {
                     out.write("</td></tr>");
                     out.newLine();
 
-                    for (int j=0; j<history.getContests().get(i).numEntries(); j++)
+                    for (int j=0; j<history.getPolls().get(i).numEntries(); j++)
                     {
-                        entry = contest.getEntryByIndex(j);
+                        entry = poll.getEntryByIndex(j);
                         isWinner = (entry.isWinner());
 
                         if (isWinner)
@@ -92,7 +92,7 @@ public class ArchivesGenerator {
                         // TODO: Rename 'image' class.  It's a holdover from a much older version of the page.
                         out.write("<a class='image' href='" + UserProfile.getProfileDropboxURL(entry.getMember()) + "'>");
                         out.write(entry.getMember().getMostRecentName());
-                        // Add an icon if the shot won the contest
+                        // Add an icon if the shot won the poll
                         if (isWinner) {
                             out.write(" <img class='winnericon' title='Winner!' src='images/star.png'/>");
                         }
@@ -108,9 +108,9 @@ public class ArchivesGenerator {
                         {
                             out.write("<td class='votes'>"+ entry.getVotes() + "</td>");
                             out.write("<td class='percentage'>");
-                            if (contest.numVotes() > 0) {
+                            if (poll.numVotes() > 0) {
                                 DecimalFormat df = new DecimalFormat("##0.00%");
-                                out.write(df.format((double)(entry.getVotes()) / contest.numVotes()));
+                                out.write(df.format((double)(entry.getVotes()) / poll.numVotes()));
                             } else {
                                 out.write("&mdash;");
                             }
@@ -127,26 +127,26 @@ public class ArchivesGenerator {
                     //                     {
                     //                         out.write("<br/>");
                     //                         out.newLine();
-                    //                         out.write("<span class='tie-note'>Screenshot of the Week " + contest.getName() + " ended in a draw.</span>");
+                    //                         out.write("<span class='tie-note'>Screenshot of the Week " + poll.getName() + " ended in a draw.</span>");
                     //                     }
 
                     out.write("<tr class='info-row'><td></td><td class='numentries'>");
-                    out.write(contest.numEntries() + " entr");
-                    if (contest.numEntries() != 1)
+                    out.write(poll.numEntries() + " entr");
+                    if (poll.numEntries() != 1)
                         out.write("ies");
                     else
                         out.write("y");
                     out.write("</td><td class='votes'>");
-                    out.write(""+contest.numVotes());
+                    out.write(""+poll.numVotes());
                     out.write("</td><td>");  // percentage doesn't need a total
                     out.write("</td><td class='points'>");
-                    out.write(""+contest.numPoints());
+                    out.write(""+poll.numPoints());
                     out.write("</td></tr>");
 
-                    if (contest.numNotes() > 0) {
+                    if (poll.numNotes() > 0) {
                         out.write("<tr><td class='contest-notes-cell' colspan=5><ul class='contest-notes-list'>");
-                        for (int j = 0; j < contest.numNotes(); ++j) {
-                            out.write("<li class='contest-notes-item'>" + contest.getNote(j) + "</li>");
+                        for (int j = 0; j < poll.numNotes(); ++j) {
+                            out.write("<li class='poll-notes-item'>" + poll.getNote(j) + "</li>");
                         }
                         out.write("</ul>");
                         out.write("</td></tr>");

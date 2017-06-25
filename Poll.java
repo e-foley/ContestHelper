@@ -1,13 +1,7 @@
 import java.util.ArrayList;
 import java.lang.Math;
 
-/**
- * Write a description of class Member here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-public class Contest
+public class Poll
 {
     public static final int DEFAULT_SYNCH = -1;
     // instance variables - replace the example below with your own
@@ -22,7 +16,7 @@ public class Contest
     /**
      * Constructor for objects of class Member
      */
-    public Contest()
+    public Poll()
     {
         // initialise instance variables
         name = "";
@@ -33,7 +27,7 @@ public class Contest
         notes = new ArrayList<String>();
     }
     
-    public Contest(String myName)
+    public Poll(String myName)
     {
         name = myName;
         entries = new ArrayList<Entry>();
@@ -43,7 +37,7 @@ public class Contest
         notes = new ArrayList<String>();
     }
       
-    public Contest(String myName, int mySynch)
+    public Poll(String myName, int mySynch)
     {
         name = myName;
         entries = new ArrayList<Entry>();
@@ -53,7 +47,7 @@ public class Contest
         notes = new ArrayList<String>();
     }
     
-    public Contest(String myName, boolean myHasTopic, int myTopic)
+    public Poll(String myName, boolean myHasTopic, int myTopic)
     {
         name = myName;
         entries = new ArrayList<Entry>();
@@ -63,7 +57,7 @@ public class Contest
         notes = new ArrayList<String>();
     }
     
-    public Contest(String myName, boolean myHasTopic, int myTopic, int mySynch)
+    public Poll(String myName, boolean myHasTopic, int myTopic, int mySynch)
     {
         name = myName;
         entries = new ArrayList<Entry>();
@@ -169,7 +163,7 @@ public class Contest
     }
     
     /** TERRIBLE, TERRIBLE, SUPER-KLUDGY METHOD. BEWARE. */
-    public float getApparentContestNumber()
+    public float getApparentPollNumber()
     {
         return Float.parseFloat(name.replaceAll("[^0-9.]",""));
     }

@@ -1,18 +1,15 @@
 import java.util.Comparator;
 import java.util.ArrayList;
+import java.text.NumberFormat;
 
 public class MemberSortEntries implements MemberDataRetriever
 {
+    public float getValue(Member member) {
+        return member.getTotalEntries();
+    }
+    
     public int compare(Member m1, Member m2) {
-        int result = new Integer(m2.getTotalEntries()).compareTo(m1.getTotalEntries());
-        /*
-        if (result == 0)
-            result = (new MemberSortUncertainty()).compare(m1, m2);*/ // not necessary for victories or entries
-        if (result == 0)
-            result = (new MemberSortRecent()).compare(m1, m2);
-        if (result == 0)
-            result = (new MemberSortAlphabetical()).compare(m1, m2);
-        return result;
+        return new Integer(m2.getTotalEntries()).compareTo(m1.getTotalEntries());
     }
     
     public String getData(Member m)
@@ -33,10 +30,10 @@ public class MemberSortEntries implements MemberDataRetriever
         
         for (int i=0; i<entries.size(); i++)
         {   // The below will strip contests of their letters in the case of multi-thread contests
-            if (linkTopics && entries.get(i).getContest().hasTopic())
-                building += ("<a class='green' href='http://www.purezc.net/forums/index.php?showtopic=" + entries.get(i).getContest().getTopic() + "'>#" + entries.get(i).getContest().getName() + "</a>");
+            if (linkTopics && entries.get(i).getPoll().hasTopic())
+                building += ("<a class='green' href='http://www.purezc.net/forums/index.php?showtopic=" + entries.get(i).getPoll().getTopic() + "'>#" + entries.get(i).getPoll().getName() + "</a>");
             else
-                building += ("#" + entries.get(i).getContest().getName());
+                building += ("#" + entries.get(i).getPoll().getName());
             if (i < entries.size()-2)
                 building += ", ";
             else if (i == entries.size()-2)
@@ -48,5 +45,13 @@ public class MemberSortEntries implements MemberDataRetriever
             }
         }
         return building;
+    }
+    
+    public NumberFormat getFormat() {
+        return NumberFormat.getInstance();
+    }
+    
+    public boolean qualifies(Member mem) {
+        return true;
     }
 }

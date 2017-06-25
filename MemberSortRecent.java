@@ -22,7 +22,7 @@ public class MemberSortRecent implements Comparator<Member>
             if (entry1 == null && entry2 == null)
                 return 0;
            
-            result = m2.getRecentEntry(offset).getContest().getSynch() - m1.getRecentEntry(offset).getContest().getSynch();
+            result = m2.getRecentEntry(offset).getPoll().getSynch() - m1.getRecentEntry(offset).getPoll().getSynch();
     
             if (result == 0) // i.e. if both members last participated in the same contest
             {
