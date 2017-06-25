@@ -1,6 +1,7 @@
 import java.util.Comparator;
 import java.util.ArrayList;
 import java.text.NumberFormat;
+import java.text.DecimalFormat;
 
 public class MemberSortWinRatio implements MemberDataRetriever
 {
@@ -25,7 +26,7 @@ public class MemberSortWinRatio implements MemberDataRetriever
     
     public String getData(Member m)
     {
-        return ""+NumberFormat.getInstance().format(m.getWinRatio());
+        return getFormat().format(m.getWinRatio());
     }
     
     public String getDetails(Member m, boolean linkTopics)
@@ -41,7 +42,7 @@ public class MemberSortWinRatio implements MemberDataRetriever
     }
     
     public NumberFormat getFormat() {
-        return NumberFormat.getInstance();
+        return new DecimalFormat("0.000");
     }
     
     public boolean qualifies(Member mem) {
