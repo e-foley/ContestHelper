@@ -50,4 +50,8 @@ public class MemberSortPlusMinusPoints implements MemberDataRetriever
     public NumberFormat getFormat() {
         return NumberFormat.getInstance();
     }
+    
+    public boolean qualifies(Member mem) {
+        return true;
+    }
 }

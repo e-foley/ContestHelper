@@ -86,4 +86,8 @@ public class MemberSortConsecutiveStrict implements MemberDataRetriever
     public NumberFormat getFormat() {
         return new DecimalFormat("#.##");
     }
+    
+    public boolean qualifies(Member mem) {
+        return true;
+    }
 }

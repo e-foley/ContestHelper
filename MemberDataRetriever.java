@@ -8,4 +8,5 @@ public interface MemberDataRetriever extends Comparator<Member>
     int compare(Member m1, Member m2);
     String getDetails(Member member, boolean linkTopics);
     NumberFormat getFormat();
+    boolean qualifies(Member mem);
 }

@@ -44,5 +44,9 @@ public class MemberSortWinRatio implements MemberDataRetriever
         return NumberFormat.getInstance();
     }
     
+    public boolean qualifies(Member mem) {
+        return mem.getTotalEntries() >= min_entries_;
+    }
+    
     private int min_entries_;
 }
