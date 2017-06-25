@@ -4203,11 +4203,17 @@ Ecruteak; png; 13
 FireSeraphim; png; 22
 Joelmacool; png; 9
 Alestance; png; 6
-/*
+
 #615 @ 72502
-Eddy; png; 
-Demonlink; png; 
-Avataro; png; 
-TheRock; png; 
-Sheik; png; 
-Alestance; png; 
+Eddy; png; 8
+Demonlink; png; 21
+Avataro; png; 2
+TheRock; png; 1
+Sheik; png; 19
+Alestance; png; 0
+/*
+#616 @ 72552
+Sheik; png; 30
+Anthus; png; 10
+Dimentio; png; 9
+/*
