@@ -89,7 +89,11 @@ public class Leaderboard
             ArrayList<Member> members_at_rank = getMembersAtPlace(p);
             for (int m = 0; m < members_at_rank.size(); ++m) {
                 if (members_at_rank.get(m).getId() == id) {
-                    return p;
+                    if (!metric.qualifies(members_at_rank.get(m))) {
+                        return NO_PLACE;
+                    } else {
+                        return p;
+                    }
                 }
             }
         }

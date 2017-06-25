@@ -62,6 +62,11 @@ public class LeaderboardFormatter {
                 for (int c = 0; c < coplacers.size(); ++c) {
                     Member member = coplacers.get(c);
                     
+                    // Don't print if member is unqualified
+                    if (!leaderboard.getMetric().qualifies(member)) {
+                        continue;
+                    }
+                    
                     out.newLine();
                     out.write("<tr class='");
     
@@ -98,7 +103,9 @@ public class LeaderboardFormatter {
                     out.write("<td class='delta-cell'>");
                     // Figure out if the member has been newly added to the leaderboard by checking if their earliest entry occured after our subhistory end cut-off
                     // TODO: This is a terribly indirect method that would benefit greatly if contests were stored by ID and held their own ID
-                    boolean is_member_new = (member.getEntries().isEmpty() || leaderboard.getHistory().getPolls().indexOf(member.getEntries().get(0).getPoll()) > subhistory_end);
+                    boolean is_member_new = (member.getEntries().isEmpty() ||
+                                             leaderboard.getHistory().getPolls().indexOf(member.getEntries().get(0).getPoll()) > subhistory_end ||
+                                             comparison.getPlaceOfMember(member.getId()) == Leaderboard.NO_PLACE);
                     if (is_member_new) {
                         out.write("<span class='place-delta'><span class='new-text'>NEW</span></span>");
                     } else {
