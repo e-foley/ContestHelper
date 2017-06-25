@@ -29,7 +29,7 @@ public class LeaderboardFormatter {
             else
                 out.write("<div class='leaderboard' style='display: none;' id='" + ID + "_closed'>");
             out.write("<table class='leaderboard-table stunt'><tr class='sort-title'><td>");
-            out.write("<div class='tableheaderright'><a href='javascript:toggle(" + ID + ", 1);'><img src='https://dl.dropboxusercontent.com/u/10663130/PureZC/exp_plus.png' border='0'  alt='Expand' /></a></div>");
+            out.write("<div class='tableheaderright'><a href='javascript:toggle(" + ID + ", 1);'><img src='images/exp_plus.png' border='0'  alt='Expand' /></a></div>");
             out.write("<a class='contest' href='javascript:toggle(" + ID + ", 1);'>" + title + "</a></td></tr></table></div>");
             
             if (hidden)
@@ -44,7 +44,7 @@ public class LeaderboardFormatter {
             else
                 out.write("5>");
 
-            out.write("<div class='tableheaderright'><a href='javascript:toggle(" + ID + ", 0);'><img src='https://dl.dropboxusercontent.com/u/10663130/PureZC/exp_minus.png' border='0'  alt='Collapse' /></a></div>");
+            out.write("<div class='tableheaderright'><a href='javascript:toggle(" + ID + ", 0);'><img src='images/exp_minus.png' border='0'  alt='Collapse' /></a></div>");
             out.write("<a class='contest' href='javascript:toggle(" + ID + ", 0);'>" + title + "</a></td></tr>");
             out.newLine();
             out.write("<tr class='header-row'><td>Rank</td><td>&#177;</td>");
