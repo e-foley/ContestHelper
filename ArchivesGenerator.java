@@ -191,19 +191,19 @@ public class ArchivesGenerator {
             }
             // We can always declare the current page...
             //out.write("<td class='navtable-cell'><span class='current-page'>Page " + current_page + "</span></td>");
-            out.write("<td class='navtable-cell'><label class='page-selector'><select>\n");
+            out.write("<td class='navtable-cell'><div class='page-selector'><label><select>\n");
             // Dropbown
             for (int i = 0; i < num_pages; ++i) {
                 ContestBounds bounds = getPageBounds(history, contests_per_page, i + 1);
                 if (bounds != null) {
                     out.write("<option value='" + (i + 1) + "'");
                     if ((i + 1) == current_page) {
-                        out.write(" default='default'");
+                        out.write(" selected='selected'");
                     }
                     out.write(">Page " + (i + 1) + " (#" + bounds.getStart().getName() + "&ndash;#" + bounds.getEnd().getName() + ")</option>\n");
                 }
             }
-            out.write("</select></label></td>");
+            out.write("</select></label></div></td>");
             // If a next page, create a link to it and the oldest page
             if (current_page < num_pages) {
                 out.write("<td class='navtable-cell'><a class='green' href='archives-page" + (current_page + 1) + ".html'>Older &gt;</a></td>");
