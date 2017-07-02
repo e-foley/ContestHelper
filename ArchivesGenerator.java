@@ -171,7 +171,7 @@ public class ArchivesGenerator {
     }
     
     // In this function, `current_page` is 1-indexed.
-    public void insertNavigationBar(BufferedWriter out, int current_page, int num_pages) {
+    public void insertNavigationBar(BufferedWriter out, History history, int current_page, int num_pages, int contests_per_page) {
         try {
             out.write("<table class='navtable'>");
             out.newLine();
@@ -190,7 +190,20 @@ public class ArchivesGenerator {
                 out.write("<td class='navtable-cell'><a class='green' href='archives-page" + (current_page - 1) + ".html'>&lt; Newer</a></td>");
             }
             // We can always declare the current page...
-            out.write("<td class='navtable-cell'><span class='current-page'>Page " + current_page + "</span></td>");
+            //out.write("<td class='navtable-cell'><span class='current-page'>Page " + current_page + "</span></td>");
+            out.write("<td class='navtable-cell'><label class='page-selector'><select>\n");
+            // Dropbown
+            for (int i = 0; i < num_pages; ++i) {
+                ContestBounds bounds = getPageBounds(history, contests_per_page, i + 1);
+                if (bounds != null) {
+                    out.write("<option value='" + (i + 1) + "'");
+                    if ((i + 1) == current_page) {
+                        out.write(" default='default'");
+                    }
+                    out.write(">Page " + (i + 1) + " (#" + bounds.getStart().getName() + "&ndash;#" + bounds.getEnd().getName() + ")</option>\n");
+                }
+            }
+            out.write("</select></label></td>");
             // If a next page, create a link to it and the oldest page
             if (current_page < num_pages) {
                 out.write("<td class='navtable-cell'><a class='green' href='archives-page" + (current_page + 1) + ".html'>Older &gt;</a></td>");
@@ -203,5 +216,24 @@ public class ArchivesGenerator {
         } catch (Exception e) {
             System.err.println("Error inserting navigation bar...");
         }
+    }
+    
+    ContestBounds getPageBounds(History history, int contests_per_page, int page) {
+        // This method assumes that polls are already sorted within History.
+        // This is also a place where we'll switch from Poll-centricness to Contest-centricness at a later time.
+        if (contests_per_page < 1 || page < 1) {
+            return null;
+        }
+        
+        int total_contests = history.numPolls();
+        int max_page = (total_contests + contests_per_page - 1) / contests_per_page;
+        if (page > max_page) {
+            return null;
+        }
+        
+        int contest_end_index = total_contests - 1 - (page - 1) * contests_per_page;
+        int contest_start_index = Math.max(0, contest_end_index - contests_per_page + 1);
+        
+        return new ContestBounds(history.getPoll(contest_start_index), history.getPoll(contest_end_index));
     }
 }

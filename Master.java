@@ -69,9 +69,9 @@ public abstract class Master
                 fstream = new FileWriter("web/archives-page" + Integer.toString(p + 1) + ".html");
                 out = new BufferedWriter(fstream);
                 Master.addFileToBuffer("config/archives_header.txt", out, swaps);
-                archivesGenerator.insertNavigationBar(out, p + 1, num_pages);
+                archivesGenerator.insertNavigationBar(out, history, p + 1, num_pages, CONTESTS_PER_PAGE);
                 archivesGenerator.generate(history, out, poll_start, poll_end);
-                archivesGenerator.insertNavigationBar(out, p + 1, num_pages);
+                archivesGenerator.insertNavigationBar(out, history, p + 1, num_pages, CONTESTS_PER_PAGE);
                 Master.addFileToBuffer("config/archives_footer.txt", out, swaps);
                 out.close();
                 ++p;
