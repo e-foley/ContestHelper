@@ -128,7 +128,7 @@ abstract class UserProfile
                 out.write("<tr class='member-details-row'><td class='member-details-cell'>" + stat.getTitle() + "</td>");
                 out.write("<td class='member-details-cell'>" + metric.getData(member) + "</td>");
                 out.write("<td class='member-details-cell'>" + leaderboard.getPlaceOfMember(member.getId()) + "/" + leaderboard.countQualifiers() + "</td>");
-                out.write("<td class='member-details-cell details'>" + metric.getDetails(member, true) + "</td></tr>/n");
+                out.write("<td class='member-details-cell details'>" + metric.getDetails(member, true) + "</td></tr>\n");
             }
             
             out.write("</table>\n");
