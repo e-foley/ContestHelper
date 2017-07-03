@@ -63,10 +63,10 @@ abstract class UserProfile
                 } else {
                     out.write(poll.getName());
                 }
-                out.write("</div></div>");
+                out.write("</div></div>\n");
             }
             
-            out.write("</div>");
+            out.write("</div>\n");
             
             Master.addFileToBuffer("config/profile_footer.txt", out, swaps);
             out.close();
