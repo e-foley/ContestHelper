@@ -130,7 +130,7 @@ abstract class UserProfile
                     out.write("<td class='member-details-cell'>" + metric.getData(member) + "</td>");
                     out.write("<td class='member-details-cell'>");
                     int rank = leaderboard.getPlaceOfMember(member.getId());  // 0-indexed!!
-                    out.write(leaderboard.getMembersAtPlace(rank).size() > 1 ? "t-": "");
+                    out.write(leaderboard.getMembersAtPlace(rank).size() > 1 ? "t&#8209;": "");  // Non-breaking hyphen
                     out.write("" + (rank + 1) + "/" + leaderboard.countQualifiers() + "</td>");
                 } else {
                     out.write("<td class='member-details-cell'>N/A</td>");
