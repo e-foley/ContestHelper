@@ -154,7 +154,7 @@ public abstract class Master
             if (generate_user_galleries) {
                 ArrayList<Member> mems = member_list;
                 for (int i=0; i<mems.size(); i++) {
-                    UserProfile.createProfilePage(mems.get(i), false);
+                    UserProfile.createProfilePage(mems.get(i), false, leaderboards_full);
                 }
             }
 

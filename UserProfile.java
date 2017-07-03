@@ -20,7 +20,7 @@ abstract class UserProfile
      * @param  y   a sample parameter for a method
      * @return     the sum of x and y 
      */
-    public static void createProfilePage(Member mem, boolean explicit)
+    public static void createProfilePage(Member mem, boolean explicit, ArrayList<FormattedLeaderboard> stats)
     {
         String recent_name = mem.getMostRecentName();
         //String safe_name = getSafeName(recent_name);
@@ -40,6 +40,8 @@ abstract class UserProfile
             FileWriter fstream = new FileWriter(initial_target);
             BufferedWriter out = new BufferedWriter(fstream);
             Master.addFileToBuffer("config/profile_header.txt", out, swaps);
+            
+            addStatsTableToFile(mem, stats, true, true, out);
             
             out.write("<div class='picture-large-list'>");
             
@@ -112,40 +114,25 @@ abstract class UserProfile
         // return "http://sotw.elfractal.com/profiles/" + getSafeName(mem.getMostRecentName()) + ".html";
     }
     
-    public static void startMemberDetailsTable(Member member, boolean details, BufferedWriter out) {
+    public static void addStatsTableToFile(Member member, ArrayList<FormattedLeaderboard> stats, boolean details, boolean links_in_details, BufferedWriter out) {
         try {
             out.write("<table class='member-details-table'><tr class='member-details-header-row'><td colspan='");
             out.write(details ? "4" : "3");
             out.write("'>" + member.getMostRecentName() + "&rsquo;s stats</td></tr>\n");
             out.write("<tr class='member-details-subheader-row'><td class='member-details-subheader-cell'>Category</td><td class='member-details-subheader-cell'>Value</td><td class='member-details-subheader-cell'>Rank</td><td class='member-details-subheader-cell'>Details</td></tr>\n");
-        } catch (Exception e) {
-            System.err.println("Error: " + e.getMessage());
-        }
-    }
-    
-    public static void endMemberDetailsTable(BufferedWriter out) {
-        try {
+        
+            for (FormattedLeaderboard stat : stats) {
+                Leaderboard leaderboard = stat.getLeaderboard();
+                MemberDataRetriever metric = leaderboard.getMetric();
+                History history = leaderboard.getHistory();
+                out.write("<tr class='member-details-row'><td class='member-details-cell'>" + stat.getTitle() + "</td>");
+                out.write("<td class='member-details-cell'>" + metric.getData(member) + "</td>");
+                out.write("<td class='member-details-cell'>" + leaderboard.getPlaceOfMember(member.getId()) + "/" + leaderboard.countQualifiers() + "</td>");
+                out.write("<td class='member-details-cell details'>" + metric.getDetails(member, true) + "</td></tr>/n");
+            }
+            
             out.write("</table>\n");
         } catch (Exception e) {
-            System.err.println("Error: " + e.getMessage());
-        }
-    }
-        
-    // TODO: Order tied members by most recent entry date (or any other metric we want to use)
-    public static void addMemberDetailsRow(FormattedLeaderboard formatted, Member member, BufferedWriter out, String title, boolean details, boolean linksInDetails) {
-        Leaderboard leaderboard = formatted.getLeaderboard();
-        MemberDataRetriever metric = leaderboard.getMetric();
-        History history = leaderboard.getHistory();
-        
-        try
-        {
-            out.write("<tr class='member-details-row'><td class='member-details-cell'>" + title + "</td>");
-            out.write("<td class='member-details-cell'>" + metric.getData(member) + "</td>");
-            out.write("<td class='member-details-cell'>" + leaderboard.getPlaceOfMember(member.getId()) + "/" + leaderboard.countQualifiers() + "</td>");
-            out.write("<td class='member-details-cell details'>" + metric.getDetails(member, true) + "</td></tr>/n");
-        }
-        catch (Exception e)
-        {
             System.err.println("Error: " + e.getMessage());
         }
     }
