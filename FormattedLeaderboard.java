@@ -22,6 +22,22 @@ public class FormattedLeaderboard {
     public Leaderboard getLeaderboard() {
         return leaderboard_;
     }
+    
+    public String getTitle() {
+        return title_;
+    }
+    
+    public String getPrefix() {
+        return prefix_;
+    }
+    
+    public String getSuffixSingular() {
+        return suffix_singular_;
+    }
+    
+    public String getSuffixPlural() {
+        return suffix_plural_;
+    }
 
     // NOTE: `prefix` is not presently used
     public void addToFile(int delta, BufferedWriter out, boolean hidden, boolean details, boolean linksInDetails, int ID) {
