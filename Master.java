@@ -128,7 +128,7 @@ public abstract class Master
             out = new BufferedWriter(fstream);
             Master.addFileToBuffer("config/leaderboard_header.txt", out, swaps);
             for (int i = 0; i < leaderboards_brief.size(); ++i) {
-                leaderboards_brief.get(i).addToFile(DELTA, out, true, false, false, i + 1, DIGEST_LIST_LENGTH);
+                leaderboards_brief.get(i).addToFile(DELTA, out, false, false, false, i + 1, DIGEST_LIST_LENGTH);
             }
             Master.addFileToBuffer("config/leaderboard_footer.txt", out, swaps);
             out.close();
