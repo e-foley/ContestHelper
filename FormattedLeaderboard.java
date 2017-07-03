@@ -4,18 +4,32 @@ import java.util.ArrayList;
 public class FormattedLeaderboard {
     public static final boolean SHOW_MEMBER_IDS = false;
     
-    public FormattedLeaderboard() {}
+    // TODO: Make not all these public
+    public Leaderboard leaderboard_;
+    public String title_;
+    public String prefix_;
+    public String suffix_singular_;
+    public String suffix_plural_;
+    
+    // NOTE: `prefix` is not presently used
+    public FormattedLeaderboard(Leaderboard leaderboard, String title, String prefix, String suffixSingular, String suffixPlural) {
+        leaderboard_ = leaderboard;
+        title_ = title;
+        prefix_ = prefix;
+        suffix_singular_ = suffixSingular;
+        suffix_plural_ = suffixPlural;
+    }
 
     // NOTE: `prefix` is not presently used
-    public void addToFile(Leaderboard leaderboard, int delta, String title, String prefix, String suffixSingular, String suffixPlural, BufferedWriter out, boolean hidden, boolean details, boolean linksInDetails, int ID) {
-        addToFile(leaderboard, delta, title, prefix, suffixSingular, suffixPlural, out, hidden, details, linksInDetails, ID, Integer.MAX_VALUE);
+    public void addToFile(int delta, BufferedWriter out, boolean hidden, boolean details, boolean linksInDetails, int ID) {
+        addToFile(delta, out, hidden, details, linksInDetails, ID, Integer.MAX_VALUE);
     }
     
     // TODO: Order tied members by most recent entry date (or any other metric we want to use)
-    public void addToFile(Leaderboard leaderboard, int delta, String title, String prefix, String suffixSingular, String suffixPlural, BufferedWriter out, boolean hidden, boolean details, boolean linksInDetails, int ID, int limit) {
-        ArrayList<Member> members = leaderboard.getMembers();
-        MemberDataRetriever metric = leaderboard.getMetric();
-        History history = leaderboard.getHistory();
+    public void addToFile(int delta, BufferedWriter out, boolean hidden, boolean details, boolean linksInDetails, int ID, int limit) {
+        ArrayList<Member> members = leaderboard_.getMembers();
+        MemberDataRetriever metric = leaderboard_.getMetric();
+        History history = leaderboard_.getHistory();
         int subhistory_start = 0;
         int subhistory_end = Math.max(0, history.getPolls().size() - delta - 1);
         Leaderboard comparison = new Leaderboard(history.getSubhistory(subhistory_start, subhistory_end), metric);
@@ -30,7 +44,7 @@ public class FormattedLeaderboard {
                 out.write("<div class='leaderboard' style='display: none;' id='" + ID + "_closed'>");
             out.write("<table class='leaderboard-table stunt'><tr class='sort-title'><td>");
             out.write("<div class='tableheaderright'><a href='javascript:toggle(" + ID + ", 1);'><img src='images/exp_plus.png' border='0'  alt='Expand' /></a></div>");
-            out.write("<a class='contest' href='javascript:toggle(" + ID + ", 1);'>" + title + "</a></td></tr></table></div>");
+            out.write("<a class='contest' href='javascript:toggle(" + ID + ", 1);'>" + title_ + "</a></td></tr></table></div>");
             
             if (hidden)
                 out.write("<div class='leaderboard' style='display: none;' id='" + ID + "_open'>");
@@ -45,10 +59,10 @@ public class FormattedLeaderboard {
                 out.write("5>");
 
             out.write("<div class='tableheaderright'><a href='javascript:toggle(" + ID + ", 0);'><img src='images/exp_minus.png' border='0'  alt='Collapse' /></a></div>");
-            out.write("<a class='contest' href='javascript:toggle(" + ID + ", 0);'>" + title + "</a></td></tr>");
+            out.write("<a class='contest' href='javascript:toggle(" + ID + ", 0);'>" + title_ + "</a></td></tr>");
             out.newLine();
             out.write("<tr class='header-row'><td>Rank</td><td>&#177;</td>");
-            out.write("<td>Name</td><td>" + suffixPlural + "</td><td>&#177;</td>");
+            out.write("<td>Name</td><td>" + suffix_plural_ + "</td><td>&#177;</td>");
             
             if (details)
                 out.write("<td>Details</td>");
@@ -58,12 +72,12 @@ public class FormattedLeaderboard {
             //NOTE: Deciding places really shouldn't be the responsibility of this section... Oh well.
             int p = 0;
             while (p < Math.min(members.size(), limit)) {
-                ArrayList<Member> coplacers = leaderboard.getMembersAtPlace(p);
+                ArrayList<Member> coplacers = leaderboard_.getMembersAtPlace(p);
                 for (int c = 0; c < coplacers.size(); ++c) {
                     Member member = coplacers.get(c);
                     
                     // Don't print if member is unqualified
-                    if (!leaderboard.getMetric().qualifies(member)) {
+                    if (!leaderboard_.getMetric().qualifies(member)) {
                         continue;
                     }
                     
@@ -104,7 +118,7 @@ public class FormattedLeaderboard {
                     // Figure out if the member has been newly added to the leaderboard by checking if their earliest entry occured after our subhistory end cut-off
                     // TODO: This is a terribly indirect method that would benefit greatly if contests were stored by ID and held their own ID
                     boolean is_member_new = (member.getEntries().isEmpty() ||
-                                             leaderboard.getHistory().getPolls().indexOf(member.getEntries().get(0).getPoll()) > subhistory_end ||
+                                             leaderboard_.getHistory().getPolls().indexOf(member.getEntries().get(0).getPoll()) > subhistory_end ||
                                              comparison.getPlaceOfMember(member.getId()) == Leaderboard.NO_PLACE);
                     if (is_member_new) {
                         out.write("<span class='place-delta'><span class='new-text'>NEW</span></span>");
