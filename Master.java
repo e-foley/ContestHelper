@@ -82,7 +82,7 @@ public abstract class Master
             out = new BufferedWriter(fstream);
             Master.addFileToBuffer("config/leaderboard_header.txt", out, swaps);
             
-            LeaderboardFormatter board_format = new LeaderboardFormatter();
+            FormattedLeaderboard board_format = new FormattedLeaderboard();
             board_format.addToFile(new Leaderboard(history, new MemberSortVotes(), new MemberSortRecent()), DELTA, "Most votes (all-time)", "", " vote", " Votes", out, true, true, true, 1);
             board_format.addToFile(new Leaderboard(history, new MemberSortPoints(), new MemberSortRecent()), DELTA, "Most points (all-time)", "", " point", " Points", out, true, true, true, 2);
             board_format.addToFile(new Leaderboard(history, new MemberSortVotesSingle(), new MemberSortRecent()), DELTA, "Most votes (single contest, by member)", "", " votes", " Votes", out, true, true, true, 3);
