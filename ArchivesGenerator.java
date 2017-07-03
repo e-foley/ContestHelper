@@ -191,7 +191,7 @@ public class ArchivesGenerator {
             }
             // We can always declare the current page...
             //out.write("<td class='navtable-cell'><span class='current-page'>Page " + current_page + "</span></td>");
-            out.write("<td class='navtable-cell'><div class='page-selector'><label><select>\n");
+            out.write("<td class='navtable-cell'><div class='page-selector'><label><select onChange='window.location.href=\"archives-page\" + this.value + \".html\"'>\n");
             // Dropbown
             for (int i = 0; i < num_pages; ++i) {
                 ContestBounds bounds = getPageBounds(history, contests_per_page, i + 1);
