@@ -4216,11 +4216,16 @@ Alestance; png; 0
 Sheik; png; 31
 Anthus; png; 11
 Dimentio; png; 10
-/*
-#617 @ 72587
-Sheik; png;
-Shane; png;
-xanadude; png; 
-Dimentio; png; 
-/*
 
+#617 @ 72587
+Sheik; png; 19
+Shane; png; 16
+xanadude; png; 2
+Dimentio; png; 8
+/*
+#618 @ 72629
+xanadude; png; 
+TheRock; png; 
+BigJoe; png; 
+Sheik; png; 
+/*

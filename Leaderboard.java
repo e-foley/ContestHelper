@@ -112,4 +112,14 @@ public class Leaderboard
     public History getHistory() {
         return history;
     }
+    
+    public int countQualifiers() {
+        int count = 0;
+        for (Member member : members) {
+            if (metric.qualifies(member)) {
+                count++;
+            }
+        }
+        return count;
+    }
 }
