@@ -20,7 +20,7 @@ abstract class UserProfile
      * @param  y   a sample parameter for a method
      * @return     the sum of x and y 
      */
-    public static void createProfilePage(Member mem, boolean explicit)
+    public static void createProfilePage(Member mem, boolean explicit, ArrayList<FormattedLeaderboard> stats)
     {
         String recent_name = mem.getMostRecentName();
         //String safe_name = getSafeName(recent_name);
@@ -41,7 +41,9 @@ abstract class UserProfile
             BufferedWriter out = new BufferedWriter(fstream);
             Master.addFileToBuffer("config/profile_header.txt", out, swaps);
             
-            out.write("<div class='picture-large-list'>");
+            addStatsTableToFile(mem, stats, true, true, out);
+            
+            out.write("<div class='picture-large-list'>\n");
             
             ArrayList<Entry> entries = mem.getEntries();
             // Note: this assumes that the entries have been ordered chronologically
@@ -61,10 +63,10 @@ abstract class UserProfile
                 } else {
                     out.write(poll.getName());
                 }
-                out.write("</div></div>");
+                out.write("</div></div>\n");
             }
             
-            out.write("</div>");
+            out.write("</div>\n");
             
             Master.addFileToBuffer("config/profile_footer.txt", out, swaps);
             out.close();
@@ -110,5 +112,36 @@ abstract class UserProfile
     {
         return "profiles/" + getSafeName(mem.getMostRecentName()) + ".html";
         // return "http://sotw.elfractal.com/profiles/" + getSafeName(mem.getMostRecentName()) + ".html";
+    }
+    
+    public static void addStatsTableToFile(Member member, ArrayList<FormattedLeaderboard> stats, boolean details, boolean links_in_details, BufferedWriter out) {
+        try {
+            out.write("<div class='member-details-div'><table class='member-details-table'><tr class='member-details-header-row'><td colspan='");
+            out.write(details ? "4" : "3");
+            out.write("'>" + member.getMostRecentName() + "&rsquo;s stats</td></tr>\n");
+            out.write("<tr class='member-details-subheader-row'><td class='member-details-subheader-cell'>Category</td><td class='member-details-subheader-cell'>Value</td><td class='member-details-subheader-cell'>Rank</td><td class='member-details-subheader-cell'>Details</td></tr>\n");
+        
+            for (FormattedLeaderboard stat : stats) {
+                Leaderboard leaderboard = stat.getLeaderboard();
+                MemberDataRetriever metric = leaderboard.getMetric();
+                History history = leaderboard.getHistory();
+                out.write("<tr class='member-details-row'><td class='member-details-cell category-cell'>" + stat.getContextlessTitle() + "</td>");
+                if (metric.qualifies(member)) {
+                    out.write("<td class='member-details-cell'>" + metric.getData(member) + "</td>");
+                    out.write("<td class='member-details-cell'>");
+                    int rank = leaderboard.getPlaceOfMember(member.getId());  // 0-indexed!!
+                    out.write(leaderboard.getMembersAtPlace(rank).size() > 1 ? "t&#8209;": "");  // Non-breaking hyphen
+                    out.write("" + (rank + 1) + "/" + leaderboard.countQualifiers() + "</td>");
+                } else {
+                    out.write("<td class='member-details-cell'>N/A</td>");
+                    out.write("<td class='member-details-cell'>&#8210;/" + leaderboard.countQualifiers() + "</td>");
+                }
+                out.write("<td class='member-details-cell details'>" + metric.getDetails(member, true) + "</td></tr>\n");
+            }
+            
+            out.write("</table></div>\n");
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+        }
     }
 }
