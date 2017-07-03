@@ -300,6 +300,14 @@ public class History
     {
         return polls;
     }
+    
+    public int numPolls() {
+        return polls.size();
+    }
+    
+    public Poll getPoll(int index) {
+        return polls.get(index);
+    }
 
     public String getLastPollName()
     {

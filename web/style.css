@@ -507,3 +507,11 @@ td.contest-cell
 {
   /*color: #AA0000;*/
 }
+
+.page-selector select
+{
+  color: #000000;
+  background-color: #FFFFFF;
+  font-weight: bold;
+  font-size: 16px;
+}
