@@ -6,14 +6,16 @@ public class FormattedLeaderboard {
     
     private Leaderboard leaderboard_;
     private String title_;
+    private String contextless_title_;
     private String prefix_;
     private String suffix_singular_;
     private String suffix_plural_;
     
     // NOTE: `prefix` is not presently used
-    public FormattedLeaderboard(Leaderboard leaderboard, String title, String prefix, String suffixSingular, String suffixPlural) {
+    public FormattedLeaderboard(Leaderboard leaderboard, String title, String contextless_title, String prefix, String suffixSingular, String suffixPlural) {
         leaderboard_ = leaderboard;
         title_ = title;
+        contextless_title_ = contextless_title;
         prefix_ = prefix;
         suffix_singular_ = suffixSingular;
         suffix_plural_ = suffixPlural;
@@ -25,6 +27,10 @@ public class FormattedLeaderboard {
     
     public String getTitle() {
         return title_;
+    }
+    
+    public String getContextlessTitle() {
+        return contextless_title_;
     }
     
     public String getPrefix() {
