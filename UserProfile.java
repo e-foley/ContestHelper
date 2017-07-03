@@ -126,8 +126,13 @@ abstract class UserProfile
                 MemberDataRetriever metric = leaderboard.getMetric();
                 History history = leaderboard.getHistory();
                 out.write("<tr class='member-details-row'><td class='member-details-cell'>" + stat.getTitle() + "</td>");
-                out.write("<td class='member-details-cell'>" + metric.getData(member) + "</td>");
-                out.write("<td class='member-details-cell'>" + leaderboard.getPlaceOfMember(member.getId()) + "/" + leaderboard.countQualifiers() + "</td>");
+                if (metric.qualifies(member)) {
+                    out.write("<td class='member-details-cell'>" + metric.getData(member) + "</td>");
+                    out.write("<td class='member-details-cell'>" + leaderboard.getPlaceOfMember(member.getId()) + "/" + leaderboard.countQualifiers() + "</td>");
+                } else {
+                    out.write("<td class='member-details-cell'>N/A</td>");
+                    out.write("<td class='member-details-cell'>&#8210;/" + leaderboard.countQualifiers() + "</td>");
+                }
                 out.write("<td class='member-details-cell details'>" + metric.getDetails(member, true) + "</td></tr>\n");
             }
             
