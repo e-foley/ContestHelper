@@ -43,7 +43,7 @@ abstract class UserProfile
             
             addStatsTableToFile(mem, stats, true, true, out);
             
-            out.write("<div class='picture-large-list'>");
+            out.write("<div class='picture-large-list'>\n");
             
             ArrayList<Entry> entries = mem.getEntries();
             // Note: this assumes that the entries have been ordered chronologically
