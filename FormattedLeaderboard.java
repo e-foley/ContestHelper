@@ -4,12 +4,11 @@ import java.util.ArrayList;
 public class FormattedLeaderboard {
     public static final boolean SHOW_MEMBER_IDS = false;
     
-    // TODO: Make not all these public
-    public Leaderboard leaderboard_;
-    public String title_;
-    public String prefix_;
-    public String suffix_singular_;
-    public String suffix_plural_;
+    private Leaderboard leaderboard_;
+    private String title_;
+    private String prefix_;
+    private String suffix_singular_;
+    private String suffix_plural_;
     
     // NOTE: `prefix` is not presently used
     public FormattedLeaderboard(Leaderboard leaderboard, String title, String prefix, String suffixSingular, String suffixPlural) {
@@ -18,6 +17,10 @@ public class FormattedLeaderboard {
         prefix_ = prefix;
         suffix_singular_ = suffixSingular;
         suffix_plural_ = suffixPlural;
+    }
+    
+    public Leaderboard getLeaderboard() {
+        return leaderboard_;
     }
 
     // NOTE: `prefix` is not presently used
@@ -209,8 +212,8 @@ public class FormattedLeaderboard {
     }
         
     // TODO: Order tied members by most recent entry date (or any other metric we want to use)
-    public void addMemberDetailsRow(Leaderboard leaderboard, Member member, /*int delta,*/ String title, String prefix, String suffixSingular, String suffixPlural, BufferedWriter out, /*boolean hidden,*/ boolean details, boolean linksInDetails/*, int ID, int limit*/) {
-        // ArrayList<Member> members = leaderboard.getMembers();
+    public void addMemberDetailsRow(FormattedLeaderboard formatted, Member member, BufferedWriter out, String title, boolean details, boolean linksInDetails) {
+        Leaderboard leaderboard = formatted.getLeaderboard();
         MemberDataRetriever metric = leaderboard.getMetric();
         History history = leaderboard.getHistory();
         //int subhistory_start = 0;
