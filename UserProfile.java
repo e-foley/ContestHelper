@@ -116,7 +116,7 @@ abstract class UserProfile
     
     public static void addStatsTableToFile(Member member, ArrayList<FormattedLeaderboard> stats, boolean details, boolean links_in_details, BufferedWriter out) {
         try {
-            out.write("<table class='member-details-table'><tr class='member-details-header-row'><td colspan='");
+            out.write("<div class='member-details-div'><table class='member-details-table'><tr class='member-details-header-row'><td colspan='");
             out.write(details ? "4" : "3");
             out.write("'>" + member.getMostRecentName() + "&rsquo;s stats</td></tr>\n");
             out.write("<tr class='member-details-subheader-row'><td class='member-details-subheader-cell'>Category</td><td class='member-details-subheader-cell'>Value</td><td class='member-details-subheader-cell'>Rank</td><td class='member-details-subheader-cell'>Details</td></tr>\n");
@@ -131,7 +131,7 @@ abstract class UserProfile
                 out.write("<td class='member-details-cell details'>" + metric.getDetails(member, true) + "</td></tr>\n");
             }
             
-            out.write("</table>\n");
+            out.write("</table></div>\n");
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
         }
