@@ -10,12 +10,17 @@ public class Member
     private boolean hasId;
     private int id;
 
+    private boolean dirty;  // Whether stats need to be calculated anew
+    
     public Member()
     {
         names = new ArrayList<String>();
         entries = new ArrayList<Entry>();
         tag = new String();
         isTagged = false;
+        hasId = false;
+        id = 0;
+        dirty = true;
     }
     
     // Incomplete clone
@@ -26,6 +31,7 @@ public class Member
         isTagged = mem.isTagged;
         hasId = mem.hasId;
         id = mem.id;
+        dirty = true;  // MAYBE this can be mem.dirty, but I don't want to risk it.
     }
     
     public Member(String myName)
@@ -35,6 +41,9 @@ public class Member
         entries = new ArrayList<Entry>();
         tag = new String();
         isTagged = false;
+        hasId = false;
+        id = 0;
+        dirty = true;
     }
     
     public Member(String myTag, String myName)
@@ -44,6 +53,9 @@ public class Member
         entries = new ArrayList<Entry>();
         tag = myTag;
         isTagged = true;
+        hasId = false;
+        id = 0;
+        dirty = true;
     }
     
     public Member(ArrayList<String> myNames)
@@ -52,6 +64,9 @@ public class Member
         entries = new ArrayList<Entry>();
         tag = new String();
         isTagged = false;
+        hasId = false;
+        id = 0;
+        dirty = true;
     }
     
     public Member(String myTag, ArrayList<String> myNames) {
@@ -59,6 +74,9 @@ public class Member
         entries = new ArrayList<Entry>();
         tag = myTag;
         isTagged = true;
+        hasId = false;
+        id = 0;
+        dirty = true;
     }
 
     public void addEntry(Entry entryAdding)
