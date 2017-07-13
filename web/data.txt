@@ -4222,10 +4222,16 @@ Sheik; png; 19
 Shane; png; 16
 xanadude; png; 2
 Dimentio; png; 8
-/*
+
 #618 @ 72629
-xanadude; png; 
+xanadude; png; 6
+TheRock; png; 6
+BigJoe; png; 2
+Sheik; png; 35
+/*
+#619 @ 72657
 TheRock; png; 
-BigJoe; png; 
 Sheik; png; 
+Russ; png; 
+xanadude; png; 
 /*
