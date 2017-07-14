@@ -67,7 +67,7 @@ public abstract class Master
             Master.addFileToBuffer("config/archives_header.txt", out, swaps);
             stamps.add(new NamedStamp("Generating archives"));
             archivesGenerator.generate(history, out);
-            stamps.add(new NamedStamp("Done generating archives"));
+            stamps.add(new NamedStamp("Writing archives"));
             Master.addFileToBuffer("config/archives_footer.txt", out, swaps);
             out.close();
             stamps.add(new NamedStamp("Done writing archives"));
@@ -135,7 +135,7 @@ public abstract class Master
             out = new BufferedWriter(fstream);
             Master.addFileToBuffer("config/leaderboard_header.txt", out, swaps);
             for (int i = 0; i < leaderboards_full.size(); ++i) {
-                stamps.add(new NamedStamp("Leaderboard category index " + i));
+                stamps.add(new NamedStamp("Leaderboard: " + leaderboards_full.get(i).getTitle()));
                 leaderboards_full.get(i).addToFile(DELTA, out, true, false, false, i + 1);
             }
             Master.addFileToBuffer("config/leaderboard_footer.txt", out, swaps);
@@ -185,9 +185,12 @@ public abstract class Master
             
             if (!stamps.isEmpty()) {
                 long start = stamps.get(0).getStamp();
-                System.out.println("0\tN/A\t" + stamps.get(0).getName());
-                for (int i = 1; i < stamps.size(); ++i) {
-                    System.out.println("" + (stamps.get(i).getStamp() - start) + "\t" + (stamps.get(i).getStamp() - stamps.get(i-1).getStamp()) + "\t" + stamps.get(i).getName());
+                for (int i = 0; i < stamps.size(); ++i) {
+                    if (i < stamps.size() - 1) {
+                        System.out.println("" + (stamps.get(i).getStamp() - start) + "\t" + (stamps.get(i+1).getStamp() - stamps.get(i).getStamp()) + "\t" + stamps.get(i).getName());
+                    } else {
+                        System.out.println("" + (stamps.get(i).getStamp() - start) + "\tN/A\t" + stamps.get(i).getName());
+                    }
                 }
             }
         }
