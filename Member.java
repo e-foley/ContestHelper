@@ -11,11 +11,16 @@ public class Member
     private int id;
 
     private boolean dirty;  // Whether stats need to be calculated anew.  We COULD change this to do dirty flags for each stat, maybe with a fancy class...
+    private int stage = 0;
     private int total_votes = 0;
     private int total_points = 0;
     private int total_plus_minus_points = 0;
     private int total_plus_minus_heads = 0;
     private float total_winningness = 0.0f;
+    private ArrayList<ArrayList<Entry>> winning_streak_loose = new ArrayList<ArrayList<Entry>>();
+    private ArrayList<ArrayList<Entry>> winning_streak_strict = new ArrayList<ArrayList<Entry>>();
+    private float longest_streak_loose = 0.0f;
+    private float longest_streak_strict = 0.0f;
     
     public Member()
     {
@@ -88,11 +93,13 @@ public class Member
     {
         entries.add(entryAdding);
         dirty = true;  // Adding an entry invalidates any cached stats.
+        stage = 0;
     }
     
     public boolean removeEntry(Entry removing) {
         if (entries.remove(removing)) {
             dirty = true;
+            stage = 0;
             return true;
         }
         return false;
@@ -255,13 +262,20 @@ public class Member
         return false;
     }
     
-    public static int getNumberOfLongestStreaks(ArrayList<ArrayList<Entry>> list)
-    {
-        return list.size();
+    public int getNumberOfLongestStreaks(boolean strict) {
+        refreshStats();
+        return strict ? winning_streak_strict.size() : winning_streak_loose.size();
     }
     
-    public static float getLongestStreak(ArrayList<ArrayList<Entry>> list)
+    public float getLongestStreak(boolean strict) {
+        refreshStats();
+        return strict ? longest_streak_strict : longest_streak_loose;
+    }
+    
+    private float calcLongestStreak(boolean strict)
     {
+        ArrayList<ArrayList<Entry>> list = getEntriesInLongestStreak(strict);
+        
         if (list.size() <= 0)
             return 0.0f;
             
@@ -271,7 +285,12 @@ public class Member
         return sum;
     }
     
-    public ArrayList<ArrayList<Entry>> getEntriesInLongestStreak(boolean strict)
+    public ArrayList<ArrayList<Entry>> getEntriesInLongestStreak(boolean strict) {
+        refreshStats();
+        return strict ? winning_streak_strict : winning_streak_loose;
+    }
+    
+    private ArrayList<ArrayList<Entry>> calcEntriesInLongestStreak(boolean strict)
     {
         //System.out.println("Getting for member " + getMostRecentName());
         float current = 0.0f;
@@ -410,14 +429,23 @@ public class Member
             return;
         }
         
-        // Update all the stats at once.
-        total_votes = calcTotalVotes();
-        total_points = calcTotalPoints();
-        total_plus_minus_points = calcTotalPlusMinusPoints();
-        total_plus_minus_heads = calcTotalPlusMinusHeads();
-        total_winningness = calcTotalWinningness();
-        
-        // We're up to date!
-        dirty = false;
+        if (stage == 1) {
+            winning_streak_strict = getEntriesInLongestStreak(true);
+            winning_streak_loose = getEntriesInLongestStreak(false);
+            longest_streak_strict = getLongestStreak(true);
+            longest_streak_loose = getLongestStreak(false);
+            // We're up to date!
+            dirty = false;
+            stage = 0;
+        } else if (stage == 0) {
+            // Update all fundamental stats
+            total_votes = calcTotalVotes();
+            total_points = calcTotalPoints();
+            total_plus_minus_points = calcTotalPlusMinusPoints();
+            total_plus_minus_heads = calcTotalPlusMinusHeads();
+            total_winningness = calcTotalWinningness();
+            stage = 1;
+            refreshStats();
+        }
     } 
 }

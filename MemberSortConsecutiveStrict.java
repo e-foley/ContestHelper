@@ -6,29 +6,26 @@ import java.util.ArrayList;
 public class MemberSortConsecutiveStrict implements MemberDataRetriever
 {
     public float getValue(Member member) {
-        ArrayList<ArrayList<Entry>> list = member.getEntriesInLongestStreak(true);
-        return Member.getLongestStreak(list);
+        return member.getLongestStreak(true);
     }
     
     public int compare(Member m1, Member m2) {
-        ArrayList<ArrayList<Entry>> listOne = m1.getEntriesInLongestStreak(true);
-        ArrayList<ArrayList<Entry>> listTwo = m2.getEntriesInLongestStreak(true);
-        int result = new Float(Member.getLongestStreak(listTwo)).compareTo(Member.getLongestStreak(listOne));
+        int result = new Float(m2.getLongestStreak(true)).compareTo(m1.getLongestStreak(true));
         if (result == 0) {
-            result = Member.getNumberOfLongestStreaks(listTwo) - Member.getNumberOfLongestStreaks(listOne);
+            result = m2.getNumberOfLongestStreaks(true) - m1.getNumberOfLongestStreaks(true);
         }
         return result;
     }
     
     public String getData(Member m)
     {
-        ArrayList<ArrayList<Entry>> list = m.getEntriesInLongestStreak(true);
+        // ArrayList<ArrayList<Entry>> list = m.getEntriesInLongestStreak(true);
         DecimalFormat df = new DecimalFormat("#.##");
         
         //if (Member.getNumberOfLongestStreaks(list) > 1)
             //return df.format(Member.getLongestStreak(list)) + "×" + Member.getNumberOfLongestStreaks(list);
         //else
-            return df.format(Member.getLongestStreak(list));
+            return df.format(m.getLongestStreak(true));
         //return Member.getNumberOfLongestStreaks(list) + "×" + df.format(Member.getLongestStreak(list));
     }
     
