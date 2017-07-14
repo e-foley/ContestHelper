@@ -10,7 +10,11 @@ public class Member
     private boolean hasId;
     private int id;
 
-    private boolean dirty;  // Whether stats need to be calculated anew
+    private boolean dirty;  // Whether stats need to be calculated anew.  We COULD change this to do dirty flags for each stat, maybe with a fancy class...
+    private int total_votes = 0;
+    private int total_points = 0;
+    private int total_plus_minus_points = 0;
+    private int total_plus_minus_heads = 0;
     
     public Member()
     {
@@ -82,10 +86,15 @@ public class Member
     public void addEntry(Entry entryAdding)
     {
         entries.add(entryAdding);
+        dirty = true;  // Adding an entry invalidates any cached stats.
     }
     
     public boolean removeEntry(Entry removing) {
-        return entries.remove(removing);
+        if (entries.remove(removing)) {
+            dirty = true;
+            return true;
+        }
+        return false;
     }
     
     public void addName(String nameAdding)
@@ -144,7 +153,12 @@ public class Member
         return hasId;
     }
     
-    public int getTotalVotes()
+    public int getTotalVotes() {
+        refreshStats();
+        return total_votes;
+    }
+    
+    private int calcTotalVotes()
     {
         int sum = 0;
         for (int i=0; i<entries.size(); i++)
@@ -154,7 +168,12 @@ public class Member
         return sum;
     }
     
-    public int getTotalPoints()
+    public int getTotalPoints() {
+        refreshStats();
+        return total_points;
+    }
+    
+    private int calcTotalPoints()
     {
         int sum = 0;
         for (int i=0; i<entries.size(); i++)
@@ -164,7 +183,12 @@ public class Member
         return sum;
     }
     
-    public int getTotalPlusMinusPoints()
+    public int getTotalPlusMinusPoints() {
+        refreshStats();
+        return total_plus_minus_points;
+    }
+    
+    private int calcTotalPlusMinusPoints()
     {
         int sum = 0;
         for (int i=0; i<entries.size(); i++)
@@ -174,7 +198,12 @@ public class Member
         return sum;
     }
     
-    public int getTotalPlusMinusHeads()
+    public int getTotalPlusMinusHeads() {
+        refreshStats();
+        return total_plus_minus_heads;
+    }
+    
+    private int calcTotalPlusMinusHeads()
     {
         int sum = 0;
         for (int i=0; i<entries.size(); i++)
@@ -368,4 +397,20 @@ public class Member
     public int getNewFormidableRating() {
         return Math.round(5000.0f + 5000.0f * getTotalPlusMinusHeads() / (getTotalNumOpponents() + 10));
     }
+    
+    private void refreshStats() {
+        if (!dirty) {
+            // If we're up-to-date, there's no need to calculate.
+            return;
+        }
+        
+        // Update all the stats at once.
+        total_votes = calcTotalVotes();
+        total_points = calcTotalPoints();
+        total_plus_minus_points = calcTotalPlusMinusPoints();
+        total_plus_minus_heads = calcTotalPlusMinusHeads();
+        
+        // We're up to date!
+        dirty = false;
+    } 
 }
