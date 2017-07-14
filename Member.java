@@ -15,6 +15,7 @@ public class Member
     private int total_points = 0;
     private int total_plus_minus_points = 0;
     private int total_plus_minus_heads = 0;
+    private float total_winningness = 0.0f;
     
     public Member()
     {
@@ -218,7 +219,12 @@ public class Member
         return entries.size();
     }
     
-    public float getTotalWinningness()
+    public float getTotalWinningness() {
+        refreshStats();
+        return total_winningness;
+    }
+    
+    private float calcTotalWinningness()
     {
         float sum = 0;
         for (int i=0; i<entries.size(); i++)
@@ -409,6 +415,7 @@ public class Member
         total_points = calcTotalPoints();
         total_plus_minus_points = calcTotalPlusMinusPoints();
         total_plus_minus_heads = calcTotalPlusMinusHeads();
+        total_winningness = calcTotalWinningness();
         
         // We're up to date!
         dirty = false;
