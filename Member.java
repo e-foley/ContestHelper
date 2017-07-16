@@ -11,7 +11,6 @@ public class Member
     private int id;
 
     private boolean dirty;  // Whether stats need to be calculated anew.  We COULD change this to do dirty flags for each stat, maybe with a fancy class...
-    private int stage = 0;
     private int total_votes = 0;
     private int total_points = 0;
     private int total_plus_minus_points = 0;
@@ -21,6 +20,7 @@ public class Member
     private ArrayList<ArrayList<Entry>> winning_streak_strict = new ArrayList<ArrayList<Entry>>();
     private float longest_streak_loose = 0.0f;
     private float longest_streak_strict = 0.0f;
+    private int formidable_rating = 0;
     
     public Member()
     {
@@ -93,13 +93,11 @@ public class Member
     {
         entries.add(entryAdding);
         dirty = true;  // Adding an entry invalidates any cached stats.
-        stage = 0;
     }
     
     public boolean removeEntry(Entry removing) {
         if (entries.remove(removing)) {
             dirty = true;
-            stage = 0;
             return true;
         }
         return false;
@@ -274,7 +272,8 @@ public class Member
     
     private float calcLongestStreak(boolean strict)
     {
-        ArrayList<ArrayList<Entry>> list = getEntriesInLongestStreak(strict);
+        //ArrayList<ArrayList<Entry>> list = getEntriesInLongestStreak(strict);
+        ArrayList<ArrayList<Entry>> list = calcEntriesInLongestStreak(strict);  // IS IT PROPER TO FORCE A CALCULATION HERE VIA CALC?
         
         if (list.size() <= 0)
             return 0.0f;
@@ -420,7 +419,13 @@ public class Member
     }
     
     public int getNewFormidableRating() {
-        return Math.round(5000.0f + 5000.0f * getTotalPlusMinusHeads() / (getTotalNumOpponents() + 10));
+        refreshStats();
+        return formidable_rating;
+    }
+    
+    public int calcNewFormidableRating() {
+        // TODO: Just calcLongestStreak, don't use 'calc' here.  Instead, cache results individually, since work is done twice!
+        return Math.round(5000.0f + 5000.0f * calcTotalPlusMinusHeads() / (getTotalNumOpponents() + 10));
     }
     
     private void refreshStats() {
@@ -429,23 +434,18 @@ public class Member
             return;
         }
         
-        if (stage == 1) {
-            winning_streak_strict = getEntriesInLongestStreak(true);
-            winning_streak_loose = getEntriesInLongestStreak(false);
-            longest_streak_strict = getLongestStreak(true);
-            longest_streak_loose = getLongestStreak(false);
-            // We're up to date!
-            dirty = false;
-            stage = 0;
-        } else if (stage == 0) {
-            // Update all fundamental stats
-            total_votes = calcTotalVotes();
-            total_points = calcTotalPoints();
-            total_plus_minus_points = calcTotalPlusMinusPoints();
-            total_plus_minus_heads = calcTotalPlusMinusHeads();
-            total_winningness = calcTotalWinningness();
-            stage = 1;
-            refreshStats();
-        }
+        // Update all fundamental stats
+        total_votes = calcTotalVotes();
+        total_points = calcTotalPoints();
+        total_plus_minus_points = calcTotalPlusMinusPoints();
+        total_plus_minus_heads = calcTotalPlusMinusHeads();
+        total_winningness = calcTotalWinningness();
+        winning_streak_strict = calcEntriesInLongestStreak(true);
+        winning_streak_loose = calcEntriesInLongestStreak(false);
+        longest_streak_strict = calcLongestStreak(true);
+        longest_streak_loose = calcLongestStreak(false);
+        formidable_rating = calcNewFormidableRating();
+        // We're up to date!
+        dirty = false;
     } 
 }
