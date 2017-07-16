@@ -19,14 +19,13 @@ public class MemberSortConsecutiveLoose implements MemberDataRetriever
     
     public String getData(Member m)
     {
-        // ArrayList<ArrayList<Entry>> list = m.getEntriesInLongestStreak(false);
         DecimalFormat df = new DecimalFormat("#.##");
         
-//         if (Member.getNumberOfLongestStreaks(list) > 1)
-//             return df.format(Member.getLongestStreak(list)) + "×" + Member.getNumberOfLongestStreaks(list);
-//         else
+        if (m.getNumberOfLongestStreaks(false) > 1) {
+            return "(" + m.getNumberOfLongestStreaks(false) + "&times;)&nbsp;" + df.format(m.getLongestStreak(false));
+        } else {
             return df.format(m.getLongestStreak(false));
-        //return Member.getNumberOfLongestStreaks(list) + "×" + df.format(Member.getLongestStreak(list));
+        }
     }
     
     public String getDetails(Member m, boolean linkTopics)

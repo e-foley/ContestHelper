@@ -19,14 +19,13 @@ public class MemberSortConsecutiveStrict implements MemberDataRetriever
     
     public String getData(Member m)
     {
-        // ArrayList<ArrayList<Entry>> list = m.getEntriesInLongestStreak(true);
         DecimalFormat df = new DecimalFormat("#.##");
         
-        //if (Member.getNumberOfLongestStreaks(list) > 1)
-            //return df.format(Member.getLongestStreak(list)) + "×" + Member.getNumberOfLongestStreaks(list);
-        //else
+        if (m.getNumberOfLongestStreaks(true) > 1) {
+            return "(" + m.getNumberOfLongestStreaks(true) + "&times;)&nbsp;" + df.format(m.getLongestStreak(true));
+        } else {
             return df.format(m.getLongestStreak(true));
-        //return Member.getNumberOfLongestStreaks(list) + "×" + df.format(Member.getLongestStreak(list));
+        }
     }
     
     public String getDetails(Member m, boolean linkTopics)
