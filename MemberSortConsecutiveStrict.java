@@ -22,7 +22,7 @@ public class MemberSortConsecutiveStrict implements MemberDataRetriever
         DecimalFormat df = new DecimalFormat("#.##");
         
         if (m.getNumberOfLongestStreaks(true) > 1) {
-            return "(" + m.getNumberOfLongestStreaks(true) + "&times;) " + df.format(m.getLongestStreak(true));
+            return "(" + m.getNumberOfLongestStreaks(true) + "&times;)&nbsp;" + df.format(m.getLongestStreak(true));
         } else {
             return df.format(m.getLongestStreak(true));
         }

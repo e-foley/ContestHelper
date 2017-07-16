@@ -22,7 +22,7 @@ public class MemberSortConsecutiveLoose implements MemberDataRetriever
         DecimalFormat df = new DecimalFormat("#.##");
         
         if (m.getNumberOfLongestStreaks(false) > 1) {
-            return "(" + m.getNumberOfLongestStreaks(false) + "&times;) " + df.format(m.getLongestStreak(false));
+            return "(" + m.getNumberOfLongestStreaks(false) + "&times;)&nbsp;" + df.format(m.getLongestStreak(false));
         } else {
             return df.format(m.getLongestStreak(false));
         }
