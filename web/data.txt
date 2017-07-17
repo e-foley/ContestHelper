@@ -4228,10 +4228,16 @@ xanadude; png; 6
 TheRock; png; 6
 BigJoe; png; 2
 Sheik; png; 35
-/*
+
 #619 @ 72657
-TheRock; png; 
+TheRock; png; 0
+Sheik; png; 39
+Russ; png; 9
+xanadude; png; 2
+/*
+#620 @ 72695
+Avataro; png; 
+Jared; png; 
 Sheik; png; 
 Russ; png; 
-xanadude; png; 
 /*

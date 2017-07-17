@@ -18,6 +18,9 @@ public abstract class Master
     
     public static void main(String[] args)
     {
+        ArrayList<NamedStamp> stamps = new ArrayList<NamedStamp>();
+        stamps.add(new NamedStamp("Begin"));
+        
         String testText;
         
         testText = "";
@@ -30,11 +33,15 @@ public abstract class Master
         History history = new History();
         ArchivesGenerator archivesGenerator = new ArchivesGenerator();
         String strLine = new String();
+        
+        stamps.add(new NamedStamp("Populating members"));
         if (!history.populateMembersFromFile("web/associations.txt"))
         {
             JOptionPane.showMessageDialog(null, "Error while parsing associations.txt.\nPerhaps data aren't delimited correctly.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        
+        stamps.add(new NamedStamp("Populating entries"));
         if (!history.populateEntriesFromFile("web/data.txt"))
         {
             JOptionPane.showMessageDialog(null, "Error while parsing data.txt.\nPerhaps data aren't delimited correctly or a numeric value is misplaced.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -47,22 +54,28 @@ public abstract class Master
         String[][] swaps = new String[][] {{"###",""+history.getLastPollName()}};
         
         try
-        {        
+        {
+            stamps.add(new NamedStamp("Copying input files"));
             // make backups of input
             Master.copyFile(new File("web/data.txt"),new File("backup/data-" + history.getLastPollName() + ".txt"));
             Master.copyFile(new File("web/associations.txt"),new File("backup/associations-" + history.getLastPollName() + ".txt"));
             
             // ARCHIVES
+            stamps.add(new NamedStamp("Preparing archive generation"));
             fstream = new FileWriter("web/archives" + testText + ".html");
             out = new BufferedWriter(fstream);
             Master.addFileToBuffer("config/archives_header.txt", out, swaps);
+            stamps.add(new NamedStamp("Generating archives"));
             archivesGenerator.generate(history, out);
+            stamps.add(new NamedStamp("Writing archives"));
             Master.addFileToBuffer("config/archives_footer.txt", out, swaps);
             out.close();
-
+            stamps.add(new NamedStamp("Done writing archives"));
+            
             final int num_polls = history.getPolls().size();
             final int num_pages = (num_polls + CONTESTS_PER_PAGE - 1) / CONTESTS_PER_PAGE;
             int p = 0;  // Page index.  Page number for URLs is one greater than this.
+            stamps.add(new NamedStamp("Beginning individual archives pages"));
             for (int e = num_polls - 1; e >= 0; e -= CONTESTS_PER_PAGE) {
                 final int poll_end = e;
                 final int poll_start = Math.max(poll_end - CONTESTS_PER_PAGE + 1, 0);
@@ -79,6 +92,7 @@ public abstract class Master
 
             // LEADERBOARD
             // Define all boards
+            stamps.add(new NamedStamp("Defining leaderboards"));
             FormattedLeaderboard votes_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortVotes(), new MemberSortRecent()), "Most votes (all-time)", "Total votes", "", " vote", " Votes");
             FormattedLeaderboard points_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortPoints(), new MemberSortRecent()), "Most points (all-time)", "Total points", "", " point", " Points");
             FormattedLeaderboard votes_single_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortVotesSingle(), new MemberSortRecent()), "Most votes (single contest, by member)", "Most votes in one contest", "", " votes", " Votes");
@@ -93,6 +107,7 @@ public abstract class Master
             FormattedLeaderboard formidable_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortNewFormidable(), new MemberSortRecent()), "Most formidable opponents", "Rating", "", "", " Rating");
             
             // Associate select boards with pages
+            stamps.add(new NamedStamp("Claiming leaderboards for individual pages"));
             ArrayList<FormattedLeaderboard> leaderboards_full = new ArrayList<FormattedLeaderboard>();
             leaderboards_full.add(votes_board);
             leaderboards_full.add(points_board);
@@ -115,15 +130,18 @@ public abstract class Master
             leaderboards_brief.add(formidable_board);
             
             // Now begin to write these pages
+            stamps.add(new NamedStamp("Writing big leaderboards page"));
             fstream = new FileWriter("web/leaderboards" + testText + ".html");
             out = new BufferedWriter(fstream);
             Master.addFileToBuffer("config/leaderboard_header.txt", out, swaps);
             for (int i = 0; i < leaderboards_full.size(); ++i) {
+                stamps.add(new NamedStamp("Leaderboard: " + leaderboards_full.get(i).getTitle()));
                 leaderboards_full.get(i).addToFile(DELTA, out, true, false, false, i + 1);
             }
             Master.addFileToBuffer("config/leaderboard_footer.txt", out, swaps);
             out.close();
             
+            stamps.add(new NamedStamp("Writing leaderboards digest page"));
             fstream = new FileWriter("web/leaderboards-digest" + testText + ".html");
             out = new BufferedWriter(fstream);
             Master.addFileToBuffer("config/leaderboard_header.txt", out, swaps);
@@ -134,6 +152,7 @@ public abstract class Master
             out.close();
             
             // MEMBER LIST
+            stamps.add(new NamedStamp("Generating member list"));
             fstream = new FileWriter("members/members-" + history.getLastPollName() + ".txt");
             out = new BufferedWriter(fstream);
             ArrayList<Member> member_list = new ArrayList<Member>(history.getMembers());
@@ -151,6 +170,7 @@ public abstract class Master
             out.close();
             
             // PROFILES
+            stamps.add(new NamedStamp("Generating user profiles"));
             if (generate_user_galleries) {
                 ArrayList<Member> mems = member_list;
                 for (int i=0; i<mems.size(); i++) {
@@ -158,9 +178,21 @@ public abstract class Master
                 }
             }
 
+            stamps.add(new NamedStamp("Pretty much done!"));
             long endTime = System.nanoTime();
             long duration = endTime - startTime;
             JOptionPane.showMessageDialog(null, "Archive output saved to archives\\archive-" + history.getLastPollName() + testText + ".html.\nLeaderboard output saved to leaderboards\\leaderboards-" + history.getLastPollName() + testText + ".html.\nTime elapsed: " + ((double)(duration))/1000000000.0 + " seconds.", "Success!", JOptionPane.INFORMATION_MESSAGE);
+            
+            if (!stamps.isEmpty()) {
+                long start = stamps.get(0).getStamp();
+                for (int i = 0; i < stamps.size(); ++i) {
+                    if (i < stamps.size() - 1) {
+                        System.out.println("" + (stamps.get(i).getStamp() - start) + "\t" + (stamps.get(i+1).getStamp() - stamps.get(i).getStamp()) + "\t" + stamps.get(i).getName());
+                    } else {
+                        System.out.println("" + (stamps.get(i).getStamp() - start) + "\tN/A\t" + stamps.get(i).getName());
+                    }
+                }
+            }
         }
         catch (Exception e)
         {
