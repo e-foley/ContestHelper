@@ -4234,10 +4234,16 @@ TheRock; png; 0
 Sheik; png; 39
 Russ; png; 9
 xanadude; png; 2
-/*
+
 #620 @ 72695
-Avataro; png; 
-Jared; png; 
-Sheik; png; 
-Russ; png; 
+Avataro; png; 6
+Jared; png; 16
+Sheik; png; 31
+Russ; png; 5
+/*
+#621 @ 72728
+Joelmacool; png; 
+TheRock; png; 
+nicklegends; png; 
+Russ; gif; 
 /*
