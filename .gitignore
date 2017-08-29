@@ -58,6 +58,9 @@ bluej.pkh
 doc/resources/inherit.gif
 doc/logfile.txt
 *.jar
+temp.txt
+README.TXT
+__SHELL*.java
 
 # ELF: Project-specific excludes
 archives/
@@ -65,7 +68,3 @@ backup/
 leaderboards/
 members/
 images/
-README.TXT
-__SHELL0.java
-__SHELL8.java
-__SHELL2.java
