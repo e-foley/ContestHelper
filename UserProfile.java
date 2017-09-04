@@ -17,14 +17,14 @@ abstract class UserProfile
         
         String initial_target;
         if (explicit) {
-            initial_target = getProfileURL(mem);
+            initial_target = getProfilePath(mem);
         } else {
             initial_target = TEMP_PATH;
         }
         
         try
         {
-            System.out.println("Attempting to write file " + getProfileURL(mem) + "...");
+            System.out.println("Attempting to write file " + getProfilePath(mem) + "...");
             FileWriter fstream = new FileWriter(initial_target);
             BufferedWriter out = new BufferedWriter(fstream);
             Master.addFileToBuffer("config/profile_header.txt", out, swaps);
@@ -85,7 +85,7 @@ abstract class UserProfile
             return;
         } else {
             File temp_file = new File(TEMP_PATH);
-            File profile_file = new File(getProfileURL(mem));
+            File profile_file = new File(getProfilePath(mem));
             if (Master.fileEquals(temp_file, profile_file)) {
                 try {
                     Files.deleteIfExists(temp_file.toPath());
@@ -106,16 +106,19 @@ abstract class UserProfile
         return orig.replaceAll("[^a-zA-Z0-9]", "");
     }
     
-    public static String getProfileURL(Member mem)
+    public static String getProfilePath(Member mem)
     {
-        return "web/profiles/" + getSafeName(mem.getMostRecentName()) + ".html";
+        return "web/" + getProfileUrl(mem);
     }
     
     // I don't remember why I have this method.
-    public static String getProfileDropboxURL(Member mem)
+    public static String getProfileUrl(Member mem)
     {
-        return "profiles/" + getSafeName(mem.getMostRecentName()) + ".html";
-        // return "http://sotw.elfractal.com/profiles/" + getSafeName(mem.getMostRecentName()) + ".html";
+        String body = getSafeName(mem.getMostRecentName());
+        if (mem.hasTag()) {
+            body += ("-" + mem.getTag());
+        }
+        return "profiles/" + body + ".html";
     }
     
     public static void addStatsTableToFile(Member member, ArrayList<FormattedLeaderboard> stats, boolean details, boolean links_in_details, BufferedWriter out) {
