@@ -20,7 +20,7 @@ div.big-block
 div.big-block.archives
 {
   max-width: none;  /* Overrides div.big-block */
-  min-width: inherit;
+  min-width: 550px;  /* Seems redundant with big-block, but helps rendering... */
   margin: 0 5%;  /* Used to be margin: 0 auto; */
 }
 
