@@ -63,9 +63,9 @@ abstract class UserProfile
                 }
                 out.write("<div class='picture-large-caption'>");
                 if (poll.hasTopic()) {
-                    out.write("<a class='alt' href='" + poll.getURL() + "'>" + poll.getName() + "</a>");
+                    out.write("<a class='alt' href='" + poll.getURL() + "'>#" + poll.getName() + "</a>");
                 } else {
-                    out.write(poll.getName());
+                    out.write("#" + poll.getName());
                 }
                 out.write("</div></div>\n");
             }
