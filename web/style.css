@@ -340,7 +340,7 @@ td.contest-cell
 .picture-large-div
 {
   width: 512px;
-	
+
   /* Maintains pixelated look */
   image-rendering: -moz-crisp-edges;         /* Firefox */
   image-rendering:   -o-crisp-edges;         /* Opera */
@@ -518,7 +518,7 @@ td.contest-cell
 
 .member-details-div
 {
-  
+
 }
 
 /* Copies from leaderboard-table, defined earlier */
@@ -558,7 +558,7 @@ td.contest-cell
 
 .member-details-subheader-cell
 {
-  
+
 }
 
 .member-details-row
@@ -568,10 +568,18 @@ td.contest-cell
 
 .member-details-cell
 {
-  
+
 }
 
 .category-cell
 {
   font-weight: bold;
+}
+
+.former-names
+{
+  text-align: center;
+  font-weight: normal;
+  color: #FFFFFF;
+  font-size: 1.25em;
 }

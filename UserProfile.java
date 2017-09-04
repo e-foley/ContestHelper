@@ -4,22 +4,10 @@ import java.util.ArrayList;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-/**
- * Write a description of class UserProfile here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 abstract class UserProfile
 {
     public static final String TEMP_PATH = "temp.txt";
 
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
     public static void createProfilePage(Member mem, boolean explicit, ArrayList<FormattedLeaderboard> stats)
     {
         String recent_name = mem.getMostRecentName();
@@ -40,6 +28,22 @@ abstract class UserProfile
             FileWriter fstream = new FileWriter(initial_target);
             BufferedWriter out = new BufferedWriter(fstream);
             Master.addFileToBuffer("config/profile_header.txt", out, swaps);
+            
+            ArrayList<String> unique_names = mem.getUniqueNames();
+            if (unique_names.size() > 1) {
+                out.write("<div class='former-names'>Other names used: ");
+                boolean first_written = false;
+                for (String unique_name : unique_names) {
+                    if (!unique_name.equals(mem.getMostRecentName())) {
+                        if (first_written) {
+                            out.write(", ");
+                        }
+                        out.write(unique_name);
+                        first_written = true;
+                    }
+                }
+                out.write("</div>");
+            }
             
             addStatsTableToFile(mem, stats, true, true, out);
             

@@ -123,6 +123,20 @@ public class Member
         return entries;
     }
     
+    public ArrayList<String> getNames() {
+        return names;
+    }
+    
+    public ArrayList<String> getUniqueNames() {
+        ArrayList<String> unique_names = new ArrayList<String>();
+        for (String name : names) {
+            if (!unique_names.contains(name)) {
+                unique_names.add(name);
+            }
+        }
+        return unique_names;
+    }
+    
     public String getMostRecentName()
     {
         return names.get(names.size()-1);
