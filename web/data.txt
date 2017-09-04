@@ -1,4 +1,4 @@
-// MASTER DATA FILE
+ï»¿// MASTER DATA FILE
 // This is the file where all the contest data gets placed.
 // All empty lines and lines beginning with two slashes are ignored.
 // Number to the right of each @ sign is the topic number of the contest.
@@ -2171,7 +2171,7 @@ skulduggery; png; 1
 Rover; png; 1
 
 #312 @ 49082
-Isdrakthül; Isdrakthul; png; 6
+IsdrakthÃ¼l; Isdrakthul; png; 6
 Ornlu; png; 18
 Rover; png; 0
 Furion; png; 20
@@ -2257,7 +2257,7 @@ William; png; 19
 #324 @ 50312
 Sepulcher; png; 7
 King Harkinian; KingHarkinian; png; 5
-Isdrakthül; Isdrakthul; png; 3
+IsdrakthÃ¼l; Isdrakthul; png; 3
 link1996; png; 7
 Yoshidude; png; 2
 Lynker; png; 5
@@ -2366,7 +2366,7 @@ trudatman; png; 4
 
 #337 @ 51657
 linktopower; jpg; 1
-Isdrakthül; Isdrakthul; png; 6
+IsdrakthÃ¼l; Isdrakthul; png; 6
 Moo2wo; gif; 24
 Ornlu; png; 9
 
@@ -3975,7 +3975,7 @@ Avataro; png; 6
 #579 @ 70939
 Lunaria; png; 1
 Joelmacool; png; 10
-Lüt; Lut; png; 28
+LÃ¼t; Lut; png; 28
 Sephiroth; png; 10
 
 #580 @ 70971
@@ -4009,7 +4009,7 @@ Polaris; png; 13
 #585 @ 71191
 Joelmacool; png; 13
 Moosh; png; 11
-Lüt; Lut; png; 19
+LÃ¼t; Lut; png; 19
 
 #586 @ 71230
 Zaxarone; png; 2
@@ -4048,7 +4048,7 @@ Plutia; png; 1
 
 #591 @ 91440
 Joelmacool; png; 26
-Lüt; Lut; png; 16
+LÃ¼t; Lut; png; 16
 Dimentio; png; 2
 
 #592 @ 71488
@@ -4111,7 +4111,7 @@ GrantGreif; png; 3
 ywkls; png; 0
 Orithan; png; 0
 Alestance; png; 1
-Lüt; Lut; png; 2
+LÃ¼t; Lut; png; 2
 Eddy; png; 1
 
 #601 @ 71911
@@ -4138,13 +4138,13 @@ Jared; png; 9
 Avataro; png; 3
 Eggman666; gif; 17
 Eddy; png; 4
-Lüt; Lut; png; 8
+LÃ¼t; Lut; png; 8
 Demonlink; png; 16
 
 #606 @ 72089
 Eggman666; gif; 47
 Hergiswi; png; 8
-Lüt; Lut; png; 1
+LÃ¼t; Lut; png; 1
 
 #607 @ 72128
 Zaxaphone; png; 11
@@ -4157,7 +4157,7 @@ TheRock; png; 2
 Zaxaphone; png; 12
 Joelmacool; png; 13
 Russ; png; 11
-Lüt; Lut; png; 10
+LÃ¼t; Lut; png; 10
 
 #609 @ 72216
 Eggman666; gif; 9

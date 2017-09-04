@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
-
 import javax.swing.JOptionPane;
+import java.nio.charset.StandardCharsets;
 
 public class History
 {
@@ -38,7 +38,7 @@ public class History
                  entry_adding.hasUncertainty(),
                  entry_adding.getOverrideCode());
     }
-    
+
     public void addEntry(String pollName, boolean hasTopicInfo, int topic, int currentSynch, String memberName, String tag, boolean requestId, int memberId, boolean myHasURL, String URL, boolean myHasVotes, int myVotes, boolean myHasUncertainty, int overrideCode) {
         Poll pollRetrieved;
         // check if the poll being requested hasn't been formed yet
@@ -81,13 +81,13 @@ public class History
         pollRetrieved.addEntry(entryAdding);
         memberRetrieved.addEntry(entryAdding);
     }
-    
+
     // Creates a new history that possesses cloned members and polls from this history (over a given span of polls).
     public History getSubhistory(int index_start, int index_end) {
         History returning = new History();
 
         returning.members = new HashMap<Integer, Member>();
-        
+
         Set<Integer> member_ids = members.keySet();
         for (Integer member_id : member_ids) {
             Member member = new Member(members.get(member_id));  // Performs incomplete clone per custom Member constructor
@@ -106,15 +106,15 @@ public class History
                 member.removeEntry(ent_rem);
             }
         }
-        
+
         for (int i = index_start; i <= index_end; ++i) {
           returning.polls.add(this.polls.get(i));
         }
-        
+
         if (!returning.polls.isEmpty()) {
             returning.lastPollName = returning.polls.get(returning.polls.size() - 1).getName();
         }
-        
+
         return returning;
     }
 
@@ -127,7 +127,7 @@ public class History
         }
         return null;
     }
-    
+
     public Member getMemberByTag(String memberTag) {
         for (int i = 0; i < members.size(); ++i) {
             if (members.get(i).hasTag() && members.get(i).getTag().equals(memberTag)) {
@@ -136,7 +136,7 @@ public class History
         }
         return null;
     }
-    
+
     public Member getMemberById(int id) {
         return members.get(id);
     }
@@ -159,15 +159,22 @@ public class History
             FileInputStream fstream = new FileInputStream(filename);
             // Get the object of DataInputStream
             DataInputStream in = new DataInputStream(fstream);
-            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+            BufferedReader br = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
             String strLine; // String in which to place new lines as they are read
             String nameRegex = "(\\s+)?>(\\s+)?";   // regular expression to divide associations file
             String tagRegex = "(\\s+)?\\:(\\s+)?";  // Regular expression that divides lines into a tag section and a names section
             String[] namesRead; // array for the output of the regex split
 
             //Read File Line By Line
-            while ((strLine = br.readLine()) != null)
-            {
+            int lines_to_ignore = 1;
+            int line = 0;
+            while ((strLine = br.readLine()) != null) {
+                line++;
+                if (line <= lines_to_ignore) {
+                    // Some junk appears at the top of Notepad UTF-8 files and I'm not sure what it is... But we can ignore it.
+                    continue;
+                }
+                
                 // Ignore empty lines and those starting with two slashes
                 if (!strLine.equals("")  &&  !strLine.startsWith("//"))
                 {
@@ -213,7 +220,7 @@ public class History
             FileInputStream fstream = new FileInputStream(filename);
             // Get the object of DataInputStream
             DataInputStream in = new DataInputStream(fstream);
-            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+            BufferedReader br = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
             String strLine; // String in which to place new lines as they are read
 
             String[] splits; // array for the output of the regex split
@@ -222,15 +229,19 @@ public class History
             Poll pollRetrieved = null;
 
             ParsedLine parse;
-
-            //Read File Line By Line
-
+            
+            // Read file line by line
             boolean blockComment = false;
             String blockOpen = "/*";
             String blockClose = "*/";
-
-            while ((strLine = br.readLine()) != null)
-            {
+            int lines_to_ignore = 1;
+            int line = 0;
+            while ((strLine = br.readLine()) != null) {
+                line++;
+                if (line <= lines_to_ignore) {
+                    // Some junk appears at the top of Notepad UTF-8 files and I'm not sure what it is... But we can ignore it.
+                    continue;
+                }
                 blockComment |= strLine.startsWith(blockOpen);
                 parse = new ParsedLine(strLine, currentPollName);
 
@@ -255,7 +266,7 @@ public class History
                 {
                     addEntry(currentPollName, parse.hasTopicInfo, parse.topic, currentSynch, parse.memberName, parse.tag, true, -1, parse.hasURL, parse.URL, parse.hasVotes, parse.votes, !parse.hasVotes, parse.overrideCode);
                 }
-                
+
                 if (parse.isPollNote && !blockComment && pollRetrieved != null) {
                     pollRetrieved.addNote(parse.note);
                 }
@@ -264,7 +275,7 @@ public class History
             }
             lastPollName = currentPollName;   // this is so we can name the output files intelligently
             //Close the input stream
-            in.close(); 
+            in.close();
         }
         catch (Exception e)
         {
@@ -291,7 +302,7 @@ public class History
     {
         return members.values();
     }
-    
+
     public HashMap<Integer, Member> getMemberMap() {
         return members;
     }
@@ -300,11 +311,11 @@ public class History
     {
         return polls;
     }
-    
+
     public int numPolls() {
         return polls.size();
     }
-    
+
     public Poll getPoll(int index) {
         return polls.get(index);
     }
@@ -313,7 +324,7 @@ public class History
     {
         return lastPollName;
     }
-    
+
     private void setLastPollName(String lastPollNameSetting) {
         lastPollName = lastPollNameSetting;
     }
