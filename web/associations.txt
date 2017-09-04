@@ -1,4 +1,4 @@
-// This is where we register name changes for people in the contest.
+﻿// This is where we register name changes for people in the contest.
 // Empty lines and lines beginning with two slashes are ignored.
 // Put each member's most recent name on the right.
 // Any amount of whitespace can be placed around the '>' characters as desired.
