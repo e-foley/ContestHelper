@@ -164,7 +164,7 @@ public class FormattedLeaderboard {
                     
                     // Name column
                     out.write("<td class='name-cell'>");
-                    out.write("<a class='black' href='" + UserProfile.getProfileDropboxURL(member) + "'>");
+                    out.write("<a class='black' href='" + UserProfile.getProfileUrl(member) + "'>");
                     out.write(member.getMostRecentName() + (SHOW_MEMBER_IDS ? " (" + member.getId() + ")" : ""));
                     out.write("</a>");
                     out.write("</td>");
