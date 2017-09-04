@@ -134,7 +134,7 @@ abstract class UserProfile
                 History history = leaderboard.getHistory();
                 out.write("<tr class='member-details-row'><td class='member-details-cell category-cell'>" + stat.getContextlessTitle() + "</td>");
                 if (metric.qualifies(member)) {
-                    out.write("<td class='member-details-cell'>" + metric.getData(member) + "</td>");
+                    out.write("<td class='member-details-cell value-cell'>" + metric.getData(member) + "</td>");
                     out.write("<td class='member-details-cell'>");
                     int rank = leaderboard.getPlaceOfMember(member.getId());  // 0-indexed!!
                     out.write(leaderboard.getMembersAtPlace(rank).size() > 1 ? "t&#8209;": "");  // Non-breaking hyphen

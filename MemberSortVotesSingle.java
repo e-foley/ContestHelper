@@ -22,9 +22,13 @@ public class MemberSortVotesSingle implements MemberDataRetriever
     
     public String getData(Member m)
     {
-        ArrayList<Entry> list = m.getEntriesWithMostVotes();
         DecimalFormat df = new DecimalFormat("#.##");
-        return df.format(Member.getMostVotesSingle(list));
+        ArrayList<Entry> list = m.getEntriesWithMostVotes();
+        if (m.getNumberOfEntriesWithMostVotes(list) > 1) {
+            return "(" + m.getNumberOfEntriesWithMostVotes(list) + "&times;)&nbsp;" + df.format(Member.getMostVotesSingle(list));
+        } else {
+            return df.format(Member.getMostVotesSingle(list));
+        }
     }
     
     public String getDetails(Member m, boolean linkTopics)
