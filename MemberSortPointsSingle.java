@@ -22,9 +22,13 @@ public class MemberSortPointsSingle implements MemberDataRetriever
     
     public String getData(Member m)
     {
-        ArrayList<Entry> list = m.getEntriesWithMostPoints();
         DecimalFormat df = new DecimalFormat("#.##");
-        return df.format(Member.getMostPointsSingle(list));
+        ArrayList<Entry> list = m.getEntriesWithMostPoints();
+        if (m.getNumberOfEntriesWithMostPoints(list) > 1) {
+            return "(" + m.getNumberOfEntriesWithMostPoints(list) + "&times;)&nbsp;" + df.format(Member.getMostPointsSingle(list));
+        } else {
+            return df.format(Member.getMostPointsSingle(list));
+        }
     }
     
     public String getDetails(Member m, boolean linkTopics)

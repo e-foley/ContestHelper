@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.ArrayList;
 import java.nio.file.Files;
 import java.util.Arrays;
+import java.nio.charset.StandardCharsets;
 
 public abstract class Master
 {
@@ -213,7 +214,7 @@ public abstract class Master
         {
             FileInputStream fstream = new FileInputStream(filename);
             DataInputStream in = new DataInputStream(fstream);
-            BufferedReader br = new BufferedReader(new InputStreamReader(in)); 
+            BufferedReader br = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8)); 
             
             while ((strLine = br.readLine()) != null)
             {

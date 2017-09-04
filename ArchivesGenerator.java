@@ -90,7 +90,7 @@ public class ArchivesGenerator {
                         
                         out.write("<td class='name'>");
                         // TODO: Rename 'image' class.  It's a holdover from a much older version of the page.
-                        out.write("<a class='image' href='" + UserProfile.getProfileDropboxURL(entry.getMember()) + "'>");
+                        out.write("<a class='image' href='" + UserProfile.getProfileUrl(entry.getMember()) + "'>");
                         out.write(entry.getMember().getMostRecentName());
                         // Add an icon if the shot won the poll
                         if (isWinner) {

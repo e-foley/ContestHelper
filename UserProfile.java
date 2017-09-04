@@ -4,22 +4,10 @@ import java.util.ArrayList;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-/**
- * Write a description of class UserProfile here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 abstract class UserProfile
 {
     public static final String TEMP_PATH = "temp.txt";
 
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
     public static void createProfilePage(Member mem, boolean explicit, ArrayList<FormattedLeaderboard> stats)
     {
         String recent_name = mem.getMostRecentName();
@@ -29,17 +17,33 @@ abstract class UserProfile
         
         String initial_target;
         if (explicit) {
-            initial_target = getProfileURL(mem);
+            initial_target = getProfilePath(mem);
         } else {
             initial_target = TEMP_PATH;
         }
         
         try
         {
-            System.out.println("Attempting to write file " + getProfileURL(mem) + "...");
+            System.out.println("Attempting to write file " + getProfilePath(mem) + "...");
             FileWriter fstream = new FileWriter(initial_target);
             BufferedWriter out = new BufferedWriter(fstream);
             Master.addFileToBuffer("config/profile_header.txt", out, swaps);
+            
+            ArrayList<String> unique_names = mem.getUniqueNames();
+            if (unique_names.size() > 1) {
+                out.write("<div class='former-names'>Other names used: ");
+                boolean first_written = false;
+                for (String unique_name : unique_names) {
+                    if (!unique_name.equals(mem.getMostRecentName())) {
+                        if (first_written) {
+                            out.write(", ");
+                        }
+                        out.write(unique_name);
+                        first_written = true;
+                    }
+                }
+                out.write("</div>");
+            }
             
             addStatsTableToFile(mem, stats, true, true, out);
             
@@ -59,9 +63,9 @@ abstract class UserProfile
                 }
                 out.write("<div class='picture-large-caption'>");
                 if (poll.hasTopic()) {
-                    out.write("<a class='alt' href='" + poll.getURL() + "'>" + poll.getName() + "</a>");
+                    out.write("<a class='alt' href='" + poll.getURL() + "'>#" + poll.getName() + "</a>");
                 } else {
-                    out.write(poll.getName());
+                    out.write("#" + poll.getName());
                 }
                 out.write("</div></div>\n");
             }
@@ -81,7 +85,7 @@ abstract class UserProfile
             return;
         } else {
             File temp_file = new File(TEMP_PATH);
-            File profile_file = new File(getProfileURL(mem));
+            File profile_file = new File(getProfilePath(mem));
             if (Master.fileEquals(temp_file, profile_file)) {
                 try {
                     Files.deleteIfExists(temp_file.toPath());
@@ -102,16 +106,19 @@ abstract class UserProfile
         return orig.replaceAll("[^a-zA-Z0-9]", "");
     }
     
-    public static String getProfileURL(Member mem)
+    public static String getProfilePath(Member mem)
     {
-        return "web/profiles/" + getSafeName(mem.getMostRecentName()) + ".html";
+        return "web/" + getProfileUrl(mem);
     }
     
     // I don't remember why I have this method.
-    public static String getProfileDropboxURL(Member mem)
+    public static String getProfileUrl(Member mem)
     {
-        return "profiles/" + getSafeName(mem.getMostRecentName()) + ".html";
-        // return "http://sotw.elfractal.com/profiles/" + getSafeName(mem.getMostRecentName()) + ".html";
+        String body = getSafeName(mem.getMostRecentName());
+        if (mem.hasTag()) {
+            body += ("-" + mem.getTag());
+        }
+        return "profiles/" + body + ".html";
     }
     
     public static void addStatsTableToFile(Member member, ArrayList<FormattedLeaderboard> stats, boolean details, boolean links_in_details, BufferedWriter out) {
@@ -127,7 +134,7 @@ abstract class UserProfile
                 History history = leaderboard.getHistory();
                 out.write("<tr class='member-details-row'><td class='member-details-cell category-cell'>" + stat.getContextlessTitle() + "</td>");
                 if (metric.qualifies(member)) {
-                    out.write("<td class='member-details-cell'>" + metric.getData(member) + "</td>");
+                    out.write("<td class='member-details-cell value-cell'>" + metric.getData(member) + "</td>");
                     out.write("<td class='member-details-cell'>");
                     int rank = leaderboard.getPlaceOfMember(member.getId());  // 0-indexed!!
                     out.write(leaderboard.getMembersAtPlace(rank).size() > 1 ? "t&#8209;": "");  // Non-breaking hyphen

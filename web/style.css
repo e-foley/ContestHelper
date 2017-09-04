@@ -12,6 +12,7 @@ div.big-block
   border-style: solid;
   border-color: #C0C0C0;
   border-width: 2px;
+  min-width: 550px;
   max-width: 1000px;
   margin: 0 auto;
 }
@@ -19,7 +20,7 @@ div.big-block
 div.big-block.archives
 {
   max-width: none;  /* Overrides div.big-block */
-  min-width: 550px;
+  min-width: 550px;  /* Seems redundant with big-block, but helps rendering... */
   margin: 0 5%;  /* Used to be margin: 0 auto; */
 }
 
@@ -339,8 +340,8 @@ td.contest-cell
 
 .picture-large-div
 {
-  width: 512px;
-	
+  width: 532px;  /* Width of .picture-large plus width of its border */
+
   /* Maintains pixelated look */
   image-rendering: -moz-crisp-edges;         /* Firefox */
   image-rendering:   -o-crisp-edges;         /* Opera */
@@ -356,7 +357,7 @@ td.contest-cell
 
 .picture-large
 {
-  width: 100%;
+  width: 512px;
   height: auto;
   border: 10px #AAAAAA ridge;
   margins: auto;
@@ -365,6 +366,8 @@ td.contest-cell
 .picture-large-caption
 {
   text-align: right;
+  margin-right: 20px;
+  color: #FFFFFF;
 }
 
 .winnericon
@@ -518,7 +521,7 @@ td.contest-cell
 
 .member-details-div
 {
-  
+
 }
 
 /* Copies from leaderboard-table, defined earlier */
@@ -558,7 +561,7 @@ td.contest-cell
 
 .member-details-subheader-cell
 {
-  
+
 }
 
 .member-details-row
@@ -568,10 +571,24 @@ td.contest-cell
 
 .member-details-cell
 {
-  
+
 }
 
 .category-cell
 {
   font-weight: bold;
+}
+
+.value-cell
+{
+  text-align: right;
+  padding-right: 8px;
+}
+
+.former-names
+{
+  text-align: center;
+  font-weight: normal;
+  color: #FFFFFF;
+  font-size: 1.25em;
 }
