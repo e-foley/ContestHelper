@@ -4297,9 +4297,15 @@ FireSeraphim; png; 18
 Sheik; png; 22
 Zaxaphone; png; 1
 Joelmacool; png; 8
-/*
+
 #632 @ 73031
+Anthus; png; 30
+Ecruteak; png; 4
+Jared; png; 16
+/*
+#633 @ 73060
 Anthus; png; 
+Avataro; png; 
 Ecruteak; png; 
-Jared; png; 
+Joelmacool; png; 
 /*
