@@ -94,6 +94,7 @@ public abstract class Master
             // LEADERBOARD
             // Define all boards
             stamps.add(new NamedStamp("Defining leaderboards"));
+            FormattedLeaderboard weighted_formidable_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortWeightedFormidable(), new MemberSortRecent()), "Most formidable opponents", "Rating", "", "", " Rating");
             FormattedLeaderboard votes_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortVotes(), new MemberSortRecent()), "Most votes (all-time)", "Total votes", "", " vote", " Votes");
             FormattedLeaderboard points_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortPoints(), new MemberSortRecent()), "Most points (all-time)", "Total points", "", " point", " Points");
             FormattedLeaderboard votes_single_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortVotesSingle(), new MemberSortRecent()), "Most votes (single contest, by member)", "Most votes in one contest", "", " votes", " Votes");
@@ -105,11 +106,12 @@ public abstract class Master
             FormattedLeaderboard win_ratio_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortWinRatio(WIN_RATIO_MIN_ENTRIES), new MemberSortRecent()), "Best win ratios (minimum " + WIN_RATIO_MIN_ENTRIES + " entries)", "Win ratio (" + WIN_RATIO_MIN_ENTRIES + "-entry minimum)", "", "", " Ratio");
             FormattedLeaderboard plus_minus_points_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortPlusMinusPoints(), new MemberSortRecent()), "Best plus/minus records (head-to-head vote basis)", "Plus/minus votes", "", "", " +/- votes");
             FormattedLeaderboard plus_minus_wins_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortPlusMinusHeads(), new MemberSortRecent()), "Best plus/minus records (head-to-head victory basis)", "Plus/minus wins", "", "", " +/- wins");
-            FormattedLeaderboard formidable_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortNewFormidable(), new MemberSortRecent()), "Most formidable opponents", "Rating", "", "", " Rating");
+            //FormattedLeaderboard formidable_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortNewFormidable(), new MemberSortRecent()), "Most formidable opponents", "Rating", "", "", " Rating");
             
             // Associate select boards with pages
             stamps.add(new NamedStamp("Claiming leaderboards for individual pages"));
             ArrayList<FormattedLeaderboard> leaderboards_full = new ArrayList<FormattedLeaderboard>();
+            leaderboards_full.add(weighted_formidable_board);
             leaderboards_full.add(votes_board);
             leaderboards_full.add(points_board);
             leaderboards_full.add(votes_single_board);
@@ -121,14 +123,15 @@ public abstract class Master
             leaderboards_full.add(win_ratio_board);
             leaderboards_full.add(plus_minus_points_board);
             leaderboards_full.add(plus_minus_wins_board);
-            leaderboards_full.add(formidable_board);
+            //leaderboards_full.add(formidable_board);
             
             ArrayList<FormattedLeaderboard> leaderboards_brief = new ArrayList<FormattedLeaderboard>();
+            leaderboards_brief.add(weighted_formidable_board);
             leaderboards_brief.add(votes_board);
             leaderboards_brief.add(votes_single_board);
             leaderboards_brief.add(victories_board);
             leaderboards_brief.add(entries_board);
-            leaderboards_brief.add(formidable_board);
+            //leaderboards_brief.add(formidable_board);
             
             // Now begin to write these pages
             stamps.add(new NamedStamp("Writing big leaderboards page"));
