@@ -63,6 +63,7 @@ README.TXT
 __SHELL*.java
 
 # ELF: Project-specific excludes
+sotw_runner.bat
 archives/
 backup/
 leaderboards/

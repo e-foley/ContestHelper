@@ -4302,10 +4302,21 @@ Joelmacool; png; 8
 Anthus; png; 30
 Ecruteak; png; 4
 Jared; png; 16
-/*
+
 #633 @ 73060
-Anthus; png; 
-Avataro; png; 
-Ecruteak; png; 
+Anthus; png; 26
+Avataro; png; 8
+Ecruteak; png; 4
+Joelmacool; png; 12
+
+#634 @ 73101
+Jared; png; 13
+Feenicks; png; 8
+Anthus; png; 17
+Joelmacool; png; 8
+/*
+#635 @ 73123
 Joelmacool; png; 
+Alucard648; png; 
+Anthus; png; 
 /*
