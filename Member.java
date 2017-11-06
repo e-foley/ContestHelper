@@ -22,6 +22,13 @@ public class Member
     private float longest_streak_strict = 0.0f;
     private int formidable_rating = 0;
     
+    private float weighted_plus_minus_heads = 0.0f;
+    private float weighted_opponent_count = 0.0f;
+    private int weighted_formidable_rating = 0;
+    
+    public static final float DECAY = 0.933033f;  // 0.933033 corresponds to half-life of 10 about contests.
+    public static final float BAYESIAN_ALLOWANCE = 10.0f;
+    
     public Member()
     {
         names = new ArrayList<String>();
@@ -233,6 +240,19 @@ public class Member
         return sum;
     }
     
+    public float getWeightedPlusMinusHeads() {
+        refreshStats();
+        return weighted_plus_minus_heads;
+    }
+    
+    private float calcWeightedPlusMinusHeads() {
+        float sum = 0.0f;
+        for (int i=0; i<entries.size(); ++i) {
+            sum += entries.get(i).getPlusMinusHeads() * Math.pow(DECAY, entries.size() - i - 1);
+        }
+        return sum;
+    }
+    
     public int getTotalEntries()
     {
         return entries.size();
@@ -432,15 +452,38 @@ public class Member
         return opponent_count;
     }
     
+    public float getWeightedNumOpponents() {
+        refreshStats();
+        return weighted_opponent_count;
+    }
+
+    public float calcWeightedNumOpponents() {
+        float opponent_count = 0.0f;
+        for (int i = 0; i < entries.size(); ++i) {
+            opponent_count += (entries.get(i).getPoll().numEntries() - 1) * Math.pow(DECAY, entries.size() - i - 1);
+        }
+        return opponent_count;
+    }
+    
     public int getNewFormidableRating() {
         refreshStats();
         return formidable_rating;
     }
     
-    public int calcNewFormidableRating() {
+    private int calcNewFormidableRating() {
         // TODO: Just calcLongestStreak, don't use 'calc' here.  Instead, cache results individually, since work is done twice!
         return Math.round(5000.0f + 5000.0f * calcTotalPlusMinusHeads() / (getTotalNumOpponents() + 10));
     }
+    
+    public int getWeightedFormidableRating() {
+        refreshStats();
+        return weighted_formidable_rating;
+    }
+    
+    private int calcWeightedFormidableRating() {
+        return Math.round(5000.0f + 5000.0f * calcWeightedPlusMinusHeads() / (calcWeightedNumOpponents() + BAYESIAN_ALLOWANCE));
+    }
+        
     
     private void refreshStats() {
         if (!dirty) {
@@ -459,6 +502,12 @@ public class Member
         longest_streak_strict = calcLongestStreak(true);
         longest_streak_loose = calcLongestStreak(false);
         formidable_rating = calcNewFormidableRating();
+        
+        // Experiments
+        weighted_plus_minus_heads = calcWeightedPlusMinusHeads();
+        weighted_opponent_count = calcWeightedNumOpponents();
+        weighted_formidable_rating = calcWeightedFormidableRating();
+        
         // We're up to date!
         dirty = false;
     } 
