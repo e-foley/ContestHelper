@@ -21,6 +21,8 @@ public class Entry
     private boolean plusMinusPointsAssigned;
     private int plusMinusHeads;
     private boolean plusMinusHeadsAssigned;
+    private int potential;
+    private boolean potential_assigned;
     
     public Entry(Member myMember, Poll myPoll, boolean myHasURL, String myURL, boolean myHasVotes, int votesSet, boolean myHasUncertainty, int myOverrideCode, String myNameSubmittedUnder)
     {
@@ -39,6 +41,8 @@ public class Entry
         plusMinusPointsAssigned = false;
         plusMinusHeads = 0;
         plusMinusPointsAssigned = false;
+        potential = 0;
+        potential_assigned = false;
     }
     
     public Member getMember()
@@ -134,7 +138,22 @@ public class Entry
         }
         return plusMinusHeads;
     }       
-            
+          
+    // Potential for an entry is the sum of maximum vote margins against all other entries in the contest.
+    // The maximum vote margin is equal to the sum of the votes between the two members.
+    public int getPotential() {
+        if (!potential_assigned) {
+            ArrayList<Entry> entries = poll.getEntries();
+            // We'll end up double-counting the entry's potential against itself, so reduce the tally accordingly.
+            int temp_potential = -2 * getVotes();
+            for (Entry competitor_entry : entries) {
+                temp_potential += getVotes() + competitor_entry.getVotes();
+            }
+            potential = temp_potential;
+            potential_assigned = true;
+        }
+        return potential;
+    }
     
     public float getWinningness()
     {
