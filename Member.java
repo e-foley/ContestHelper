@@ -484,7 +484,7 @@ public class Member
     
     private int calcWeightedFormidableRating() {
         // The Math.pow() thing has the effect of pretending there was a contest with 10 opponents and 0 plus-minus points that predated all other contests.
-        return (int)(Math.round(5000.0f + 5000.0f * calcWeightedPlusMinusPoints() / (calcWeightedPotential() + BAYESIAN_ALLOWANCE * Math.pow(DECAY, entries.size() - 2))));
+        return (int)(Math.round(5000.0f + 5000.0f * calcWeightedPlusMinusPoints() / (calcWeightedPotential() + BAYESIAN_ALLOWANCE * Math.pow(DECAY, entries.size()))));
     }
         
     
