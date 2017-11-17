@@ -26,8 +26,8 @@ public class Member
     private float weighted_potential = 0.0f;
     private int weighted_formidable_rating = 0;
     
-    public static final float DECAY = 0.933033f;  // 0.933033 corresponds to half-life of 10 about contests.
-    public static final float BAYESIAN_ALLOWANCE = 10.0f;
+    public static final float DECAY = 0.933033f;  // 0.933033 corresponds to half-life of 10 contests.
+    public static final float BAYESIAN_ALLOWANCE = 200.0f;
     
     public Member()
     {
@@ -483,7 +483,7 @@ public class Member
     }
     
     private int calcWeightedFormidableRating() {
-        // The Math.pow() thing has the effect of pretending there was a contest with 10 opponents and 0 plus-minus points that predated all other contests.
+        // The Math.pow() thing has the effect of pretending there was a big contest, predating all others, with BAYESIAN_ALLOWANCE "potential" for the entry of which 0 was achieved.
         return (int)(Math.round(5000.0f + 5000.0f * calcWeightedPlusMinusPoints() / (calcWeightedPotential() + BAYESIAN_ALLOWANCE * Math.pow(DECAY, entries.size()))));
     }
         
