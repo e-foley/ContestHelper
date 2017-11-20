@@ -4319,10 +4319,15 @@ Joelmacool; png; 8
 Joelmacool; png; 18
 Alucard648; png; 14
 Anthus; png; 8
-/*
+
 #636 @ 73153
-TheRock; png; 
-Sheik; png; 
-Eddy; png; 
-Jared; png; 
+TheRock; png; 2
+Sheik; png; 20
+Eddy; png; 14
+Jared; png; 6
+/*
+#637 @ 73171
+Joelmacool; png; 
+Anthus; png; 
+Dimentio; png; 
 /*
