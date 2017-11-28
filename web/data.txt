@@ -4325,9 +4325,15 @@ TheRock; png; 2
 Sheik; png; 20
 Eddy; png; 14
 Jared; png; 6
-/*
+
 #637 @ 73171
-Joelmacool; png; 
+Joelmacool; png; 7
+Anthus; png; 21
+Dimentio; png; 14
+/*
+#638 @ 73193
 Anthus; png; 
-Dimentio; png; 
+Mibbitable; png; 
+Avataro; png; 
+Shoshon the Elegant; png; 
 /*
