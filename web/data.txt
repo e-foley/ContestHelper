@@ -4330,10 +4330,14 @@ Jared; png; 6
 Joelmacool; png; 7
 Anthus; png; 21
 Dimentio; png; 14
-/*
+
 #638 @ 73193
-Anthus; png; 
-Mibbitable; png; 
-Avataro; png; 
-Shoshon the Elegant; png; 
+Anthus; png; 7
+Mibbitable; png; 16
+Avataro; png; 4
+Shoshon the Elegant; Shoshon%20the%20Elegant; png; 10
 /*
+#639 @ 73228
+Joelmacool; png; 
+Anthus; png; 
+Shoshon the Elegant; Shoshon%20the%20Elegant; png; 
