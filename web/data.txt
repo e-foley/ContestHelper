@@ -4341,13 +4341,18 @@ Shoshon the Elegant; Shoshon%20the%20Elegant; png; 10
 Joelmacool; png; 22
 Anthus; png; 7
 Shoshon the Elegant; Shoshon%20the%20Elegant; png; 10
-/*
+
 #640 @ 73258
-ywkls; png; 
-Avataro; png; 
-Dimentio; gif; 
-TheRock; png; 
-Orithan; png; 
-Anthus; png; 
+ywkls; png; 10
+Avataro; png; 13
+Dimentio; gif; 4
+TheRock; png; 2
+Orithan; png; 10
+Anthus; png; 1
+Shoshon the Elegant; Shoshon%20the%20Elegant; png; 4
+/*
+#641 @ 73283
+Demonlink; png; 
 Shoshon the Elegant; Shoshon%20the%20Elegant; png; 
+Dimentio; png; 
 /*
