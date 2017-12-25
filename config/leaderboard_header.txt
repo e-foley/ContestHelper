@@ -59,9 +59,6 @@ All deltas calculated over last <span style='font-weight:bold;'>10</span> contes
 <div class='faq-you'>Some members have a plus sign (+) next to their votes and points.  Why?</div>
 <div class='answer-you'>The polls in Screenshots of the Week 1&ndash;4 are lost. For these contests, entrants are formally given zero votes and zero points but get preference in the leaderboards over members who would otherwise have the same number of votes or points.</div>
 <p/>
-<!--<div class='faq-you'>How are names ordered in the case of a tie?</div>
-<div class='answer-you'>Do you really want to know? Okay, fine. Ties are broken by which member entered more recently. If both members last entered in the same contest, the upper hand is given to whoever got more votes in that contest. If both received the same number of votes, then whoever entered more recently prior to that contest is favored. The votes here are then compared if necessary. This algorithm works its way back to the start of the contest. If two members have identical records, then case-insensitive alphabetical order is the deciding factor. Don't expect this to happen often.</div>
-<p/>-->
 <div class='faq-you'>Should I take these leaderboards seriously?</div>
 <div class='answer-you'>The whole idea behind this page is to offer a unique retrospective on the history of the contest for <span style='font-weight: bold;'>fun</span>. There are errors on it. The list of categories is not comprehensive. Both the votes and the points systems are flawed to an extent. The answer is no: do not take these stats too seriously. If you want to base your value as a human being off the results shown here, take a step back and re-examine your priorities in life.</div>
 <p/>
