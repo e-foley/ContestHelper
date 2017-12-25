@@ -134,13 +134,13 @@ abstract class UserProfile
                 out.write("<tr class='member-details-row'><td class='member-details-cell category-cell'>" + stat.getContextlessTitle() + "</td>");
                 if (metric.qualifies(member)) {
                     out.write("<td class='member-details-cell value-cell'>" + metric.getData(member) + "</td>");
-                    out.write("<td class='member-details-cell'>");
+                    out.write("<td class='member-details-cell rank-cell'>");
                     int rank = leaderboard.getPlaceOfMember(member.getId());  // 0-indexed!!
                     out.write(leaderboard.getMembersAtPlace(rank).size() > 1 ? "t&#8209;": "");  // Non-breaking hyphen
-                    out.write("" + (rank + 1) + "/" + leaderboard.countQualifiers() + "</td>");
+                    out.write("" + (rank + 1) + "&nbsp;<span class='num-qualifiers'>/&nbsp;" + leaderboard.countQualifiers() + "</span></td>");
                 } else {
-                    out.write("<td class='member-details-cell'>N/A</td>");
-                    out.write("<td class='member-details-cell'>&#8210;/" + leaderboard.countQualifiers() + "</td>");
+                    out.write("<td class='member-details-cell value-cell'>N/A</td>");
+                    out.write("<td class='member-details-cell rank-cell'>&#8210;&nbsp;<span class='num-qualifiers'>/&nbsp;" + leaderboard.countQualifiers() + "</span></td>");
                 }
                 out.write("<td class='member-details-cell details'>" + metric.getDetails(member, true) + "</td></tr>\n");
             }
