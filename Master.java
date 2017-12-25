@@ -1,6 +1,5 @@
 import java.io.*;
 import java.nio.channels.FileChannel;
-import javax.swing.JOptionPane;
 import java.util.Collections;
 import java.util.ArrayList;
 import java.nio.file.Files;
@@ -38,14 +37,14 @@ public abstract class Master
         stamps.add(new NamedStamp("Populating members"));
         if (!history.populateMembersFromFile("web/associations.txt"))
         {
-            JOptionPane.showMessageDialog(null, "Error while parsing associations.txt.\nPerhaps data aren't delimited correctly.", "Error", JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error while parsing associations.txt.  Perhaps data aren't delimited correctly.");
             return;
         }
         
         stamps.add(new NamedStamp("Populating entries"));
         if (!history.populateEntriesFromFile("web/data.txt"))
         {
-            JOptionPane.showMessageDialog(null, "Error while parsing data.txt.\nPerhaps data aren't delimited correctly or a numeric value is misplaced.", "Error", JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error while parsing data.txt.  Perhaps data aren't delimited correctly or a numeric value is misplaced.");
             return;
         }
         
@@ -178,6 +177,7 @@ public abstract class Master
             if (generate_user_galleries) {
                 ArrayList<Member> mems = member_list;
                 for (int i=0; i<mems.size(); i++) {
+                    System.out.println("Attempting to write file " + UserProfile.getProfilePath(mems.get(i)) + "...");
                     UserProfile.createProfilePage(mems.get(i), false, leaderboards_full);
                 }
             }
@@ -185,7 +185,9 @@ public abstract class Master
             stamps.add(new NamedStamp("Pretty much done!"));
             long endTime = System.nanoTime();
             long duration = endTime - startTime;
-            JOptionPane.showMessageDialog(null, "Archive output saved to archives\\archive-" + history.getLastPollName() + testText + ".html.\nLeaderboard output saved to leaderboards\\leaderboards-" + history.getLastPollName() + testText + ".html.\nTime elapsed: " + ((double)(duration))/1000000000.0 + " seconds.", "Success!", JOptionPane.INFORMATION_MESSAGE);
+            System.out.println("Archive output saved to archives\\archive-" + history.getLastPollName() + testText + ".html.");
+            System.out.println("Leaderboard output saved to leaderboards\\leaderboards-" + history.getLastPollName() + testText + ".html.");
+            System.out.println("Time elapsed: " + ((double)(duration))/1000000000.0 + " seconds.");
             
             if (!stamps.isEmpty()) {
                 long start = stamps.get(0).getStamp();
@@ -201,7 +203,7 @@ public abstract class Master
         catch (Exception e)
         {
             System.err.println("Error: " + e.getMessage());
-            JOptionPane.showMessageDialog(null, "A strange problem occurred. Talk to nicklegends about it.\n\"" + e.getMessage() + "\"", "Error", JOptionPane.ERROR_MESSAGE);
+            System.err.println("A strange problem occurred.  Talk to nicklegends about it.");
         }
     }
 
@@ -230,7 +232,7 @@ public abstract class Master
         catch (Exception e)
         {
             System.err.println("Error: " + e.getMessage());
-            JOptionPane.showMessageDialog(null, filename + " is missing.", "Error", JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error adding" + filename + " to buffer.  Is it missing?");
         }
     }
     

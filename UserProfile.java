@@ -24,7 +24,6 @@ abstract class UserProfile
         
         try
         {
-            System.out.println("Attempting to write file " + getProfilePath(mem) + "...");
             FileWriter fstream = new FileWriter(initial_target);
             BufferedWriter out = new BufferedWriter(fstream);
             Master.addFileToBuffer("config/profile_header.txt", out, swaps);

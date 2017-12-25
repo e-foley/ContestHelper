@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
-import javax.swing.JOptionPane;
 import java.nio.charset.StandardCharsets;
 
 public class History
@@ -204,9 +203,8 @@ public class History
         }
         catch (Exception e)
         {
-            //Catch exception if any
+            // Catch exception if any
             System.err.println("Error: " + e.getMessage());
-            //JOptionPane.showMessageDialog(null, e.getMessage());
             return false;
         }
         return true;
@@ -281,7 +279,6 @@ public class History
         {
             //Catch exception if any
             System.err.println("Error: " + e.getMessage());
-            //JOptionPane.showMessageDialog(null, e.getMessage());
             return false;
         }
         return true;
