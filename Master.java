@@ -48,7 +48,7 @@ public abstract class Master
             return;
         }
         
-        FileWriter fstream;
+        FileOutputStream fstream;
         BufferedWriter out;
         
         String[][] swaps = new String[][] {{"###",""+history.getLastPollName()}};
@@ -62,13 +62,14 @@ public abstract class Master
             
             // ARCHIVES
             stamps.add(new NamedStamp("Preparing archive generation"));
-            fstream = new FileWriter("web/archives" + testText + ".html");
-            out = new BufferedWriter(fstream);
-            Master.addFileToBuffer("config/archives_header.txt", out, swaps);
+            fstream = new FileOutputStream("web/archives" + testText + ".html");
+            out = new BufferedWriter(new OutputStreamWriter(fstream, StandardCharsets.UTF_8));
+            
+            addFileToBuffer("config/archives_header.txt", out, swaps);
             stamps.add(new NamedStamp("Generating archives"));
             archivesGenerator.generate(history, out);
             stamps.add(new NamedStamp("Writing archives"));
-            Master.addFileToBuffer("config/archives_footer.txt", out, swaps);
+            addFileToBuffer("config/archives_footer.txt", out, swaps);
             out.close();
             stamps.add(new NamedStamp("Done writing archives"));
             
@@ -79,13 +80,13 @@ public abstract class Master
             for (int e = num_polls - 1; e >= 0; e -= CONTESTS_PER_PAGE) {
                 final int poll_end = e;
                 final int poll_start = Math.max(poll_end - CONTESTS_PER_PAGE + 1, 0);
-                fstream = new FileWriter("web/archives-page" + Integer.toString(p + 1) + ".html");
-                out = new BufferedWriter(fstream);
-                Master.addFileToBuffer("config/archives_header.txt", out, swaps);
+                fstream = new FileOutputStream("web/archives-page" + Integer.toString(p + 1) + ".html");
+                out = new BufferedWriter(new OutputStreamWriter(fstream, StandardCharsets.UTF_8));
+                addFileToBuffer("config/archives_header.txt", out, swaps);
                 archivesGenerator.insertNavigationBar(out, history, p + 1, num_pages, CONTESTS_PER_PAGE);
                 archivesGenerator.generate(history, out, poll_start, poll_end);
                 archivesGenerator.insertNavigationBar(out, history, p + 1, num_pages, CONTESTS_PER_PAGE);
-                Master.addFileToBuffer("config/archives_footer.txt", out, swaps);
+                addFileToBuffer("config/archives_footer.txt", out, swaps);
                 out.close();
                 ++p;
             }
@@ -134,30 +135,30 @@ public abstract class Master
             
             // Now begin to write these pages
             stamps.add(new NamedStamp("Writing big leaderboards page"));
-            fstream = new FileWriter("web/leaderboards" + testText + ".html");
-            out = new BufferedWriter(fstream);
-            Master.addFileToBuffer("config/leaderboard_header.txt", out, swaps);
+            fstream = new FileOutputStream("web/leaderboards" + testText + ".html");
+            out = new BufferedWriter(new OutputStreamWriter(fstream, StandardCharsets.UTF_8));
+            addFileToBuffer("config/leaderboard_header.txt", out, swaps);
             for (int i = 0; i < leaderboards_full.size(); ++i) {
                 stamps.add(new NamedStamp("Leaderboard: " + leaderboards_full.get(i).getTitle()));
                 leaderboards_full.get(i).addToFile(DELTA, out, true, false, false, i + 1);
             }
-            Master.addFileToBuffer("config/leaderboard_footer.txt", out, swaps);
+            addFileToBuffer("config/leaderboard_footer.txt", out, swaps);
             out.close();
             
             stamps.add(new NamedStamp("Writing leaderboards digest page"));
-            fstream = new FileWriter("web/leaderboards-digest" + testText + ".html");
-            out = new BufferedWriter(fstream);
-            Master.addFileToBuffer("config/leaderboard_header.txt", out, swaps);
+            fstream = new FileOutputStream("web/leaderboards-digest" + testText + ".html");
+            out = new BufferedWriter(new OutputStreamWriter(fstream, StandardCharsets.UTF_8));
+            addFileToBuffer("config/leaderboard_header.txt", out, swaps);
             for (int i = 0; i < leaderboards_brief.size(); ++i) {
                 leaderboards_brief.get(i).addToFile(DELTA, out, false, false, false, i + 1, DIGEST_LIST_LENGTH);
             }
-            Master.addFileToBuffer("config/leaderboard_footer.txt", out, swaps);
+            addFileToBuffer("config/leaderboard_footer.txt", out, swaps);
             out.close();
             
             // MEMBER LIST
             stamps.add(new NamedStamp("Generating member list"));
-            fstream = new FileWriter("members/members-" + history.getLastPollName() + ".txt");
-            out = new BufferedWriter(fstream);
+            fstream = new FileOutputStream("members/members-" + history.getLastPollName() + ".txt");
+            out = new BufferedWriter(new OutputStreamWriter(fstream, StandardCharsets.UTF_8));
             ArrayList<Member> member_list = new ArrayList<Member>(history.getMembers());
             Collections.sort(member_list, new MemberSortAlphabetical());
             for (int i=0; i<member_list.size(); i++)
