@@ -134,6 +134,7 @@ public class Member
         return names;
     }
     
+    // Preferably return this in order from old to new (makes "other usernames" logic consistent when generating profiles)
     public ArrayList<String> getUniqueNames() {
         ArrayList<String> unique_names = new ArrayList<String>();
         for (String name : names) {

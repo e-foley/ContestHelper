@@ -1,6 +1,7 @@
 import java.io.*;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
+import java.util.ListIterator;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -31,8 +32,10 @@ abstract class UserProfile
             ArrayList<String> unique_names = mem.getUniqueNames();
             if (unique_names.size() > 1) {
                 out.write("<div class='former-names'>Other names used: ");
+                ListIterator<String> li = unique_names.listIterator(unique_names.size());
                 boolean first_written = false;
-                for (String unique_name : unique_names) {
+                while(li.hasPrevious()) {
+                    String unique_name = li.previous();
                     if (!unique_name.equals(mem.getMostRecentName())) {
                         if (first_written) {
                             out.write(", ");
