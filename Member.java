@@ -22,6 +22,13 @@ public class Member
     private float longest_streak_strict = 0.0f;
     private int formidable_rating = 0;
     
+    private float weighted_plus_minus_points = 0.0f;
+    private float weighted_potential = 0.0f;
+    private int weighted_formidable_rating = 0;
+    
+    public static final float DECAY = 0.933033f;  // 0.933033 corresponds to half-life of 10 contests.
+    public static final float BAYESIAN_ALLOWANCE = 200.0f;
+    
     public Member()
     {
         names = new ArrayList<String>();
@@ -233,6 +240,19 @@ public class Member
         return sum;
     }
     
+    public float getWeightedPlusMinusPoints() {
+        refreshStats();
+        return weighted_plus_minus_points;
+    }
+    
+    private float calcWeightedPlusMinusPoints() {
+        float sum = 0.0f;
+        for (int i=0; i<entries.size(); ++i) {
+            sum += entries.get(i).getPlusMinusPoints() * Math.pow(DECAY, entries.size() - i - 1);
+        }
+        return sum;
+    }
+    
     public int getTotalEntries()
     {
         return entries.size();
@@ -432,15 +452,41 @@ public class Member
         return opponent_count;
     }
     
+    public float getWeightedNumOpponents() {
+        refreshStats();
+        return weighted_potential;
+    }
+
+    public float calcWeightedPotential() {
+        float potential = 0.0f;
+        int i = 0;
+        for (Entry member_entry : entries) {
+            potential += member_entry.getPotential() * Math.pow(DECAY, entries.size() - i - 1);
+            ++i;
+        } 
+        return potential;
+    }
+    
     public int getNewFormidableRating() {
         refreshStats();
         return formidable_rating;
     }
     
-    public int calcNewFormidableRating() {
+    private int calcNewFormidableRating() {
         // TODO: Just calcLongestStreak, don't use 'calc' here.  Instead, cache results individually, since work is done twice!
         return Math.round(5000.0f + 5000.0f * calcTotalPlusMinusHeads() / (getTotalNumOpponents() + 10));
     }
+    
+    public int getWeightedFormidableRating() {
+        refreshStats();
+        return weighted_formidable_rating;
+    }
+    
+    private int calcWeightedFormidableRating() {
+        // The Math.pow() thing has the effect of pretending there was a big contest, predating all others, with BAYESIAN_ALLOWANCE "potential" for the entry of which 0 was achieved.
+        return (int)(Math.round(5000.0f + 5000.0f * calcWeightedPlusMinusPoints() / (calcWeightedPotential() + BAYESIAN_ALLOWANCE * Math.pow(DECAY, entries.size()))));
+    }
+        
     
     private void refreshStats() {
         if (!dirty) {
@@ -459,6 +505,12 @@ public class Member
         longest_streak_strict = calcLongestStreak(true);
         longest_streak_loose = calcLongestStreak(false);
         formidable_rating = calcNewFormidableRating();
+        
+        // Experiments
+        weighted_plus_minus_points = calcWeightedPlusMinusPoints();
+        weighted_potential = calcWeightedPotential();
+        weighted_formidable_rating = calcWeightedFormidableRating();
+        
         // We're up to date!
         dirty = false;
     } 
