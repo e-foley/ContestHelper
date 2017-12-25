@@ -48,7 +48,7 @@ All deltas calculated over last <span style='font-weight:bold;'>10</span> contes
 
 <tr><td class='intro'>
 <div class='faq-you'>What the heck is this?</div>
-<div class='answer-you'>You've found the Screenshot of the Week leaderboards. Each leaderboard ranks everybody who has entered the contest based on different criteria, such as votes, points, victories, and total entries.</div>
+<div class='answer-you'>You&rsquo;ve found the Screenshot of the Week leaderboards. Each leaderboard ranks everybody who has entered the contest based on different criteria, such as votes, points, victories, and total entries.</div>
 <p/>
 <div class='faq-you'>What are points?</div>
 <div class='answer-you'>Good question! You get one point per vote and an additional point for each vote you beat your competitors by.  If I get 15 votes in a contest and I beat two opponents by 7 and 11 votes, I get 15 + 7 + 11 = <span style='font-weight: bold'>33</span> points.</div>
@@ -62,7 +62,7 @@ All deltas calculated over last <span style='font-weight:bold;'>10</span> contes
 <li>It&rsquo;s based on your vote margins against your competitors in every contest you&rsquo;ve entered.</li>
 <li>The score is biased toward 5,000.  Enter more contests to reduce the weight of this bias.</li>
 <li>Recent performance is weighted more heavily than past performance.  It takes about 10 entries for an old result to lose half of its significance.</li>
-<li>It is possible for your rating to go down when winning a competition (if you&rsquo;re less dominant than usual).  Similarly, it is possible for your rating to go up when doing poorly (if you nonetheless fared better than usual).</li>
+<li>It is possible for your rating to go down when winning a competition (if you&rsquo;re less dominant than usual).  Similarly, it is possible for your rating to go up when doing poorly (if you nonetheless fare better than usual).</li>
 </ul></div>
 <p/>
 <div class='faq-you'>How does one get 0.5 wins?</div>
@@ -75,9 +75,9 @@ All deltas calculated over last <span style='font-weight:bold;'>10</span> contes
 <div class='answer-you'>The whole idea behind this page is to offer a unique retrospective on the history of the contest for <span style='font-weight: bold;'>fun</span>. There are errors on it. The list of categories is not comprehensive. Both the votes and the points systems are flawed to an extent. The answer is no: do not take these stats too seriously. If you want to base your value as a human being off the results shown here, take a step back and re-examine your priorities in life.</div>
 <p/>
 <div class='faq-you'>How is this page generated?</div>
-<div class='answer-you'>A Java applet forms HTML from the contest results as they are presented in a text file. The script takes only about one second to run.</div>
+<div class='answer-you'>I maintain text files describing contest results and member name changes.  A Java applet processes the data and spits out HTML pages for you all to enjoy.</div>
 <p/>
 <div class='faq-you'>Whom should I contact with comments, questions or error reports?</div>
-<div class='answer-you'><a class='green' href='http://www.purezc.net/forums/index.php?app=members&module=messaging&section=send&do=form&fromMemberID=2237'>Send a private message to nicklegends.</a> Thanks in advance for the feedback!</div>
+<div class='answer-you'><a class='green' href='http://www.purezc.net/forums/index.php?app=members&module=messaging&section=send&do=form&fromMemberID=2237'>Send a private message to nicklegends.</a>  He thanks you in advance for the feedback!</div>
 </td></tr></table>
 </div>
