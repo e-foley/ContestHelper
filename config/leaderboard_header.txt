@@ -56,8 +56,8 @@ All deltas calculated over last <span style='font-weight:bold;'>10</span> contes
 <div class='faq-you'>Why bother with points?</div>
 <div class='answer-you'>Votes are harder to come by in large contests because there are more options for voters to choose from. This makes each vote received in a large contest arguably more valuable than each vote received in a small contest. Points reflect this whereas a simple vote tally does not.</div>
 <p/>
-<div class='faq-you'>Some members have question marks (?) instead of votes and points in the details section. Why?</div>
-<div class='answer-you'>The polls in Screenshots of the Week 1&ndash;4 are lost. For these contests, entrants are formally given zero votes and zero points but get preference in the leaderboards over members who would otherwise have the same number of votes or points. This is denoted with a plus sign (+) beside the appropriate tally.</div>
+<div class='faq-you'>Some members have a plus sign (+) next to their votes and points.  Why?</div>
+<div class='answer-you'>The polls in Screenshots of the Week 1&ndash;4 are lost. For these contests, entrants are formally given zero votes and zero points but get preference in the leaderboards over members who would otherwise have the same number of votes or points.</div>
 <p/>
 <!--<div class='faq-you'>How are names ordered in the case of a tie?</div>
 <div class='answer-you'>Do you really want to know? Okay, fine. Ties are broken by which member entered more recently. If both members last entered in the same contest, the upper hand is given to whoever got more votes in that contest. If both received the same number of votes, then whoever entered more recently prior to that contest is favored. The votes here are then compared if necessary. This algorithm works its way back to the start of the contest. If two members have identical records, then case-insensitive alphabetical order is the deciding factor. Don't expect this to happen often.</div>
