@@ -1,9 +1,11 @@
-import java.io.*;
-import java.nio.channels.FileChannel;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.ListIterator;
 import java.nio.file.Files;
-import java.nio.file.Path;
 
 abstract class UserProfile
 {
@@ -25,8 +27,8 @@ abstract class UserProfile
         
         try
         {
-            FileWriter fstream = new FileWriter(initial_target);
-            BufferedWriter out = new BufferedWriter(fstream);
+            FileOutputStream fstream = new FileOutputStream(initial_target);
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fstream, StandardCharsets.UTF_8));
             Master.addFileToBuffer("config/profile_header.txt", out, swaps);
             
             ArrayList<String> unique_names = mem.getUniqueNames();
