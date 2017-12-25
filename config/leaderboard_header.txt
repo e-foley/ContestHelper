@@ -56,6 +56,15 @@ All deltas calculated over last <span style='font-weight:bold;'>10</span> contes
 <div class='faq-you'>Why bother with points?</div>
 <div class='answer-you'>Votes are harder to come by in large contests because there are more options for voters to choose from. This makes each vote received in a large contest arguably more valuable than each vote received in a small contest. Points reflect this whereas a simple vote tally does not.</div>
 <p/>
+<div class='faq-you'>What is a member's &ldquo;formidable&rdquo; rating?</div>
+<div class='answer-you'>The formidable rating is designed to measure Screenshot of the Week dominance.  The formula is a little complex, but here are the takeaways:
+<ul>
+It&rsquo;s based on your vote margins against your competitors in every contest you&rsquo;ve entered.</li>
+<li>The score is biased toward 5,000.  Enter more contests to reduce the weight of this bias.</li>
+<li>Recent performance is weighted more heavily than past performance.  It takes about 10 entries for an old result to lose half of its significance.</li>
+<li>It is possible for your rating to go down when winning a competition (if you&rsquo;re less dominant than usual).  Similarly, it is possible for your rating to go up when doing poorly (if you nonetheless fared better than usual).</li>
+</ul></div>
+<p/>
 <div class='faq-you'>Some members have a plus sign (+) next to their votes and points.  Why?</div>
 <div class='answer-you'>The polls in Screenshots of the Week 1&ndash;4 are lost. For these contests, entrants are formally given zero votes and zero points but get preference in the leaderboards over members who would otherwise have the same number of votes or points.</div>
 <p/>
