@@ -72,7 +72,7 @@ All deltas calculated over last <span style='font-weight:bold;'>10</span> contes
 <div class='answer-you'>The polls in Screenshots of the Week 1&ndash;4 are lost. For these contests, entrants are formally given zero votes and zero points but get preference in the leaderboards over members who would otherwise have the same number of votes or points.</div>
 <p/>
 <div class='faq-you'>Should I take these leaderboards seriously?</div>
-<div class='answer-you'>The whole idea behind this page is to offer a unique retrospective on the history of the contest for <span style='font-weight: bold;'>fun</span>. There are errors on it. The list of categories is not comprehensive. Both the votes and the points systems are flawed to an extent. The answer is no: do not take these stats too seriously. If you want to base your value as a human being off the results shown here, take a step back and re-examine your priorities in life.</div>
+<div class='answer-you'>The whole idea behind this page is to offer a unique retrospective on the history of the contest for <span style='font-weight: bold;'>fun</span>. There are errors on it. The list of categories is not comprehensive. The metrics have flaws. The answer is no: do not take these stats too seriously. If you want to base your value as a human being off the results shown here, take a step back and re-examine your priorities in life.</div>
 <p/>
 <div class='faq-you'>How is this page generated?</div>
 <div class='answer-you'>I maintain text files describing contest results and member name changes.  A Java applet processes the data and spits out HTML pages for you all to enjoy.</div>
