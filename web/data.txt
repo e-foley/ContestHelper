@@ -4350,9 +4350,14 @@ TheRock; png; 2
 Orithan; png; 10
 Anthus; png; 1
 Shoshon the Elegant; Shoshon%20the%20Elegant; png; 4
-/*
+
 #641 @ 73283
-Demonlink; png; 
+Demonlink; png; 27
+Shoshon the Elegant; Shoshon%20the%20Elegant; png; 6
+Dimentio; png; 7
+/*
+#642 @ 73312
 Shoshon the Elegant; Shoshon%20the%20Elegant; png; 
-Dimentio; png; 
+Anthus; png; 
+Matthew[294314]; png; 
 /*
