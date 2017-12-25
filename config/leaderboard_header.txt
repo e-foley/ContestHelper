@@ -51,7 +51,7 @@ All deltas calculated over last <span style='font-weight:bold;'>10</span> contes
 <div class='answer-you'>You've found the Screenshot of the Week leaderboards. Each leaderboard ranks everybody who has entered the contest based on different criteria, such as votes, points, victories, and total entries.</div>
 <p/>
 <div class='faq-you'>What are points?</div>
-<div class='answer-you'>Good question! You get one point for each vote you receive in a contest, and an additional point for every vote by which you best your competitors, even if you don't win the contest as a whole. If I get 15 votes in a contest and I beat two opponents by 7 and 11 votes, I get 15 + 7 + 11 = <span style='font-weight: bold'>33</span>  points.</div>
+<div class='answer-you'>Good question! You get one point per vote and an additional point for each vote you beat your competitors by.  If I get 15 votes in a contest and I beat two opponents by 7 and 11 votes, I get 15 + 7 + 11 = <span style='font-weight: bold'>33</span> points.</div>
 <p/>
 <div class='faq-you'>Why bother with points?</div>
 <div class='answer-you'>Votes are harder to come by in large contests because there are more options for voters to choose from. This makes each vote received in a large contest arguably more valuable than each vote received in a small contest. Points reflect this whereas a simple vote tally does not.</div>
