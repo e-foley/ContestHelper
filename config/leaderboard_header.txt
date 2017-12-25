@@ -59,7 +59,7 @@ All deltas calculated over last <span style='font-weight:bold;'>10</span> contes
 <div class='faq-you'>What is a member's &ldquo;formidable&rdquo; rating?</div>
 <div class='answer-you'>The formidable rating is designed to measure Screenshot of the Week dominance.  The formula is a little complex, but here are the takeaways:
 <ul>
-It&rsquo;s based on your vote margins against your competitors in every contest you&rsquo;ve entered.</li>
+<li>It&rsquo;s based on your vote margins against your competitors in every contest you&rsquo;ve entered.</li>
 <li>The score is biased toward 5,000.  Enter more contests to reduce the weight of this bias.</li>
 <li>Recent performance is weighted more heavily than past performance.  It takes about 10 entries for an old result to lose half of its significance.</li>
 <li>It is possible for your rating to go down when winning a competition (if you&rsquo;re less dominant than usual).  Similarly, it is possible for your rating to go up when doing poorly (if you nonetheless fared better than usual).</li>
