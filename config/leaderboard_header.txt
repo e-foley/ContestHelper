@@ -48,27 +48,36 @@ All deltas calculated over last <span style='font-weight:bold;'>10</span> contes
 
 <tr><td class='intro'>
 <div class='faq-you'>What the heck is this?</div>
-<div class='answer-you'>You've found the Screenshot of the Week leaderboards. Each leaderboard ranks everybody who has entered the contest based on different criteria, such as votes, points, victories, and total entries.</div>
+<div class='answer-you'>You&rsquo;ve found the Screenshot of the Week leaderboards. Each leaderboard ranks everybody who has entered the contest based on different criteria, such as votes, points, victories, and total entries.</div>
+<p/>
+<div class='faq-you'>What is a member's &ldquo;formidable&rdquo; rating?</div>
+<div class='answer-you'>The formidable rating is designed to measure Screenshot of the Week dominance.  The formula is a little complex, but here are the takeaways:
+<ul>
+<li>It&rsquo;s based on your vote margins against your competitors in every contest you&rsquo;ve entered.</li>
+<li>The score is biased toward 5,000.  Enter more contests to reduce the weight of this bias.</li>
+<li>Recent performance is weighted more heavily than past performance.  It takes about 10 entries for an old result to lose half of its significance.</li>
+<li>It is possible for your rating to go down when winning a competition (if you&rsquo;re less dominant than usual).  Similarly, it is possible for your rating to go up when doing poorly (if you nonetheless fare better than usual).</li>
+</ul></div>
 <p/>
 <div class='faq-you'>What are points?</div>
-<div class='answer-you'>Good question! You get one point for each vote you receive in a contest, and an additional point for every vote by which you best your competitors, even if you don't win the contest as a whole. If I get 15 votes in a contest and I beat two opponents by 7 and 11 votes, I get 15 + 7 + 11 = <span style='font-weight: bold'>33</span>  points.</div>
+<div class='answer-you'>Good question! You get one point per vote and an additional point for each vote you beat your competitors by.  If I get 15 votes in a contest and I beat two opponents by 7 and 11 votes, I get 15 + 7 + 11 = <span style='font-weight: bold'>33</span> points.</div>
 <p/>
 <div class='faq-you'>Why bother with points?</div>
 <div class='answer-you'>Votes are harder to come by in large contests because there are more options for voters to choose from. This makes each vote received in a large contest arguably more valuable than each vote received in a small contest. Points reflect this whereas a simple vote tally does not.</div>
 <p/>
-<div class='faq-you'>Some members have question marks (?) instead of votes and points in the details section. Why?</div>
-<div class='answer-you'>The polls in Screenshots of the Week 1-4 are lost. For these contests, entrants are formally given zero votes and zero points but get preference in the leaderboards over members who would otherwise have the same number of votes or points. This is denoted with a plus sign (+) beside the appropriate tally.</div>
+<div class='faq-you'>How does one get 0.5 wins?</div>
+<div class='answer-you'>Screenshot of the Week used to have occasional ties.  In this situation, the win is split among those who tied for the most votes in the contest.</div>
 <p/>
-<!--<div class='faq-you'>How are names ordered in the case of a tie?</div>
-<div class='answer-you'>Do you really want to know? Okay, fine. Ties are broken by which member entered more recently. If both members last entered in the same contest, the upper hand is given to whoever got more votes in that contest. If both received the same number of votes, then whoever entered more recently prior to that contest is favored. The votes here are then compared if necessary. This algorithm works its way back to the start of the contest. If two members have identical records, then case-insensitive alphabetical order is the deciding factor. Don't expect this to happen often.</div>
-<p/>-->
+<div class='faq-you'>Some members have a plus sign (+) next to their votes and points.  Why?</div>
+<div class='answer-you'>The polls in Screenshots of the Week 1&ndash;4 are lost. For these contests, entrants are formally given zero votes and zero points but get preference in the leaderboards over members who would otherwise have the same number of votes or points.</div>
+<p/>
 <div class='faq-you'>Should I take these leaderboards seriously?</div>
-<div class='answer-you'>The whole idea behind this page is to offer a unique retrospective on the history of the contest for <span style='font-weight: bold;'>fun</span>. There are errors on it. The list of categories is not comprehensive. Both the votes and the points systems are flawed to an extent. The answer is no: do not take these stats too seriously. If you want to base your value as a human being off the results shown here, take a step back and re-examine your priorities in life.</div>
+<div class='answer-you'>The whole idea behind this page is to offer a unique retrospective on the history of the contest for <span style='font-weight: bold;'>fun</span>. There are errors on it. The list of categories is not comprehensive. The metrics have flaws. The answer is no: do not take these stats too seriously. If you want to base your value as a human being off the results shown here, take a step back and re-examine your priorities in life.</div>
 <p/>
 <div class='faq-you'>How is this page generated?</div>
-<div class='answer-you'>A Java applet forms HTML from the contest results as they are presented in a text file. The script takes only about one second to run.</div>
+<div class='answer-you'>I maintain text files describing contest results and member name changes.  A Java applet processes the data and spits out HTML pages for you all to enjoy.</div>
 <p/>
 <div class='faq-you'>Whom should I contact with comments, questions or error reports?</div>
-<div class='answer-you'><a class='green' href='http://www.purezc.net/forums/index.php?app=members&module=messaging&section=send&do=form&fromMemberID=2237'>Send a private message to nicklegends.</a> Thanks in advance for the feedback!</div>
+<div class='answer-you'><a class='green' href='http://www.purezc.net/forums/index.php?app=members&module=messaging&section=send&do=form&fromMemberID=2237'>Send a private message to nicklegends.</a>  He thanks you in advance for the feedback!</div>
 </td></tr></table>
 </div>
