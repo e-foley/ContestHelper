@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Entry
 {
-    class MemberNameCouple {
+    static class MemberNameCouple {
         public Member member;
         public String name_submitted_under;
     }

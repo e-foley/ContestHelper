@@ -10,7 +10,7 @@ import java.util.Set;
 import java.nio.charset.StandardCharsets;
 
 public class History {
-    class MemberInfo {
+    static class MemberInfo {
         public String member_name;
         public String tag;
         int id;
@@ -53,7 +53,7 @@ public class History {
             polls.add(pollRetrieved);
         }
 
-        ArrayList<Entry.MemberNameCouple> members_retrieved;
+        ArrayList<Entry.MemberNameCouple> members_retrieved = new ArrayList<Entry.MemberNameCouple>();
         for (MemberInfo info : member_infos) {
             // Aliases for convenience
             String memberName = info.member_name;
@@ -87,7 +87,7 @@ public class History {
                 }
             }
             // TODO: Clean this up... This can't be most efficient, can it?
-            Entry.MemberNameCouple couple;
+            Entry.MemberNameCouple couple = new Entry.MemberNameCouple();
             couple.member = memberRetrieved;
             couple.name_submitted_under = memberName;
             
@@ -285,8 +285,9 @@ public class History {
 
                 if (parse.hasMemberInfo && !blockComment)
                 {
-                    addEntry(currentPollName, parse.hasTopicInfo, parse.topic, currentSynch, parse.memberName, parse.tag, true, -1, parse.hasURL, parse.URL, parse.hasVotes, parse.votes, !parse.hasVotes, parse.overrideCode);
-                }
+                    // addEntry(currentPollName, parse.hasTopicInfo, parse.topic, currentSynch, parse.member_infos, true, -1, parse.hasURL, parse.URL, parse.hasVotes, parse.votes, !parse.hasVotes, parse.overrideCode);
+                    addEntry(currentPollName, parse.hasTopicInfo, parse.topic, currentSynch, parse.member_infos, true, parse.hasURL, parse.URL, parse.hasVotes, parse.votes, !parse.hasVotes, parse.overrideCode);
+                 }
 
                 if (parse.isPollNote && !blockComment && pollRetrieved != null) {
                     pollRetrieved.addNote(parse.note);

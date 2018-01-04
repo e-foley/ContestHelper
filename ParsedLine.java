@@ -11,9 +11,9 @@ public class ParsedLine
     public int topic;
     
     public boolean hasMemberInfo;
-    public ArrayList<String> memberNames;
-    public boolean hasTag;
-    public String tag;
+    public ArrayList<History.MemberInfo> member_infos;
+    //public boolean hasTag;
+    //public String tag;
     public boolean hasURL;
     public String URL;
     public boolean hasVotes;
@@ -48,9 +48,9 @@ public class ParsedLine
         hasTopicInfo = false;
         topic = -1;
         hasMemberInfo = false;
-        memberNames = new ArrayList<String>();
-        hasTag = false;
-        tag = "";
+        member_infos = new ArrayList<History.MemberInfo>();
+        //hasTag = false;
+        //tag = "";
         hasURL = false;
         URL = "";
         hasVotes = false;
@@ -104,15 +104,20 @@ public class ParsedLine
                     // Split the member into name and tag sections as appropriate nicklegends[2237]
                     String[] tagSplit = each_member[i].split(regexTag);
                     if (tagSplit.length > 1) {
-                        hasTag = true;
-                        tag = tagSplit[1];
-                        //memberName = tagSplit[0];
-                        memberNames.add(tagSplit[0]);
-                    } else {
-                        hasTag = false;
-                        tag = "";
+                        History.MemberInfo info = new History.MemberInfo();
+                        info.member_name = tagSplit[0];
+                        info.tag = tagSplit[1];
+                        // info.id = 
+                        // hasTag = true;
                         // memberName = tagSplit[0];
-                        memberNames.add(tagSplit[0]);
+                        member_infos.add(info);
+                    } else {
+                        History.MemberInfo info = new History.MemberInfo();
+                        info.member_name = tagSplit[0];
+                        info.tag = "";
+                        // info.id = 
+                        // hasTag = false;
+                        member_infos.add(info);
                     }
                 }
             }
@@ -140,7 +145,7 @@ public class ParsedLine
                         pollIDString = "0" + pollIDString;
                      
                     hasURL = true;
-                    URL = "http://sotw.purezc.net/SOTW" + pollIDString + "/" + memberNames.get(0).replace(" ","%20").replace("'","%27") + "." + splits[1]; // TODO: Do we want to include other members here by default?
+                    URL = "http://sotw.purezc.net/SOTW" + pollIDString + "/" + member_infos.get(0).member_name.replace(" ","%20").replace("'","%27") + "." + splits[1]; // TODO: Do we want to include other members here by default?
                 }
             }
             
