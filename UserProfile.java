@@ -81,7 +81,7 @@ abstract class UserProfile
         }
         catch (Exception e)
         {
-            System.err.println("Error: " + e.getMessage());
+            System.err.println("Error caught in UserProfile: " + e.getMessage());
             //JOptionPane.showMessageDialog(null, "User profile could not be generated. Talk to nicklegends about it.\n\"" + e.getMessage() + "\"", "Error", JOptionPane.ERROR_MESSAGE);
         }
         
@@ -152,7 +152,7 @@ abstract class UserProfile
             
             out.write("</table></div>\n");
         } catch (Exception e) {
-            System.err.println("Error: " + e.getMessage());
+            System.err.println("Error caught in UserProfile: " + e.getMessage());
         }
     }
 }

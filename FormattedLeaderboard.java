@@ -210,7 +210,7 @@ public class FormattedLeaderboard {
         }
         catch (Exception e)
         {
-            System.err.println("Error: " + e.getMessage());
+            System.err.println("Error caught in FormattedLeaderboard: " + e.getMessage());
         }
     }
 }

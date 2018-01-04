@@ -227,7 +227,7 @@ public class History {
         catch (Exception e)
         {
             // Catch exception if any
-            System.err.println("Error: " + e.getMessage());
+            System.err.println("Error caught in History: " + e.getMessage());
             return false;
         }
         return true;
@@ -302,7 +302,7 @@ public class History {
         catch (Exception e)
         {
             //Catch exception if any
-            System.err.println("Error: " + e.getMessage());
+            System.err.println("Error caught in History: " + e.getMessage());
             return false;
         }
         return true;
