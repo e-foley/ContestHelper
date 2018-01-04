@@ -5,7 +5,7 @@ public class Entry
     public static final int AUTO_WIN = 1;
     public static final int AUTO_LOSE = -1;
     
-    private Member member;
+    private ArrayList<Member> members;
     private Poll poll;
     private String URL;
     private boolean hasURL;
@@ -24,9 +24,9 @@ public class Entry
     private int potential;
     private boolean potential_assigned;
     
-    public Entry(Member myMember, Poll myPoll, boolean myHasURL, String myURL, boolean myHasVotes, int votesSet, boolean myHasUncertainty, int myOverrideCode, String myNameSubmittedUnder)
+    public Entry(ArrayList<Member> myMembers, Poll myPoll, boolean myHasURL, String myURL, boolean myHasVotes, int votesSet, boolean myHasUncertainty, int myOverrideCode, String myNameSubmittedUnder)
     {
-        member = myMember;
+        members = myMembers;
         poll = myPoll;
         URL = myURL;
         hasURL = myHasURL;
@@ -45,9 +45,9 @@ public class Entry
         potential_assigned = false;
     }
     
-    public Member getMember()
+    public ArrayList<Member> getMembers()
     {
-        return member;
+        return members;
     }
     
     public Poll getPoll()
@@ -55,9 +55,9 @@ public class Entry
         return poll;
     }
     
-    public void setMember(Member memberSetting)
+    public void setMembers(ArrayList<Member> membersSetting)
     {
-        member = memberSetting;
+        members = membersSetting;
     }
     
     public String getURL()
