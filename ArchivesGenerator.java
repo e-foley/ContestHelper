@@ -46,7 +46,14 @@ public class ArchivesGenerator {
                                 out.write("<img class='picture-picture' title='The winner&#8217;s image is missing from the archives. Sorry.' src='images/no_image.png'/>");
                             } else {
                                 out.write("<a href='" + winners.get(j).getURL() + "'>");
-                                out.write("<img class='picture-picture' title='" + winners.get(j).getMember().getMostRecentName() + "' src='" + winners.get(j).getURL() + "'/>");
+                                out.write("<img class='picture-picture' title='");
+                                for (int k = 0; k < winners.get(j).getMemberNameCouples().size(); ++k) {
+                                    if (k != 0) {
+                                        out.write(" + ");
+                                    }
+                                    out.write(winners.get(j).getMemberNameCouples().get(k).member.getMostRecentName());
+                                }
+                                out.write("' src='" + winners.get(j).getURL() + "'/>");
                                 out.write("</a>");
                             }
                         }
@@ -90,19 +97,26 @@ public class ArchivesGenerator {
                         
                         out.write("<td class='name'>");
                         // TODO: Rename 'image' class.  It's a holdover from a much older version of the page.
-                        out.write("<a class='image' href='" + UserProfile.getProfileUrl(entry.getMember()) + "'>");
-                        out.write(entry.getMember().getMostRecentName());
+                        for (int k = 0; k < entry.getMemberNameCouples().size(); ++k) {
+                            if (k != 0) {
+                                out.write(" + ");
+                            }
+                            out.write("<a class='image' href='" + UserProfile.getProfileUrl(entry.getMemberNameCouples().get(k).member) + "'>");
+                            out.write(winners.get(j).getMemberNameCouples().get(k).member.getMostRecentName());
+                            out.write("</a>");
+                        }
+                        
                         // Add an icon if the shot won the poll
                         if (isWinner) {
                             out.write(" <img class='winnericon' title='Winner!' src='images/star.png'/>");
                         }
                         
                         // List the member's old name if they use a different name now
-                        if (!entry.getMember().getMostRecentName().equals(entry.getNameSubmittedUnder())) {
-                            out.write("<br/><span class='old-name'>(as " + entry.getNameSubmittedUnder() + ")</span>");
-                        }
-                        
-                        out.write("</a></td>");
+                        // TODO: READD!
+//                         if (!entry.getMember().getMostRecentName().equals(entry.getNameSubmittedUnder())) {
+//                             out.write("<br/><span class='old-name'>(as " + entry.getNameSubmittedUnder() + ")</span>");
+//                         }
+                        out.write("</span></td>");
 
                         if (entry.hasVotes())
                         {
