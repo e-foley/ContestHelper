@@ -100,7 +100,7 @@ public class History {
         pollRetrieved.addEntry(entryAdding);
         
         for (Entry.MemberNameCouple couple : members_retrieved) {
-            couple.member.addEntry(entryAdding);  // TODO: Change this to include ownership!!
+            couple.member.addEntry(entryAdding, 1.0f / members_retrieved.size());
         }
     }
 
@@ -114,18 +114,18 @@ public class History {
         for (Integer member_id : member_ids) {
             Member member = new Member(members.get(member_id));  // Performs incomplete clone per custom Member constructor
             returning.members.put(member.getId(), member);  // Populate a sort of copy of the members array
-            ArrayList<Entry> entries_to_remove = new ArrayList<Entry>();
-            ArrayList<Entry> entries = member.getEntries();
-            for (Entry ent : entries) {
-                int contest_index = polls.indexOf(ent.getPoll());
+            ArrayList<Member.EntryStakePair> pairs_to_remove = new ArrayList<Member.EntryStakePair>();
+            ArrayList<Member.EntryStakePair> pairs = member.getEntries();
+            for (Member.EntryStakePair pair : pairs) {
+                int contest_index = polls.indexOf(pair.entry.getPoll());
                 if (contest_index != -1 && (contest_index < index_start || contest_index > index_end)) {
-                    entries_to_remove.add(ent);
+                    pairs_to_remove.add(pair);
                 }
             }
             // Now actually remove these entries from the Member
-            for (Entry ent_rem : entries_to_remove) {
+            for (Member.EntryStakePair pair_rem : pairs_to_remove) {
                 // System.out.println("Entry removed!" + ent_rem.getURL());
-                member.removeEntry(ent_rem);
+                member.removeEntry(pair_rem);
             }
         }
 

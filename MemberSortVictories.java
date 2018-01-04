@@ -23,13 +23,15 @@ public class MemberSortVictories implements MemberDataRetriever
     {
         //boolean linkTopics = false;
         String building = new String();
-        ArrayList<Entry> entries = m.getEntries();
-        ArrayList<Entry> winners = new ArrayList<Entry>();
+        ArrayList<Member.EntryStakePair> pairs = m.getEntries();
+        ArrayList<Member.EntryStakePair> winners = new ArrayList<Member.EntryStakePair>();
         DecimalFormat df = new DecimalFormat("#.##");
-        for (int i=0; i<entries.size(); i++)
+        for (int i=0; i<pairs.size(); i++)
         {
-            if (entries.get(i).getWinningness() > 0)
-                winners.add(entries.get(i));
+            Member.EntryStakePair pair = pairs.get(i);
+            if (pair.entry.getWinningness() * pair.stake > 0) {
+                winners.add(pair);
+            }
         }
         
         if (winners.size() == 0)
@@ -39,13 +41,15 @@ public class MemberSortVictories implements MemberDataRetriever
         
         for (int i=0; i<winners.size(); i++)
         {
-            if (linkTopics && winners.get(i).getPoll().hasTopic()) // NOTE: The below should strip the A and B designations from multi-thread contests
-                building += ("<a class='green' href='http://www.purezc.net/forums/index.php?showtopic=" + winners.get(i).getPoll().getTopic() + "'>#" + winners.get(i).getPoll().getName() + "</a>");
+            Member.EntryStakePair pair = winners.get(i);
+            
+            if (linkTopics && pair.entry.getPoll().hasTopic()) // NOTE: The below should strip the A and B designations from multi-thread contests
+                building += ("<a class='green' href='http://www.purezc.net/forums/index.php?showtopic=" + pair.entry.getPoll().getTopic() + "'>#" + pair.entry.getPoll().getName() + "</a>");
             else
-                building += ("#" + winners.get(i).getPoll().getName());
-            if (winners.get(i).getWinningness() < 1.0f)
+                building += ("#" + pair.entry.getPoll().getName());
+            if (pair.entry.getWinningness() * pair.stake < 1.0f)
             {
-                building += " (" + df.format(winners.get(i).getWinningness()) + ")";
+                building += " (" + df.format(pair.entry.getWinningness() * pair.stake) + ")";
             }
             if (i < winners.size()-2)
                 building += ", ";

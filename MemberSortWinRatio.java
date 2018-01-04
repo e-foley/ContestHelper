@@ -35,7 +35,7 @@ public class MemberSortWinRatio implements MemberDataRetriever
         building += (NumberFormat.getInstance().format(m.getTotalWinningness()) + " win");
         if (m.getTotalWinningness() != 1.0)
             building += "s";
-        building += (" in " + m.getTotalEntries() + " attempt");
+        building += (" in " + NumberFormat.getInstance().format(m.getTotalEntries()) + " attempt");
         if (m.getTotalEntries() != 1)
             building += "s";
         return building;

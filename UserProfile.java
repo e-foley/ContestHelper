@@ -53,10 +53,10 @@ abstract class UserProfile
             
             out.write("<div class='picture-large-list'>\n");
             
-            ArrayList<Entry> entries = mem.getEntries();
+            ArrayList<Member.EntryStakePair> pairs = mem.getEntries();
             // Note: this assumes that the entries have been ordered chronologically
-            for (int i = entries.size()-1; i >= 0; i--) {
-                Entry ent = entries.get(i);
+            for (int i = pairs.size()-1; i >= 0; i--) {
+                Entry ent = pairs.get(i).entry;
                 Poll poll = ent.getPoll();
                 
                 out.write("<div class='picture-large-div'>");

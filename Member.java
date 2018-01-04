@@ -387,16 +387,16 @@ public class Member
         return maxList;
     }
     
-    public static int getNumberOfEntriesWithMostVotes(ArrayList<Entry> list)
+    public static int getNumberOfEntriesWithMostVotes(ArrayList<EntryStakePair> list)
     {
         return list.size();
     }
     
-    public static int getMostVotesSingle(ArrayList<Entry> list)
+    public static float getMostVotesSingle(ArrayList<EntryStakePair> list)
     {
         if (list == null || list.size() == 0)
             return 0;
-        else return list.get(0).getVotes();
+        else return list.get(0).entry.getVotes() * list.get(0).stake;
     }
     
     public ArrayList<EntryStakePair> getEntriesWithMostVotes()
@@ -420,16 +420,16 @@ public class Member
         return maxList;
     }
     
-    public static int getNumberOfEntriesWithMostPoints(ArrayList<Entry> list)
+    public static int getNumberOfEntriesWithMostPoints(ArrayList<EntryStakePair> list)
     {
         return list.size();
     }
     
-    public static int getMostPointsSingle(ArrayList<Entry> list)
+    public static float getMostPointsSingle(ArrayList<EntryStakePair> list)
     {
         if (list == null || list.size() == 0)
             return 0;
-        else return list.get(0).getPoints();
+        else return list.get(0).entry.getPoints() * list.get(0).stake;
     }
     
     public ArrayList<EntryStakePair> getEntriesWithMostPoints()
