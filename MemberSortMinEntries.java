@@ -3,9 +3,9 @@ import java.util.ArrayList;
 
 public class MemberSortMinEntries implements Comparator<Member>
 {
-    int minimum;
+    float minimum;
     
-    public MemberSortMinEntries(int minimumSet)
+    public MemberSortMinEntries(float minimumSet)
     {
         minimum = minimumSet;
     }

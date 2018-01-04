@@ -58,7 +58,7 @@ public class MemberSortEntries implements MemberDataRetriever
     }
     
     public NumberFormat getFormat() {
-        return NumberFormat.getInstance();
+        return new DecimalFormat("#.##");
     }
     
     public boolean qualifies(Member mem) {

@@ -1,6 +1,7 @@
 import java.util.Comparator;
 import java.util.ArrayList;
 import java.text.NumberFormat;
+import java.text.DecimalFormat;
 
 public class MemberSortPlusMinusHeads implements MemberDataRetriever
 {
@@ -49,7 +50,7 @@ public class MemberSortPlusMinusHeads implements MemberDataRetriever
     }
     
     public NumberFormat getFormat() {
-        return NumberFormat.getInstance();
+        return new DecimalFormat("#.##");
     }
     
     public boolean qualifies(Member mem) {
