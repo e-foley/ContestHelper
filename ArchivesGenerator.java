@@ -102,7 +102,7 @@ public class ArchivesGenerator {
                                 out.write(" + ");
                             }
                             out.write("<a class='image' href='" + UserProfile.getProfileUrl(entry.getMemberNameCouples().get(k).member) + "'>");
-                            out.write(winners.get(j).getMemberNameCouples().get(k).member.getMostRecentName());
+                            out.write(entry.getMemberNameCouples().get(k).member.getMostRecentName());
                             out.write("</a>");
                         }
                         
