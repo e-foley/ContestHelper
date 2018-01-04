@@ -9,8 +9,13 @@ import java.util.Collection;
 import java.util.Set;
 import java.nio.charset.StandardCharsets;
 
-public class History
-{
+public class History {
+    class MemberInfo {
+        public String member_name;
+        public String tag;
+        int id;
+    }
+    
     private ArrayList<Poll> polls;
     private HashMap<Integer, Member> members;  // Key is member ID, which should also be held by the Members themselves
     String lastPollName;
@@ -22,24 +27,24 @@ public class History
         lastPollName = "";
     }
 
-    public void addEntry(Entry entry_adding, boolean requestId, int memberId) {
-        addEntry(entry_adding.getPoll().getName(),
-                 entry_adding.getPoll().hasTopic(),
-                 entry_adding.getPoll().getTopic(),
-                 entry_adding.getPoll().getSynch(),
-                 entry_adding.getNameSubmittedUnder(),
-                 entry_adding.getMember().getTag(),
-                 requestId,
-                 memberId,
-                 entry_adding.hasURL(),
-                 entry_adding.getURL(),
-                 entry_adding.hasVotes(),
-                 entry_adding.getVotes(),
-                 entry_adding.hasUncertainty(),
-                 entry_adding.getOverrideCode());
-    }
+//     public void addEntry(Entry entry_adding, boolean requestId, int memberId) {
+//         addEntry(entry_adding.getPoll().getName(),
+//                  entry_adding.getPoll().hasTopic(),
+//                  entry_adding.getPoll().getTopic(),
+//                  entry_adding.getPoll().getSynch(),
+//                  entry_adding.getNameSubmittedUnder(),
+//                  entry_adding.getMember().getTag(),
+//                  requestId,
+//                  memberId,
+//                  entry_adding.hasURL(),
+//                  entry_adding.getURL(),
+//                  entry_adding.hasVotes(),
+//                  entry_adding.getVotes(),
+//                  entry_adding.hasUncertainty(),
+//                  entry_adding.getOverrideCode());
+//     }
 
-    public void addEntry(String pollName, boolean hasTopicInfo, int topic, int currentSynch, String memberName, String tag, boolean requestId, int memberId, boolean myHasURL, String URL, boolean myHasVotes, int myVotes, boolean myHasUncertainty, int overrideCode) {
+    public void addEntry(String pollName, boolean hasTopicInfo, int topic, int currentSynch, ArrayList<MemberInfo> member_infos, boolean requestId, boolean myHasURL, String URL, boolean myHasVotes, int myVotes, boolean myHasUncertainty, int overrideCode) {
         Poll pollRetrieved;
         // check if the poll being requested hasn't been formed yet
         if ((pollRetrieved = getPollByName(pollName)) == null) {
@@ -48,38 +53,55 @@ public class History
             polls.add(pollRetrieved);
         }
 
-        Member memberRetrieved;
-        // Prefer to look up by tag since tags are intended to be unique; otherwise, look up by name
-        if (!tag.isEmpty()) {
-            if ((memberRetrieved = getMemberByTag(tag)) == null) {
-                // If there is no member with this tag, create a new member that has this tag.  (Is this kosher or will we run into duplication issues?)
-                memberRetrieved = new Member(tag, memberName);
-                if (requestId) {
-                    memberRetrieved.setId(members.size());
-                } else {
-                    memberRetrieved.setId(memberId);
+        ArrayList<Entry.MemberNameCouple> members_retrieved;
+        for (MemberInfo info : member_infos) {
+            // Aliases for convenience
+            String memberName = info.member_name;
+            String tag = info.tag;
+            int memberId = info.id;
+            // Member identified by other information, if one exists.
+            Member memberRetrieved = null;
+            // Prefer to look up by tag since tags are intended to be unique; otherwise, look up by name
+            if (!tag.isEmpty()) {
+                if ((memberRetrieved = getMemberByTag(tag)) == null) {
+                    // If there is no member with this tag, create a new member that has this tag.  (Is this kosher or will we run into duplication issues?)
+                    memberRetrieved = new Member(tag, memberName);
+                    if (requestId) {
+                        memberRetrieved.setId(members.size());
+                    } else {
+                        memberRetrieved.setId(memberId);
+                    }
+                    members.put(memberRetrieved.getId(), memberRetrieved);
+                    System.out.println("Warning: tag \"" + tag + "\" in data file does not exist in associations file.");
                 }
-                members.put(memberRetrieved.getId(), memberRetrieved);
-                System.out.println("Warning: tag \"" + tag + "\" in data file does not exist in associations file.");
-            }
-        } else {
-            if ((memberRetrieved = getMemberByName(memberName)) == null) {
-                // If there is no member with this name, create a new member with this name
-                memberRetrieved = new Member(memberName);
-                if (requestId) {
-                    memberRetrieved.setId(members.size());
-                } else {
-                    memberRetrieved.setId(memberId);
+            } else {
+                if ((memberRetrieved = getMemberByName(memberName)) == null) {
+                    // If there is no member with this name, create a new member with this name
+                    memberRetrieved = new Member(memberName);
+                    if (requestId) {
+                        memberRetrieved.setId(members.size());
+                    } else {
+                        memberRetrieved.setId(memberId);
+                    }
+                    members.put(memberRetrieved.getId(), memberRetrieved);
                 }
-                members.put(memberRetrieved.getId(), memberRetrieved);
             }
+            // TODO: Clean this up... This can't be most efficient, can it?
+            Entry.MemberNameCouple couple;
+            couple.member = memberRetrieved;
+            couple.name_submitted_under = memberName;
+            
+            members_retrieved.add(couple);
         }
-
-        Entry entryAdding = new Entry(memberRetrieved, pollRetrieved, myHasURL, URL, myHasVotes, myVotes, myHasUncertainty, overrideCode, memberName);
-
+        
+        Entry entryAdding = new Entry(members_retrieved, pollRetrieved, myHasURL, URL, myHasVotes, myVotes, myHasUncertainty, overrideCode);
+    
         // regardless of the above, add the entry to the member's and poll's records
         pollRetrieved.addEntry(entryAdding);
-        memberRetrieved.addEntry(entryAdding);
+        
+        for (Entry.MemberNameCouple couple : members_retrieved) {
+            couple.member.addEntry(entryAdding);  // TODO: Change this to include ownership!!
+        }
     }
 
     // Creates a new history that possesses cloned members and polls from this history (over a given span of polls).
