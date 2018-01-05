@@ -31,11 +31,12 @@ public class MemberSortWinRatio implements MemberDataRetriever
     
     public String getDetails(Member m, boolean linkTopics)
     {        
+        DecimalFormat df = new DecimalFormat("#.##");
         String building = new String();
-        building += (NumberFormat.getInstance().format(m.getTotalWinningness()) + " win");
+        building += (df.format(m.getTotalWinningness()) + " win");
         if (m.getTotalWinningness() != 1.0)
             building += "s";
-        building += (" in " + NumberFormat.getInstance().format(m.getTotalEntries()) + " attempt");
+        building += (" in " + df.format(m.getTotalEntries()) + " attempt");
         if (m.getTotalEntries() != 1)
             building += "s";
         return building;
