@@ -101,9 +101,15 @@ public class ArchivesGenerator {
                             if (k != 0) {
                                 out.write(" + ");
                             }
-                            out.write("<a class='image' href='" + UserProfile.getProfileUrl(entry.getMemberNameCouples().get(k).member) + "'>");
-                            out.write(entry.getMemberNameCouples().get(k).member.getMostRecentName());
+                            Entry.MemberNameCouple couple = entry.getMemberNameCouples().get(k);
+                            out.write("<div class='archiveprofilelinkdiv'><a class='image' href='" + UserProfile.getProfileUrl(couple.member) + "'>");
+                            out.write(couple.member.getMostRecentName());
                             out.write("</a>");
+                            // List the member's old name if they use a different name now
+                            if (!couple.member.getMostRecentName().equals(couple.name_submitted_under)) {
+                                out.write("<br/><span class='old-name'>(as " + couple.name_submitted_under + ")</span>");
+                            }
+                            out.write("</div>");
                         }
                         
                         // Add an icon if the shot won the poll
@@ -111,11 +117,6 @@ public class ArchivesGenerator {
                             out.write(" <img class='winnericon' title='Winner!' src='images/star.png'/>");
                         }
                         
-                        // List the member's old name if they use a different name now
-                        // TODO: READD!
-//                         if (!entry.getMember().getMostRecentName().equals(entry.getNameSubmittedUnder())) {
-//                             out.write("<br/><span class='old-name'>(as " + entry.getNameSubmittedUnder() + ")</span>");
-//                         }
                         out.write("</span></td>");
 
                         if (entry.hasVotes())

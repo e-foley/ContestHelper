@@ -601,3 +601,9 @@ td.contest-cell
 {
   font-size: 0.7em;
 }
+
+.archiveprofilelinkdiv
+{
+  display:inline-block;
+  vertical-align: middle;
+}
