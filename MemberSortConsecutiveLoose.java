@@ -19,12 +19,10 @@ public class MemberSortConsecutiveLoose implements MemberDataRetriever
     
     public String getData(Member m)
     {
-        DecimalFormat df = new DecimalFormat("#.##");
-        
         if (m.getNumberOfLongestStreaks(false) > 1) {
-            return "(" + m.getNumberOfLongestStreaks(false) + "&times;)&nbsp;" + df.format(m.getLongestStreak(false));
+            return "(" + NumberFormat.getInstance().format(m.getNumberOfLongestStreaks(false)) + "&times;)&nbsp;" + getFormat().format(m.getLongestStreak(false));
         } else {
-            return df.format(m.getLongestStreak(false));
+            return getFormat().format(m.getLongestStreak(false));
         }
     }
     

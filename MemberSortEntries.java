@@ -15,7 +15,7 @@ public class MemberSortEntries implements MemberDataRetriever
     
     public String getData(Member m)
     {
-        return ""+m.getTotalEntries();
+        return getFormat().format(m.getTotalEntries());
     }
     
     public String getDetails(Member m, boolean linkTopics)

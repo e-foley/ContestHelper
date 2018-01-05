@@ -15,7 +15,7 @@ public class MemberSortPlusMinusPoints implements MemberDataRetriever
     
     public String getData(Member m)
     {
-        return ""+NumberFormat.getInstance().format(m.getTotalPlusMinusPoints());
+        return getFormat().format(m.getTotalPlusMinusPoints());
     }
     
     public String getDetails(Member m, boolean linkTopics)

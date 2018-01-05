@@ -15,8 +15,7 @@ public class MemberSortVictories implements MemberDataRetriever
     
     public String getData(Member m)
     {
-        DecimalFormat df = new DecimalFormat("#.##");
-        return df.format(m.getTotalWinningness());
+        return getFormat().format(m.getTotalWinningness());
     }
     
     public String getDetails(Member m, boolean linkTopics)

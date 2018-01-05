@@ -20,8 +20,8 @@ public class MemberSortPoints implements MemberDataRetriever
     public String getData(Member m)
     {
         if (m.hasUncertainty())
-            return ""+NumberFormat.getInstance().format(m.getTotalPoints())+"+";
-        return ""+NumberFormat.getInstance().format(m.getTotalPoints());
+            return getFormat().format(m.getTotalPoints())+"+";
+        return getFormat().format(m.getTotalPoints());
     }
     
     public String getDetails(Member m, boolean linkTopics)

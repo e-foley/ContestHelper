@@ -15,7 +15,7 @@ public class MemberSortPlusMinusHeads implements MemberDataRetriever
     
     public String getData(Member m)
     {
-        return ""+NumberFormat.getInstance().format(m.getTotalPlusMinusHeads());
+        return getFormat().format(m.getTotalPlusMinusHeads());
     }
     
     public String getDetails(Member m, boolean linkTopics)

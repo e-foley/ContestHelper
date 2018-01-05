@@ -22,12 +22,11 @@ public class MemberSortVotesSingle implements MemberDataRetriever
     
     public String getData(Member m)
     {
-        DecimalFormat df = new DecimalFormat("#.##");
         ArrayList<Member.EntryStakePair> list = m.getEntriesWithMostVotes();
         if (m.getNumberOfEntriesWithMostVotes(list) > 1) {
-            return "(" + m.getNumberOfEntriesWithMostVotes(list) + "&times;)&nbsp;" + df.format(Member.getMostVotesSingle(list));
+            return "(" + NumberFormat.getInstance().format(m.getNumberOfEntriesWithMostVotes(list)) + "&times;)&nbsp;" + getFormat().format(Member.getMostVotesSingle(list));
         } else {
-            return df.format(Member.getMostVotesSingle(list));
+            return getFormat().format(Member.getMostVotesSingle(list));
         }
     }
     

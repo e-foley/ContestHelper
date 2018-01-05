@@ -20,8 +20,8 @@ public class MemberSortVotes implements MemberDataRetriever
     public String getData(Member m)
     {
         if (m.hasUncertainty())
-            return ""+NumberFormat.getInstance().format(m.getTotalVotes())+"+";
-        return ""+NumberFormat.getInstance().format(m.getTotalVotes());
+            return getFormat().format(m.getTotalVotes())+"+";
+        return getFormat().format(m.getTotalVotes());
     }
     
     public String getDetails(Member m, boolean linkTopics)

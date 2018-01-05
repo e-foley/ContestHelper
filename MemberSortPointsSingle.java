@@ -22,12 +22,11 @@ public class MemberSortPointsSingle implements MemberDataRetriever
     
     public String getData(Member m)
     {
-        DecimalFormat df = new DecimalFormat("#.##");
         ArrayList<Member.EntryStakePair> list = m.getEntriesWithMostPoints();
         if (m.getNumberOfEntriesWithMostPoints(list) > 1) {
-            return "(" + m.getNumberOfEntriesWithMostPoints(list) + "&times;)&nbsp;" + df.format(Member.getMostPointsSingle(list));
+            return "(" + NumberFormat.getInstance().format(m.getNumberOfEntriesWithMostPoints(list)) + "&times;)&nbsp;" + getFormat().format(Member.getMostPointsSingle(list));
         } else {
-            return df.format(Member.getMostPointsSingle(list));
+            return getFormat().format(Member.getMostPointsSingle(list));
         }
     }
     
