@@ -59,14 +59,14 @@ All deltas calculated over last <span style='font-weight:bold;'>10</span> contes
 <li>It is possible for your rating to go down when winning a competition (if you&rsquo;re less dominant than usual).  Similarly, it is possible for your rating to go up when doing poorly (if you nonetheless fare better than usual).</li>
 </ul></div>
 <p/>
+<div class='faq-you'>How does somebody get half of a vote, entry, win, etc.?</div>
+<div class='answer-you'>It&rsquo;s possible to two or more members to enter a shot together.  (See <a class='green' href='https://www.purezc.net/forums/index.php?showtopic=5454'>SotW #50</a> and <a class='green' href='https://www.purezc.net/forums/index.php?showtopic=57298'>SotW #391</a>.)  When this happens, we divide all the metrics evenly.  For example, a shot submitted by two members that earns 11 votes counts as 5.5 votes for each contributor.  Also, Screenshot of the Week used to have occasional ties.  In this situation, the win is split among those who tied for the most votes in the contest.</div>
+<p/>
 <div class='faq-you'>What are points?</div>
 <div class='answer-you'>Good question! You get one point per vote and an additional point for each vote you beat your competitors by.  If I get 15 votes in a contest and I beat two opponents by 7 and 11 votes, I get 15 + 7 + 11 = <span style='font-weight: bold'>33</span> points.</div>
 <p/>
 <div class='faq-you'>Why bother with points?</div>
 <div class='answer-you'>Votes are harder to come by in large contests because there are more options for voters to choose from. This makes each vote received in a large contest arguably more valuable than each vote received in a small contest. Points reflect this whereas a simple vote tally does not.</div>
-<p/>
-<div class='faq-you'>How does one get 0.5 wins?</div>
-<div class='answer-you'>Screenshot of the Week used to have occasional ties.  In this situation, the win is split among those who tied for the most votes in the contest.</div>
 <p/>
 <div class='faq-you'>Some members have a plus sign (+) next to their votes and points.  Why?</div>
 <div class='answer-you'>The polls in Screenshots of the Week 1&ndash;4 are lost. For these contests, entrants are formally given zero votes and zero points but get preference in the leaderboards over members who would otherwise have the same number of votes or points.</div>
