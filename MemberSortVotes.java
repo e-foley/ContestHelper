@@ -30,6 +30,7 @@ public class MemberSortVotes implements MemberDataRetriever
         String building = new String();
         Entry entry;
         ArrayList<Member.EntryStakePair> entries = m.getEntries();
+        DecimalFormat df = new DecimalFormat("#.##");
         for (int i=0; i<entries.size(); i++) {
             Member.EntryStakePair pair = entries.get(i);
             entry = pair.entry;
@@ -37,7 +38,7 @@ public class MemberSortVotes implements MemberDataRetriever
             if (entry.hasUncertainty())
                 building += "?";
             else
-                building += ""+entry.getVotes() * stake;  // Could mention stake here... later?
+                building += ""+df.format(entry.getVotes() * stake);  // Could mention stake here... later?
             if (linkTopics && entry.getPoll().hasTopic())
                 building += (" in <a class='green' href='http://www.purezc.net/forums/index.php?showtopic=" + entry.getPoll().getTopic() + "'>#" + entry.getPoll().getName() + "</a>");
             else

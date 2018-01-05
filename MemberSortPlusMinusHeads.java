@@ -24,6 +24,7 @@ public class MemberSortPlusMinusHeads implements MemberDataRetriever
         String building = new String();
         Entry entry;
         ArrayList<Member.EntryStakePair> entries = m.getEntries();
+        DecimalFormat df = new DecimalFormat("#.##");
         for (int i=0; i<entries.size(); i++) {
             Member.EntryStakePair pair = entries.get(i);
             entry = pair.entry;
@@ -31,7 +32,7 @@ public class MemberSortPlusMinusHeads implements MemberDataRetriever
             if (entry.hasUncertainty())
                 building += "?";
             else
-                building += ""+entry.getPlusMinusHeads() * stake;
+                building += ""+df.format(entry.getPlusMinusHeads() * stake);
             if (linkTopics && entry.getPoll().hasTopic())
                 building += (" in <a class='green' href='http://www.purezc.net/forums/index.php?showtopic=" + entry.getPoll().getTopic() + "'>#" + entry.getPoll().getName() + "</a>");
             else
