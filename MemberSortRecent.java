@@ -16,16 +16,17 @@ public class MemberSortRecent implements Comparator<Member>
         {
             Member.EntryStakePair temp1 = m1.getRecentEntry(offset);
             Member.EntryStakePair temp2 = m2.getRecentEntry(offset);
-            entry1 = temp1.entry;
-            entry2 = temp2.entry;
         
-            if (entry1 == null && entry2 != null)
+            if (temp1 == null && temp2 != null)
                 return 1;
-            if (entry1 != null && entry2 == null)
+            if (temp1 != null && temp2 == null)
                 return -1;
-            if (entry1 == null && entry2 == null)
+            if (temp1 == null && temp2 == null)
                 return 0;
            
+            entry1 = temp1.entry;
+            entry2 = temp2.entry;
+                
             result = entry2.getPoll().getSynch() - entry1.getPoll().getSynch();
     
             if (result == 0) // i.e. if both members last participated in the same contest
