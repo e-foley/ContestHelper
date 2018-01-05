@@ -2,21 +2,26 @@ import java.util.ArrayList;
 
 public class Member
 {
+    static class EntryStakePair {
+        Entry entry;
+        float stake;
+    }
+    
     private ArrayList<String> names;
-    private ArrayList<Entry> entries;
+    private ArrayList<EntryStakePair> entries;
     private String tag;
     private boolean isTagged;
     private boolean hasId;
     private int id;
 
     private boolean dirty;  // Whether stats need to be calculated anew.  We COULD change this to do dirty flags for each stat, maybe with a fancy class...
-    private int total_votes = 0;
-    private int total_points = 0;
-    private int total_plus_minus_points = 0;
-    private int total_plus_minus_heads = 0;
+    private float total_votes = 0;
+    private float total_points = 0;
+    private float total_plus_minus_points = 0;
+    private float total_plus_minus_heads = 0;
     private float total_winningness = 0.0f;
-    private ArrayList<ArrayList<Entry>> winning_streak_loose = new ArrayList<ArrayList<Entry>>();
-    private ArrayList<ArrayList<Entry>> winning_streak_strict = new ArrayList<ArrayList<Entry>>();
+    private ArrayList<ArrayList<EntryStakePair>> winning_streak_loose = new ArrayList<ArrayList<EntryStakePair>>();
+    private ArrayList<ArrayList<EntryStakePair>> winning_streak_strict = new ArrayList<ArrayList<EntryStakePair>>();
     private float longest_streak_loose = 0.0f;
     private float longest_streak_strict = 0.0f;
     private int formidable_rating = 0;
@@ -31,7 +36,7 @@ public class Member
     public Member()
     {
         names = new ArrayList<String>();
-        entries = new ArrayList<Entry>();
+        entries = new ArrayList<EntryStakePair>();
         tag = new String();
         isTagged = false;
         hasId = false;
@@ -42,7 +47,7 @@ public class Member
     // Incomplete clone
     public Member(Member mem) {
         names = new ArrayList<String>(mem.names);
-        entries = new ArrayList<Entry>(mem.entries);
+        entries = new ArrayList<EntryStakePair>(mem.entries);
         tag = mem.tag;
         isTagged = mem.isTagged;
         hasId = mem.hasId;
@@ -54,7 +59,7 @@ public class Member
     {
         names = new ArrayList<String>();
         names.add(myName);
-        entries = new ArrayList<Entry>();
+        entries = new ArrayList<EntryStakePair>();
         tag = new String();
         isTagged = false;
         hasId = false;
@@ -66,7 +71,7 @@ public class Member
     {
         names = new ArrayList<String>();
         names.add(myName);
-        entries = new ArrayList<Entry>();
+        entries = new ArrayList<EntryStakePair>();
         tag = myTag;
         isTagged = true;
         hasId = false;
@@ -77,7 +82,7 @@ public class Member
     public Member(ArrayList<String> myNames)
     {
         names = myNames;
-        entries = new ArrayList<Entry>();
+        entries = new ArrayList<EntryStakePair>();
         tag = new String();
         isTagged = false;
         hasId = false;
@@ -87,7 +92,7 @@ public class Member
     
     public Member(String myTag, ArrayList<String> myNames) {
         names = myNames;
-        entries = new ArrayList<Entry>();
+        entries = new ArrayList<EntryStakePair>();
         tag = myTag;
         isTagged = true;
         hasId = false;
@@ -95,13 +100,16 @@ public class Member
         dirty = true;
     }
 
-    public void addEntry(Entry entryAdding)
+    public void addEntry(Entry entryAdding, float stake)
     {
-        entries.add(entryAdding);
+        EntryStakePair pair = new EntryStakePair();
+        pair.entry = entryAdding;
+        pair.stake = stake;
+        entries.add(pair);
         dirty = true;  // Adding an entry invalidates any cached stats.
     }
     
-    public boolean removeEntry(Entry removing) {
+    public boolean removeEntry(EntryStakePair removing) {
         if (entries.remove(removing)) {
             dirty = true;
             return true;
@@ -124,7 +132,7 @@ public class Member
         return false;
     }
     
-    public ArrayList<Entry> getEntries()
+    public ArrayList<EntryStakePair> getEntries()
     {
         return entries;
     }
@@ -180,62 +188,62 @@ public class Member
         return hasId;
     }
     
-    public int getTotalVotes() {
+    public float getTotalVotes() {
         refreshStats();
         return total_votes;
     }
     
-    private int calcTotalVotes()
+    private float calcTotalVotes()
     {
-        int sum = 0;
-        for (int i=0; i<entries.size(); i++)
-        {
-            sum += entries.get(i).getVotes();
+        float sum = 0.0f;
+        for (int i=0; i<entries.size(); i++) {
+            Member.EntryStakePair pair = entries.get(i);
+            sum += pair.entry.getVotes() * pair.stake;
         }
         return sum;
     }
     
-    public int getTotalPoints() {
+    public float getTotalPoints() {
         refreshStats();
         return total_points;
     }
     
-    private int calcTotalPoints()
+    private float calcTotalPoints()
     {
-        int sum = 0;
-        for (int i=0; i<entries.size(); i++)
-        {
-            sum += entries.get(i).getPoints();
+        float sum = 0.0f;
+        for (int i=0; i<entries.size(); i++) {
+            Member.EntryStakePair pair = entries.get(i);
+            sum += pair.entry.getPoints() * pair.stake;
         }
         return sum;
     }
     
-    public int getTotalPlusMinusPoints() {
+    public float getTotalPlusMinusPoints() {
         refreshStats();
         return total_plus_minus_points;
     }
     
-    private int calcTotalPlusMinusPoints()
+    private float calcTotalPlusMinusPoints()
     {
-        int sum = 0;
-        for (int i=0; i<entries.size(); i++)
-        {
-            sum += entries.get(i).getPlusMinusPoints();
+        float sum = 0.0f;
+        for (int i=0; i<entries.size(); i++) {
+            Member.EntryStakePair pair = entries.get(i);
+            sum += pair.entry.getPlusMinusPoints() * pair.stake;
         }
         return sum;
     }
     
-    public int getTotalPlusMinusHeads() {
+    public float getTotalPlusMinusHeads() {
         refreshStats();
         return total_plus_minus_heads;
     }
     
-    private int calcTotalPlusMinusHeads()
+    private float calcTotalPlusMinusHeads()
     {
-        int sum = 0;
-        for (int i=0; i<entries.size(); i++)
-        {
-            sum += entries.get(i).getPlusMinusHeads();
+        float sum = 0.0f;
+        for (int i=0; i<entries.size(); i++) {
+            Member.EntryStakePair pair = entries.get(i);
+            sum += pair.entry.getPlusMinusHeads() * pair.stake;
         }
         return sum;
     }
@@ -248,14 +256,19 @@ public class Member
     private float calcWeightedPlusMinusPoints() {
         float sum = 0.0f;
         for (int i=0; i<entries.size(); ++i) {
-            sum += entries.get(i).getPlusMinusPoints() * Math.pow(DECAY, entries.size() - i - 1);
+            Member.EntryStakePair pair = entries.get(i);
+            sum += pair.entry.getPlusMinusPoints() * pair.stake * Math.pow(DECAY, entries.size() - i - 1);
         }
         return sum;
     }
     
-    public int getTotalEntries()
+    public float getTotalEntries()
     {
-        return entries.size();
+        float sum = 0.0f;
+        for (EntryStakePair pair : entries) {
+            sum += pair.stake;
+        }
+        return sum;
     }
     
     public float getTotalWinningness() {
@@ -265,20 +278,20 @@ public class Member
     
     private float calcTotalWinningness()
     {
-        float sum = 0;
-        for (int i=0; i<entries.size(); i++)
-        {
-            sum += entries.get(i).getWinningness();
+        float sum = 0.0f;
+        for (int i=0; i<entries.size(); i++) {
+            Member.EntryStakePair pair = entries.get(i);
+            sum += pair.entry.getWinningness() * pair.stake;
         }
         return sum;
     }
     
-    public Entry getMostRecentEntry()
+    public EntryStakePair getMostRecentEntry()
     {
         return getRecentEntry(0);
     }
     
-    public Entry getRecentEntry(int offset)
+    public EntryStakePair getRecentEntry(int offset)
     {
         if (offset >= entries.size())
             return null;
@@ -288,9 +301,11 @@ public class Member
     
     public boolean hasUncertainty()
     {
-        for (int i=0; i<entries.size(); i++)
-            if (entries.get(i).hasUncertainty())
+        for (int i=0; i<entries.size(); i++) {
+            if (entries.get(i).entry.hasUncertainty()) {
                 return true;
+            }
+        }
         return false;
     }
     
@@ -307,53 +322,55 @@ public class Member
     private float calcLongestStreak(boolean strict)
     {
         //ArrayList<ArrayList<Entry>> list = getEntriesInLongestStreak(strict);
-        ArrayList<ArrayList<Entry>> list = calcEntriesInLongestStreak(strict);  // IS IT PROPER TO FORCE A CALCULATION HERE VIA CALC?
+        ArrayList<ArrayList<EntryStakePair>> list = calcEntriesInLongestStreak(strict);  // IS IT PROPER TO FORCE A CALCULATION HERE VIA CALC?
         
         if (list.size() <= 0)
             return 0.0f;
             
         float sum = 0.0f;
-        for (int i=0; i<list.get(0).size(); i++)
-            sum += list.get(0).get(i).getWinningness();
+        for (int i=0; i<list.get(0).size(); i++) {
+            EntryStakePair pair = list.get(0).get(i);
+            sum += pair.entry.getWinningness() * pair.stake;
+        }
         return sum;
     }
     
-    public ArrayList<ArrayList<Entry>> getEntriesInLongestStreak(boolean strict) {
+    public ArrayList<ArrayList<EntryStakePair>> getEntriesInLongestStreak(boolean strict) {
         refreshStats();
         return strict ? winning_streak_strict : winning_streak_loose;
     }
     
-    private ArrayList<ArrayList<Entry>> calcEntriesInLongestStreak(boolean strict)
+    private ArrayList<ArrayList<EntryStakePair>> calcEntriesInLongestStreak(boolean strict)
     {
         //System.out.println("Getting for member " + getMostRecentName());
         float current = 0.0f;
         float max = 0.0f;
-        ArrayList<Entry> currentList = new ArrayList<Entry>();
-        ArrayList<ArrayList<Entry>> maxList = new ArrayList<ArrayList<Entry>>();
+        ArrayList<EntryStakePair> currentList = new ArrayList<EntryStakePair>();
+        ArrayList<ArrayList<EntryStakePair>> maxList = new ArrayList<ArrayList<EntryStakePair>>();
         int lastWinSynch = 0;
-        Entry entry;
+        EntryStakePair pair;
         for (int i=0; i<entries.size(); i++)
         {
-            entry = entries.get(i);
-            if (entry.getWinningness() > 0.0f) // if a winner...
+            pair = entries.get(i);
+            if (pair.entry.getWinningness() > 0.0f) // if a winner...
             {
-                if (!strict || (entry.getPoll().getSynch() - lastWinSynch) <= 1)
+                if (!strict || (pair.entry.getPoll().getSynch() - lastWinSynch) <= 1)
                 {
-                    current += entry.getWinningness();
-                    currentList.add(entry);
+                    current += pair.entry.getWinningness() * pair.stake;
+                    currentList.add(pair);
                 }
                 else
                 {
-                    current = entry.getWinningness();
-                    currentList = new ArrayList<Entry>();
-                    currentList.add(entry);
+                    current = pair.entry.getWinningness() * pair.stake;
+                    currentList = new ArrayList<EntryStakePair>();
+                    currentList.add(pair);
                 }
-                lastWinSynch = entry.getPoll().getSynch();
+                lastWinSynch = pair.entry.getPoll().getSynch();
             }
             else // if not a winner
             {
                 current = 0;
-                currentList = new ArrayList<Entry>();   // this can probably be removed to save time if necessary
+                currentList = new ArrayList<EntryStakePair>();   // this can probably be removed to save time if necessary
             }
                 
             if (current == max && max > 0.0f)
@@ -363,72 +380,74 @@ public class Member
             else if (current > max)
             {
                 max = current;
-                maxList = new ArrayList<ArrayList<Entry>>();
+                maxList = new ArrayList<ArrayList<EntryStakePair>>();
                 maxList.add(currentList);
             }
         }
         return maxList;
     }
     
-    public static int getNumberOfEntriesWithMostVotes(ArrayList<Entry> list)
+    public static int getNumberOfEntriesWithMostVotes(ArrayList<EntryStakePair> list)
     {
         return list.size();
     }
     
-    public static int getMostVotesSingle(ArrayList<Entry> list)
+    public static float getMostVotesSingle(ArrayList<EntryStakePair> list)
     {
         if (list == null || list.size() == 0)
             return 0;
-        else return list.get(0).getVotes();
+        else return list.get(0).entry.getVotes() * list.get(0).stake;
     }
     
-    public ArrayList<Entry> getEntriesWithMostVotes()
+    public ArrayList<EntryStakePair> getEntriesWithMostVotes()
     {
-        int max = 0;
-        ArrayList<Entry> maxList = new ArrayList<Entry>();
+        float max = 0.0f;
+        ArrayList<EntryStakePair> maxList = new ArrayList<EntryStakePair>();
         for (int i=0; i<entries.size(); i++)
         {
-            if (entries.get(i).getVotes() == max)
+            EntryStakePair pair = entries.get(i);
+            if (pair.entry.getVotes() * pair.stake == max)
             {
-                maxList.add(entries.get(i));
+                maxList.add(pair);
             }
-            else if (entries.get(i).getVotes() >= max)
+            else if (pair.entry.getVotes() * pair.stake >= max)
             {
-                max = entries.get(i).getVotes();
-                maxList = new ArrayList<Entry>();
-                maxList.add(entries.get(i));
+                max = pair.entry.getVotes() * pair.stake;
+                maxList = new ArrayList<EntryStakePair>();
+                maxList.add(pair);
             }
         }
         return maxList;
     }
     
-    public static int getNumberOfEntriesWithMostPoints(ArrayList<Entry> list)
+    public static int getNumberOfEntriesWithMostPoints(ArrayList<EntryStakePair> list)
     {
         return list.size();
     }
     
-    public static int getMostPointsSingle(ArrayList<Entry> list)
+    public static float getMostPointsSingle(ArrayList<EntryStakePair> list)
     {
         if (list == null || list.size() == 0)
             return 0;
-        else return list.get(0).getPoints();
+        else return list.get(0).entry.getPoints() * list.get(0).stake;
     }
     
-    public ArrayList<Entry> getEntriesWithMostPoints()
+    public ArrayList<EntryStakePair> getEntriesWithMostPoints()
     {
-        int max = 0;
-        ArrayList<Entry> maxList = new ArrayList<Entry>();
+        float max = 0.0f;
+        ArrayList<EntryStakePair> maxList = new ArrayList<EntryStakePair>();
         for (int i=0; i<entries.size(); i++)
         {
-            if (entries.get(i).getPoints() == max)
+            EntryStakePair pair = entries.get(i);
+            if (pair.entry.getPoints() * pair.stake == max)
             {
-                maxList.add(entries.get(i));
+                maxList.add(pair);
             }
-            else if (entries.get(i).getPoints() >= max)
+            else if (pair.entry.getPoints() * pair.stake >= max)
             {
-                max = entries.get(i).getPoints();
-                maxList = new ArrayList<Entry>();
-                maxList.add(entries.get(i));
+                max = pair.entry.getPoints() * pair.stake;
+                maxList = new ArrayList<EntryStakePair>();
+                maxList.add(pair);
             }
         }
         return maxList;
@@ -444,10 +463,11 @@ public class Member
         return Math.round(1000 + 25 * getTotalPlusMinusPoints() / (getTotalEntries() + 3));
     }
     
-    public int getTotalNumOpponents() {
-        int opponent_count = 0;
+    public float getTotalNumOpponents() {
+        float opponent_count = 0.0f;
         for (int i = 0; i < entries.size(); ++i) {
-            opponent_count += (entries.get(i).getPoll().numEntries() - 1);
+            EntryStakePair pair = entries.get(i);
+            opponent_count += (pair.entry.getPoll().numEntries() - 1) * pair.stake;
         }
         return opponent_count;
     }
@@ -460,8 +480,8 @@ public class Member
     public float calcWeightedPotential() {
         float potential = 0.0f;
         int i = 0;
-        for (Entry member_entry : entries) {
-            potential += member_entry.getPotential() * Math.pow(DECAY, entries.size() - i - 1);
+        for (EntryStakePair pair : entries) {
+            potential += pair.entry.getPotential() * pair.stake * Math.pow(DECAY, entries.size() - i - 1);
             ++i;
         } 
         return potential;

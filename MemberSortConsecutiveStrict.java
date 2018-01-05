@@ -18,30 +18,20 @@ public class MemberSortConsecutiveStrict implements MemberDataRetriever
     }
     
     public String getData(Member m)
-    {
-        DecimalFormat df = new DecimalFormat("#.##");
-        
+    {        
         if (m.getNumberOfLongestStreaks(true) > 1) {
-            return "(" + m.getNumberOfLongestStreaks(true) + "&times;)&nbsp;" + df.format(m.getLongestStreak(true));
+            return "(" + (NumberFormat.getInstance()).format(m.getNumberOfLongestStreaks(true)) + "&times;)&nbsp;" + getFormat().format(m.getLongestStreak(true));
         } else {
-            return df.format(m.getLongestStreak(true));
+            return getFormat().format(m.getLongestStreak(true));
         }
     }
     
     public String getDetails(Member m, boolean linkTopics)
     {
-        //boolean linkTopics = false;
         String building = new String();
-        //ArrayList<Entry> entries = m.getEntries();
-        ArrayList<ArrayList<Entry>> winners = m.getEntriesInLongestStreak(true);
+        ArrayList<ArrayList<Member.EntryStakePair>> winners = m.getEntriesInLongestStreak(true);
         DecimalFormat df = new DecimalFormat("#.##");
-//         for (int i=0; i<entries.size(); i++)
-//         {
-//             if (entries.get(i).getWinningness() > 0)
-//                 winners.add(entries.get(i));
-//         }
         
-        //System.out.print("Comparing...");
         if (winners == null || winners.size() == 0)
         {
             return "N/A";
@@ -51,17 +41,15 @@ public class MemberSortConsecutiveStrict implements MemberDataRetriever
         {
             for (int i=0; i<winners.get(h).size(); i++)
             {
-//                 if (winners.get(h).get(i).getWinningness() < 1.0f)
-//                 {
-//                     building += (df.format(winners.get(h).get(i).getWinningness()) + " in ");
-//                 }
-                if (linkTopics && winners.get(h).get(i).getPoll().hasTopic()) // NOTE: The below should strip the A and B designations from multi-thread contests
-                    building += ("<a class='green' href='http://www.purezc.net/forums/index.php?showtopic=" + winners.get(h).get(i).getPoll().getTopic() + "'>#" + winners.get(h).get(i).getPoll().getName() + "</a>");
+                Member.EntryStakePair pair = winners.get(h).get(i);
+                
+                if (linkTopics && pair.entry.getPoll().hasTopic()) // NOTE: The below should strip the A and B designations from multi-thread contests
+                    building += ("<a class='green' href='http://www.purezc.net/forums/index.php?showtopic=" + pair.entry.getPoll().getTopic() + "'>#" + pair.entry.getPoll().getName() + "</a>");
                 else
-                    building += ("#" + winners.get(h).get(i).getPoll().getName());
-                if (winners.get(h).get(i).getWinningness() < 1.0f)
+                    building += ("#" + pair.entry.getPoll().getName());
+                if (pair.entry.getWinningness() * pair.stake < 1.0f)
                 {
-                    building += " (" + df.format(winners.get(h).get(i).getWinningness()) + ")";
+                    building += " (" + df.format(pair.entry.getWinningness() * pair.stake) + ")";
                 }
                 if (i < winners.get(h).size()-2)
                     building += ", ";

@@ -211,7 +211,7 @@ public abstract class Master
         }
         catch (Exception e)
         {
-            System.err.println("Error: " + e.getMessage());
+            System.err.println("Error caught in Master: " + e.getMessage());
             System.err.println("A strange problem occurred.  Talk to nicklegends about it.");
         }
     }
@@ -240,7 +240,7 @@ public abstract class Master
         }
         catch (Exception e)
         {
-            System.err.println("Error: " + e.getMessage());
+            System.err.println("Error caught in Master: " + e.getMessage());
             System.err.println("Error adding" + filename + " to buffer.  Is it missing?");
         }
     }

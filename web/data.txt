@@ -6,6 +6,7 @@
 // Some entries have a second name for URL compatibility purposes,
 //   but this shouldn't be necessary for any recent entry as long
 //   as a consistent file naming convention is used.
+// Plus symbols (+} separate members contributing jointly to one entry.
 // Contact Ed (nicklegends) with any questions.
 
 // One parameter:	username [assumes 0 votes and no link; will not show votes in archive] SHOULD NEVER USE THIS
@@ -379,8 +380,6 @@ Ian; SOTW49-Ian; gif; 6
 jman2050; SOTW49-jman2050; GIF; 1
 Teilyr; SOTW49-Teilyr; gif; 22
 
-// NOTE: I should develop a better way of handling the dual entry than this!
-// The points, votes, entries, victories, etc. should be cut in half.
 #50 @ 5454
 MountainDrew; SOTW50-MountainDrew; gif; 18
 Blonde799; SOTW50-Blonde799; gif; 0
@@ -388,9 +387,7 @@ PolygonX8; SOTW50-PolygonX8; GIF; 2
 PrettyBoy; SOTW50-PrettyBoy; jpg; 22
 codelinker8705; SOTW50-codelinker8705; gif; 2
 jman2050; SOTW50-jman2050; PNG; 0
-link3505; SOTW50-link3505andBH4; gif; 2
-BH4; SOTW50-link3505andBH4; gif; 2
-* link3505 and ShadowTiger submitted a joint shot.
+link3505 + BH4; SOTW50-link3505andBH4; gif; 2
 
 #51 @ 5598
 Ccc; SOTW51-Ccc; jpg; 1
@@ -2750,16 +2747,13 @@ Sheik; png; 27
 -DuCkTApE-; png; 2
 Jared; png; 4
 
-// Note: not ideal again -- Sheik and Supindahood split a submission
 #391 @ 57298
-Sheik; Sheik-Supindahood; png; 9
-Supindahood; Sheik-Supindahood; png; 9
+Sheik + Supindahood; Sheik-Supindahood; png; 9
 Shane; png; 2
 Dawnlight; png; 16
 Jared; png; 9
 -DuCkTApE-; jpg; 2
 Dragonite; png; 5
-* Sheik and Supindahood submitted a joint shot.
 
 #392 @ 57386
 Dragonite; png; 4
