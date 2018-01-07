@@ -371,6 +371,7 @@ td.contest-cell
 .winnericon
 {
   height: 1em;
+  vertical-align: middle;
 }
 
 .tooltip
