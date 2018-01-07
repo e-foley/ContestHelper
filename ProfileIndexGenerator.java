@@ -67,7 +67,11 @@ public abstract class ProfileIndexGenerator {
                 }
                 
                 out.write("<tr class='profile-index-row'><td class='profile-index-cell profile-index-name-cell'>");
-                out.write("<a class='green' href='" + line.link + "'>" + line.name + "</a></td></tr>\n");
+                if (!line.name.equals(line.most_recent_name)) {
+                    out.write(line.name + " (see <a class='green' style='font-weight: bold' href='" + line.link + "'>" + line.most_recent_name + "</a>)</td></tr>\n");
+                } else {
+                    out.write("<a class='green' style='font-weight: bold' href='" + line.link + "'>" + line.name + "</a></td></tr>\n");
+                }
             }
             
             if (table_active) {

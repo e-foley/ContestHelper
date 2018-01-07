@@ -661,7 +661,7 @@ td.contest-cell
 
 .profile-index-name-cell
 {
-  font-weight: bold;
+  /*font-weight: bold;*/
 }
 
 .character-heading
