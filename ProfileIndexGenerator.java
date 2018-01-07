@@ -2,6 +2,7 @@ import java.io.BufferedWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Collection;
+import java.text.DecimalFormat;
 
 public abstract class ProfileIndexGenerator {
     static class NameLinkData implements Comparable<NameLinkData> {
@@ -10,6 +11,9 @@ public abstract class ProfileIndexGenerator {
         public boolean has_id;
         public String most_recent_name;
         public String link;
+        public float num_entries;
+        public String first_contest;
+        public String most_recent_contest;
         
         // Define sorting as alphabetizing by name in case-insensitive way, then ID.
         @Override
@@ -37,6 +41,15 @@ public abstract class ProfileIndexGenerator {
                 data.has_id = member.hasId();
                 data.most_recent_name = member.getMostRecentName();
                 data.link = UserProfile.getProfileUrl(member);
+                data.num_entries = member.getTotalEntries();
+                ArrayList<Member.EntryStakePair> pairs = member.getEntries();
+                if (!pairs.isEmpty()) {
+                    data.first_contest = "#" + pairs.get(0).entry.getPoll().getName();
+                    data.most_recent_contest = "#" + pairs.get(pairs.size() - 1).entry.getPoll().getName();
+                } else {
+                    data.first_contest = "N/A";
+                    data.most_recent_contest = "N/A";
+                }
                 list.add(data);
             }
         }
@@ -61,17 +74,21 @@ public abstract class ProfileIndexGenerator {
                     }
                     out.write("<div class='character-heading'>" + starting_char + "</div>\n");
                     out.write("<table class='profile-index-table'>\n");
-                    out.write("<tr class='profile-index-header-row'><td>Name</td></tr>\n");
+                    out.write("<tr class='profile-index-header-row'><td>Name</td><td>Entries</td><td>First</td><td>Most recent</td></tr>\n");
                     last_starting_char = starting_char;
                     table_active = true;
                 }
                 
                 out.write("<tr class='profile-index-row'><td class='profile-index-cell profile-index-name-cell'>");
                 if (!line.name.equals(line.most_recent_name)) {
-                    out.write(line.name + " (see <a class='green' style='font-weight: bold' href='" + line.link + "'>" + line.most_recent_name + "</a>)</td></tr>\n");
+                    out.write(line.name + " (see <a class='green' style='font-weight: bold' href='" + line.link + "'>" + line.most_recent_name + "</a>)</td>");
                 } else {
-                    out.write("<a class='green' style='font-weight: bold' href='" + line.link + "'>" + line.name + "</a></td></tr>\n");
+                    out.write("<a class='green' style='font-weight: bold' href='" + line.link + "'>" + line.name + "</a></td>");
                 }
+                out.write("<td>" + (new DecimalFormat("#.##")).format(line.num_entries) + "</td>");
+                out.write("<td>" + line.first_contest + "</td>");
+                out.write("<td>" + line.most_recent_contest + "</td>");
+                out.write("</tr>\n");
             }
             
             if (table_active) {
