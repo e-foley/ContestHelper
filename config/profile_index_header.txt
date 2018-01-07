@@ -11,3 +11,4 @@
 <body>
 <div class='big-block'>
 <div class='grand-title'>User Profile Index</div>
+<div class='updated-text'>Last updated with the results of Screenshot of the Week <span style='font-weight:bold;'>###</span></div>
