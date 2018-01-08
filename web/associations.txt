@@ -54,7 +54,6 @@ Link R us > Rem > Adem
 Lynker > Jared > Guardian > Jared
 Gonken > Supindahood
 Revfan9 > Giggidy
-Billy Ronald > billy ronald > BillPzc
 Darklink813 > Takuya
 FefeRawft > Chakaa
 Lord Ike > Furion > Marco
@@ -106,6 +105,7 @@ GenGaming > xanadude
 Maikeru D. Shinigami > Shoshon the Elegant
 sonicfan350 > Zephyr_Eevee > Goriya > Nexas > Eins > Einsiety
 Zaxarone > Zaxaphone > Zaxarone
+Billy Ronald > billy ronald > BillPzc > Old Inactive Member
 
 // Tagged members: refer to these tags in data.txt when a member's username has been used by a different person
 //   Shared "Ben"
@@ -116,7 +116,7 @@ Zaxarone > Zaxaphone > Zaxarone
 294314: FlameCursed > Chungus > FlameCursed > Matthew
 //   Shared "Yoshi"
 1245: Yoshi > Tails > Pikachu > Fluttershy
-48320: Yoshidude > Dragonite > Tingle > Jacques > Duck > Homura > Can Dogs Eat Kiwi? > Yoshi
+48320: Yoshidude > Dragonite > Tingle > Jacques > Duck > Homura > Can Dogs Eat Kiwi? > Yoshi > Eddy finish AR3
 
 // EDUCATED GUESSES
 DarkSFK > Bob
