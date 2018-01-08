@@ -181,6 +181,16 @@ public abstract class Master
             out.write(member_list.size() + " unique members in all.");
             out.close();
             
+            // PROFILE INDEX
+            stamps.add(new NamedStamp("Generating profile index"));
+            fstream = new FileOutputStream("web/profile_index.html");
+            out = new BufferedWriter(new OutputStreamWriter(fstream, StandardCharsets.UTF_8));
+            addFileToBuffer("config/profile_index_header.txt", out, swaps);
+            ProfileIndexGenerator.generate(history, out);
+            addFileToBuffer("config/profile_index_footer.txt", out, swaps);
+            out.close();
+            
+            
             // PROFILES
             stamps.add(new NamedStamp("Generating user profiles"));
             if (generate_user_galleries) {
