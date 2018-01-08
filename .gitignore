@@ -65,6 +65,7 @@ __SHELL*.java
 # ELF: Project-specific excludes
 sotw_runner.bat
 archives/
+assets/
 backup/
 leaderboards/
 members/
