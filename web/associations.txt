@@ -78,7 +78,6 @@ JJ83 > TK8305
 
 // More recent
 cremeens1000 > Keiichi123 > Tree
-Dekadx2 > Daiv > Fausch > Jaghnus
 Jake > Darkspawn > Naldrag > Ska Glampunk > Naldrag
 OOTFan > Sepulcher > Xenix
 Lord Settra! > Rastael
@@ -98,7 +97,6 @@ Hero Link > Angeal > Pinkie Pie > Rydia > Angeal > Rydia > Lana > Linkle > Neptu
 HeavyTitanium > Titanium Justice
 GrantGreif > MarinaraSauce
 jetbox > JetBox
-Bombos > Ecruteak
 linktopower > Ventus > Benji > Ventus > FireBlazeWolf > Ventus
 Midnight_King > Shane > Charizard > Shane > Polaris > Shane
 GenGaming > xanadude
@@ -106,6 +104,8 @@ Maikeru D. Shinigami > Shoshon the Elegant
 sonicfan350 > Zephyr_Eevee > Goriya > Nexas > Eins > Einsiety
 Zaxarone > Zaxaphone > Zaxarone
 Billy Ronald > billy ronald > BillPzc > Old Inactive Member
+Dekadx2 > Daiv > Fausch > Jaghnus > fausch > SpikeReynolds
+Bombos > Ecruteak > Castelia
 
 // Tagged members: refer to these tags in data.txt when a member's username has been used by a different person
 //   Shared "Ben"
