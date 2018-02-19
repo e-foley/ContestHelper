@@ -4393,9 +4393,16 @@ Shoshon the Elegant; Shoshon%20the%20Elegant; png; 5
 Castelia; png; 8
 Russ; png; 22
 Dimentio; png; 10
-/*
+
 #649 @ 73606
-Shoshon the Elegant; Shoshon%20the%20Elegant; 
-ywkls; png; 
-Joelmacool; png; 
+Shoshon the Elegant; Shoshon%20the%20Elegant; 2
+ywkls; png; 9
+Joelmacool; png; 34
+/*
+#650 @ 73638
+Twilight-Prince; png; 
+Cukeman; png; 
+xanadude; png; 
+Shoshon the Elegant; Shoshon%20the%20Elegant; png; 
+Dimentio; png; 
 /*
