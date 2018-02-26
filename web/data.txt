@@ -4395,7 +4395,7 @@ Russ; png; 22
 Dimentio; png; 10
 
 #649 @ 73606
-Shoshon the Elegant; Shoshon%20the%20Elegant; 2
+Shoshon the Elegant; Shoshon%20the%20Elegant; png; 2
 ywkls; png; 9
 Joelmacool; png; 34
 
