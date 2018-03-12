@@ -30,7 +30,6 @@ public class MemberSortPoints implements MemberDataRetriever
         String building = new String();
         Entry entry;
         ArrayList<Member.EntryStakePair> entries = m.getEntries();
-        DecimalFormat df = new DecimalFormat("#.##");
         for (int i=0; i<entries.size(); i++) {
             Member.EntryStakePair pair = entries.get(i);
             entry = pair.entry;
@@ -38,7 +37,7 @@ public class MemberSortPoints implements MemberDataRetriever
             if (entry.hasUncertainty())
                 building += "?";
             else
-                building += ""+df.format(entry.getPoints() * stake);  // Mention stake... later?
+                building += ""+getFormat().format(entry.getPoints() * stake);  // Mention stake... later?
             if (linkTopics && entry.getPoll().hasTopic())
                 building += (" in <a class='green' href='http://www.purezc.net/forums/index.php?showtopic=" + entry.getPoll().getTopic() + "'>#" + entry.getPoll().getName() + "</a>");
             else
@@ -57,7 +56,7 @@ public class MemberSortPoints implements MemberDataRetriever
     }
     
     public NumberFormat getFormat() {
-        return new DecimalFormat("#.##");
+        return new DecimalFormat("#,###.##");
     }
     
     public boolean qualifies(Member mem) {

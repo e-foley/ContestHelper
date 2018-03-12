@@ -34,7 +34,6 @@ public class MemberSortVotesSingle implements MemberDataRetriever
     {
         String building = new String();
         ArrayList<Member.EntryStakePair> winners = m.getEntriesWithMostVotes();
-        DecimalFormat df = new DecimalFormat("#.##");
 
         if (winners == null || winners.size() == 0)
         {
@@ -62,7 +61,7 @@ public class MemberSortVotesSingle implements MemberDataRetriever
     }
     
     public NumberFormat getFormat() {
-        return new DecimalFormat("#.##");
+        return new DecimalFormat("#,###.##");
     }
     
     public boolean qualifies(Member mem) {
