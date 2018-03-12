@@ -43,7 +43,7 @@ public class MemberSortWinRatio implements MemberDataRetriever
     }
     
     public NumberFormat getFormat() {
-        return new DecimalFormat("0.000");
+        return new DecimalFormat("#.000");
     }
     
     public boolean qualifies(Member mem) {
