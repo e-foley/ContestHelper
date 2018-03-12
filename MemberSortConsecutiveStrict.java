@@ -30,7 +30,6 @@ public class MemberSortConsecutiveStrict implements MemberDataRetriever
     {
         String building = new String();
         ArrayList<ArrayList<Member.EntryStakePair>> winners = m.getEntriesInLongestStreak(true);
-        DecimalFormat df = new DecimalFormat("#.##");
         
         if (winners == null || winners.size() == 0)
         {
@@ -49,7 +48,7 @@ public class MemberSortConsecutiveStrict implements MemberDataRetriever
                     building += ("#" + pair.entry.getPoll().getName());
                 if (pair.entry.getWinningness() * pair.stake < 1.0f)
                 {
-                    building += " (" + df.format(pair.entry.getWinningness() * pair.stake) + ")";
+                    building += " (" + getFormat().format(pair.entry.getWinningness() * pair.stake) + ")";
                 }
                 if (i < winners.get(h).size()-2)
                     building += ", ";
@@ -68,7 +67,7 @@ public class MemberSortConsecutiveStrict implements MemberDataRetriever
     }
     
     public NumberFormat getFormat() {
-        return new DecimalFormat("#.##");
+        return new DecimalFormat("#,###.##");
     }
     
     public boolean qualifies(Member mem) {

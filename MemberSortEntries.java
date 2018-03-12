@@ -23,7 +23,6 @@ public class MemberSortEntries implements MemberDataRetriever
         //boolean linkTopics = false;
         String building = new String();
         ArrayList<Member.EntryStakePair> pairs = m.getEntries();
-        DecimalFormat df = new DecimalFormat("#.##");
         
         if (pairs.size() == 0)
         {
@@ -42,7 +41,7 @@ public class MemberSortEntries implements MemberDataRetriever
             }
             if (stake != 1.0f)
             {
-                building += " (" + df.format(stake) + ")";
+                building += " (" + getFormat().format(stake) + ")";
             }
             if (i < pairs.size()-2)
                 building += ", ";
@@ -58,7 +57,7 @@ public class MemberSortEntries implements MemberDataRetriever
     }
     
     public NumberFormat getFormat() {
-        return new DecimalFormat("#.##");
+        return new DecimalFormat("#,###.##");
     }
     
     public boolean qualifies(Member mem) {

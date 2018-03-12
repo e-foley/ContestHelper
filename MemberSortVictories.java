@@ -24,7 +24,6 @@ public class MemberSortVictories implements MemberDataRetriever
         String building = new String();
         ArrayList<Member.EntryStakePair> pairs = m.getEntries();
         ArrayList<Member.EntryStakePair> winners = new ArrayList<Member.EntryStakePair>();
-        DecimalFormat df = new DecimalFormat("#.##");
         for (int i=0; i<pairs.size(); i++)
         {
             Member.EntryStakePair pair = pairs.get(i);
@@ -48,7 +47,7 @@ public class MemberSortVictories implements MemberDataRetriever
                 building += ("#" + pair.entry.getPoll().getName());
             if (pair.entry.getWinningness() * pair.stake < 1.0f)
             {
-                building += " (" + df.format(pair.entry.getWinningness() * pair.stake) + ")";
+                building += " (" + getFormat().format(pair.entry.getWinningness() * pair.stake) + ")";
             }
             if (i < winners.size()-2)
                 building += ", ";
@@ -64,7 +63,7 @@ public class MemberSortVictories implements MemberDataRetriever
     }
     
     public NumberFormat getFormat() {
-        return new DecimalFormat("#.##");
+        return new DecimalFormat("#,###.##");
     }
     
     public boolean qualifies(Member mem) {
