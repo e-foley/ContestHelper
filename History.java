@@ -124,8 +124,12 @@ public class History {
             }
             // Now actually remove these entries from the Member
             for (Member.EntryStakePair pair_rem : pairs_to_remove) {
-                // System.out.println("Entry removed!" + ent_rem.getURL());
                 member.removeEntry(pair_rem);
+            }
+            
+            // Remove members without any entries (since they didn't exist...)
+            if (member.getTotalEntries() <= 0.0) {
+                returning.members.remove(member.getId());
             }
         }
 
