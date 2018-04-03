@@ -4422,9 +4422,15 @@ Orithan; png; 11
 Shoshon the Elegant; Shoshon%20the%20Elegant; png; 2
 Joelmacool; png; 14
 Octorockoncrack; png; 23
-/*
+
 #654 @ 73770
-Shoshon the Elegant; Shoshon%20the%20Elegant; png; 
-Octorockoncrack; png; 
-Anthus; png; 
+Shoshon the Elegant; Shoshon%20the%20Elegant; png; 5
+Octorockoncrack; png; 28
+Anthus; png; 9
+/*
+#655 @ 73800
+Shoshon the Elegant; Shoshon%20the%20Elegant; png; 1
+Joelmacool; png; 0
+Orithan; png; 10
+Cukeman; png; 5
 /*
