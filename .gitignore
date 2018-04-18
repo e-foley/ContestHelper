@@ -52,7 +52,6 @@ Temporary Items
 bluej.pkh
 *.class
 *.ctxt
-*.html
 *.java~
 *.bluej
 doc/resources/inherit.gif
