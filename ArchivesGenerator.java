@@ -1,4 +1,4 @@
-import java.io.*;
+import java.io.BufferedWriter;
 import java.util.ArrayList;
 import java.text.DecimalFormat;
 
@@ -46,7 +46,14 @@ public class ArchivesGenerator {
                                 out.write("<img class='picture-picture' title='The winner&#8217;s image is missing from the archives. Sorry.' src='images/no_image.png'/>");
                             } else {
                                 out.write("<a href='" + winners.get(j).getURL() + "'>");
-                                out.write("<img class='picture-picture' title='" + winners.get(j).getMember().getMostRecentName() + "' src='" + winners.get(j).getURL() + "'/>");
+                                out.write("<img class='picture-picture' title='");
+                                for (int k = 0; k < winners.get(j).getMemberNameCouples().size(); ++k) {
+                                    if (k != 0) {
+                                        out.write(" + ");
+                                    }
+                                    out.write(winners.get(j).getMemberNameCouples().get(k).member.getMostRecentName());
+                                }
+                                out.write("' src='" + winners.get(j).getURL() + "'/>");
                                 out.write("</a>");
                             }
                         }
@@ -83,26 +90,34 @@ public class ArchivesGenerator {
                         out.write("<td class='center has-shot-icon-cell'>");
                         if (entry.hasURL()) {
                             out.write("<a href='" + entry.getURL() + "'>");
-                            out.write("<img class='has-shot-icon' title='Click to view this member&#8217;s shot' src='images/camera.png' onmouseenter='enterCamera(\"" + entry.getURL() + "\")' onmousemove='hover(event)' onmouseout='exitCamera()'/>");
+                            out.write("<img class='has-shot-icon' title='Click to view this shot' src='images/camera.png' onmouseenter='enterCamera(\"" + entry.getURL() + "\")' onmousemove='hover(event)' onmouseout='exitCamera()'/>");
                             out.write("</a>");
                         }
                         out.write("</td>");
                         
                         out.write("<td class='name'>");
                         // TODO: Rename 'image' class.  It's a holdover from a much older version of the page.
-                        out.write("<a class='image' href='" + UserProfile.getProfileUrl(entry.getMember()) + "'>");
-                        out.write(entry.getMember().getMostRecentName());
+                        for (int k = 0; k < entry.getMemberNameCouples().size(); ++k) {
+                            if (k != 0) {
+                                out.write(" + ");
+                            }
+                            Entry.MemberNameCouple couple = entry.getMemberNameCouples().get(k);
+                            out.write("<div class='archiveprofilelinkdiv'><a class='image' href='" + UserProfile.getProfileUrl(couple.member) + "'>");
+                            out.write(couple.member.getMostRecentName());
+                            out.write("</a>");
+                            // List the member's old name if they use a different name now
+                            if (!couple.member.getMostRecentName().equals(couple.name_submitted_under)) {
+                                out.write("<br/><span class='old-name'>(as " + couple.name_submitted_under + ")</span>");
+                            }
+                            out.write("</div>");
+                        }
+                        
                         // Add an icon if the shot won the poll
                         if (isWinner) {
                             out.write(" <img class='winnericon' title='Winner!' src='images/star.png'/>");
                         }
                         
-                        // List the member's old name if they use a different name now
-                        if (!entry.getMember().getMostRecentName().equals(entry.getNameSubmittedUnder())) {
-                            out.write("<br/><span class='old-name'>(as " + entry.getNameSubmittedUnder() + ")</span>");
-                        }
-                        
-                        out.write("</a></td>");
+                        out.write("</span></td>");
 
                         if (entry.hasVotes())
                         {
@@ -166,7 +181,7 @@ public class ArchivesGenerator {
         catch (Exception e)
         {
             //Catch exception if any
-            System.err.println("Error: " + e.getMessage());
+            System.err.println("Error caught in ArchivesGenerator: " + e.getMessage());
         }
     }
     

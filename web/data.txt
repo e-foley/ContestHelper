@@ -6,6 +6,7 @@
 // Some entries have a second name for URL compatibility purposes,
 //   but this shouldn't be necessary for any recent entry as long
 //   as a consistent file naming convention is used.
+// Plus symbols (+} separate members contributing jointly to one entry.
 // Contact Ed (nicklegends) with any questions.
 
 // One parameter:	username [assumes 0 votes and no link; will not show votes in archive] SHOULD NEVER USE THIS
@@ -379,8 +380,6 @@ Ian; SOTW49-Ian; gif; 6
 jman2050; SOTW49-jman2050; GIF; 1
 Teilyr; SOTW49-Teilyr; gif; 22
 
-// NOTE: I should develop a better way of handling the dual entry than this!
-// The points, votes, entries, victories, etc. should be cut in half.
 #50 @ 5454
 MountainDrew; SOTW50-MountainDrew; gif; 18
 Blonde799; SOTW50-Blonde799; gif; 0
@@ -388,9 +387,7 @@ PolygonX8; SOTW50-PolygonX8; GIF; 2
 PrettyBoy; SOTW50-PrettyBoy; jpg; 22
 codelinker8705; SOTW50-codelinker8705; gif; 2
 jman2050; SOTW50-jman2050; PNG; 0
-link3505; SOTW50-link3505andBH4; gif; 2
-BH4; SOTW50-link3505andBH4; gif; 2
-* link3505 and ShadowTiger submitted a joint shot.
+link3505 + BH4; SOTW50-link3505andBH4; gif; 2
 
 #51 @ 5598
 Ccc; SOTW51-Ccc; jpg; 1
@@ -2750,16 +2747,13 @@ Sheik; png; 27
 -DuCkTApE-; png; 2
 Jared; png; 4
 
-// Note: not ideal again -- Sheik and Supindahood split a submission
 #391 @ 57298
-Sheik; Sheik-Supindahood; png; 9
-Supindahood; Sheik-Supindahood; png; 9
+Sheik + Supindahood; Sheik-Supindahood; png; 9
 Shane; png; 2
 Dawnlight; png; 16
 Jared; png; 9
 -DuCkTApE-; jpg; 2
 Dragonite; png; 5
-* Sheik and Supindahood submitted a joint shot.
 
 #392 @ 57386
 Dragonite; png; 4
@@ -4350,9 +4344,106 @@ TheRock; png; 2
 Orithan; png; 10
 Anthus; png; 1
 Shoshon the Elegant; Shoshon%20the%20Elegant; png; 4
-/*
+
 #641 @ 73283
-Demonlink; png; 
+Demonlink; png; 27
+Shoshon the Elegant; Shoshon%20the%20Elegant; png; 6
+Dimentio; png; 7
+
+#642 @ 73312
+Shoshon the Elegant; Shoshon%20the%20Elegant; png; 7
+Anthus; png; 7
+Matthew[294314]; png; 16
+
+#643 @ 73342
+Anthus; png; 7
+Shoshon the Elegant; Shoshon%20the%20Elegant; png; 8
+Joelmacool; png; 21
+
+#644 @ 73384
+xanadude; png; 3
+Shoshon the Elegant; Shoshon%20the%20Elegant; png; 2
+Shoelace; png; 13
+Jamian; png; 3
+Evan20000; png; 5
+Russ; png; 2
+Anthus; png; 14
+
+#645 @ 73414
+Anthus; png; 15
+allb; png; 5
+Shoshon the Elegant; Shoshon%20the%20Elegant; png; 21
+
+#646 @ 73458
+Shoshon the Elegant; Shoshon%20the%20Elegant; png; 24
+xanadude; png; 13
+Ecruteak; png; 3
+Dimentio; png; 7
+
+#647 @ 73535
+allb; png; 2
+Shoshon the Elegant; Shoshon%20the%20Elegant; png; 9
+Anthus; png; 4
+Orithan; png; 4
+xanadude; png; 11
+FireSeraphim; png; 10
+
+#648 @ 73577
+Shoshon the Elegant; Shoshon%20the%20Elegant; png; 5
+Castelia; png; 8
+Russ; png; 22
+Dimentio; png; 10
+
+#649 @ 73606
+Shoshon the Elegant; Shoshon%20the%20Elegant; png; 2
+ywkls; png; 9
+Joelmacool; png; 34
+
+#650 @ 73638
+Twilight-Prince; png; 4
+Cukeman; png; 24
+xanadude; png; 2
+Shoshon the Elegant; Shoshon%20the%20Elegant; png; 3
+Dimentio; png; 14
+
+#651 @ 73663
+Ganondorf; png; 16
+Shoshon the Elegant; Shoshon%20the%20Elegant; png; 1
+Anthus; png; 4
+xanadude; png; 6
+Dimentio; png; 18
+
+#652 @ 73730
+Twilight-Prince; png; 14
+Shoshon the Elegant; Shoshon%20the%20Elegant; png; 16
+Orithan; png; 11
+
+#653 @ 73746
+Shoshon the Elegant; Shoshon%20the%20Elegant; png; 2
+Joelmacool; png; 14
+Octorockoncrack; png; 23
+
+#654 @ 73770
+Shoshon the Elegant; Shoshon%20the%20Elegant; png; 5
+Octorockoncrack; png; 28
+Anthus; png; 9
+
+#655 @ 73800
+Shoshon the Elegant; Shoshon%20the%20Elegant; png; 4
+Joelmacool; png; 1
+Orithan; png; 28
+Cukeman; jpg; 12
+
+#656 @ 73825
+Shoshon the Elegant; Shoshon%20the%20Elegant; png; 1
+Sheik; png; 23
+Jared; png; 9
+Kivitoe; png; 1
+Octorockoncrack; png; 4
+EnnonFenom; png; 5
+/*
+#657 @ 73855
+Cukeman; jpg; 
 Shoshon the Elegant; Shoshon%20the%20Elegant; png; 
-Dimentio; png; 
+EnnonFenom; png; 
 /*

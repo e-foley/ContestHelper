@@ -1,4 +1,4 @@
-import java.io.*;
+import java.io.BufferedWriter;
 import java.util.ArrayList;
 
 public class FormattedLeaderboard {
@@ -143,7 +143,7 @@ public class FormattedLeaderboard {
                     // Figure out if the member has been newly added to the leaderboard by checking if their earliest entry occured after our subhistory end cut-off
                     // TODO: This is a terribly indirect method that would benefit greatly if contests were stored by ID and held their own ID
                     boolean is_member_new = (member.getEntries().isEmpty() ||
-                                             leaderboard_.getHistory().getPolls().indexOf(member.getEntries().get(0).getPoll()) > subhistory_end ||
+                                             leaderboard_.getHistory().getPolls().indexOf(member.getEntries().get(0).entry.getPoll()) > subhistory_end ||
                                              comparison.getPlaceOfMember(member.getId()) == Leaderboard.NO_PLACE);
                     if (is_member_new) {
                         out.write("<span class='place-delta'><span class='new-text'>NEW</span></span>");
@@ -210,7 +210,7 @@ public class FormattedLeaderboard {
         }
         catch (Exception e)
         {
-            System.err.println("Error: " + e.getMessage());
+            System.err.println("Error caught in FormattedLeaderboard: " + e.getMessage());
         }
     }
 }

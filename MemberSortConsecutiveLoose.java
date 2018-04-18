@@ -19,29 +19,18 @@ public class MemberSortConsecutiveLoose implements MemberDataRetriever
     
     public String getData(Member m)
     {
-        DecimalFormat df = new DecimalFormat("#.##");
-        
         if (m.getNumberOfLongestStreaks(false) > 1) {
-            return "(" + m.getNumberOfLongestStreaks(false) + "&times;)&nbsp;" + df.format(m.getLongestStreak(false));
+            return "(" + NumberFormat.getInstance().format(m.getNumberOfLongestStreaks(false)) + "&times;)&nbsp;" + getFormat().format(m.getLongestStreak(false));
         } else {
-            return df.format(m.getLongestStreak(false));
+            return getFormat().format(m.getLongestStreak(false));
         }
     }
     
     public String getDetails(Member m, boolean linkTopics)
     {
-        //boolean linkTopics = false;
         String building = new String();
-        //ArrayList<Entry> entries = m.getEntries();
-        ArrayList<ArrayList<Entry>> winners = m.getEntriesInLongestStreak(false);
-        DecimalFormat df = new DecimalFormat("#.##");
-//         for (int i=0; i<entries.size(); i++)
-//         {
-//             if (entries.get(i).getWinningness() > 0)
-//                 winners.add(entries.get(i));
-//         }
+        ArrayList<ArrayList<Member.EntryStakePair>> winners = m.getEntriesInLongestStreak(false);
         
-        //System.out.print("Comparing...");
         if (winners == null || winners.size() == 0)
         {
             return "N/A";
@@ -51,17 +40,15 @@ public class MemberSortConsecutiveLoose implements MemberDataRetriever
         {
             for (int i=0; i<winners.get(h).size(); i++)
             {
-//                 if (winners.get(h).get(i).getWinningness() < 1.0f)
-//                 {
-//                     building += (df.format(winners.get(h).get(i).getWinningness()) + " in ");
-//                 }
-                if (linkTopics && winners.get(h).get(i).getPoll().hasTopic()) // NOTE: The below should strip the A and B designations from multi-thread contests
-                    building += ("<a class='green' href='http://www.purezc.net/forums/index.php?showtopic=" + winners.get(h).get(i).getPoll().getTopic() + "'>#" + winners.get(h).get(i).getPoll().getName() + "</a>");
+                Member.EntryStakePair pair = winners.get(h).get(i);
+                
+                if (linkTopics && pair.entry.getPoll().hasTopic()) // NOTE: The below should strip the A and B designations from multi-thread contests
+                    building += ("<a class='green' href='http://www.purezc.net/forums/index.php?showtopic=" + pair.entry.getPoll().getTopic() + "'>#" + pair.entry.getPoll().getName() + "</a>");
                 else
-                    building += ("#" + winners.get(h).get(i).getPoll().getName());
-                if (winners.get(h).get(i).getWinningness() < 1.0f)
+                    building += ("#" + pair.entry.getPoll().getName());
+                if (pair.entry.getWinningness() * pair.stake < 1.0f)
                 {
-                    building += " (" + df.format(winners.get(h).get(i).getWinningness()) + ")";
+                    building += " (" + getFormat().format(pair.entry.getWinningness() * pair.stake) + ")";
                 }
                 if (i < winners.get(h).size()-2)
                     building += ", ";
@@ -80,7 +67,7 @@ public class MemberSortConsecutiveLoose implements MemberDataRetriever
     }
     
     public NumberFormat getFormat() {
-        return new DecimalFormat("#.##");
+        return new DecimalFormat("#,###.##");
     }
     
     public boolean qualifies(Member mem) {

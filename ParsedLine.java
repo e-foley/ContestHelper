@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class ParsedLine
 {
     public boolean isBlank;
@@ -9,9 +11,9 @@ public class ParsedLine
     public int topic;
     
     public boolean hasMemberInfo;
-    public String memberName;
-    public boolean hasTag;
-    public String tag;
+    public ArrayList<History.MemberInfo> member_infos;
+    //public boolean hasTag;
+    //public String tag;
     public boolean hasURL;
     public String URL;
     public boolean hasVotes;
@@ -34,6 +36,7 @@ public class ParsedLine
         // don't strictly need to be enclosed by brackets as long as there is at least one present.  For example, the
         // strings "nicklegends[2237]" and "nicklegends[2237" and "nicklegends  ]2237 [" are all treated the same way.
         String regexTag = "\\s*(\\[|\\])\\s*";
+        String regexMemberSeparator = "(\\s+)?\\+(\\s+)?";
         String[] splits;
         
         isBlank = line.equals("");
@@ -45,9 +48,9 @@ public class ParsedLine
         hasTopicInfo = false;
         topic = -1;
         hasMemberInfo = false;
-        memberName = "";
-        hasTag = false;
-        tag = "";
+        member_infos = new ArrayList<History.MemberInfo>();
+        //hasTag = false;
+        //tag = "";
         hasURL = false;
         URL = "";
         hasVotes = false;
@@ -96,16 +99,26 @@ public class ParsedLine
             {
                 hasMemberInfo = true;
                 
-                // Split the member into name and tag sections as appropriate nicklegends[2237]
-                String[] tagSplit = splits[0].split(regexTag);
-                if (tagSplit.length > 1) {
-                    hasTag = true;
-                    tag = tagSplit[1];
-                    memberName = tagSplit[0];
-                } else {
-                    hasTag = false;
-                    tag = "";
-                    memberName = tagSplit[0];
+                String[] each_member = splits[0].split(regexMemberSeparator);
+                for (int i = 0; i < each_member.length; ++i) {
+                    // Split the member into name and tag sections as appropriate nicklegends[2237]
+                    String[] tagSplit = each_member[i].split(regexTag);
+                    if (tagSplit.length > 1) {
+                        History.MemberInfo info = new History.MemberInfo();
+                        info.member_name = tagSplit[0];
+                        info.tag = tagSplit[1];
+                        // info.id = 
+                        // hasTag = true;
+                        // memberName = tagSplit[0];
+                        member_infos.add(info);
+                    } else {
+                        History.MemberInfo info = new History.MemberInfo();
+                        info.member_name = tagSplit[0];
+                        info.tag = "";
+                        // info.id = 
+                        // hasTag = false;
+                        member_infos.add(info);
+                    }
                 }
             }
             
@@ -132,7 +145,7 @@ public class ParsedLine
                         pollIDString = "0" + pollIDString;
                      
                     hasURL = true;
-                    URL = "http://sotw.purezc.net/SOTW" + pollIDString + "/" + memberName.replace(" ","%20").replace("'","%27") + "." + splits[1];
+                    URL = "http://sotw.purezc.net/SOTW" + pollIDString + "/" + member_infos.get(0).member_name.replace(" ","%20").replace("'","%27") + "." + splits[1]; // TODO: Do we want to include other members here by default?
                 }
             }
             

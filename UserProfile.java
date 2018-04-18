@@ -1,8 +1,11 @@
-import java.io.*;
-import java.nio.channels.FileChannel;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
+import java.io.File;
 import java.util.ArrayList;
+import java.util.ListIterator;
 import java.nio.file.Files;
-import java.nio.file.Path;
 
 abstract class UserProfile
 {
@@ -24,16 +27,17 @@ abstract class UserProfile
         
         try
         {
-            System.out.println("Attempting to write file " + getProfilePath(mem) + "...");
-            FileWriter fstream = new FileWriter(initial_target);
-            BufferedWriter out = new BufferedWriter(fstream);
+            FileOutputStream fstream = new FileOutputStream(initial_target);
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fstream, StandardCharsets.UTF_8));
             Master.addFileToBuffer("config/profile_header.txt", out, swaps);
             
             ArrayList<String> unique_names = mem.getUniqueNames();
             if (unique_names.size() > 1) {
                 out.write("<div class='former-names'>Other names used: ");
+                ListIterator<String> li = unique_names.listIterator(unique_names.size());
                 boolean first_written = false;
-                for (String unique_name : unique_names) {
+                while(li.hasPrevious()) {
+                    String unique_name = li.previous();
                     if (!unique_name.equals(mem.getMostRecentName())) {
                         if (first_written) {
                             out.write(", ");
@@ -49,10 +53,10 @@ abstract class UserProfile
             
             out.write("<div class='picture-large-list'>\n");
             
-            ArrayList<Entry> entries = mem.getEntries();
+            ArrayList<Member.EntryStakePair> pairs = mem.getEntries();
             // Note: this assumes that the entries have been ordered chronologically
-            for (int i = entries.size()-1; i >= 0; i--) {
-                Entry ent = entries.get(i);
+            for (int i = pairs.size()-1; i >= 0; i--) {
+                Entry ent = pairs.get(i).entry;
                 Poll poll = ent.getPoll();
                 
                 out.write("<div class='picture-large-div'>");
@@ -77,7 +81,7 @@ abstract class UserProfile
         }
         catch (Exception e)
         {
-            System.err.println("Error: " + e.getMessage());
+            System.err.println("Error caught in UserProfile: " + e.getMessage());
             //JOptionPane.showMessageDialog(null, "User profile could not be generated. Talk to nicklegends about it.\n\"" + e.getMessage() + "\"", "Error", JOptionPane.ERROR_MESSAGE);
         }
         
@@ -135,20 +139,20 @@ abstract class UserProfile
                 out.write("<tr class='member-details-row'><td class='member-details-cell category-cell'>" + stat.getContextlessTitle() + "</td>");
                 if (metric.qualifies(member)) {
                     out.write("<td class='member-details-cell value-cell'>" + metric.getData(member) + "</td>");
-                    out.write("<td class='member-details-cell'>");
+                    out.write("<td class='member-details-cell rank-cell'>");
                     int rank = leaderboard.getPlaceOfMember(member.getId());  // 0-indexed!!
                     out.write(leaderboard.getMembersAtPlace(rank).size() > 1 ? "t&#8209;": "");  // Non-breaking hyphen
-                    out.write("" + (rank + 1) + "/" + leaderboard.countQualifiers() + "</td>");
+                    out.write("" + (rank + 1) + "&nbsp;<span class='num-qualifiers'>/&nbsp;" + leaderboard.countQualifiers() + "</span></td>");
                 } else {
-                    out.write("<td class='member-details-cell'>N/A</td>");
-                    out.write("<td class='member-details-cell'>&#8210;/" + leaderboard.countQualifiers() + "</td>");
+                    out.write("<td class='member-details-cell value-cell'>N/A</td>");
+                    out.write("<td class='member-details-cell rank-cell'>&#8210;&nbsp;<span class='num-qualifiers'>/&nbsp;" + leaderboard.countQualifiers() + "</span></td>");
                 }
                 out.write("<td class='member-details-cell details'>" + metric.getDetails(member, true) + "</td></tr>\n");
             }
             
             out.write("</table></div>\n");
         } catch (Exception e) {
-            System.err.println("Error: " + e.getMessage());
+            System.err.println("Error caught in UserProfile: " + e.getMessage());
         }
     }
 }

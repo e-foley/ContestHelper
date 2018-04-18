@@ -2,10 +2,15 @@ import java.util.ArrayList;
 
 public class Entry
 {
+    static class MemberNameCouple {
+        public Member member;
+        public String name_submitted_under;
+    }
+    
     public static final int AUTO_WIN = 1;
     public static final int AUTO_LOSE = -1;
     
-    private Member member;
+    private ArrayList<MemberNameCouple> members;
     private Poll poll;
     private String URL;
     private boolean hasURL;
@@ -13,7 +18,7 @@ public class Entry
     private boolean hasUncertainty;
     private int overrideCode;
     private boolean hasVotes;
-    private String nameSubmittedUnder;
+    //private String nameSubmittedUnder;
     
     private int points;
     private boolean pointsAssigned;
@@ -24,9 +29,9 @@ public class Entry
     private int potential;
     private boolean potential_assigned;
     
-    public Entry(Member myMember, Poll myPoll, boolean myHasURL, String myURL, boolean myHasVotes, int votesSet, boolean myHasUncertainty, int myOverrideCode, String myNameSubmittedUnder)
+    public Entry(ArrayList<MemberNameCouple> myMembers, Poll myPoll, boolean myHasURL, String myURL, boolean myHasVotes, int votesSet, boolean myHasUncertainty, int myOverrideCode)
     {
-        member = myMember;
+        members = myMembers;
         poll = myPoll;
         URL = myURL;
         hasURL = myHasURL;
@@ -34,7 +39,7 @@ public class Entry
         hasUncertainty = myHasUncertainty;
         overrideCode = myOverrideCode;
         hasVotes = myHasVotes;
-        nameSubmittedUnder = myNameSubmittedUnder;
+        //nameSubmittedUnder = myNameSubmittedUnder;
         points = 0;
         pointsAssigned = false;
         plusMinusPoints = 0;
@@ -45,9 +50,13 @@ public class Entry
         potential_assigned = false;
     }
     
-    public Member getMember()
+    public ArrayList<MemberNameCouple> getMemberNameCouples()
     {
-        return member;
+        return members;
+    }
+    
+    public int numMembers() {
+        return members.size();
     }
     
     public Poll getPoll()
@@ -55,9 +64,9 @@ public class Entry
         return poll;
     }
     
-    public void setMember(Member memberSetting)
+    public void setMemberNameCouples(ArrayList<MemberNameCouple> membersSetting)
     {
-        member = memberSetting;
+        members = membersSetting;
     }
     
     public String getURL()
@@ -80,15 +89,15 @@ public class Entry
         return hasUncertainty;
     }
     
-    public String getNameSubmittedUnder()
-    {
-        return nameSubmittedUnder;
-    }
+//     public String getNameSubmittedUnder()
+//     {
+//         return nameSubmittedUnder;
+//     }
     
-    public void setNameSubmittedUnder(String name)
-    {
-        nameSubmittedUnder = name;
-    }
+//     public void setNameSubmittedUnder(String name)
+//     {
+//         nameSubmittedUnder = name;
+//     }
     
     public int getPoints()
     {

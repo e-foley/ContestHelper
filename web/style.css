@@ -174,9 +174,7 @@ td.contest-cell
 
 .details
 {
-  /*font-size: 0.75em;*/
-  font-size: 9px;
-  /*width: 60%*/
+  font-size: 0.6em;
 }
 
 .first
@@ -373,6 +371,7 @@ td.contest-cell
 .winnericon
 {
   height: 1em;
+  vertical-align: middle;
 }
 
 .tooltip
@@ -591,4 +590,83 @@ td.contest-cell
   font-weight: normal;
   color: #FFFFFF;
   font-size: 1.25em;
+}
+
+.rank-cell
+{
+  text-align: right;
+  padding-right: 8px;
+}
+
+.num-qualifiers
+{
+  font-size: 0.7em;
+}
+
+.archiveprofilelinkdiv
+{
+  display:inline-block;
+  vertical-align: middle;
+}
+
+/* Copies from leaderboard-table, defined earlier */
+.profile-index-table
+{
+  border-collapse: collapse;
+  background-color: #f7fff7;
+  margin: 1.5em auto;
+  width: 90%;
+}
+
+/* Copies from sort-table, defined earlier, EXCEPT for font size */
+.profile-index-header-row
+{
+  background-color: #56825a;
+  /* background-image: url('http://sotw.elfractal.com/images/toprow.gif'); */
+  font-weight: bold;
+  color: #e5c006;
+  text-shadow: 1px 1px 1px #503800;
+  text-align: center;
+  font-size: 1em;
+  height: 1.7em;
+}
+
+/* Copies from header-row, defined earlier */
+.profile-index-subheader-row
+{
+  background-color: #eeffee;
+  background-image: url('http://sotw.elfractal.com/images/catrow.gif');
+  font-weight: bold;
+  color: #008000;
+
+  text-align: center;
+  font-size: 1.0em;
+  height: 1.7em;
+}
+
+.profile-index-subheader-cell
+{
+
+}
+
+.profile-index-row
+{
+
+}
+
+.profile-index-cell
+{
+
+}
+
+.profile-index-name-cell
+{
+  /*font-weight: bold;*/
+}
+
+.character-heading
+{
+  text-align:center;
+  font-size: 2em;
+  color: #FFF;
 }
