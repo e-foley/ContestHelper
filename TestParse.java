@@ -24,13 +24,17 @@ public abstract class TestParse
     public static int doTheThing()
     {
         try {
-//             Document doc = Jsoup.connect("https://www.purezc.net")
-//                 .timeout(10000)
-//                 .validateTLSCertificates(false)
-//                 .get();
+            // Set up our certificates and such.
             System.setProperty("javax.net.ssl.trustStore", "cert/wwwpurezcnet.jks");
-            Document doc = Jsoup.connect("https://www.purezc.net").get();
+            // Navigate to the main SotW listing.
+            Document doc = Jsoup.connect("https://www.purezc.net/forums/index.php?showforum=45").get();
             System.out.println(doc.title());
+            // Look at all the contest numbers in the threads.
+            // (https://jsoup.org/apidocs/org/jsoup/select/Selector.html is a good resource.)
+            Elements contest_elements = doc.select("a[href*=showtopic]");
+            for (Element elem : contest_elements) {
+                System.out.println(elem.html());
+            }
 //             Elements newsHeadlines = doc.select("#mp-itn b a");
 //             for (Element headline : newsHeadlines) {
 //               System.out.println(headline.attr("title"));
