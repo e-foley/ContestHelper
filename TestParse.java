@@ -2,6 +2,7 @@ import org.jsoup.*;
 import org.jsoup.helper.*;
 import org.jsoup.nodes.*;
 import org.jsoup.select.*;
+import javax.net.ssl.SSLSocketFactory;
 
 /**
  * Abstract class TestParse - write a description of the class here
@@ -23,10 +24,12 @@ public abstract class TestParse
     public static int doTheThing()
     {
         try {
-            Document doc = Jsoup.connect("https://www.purezc.net")
-                .timeout(10000)
-                .validateTLSCertificates(false)
-                .get();
+//             Document doc = Jsoup.connect("https://www.purezc.net")
+//                 .timeout(10000)
+//                 .validateTLSCertificates(false)
+//                 .get();
+            System.setProperty("javax.net.ssl.trustStore", "cert/wwwpurezcnet.jks");
+            Document doc = Jsoup.connect("https://www.purezc.net").get();
             System.out.println(doc.title());
 //             Elements newsHeadlines = doc.select("#mp-itn b a");
 //             for (Element headline : newsHeadlines) {
