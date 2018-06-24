@@ -23,14 +23,15 @@ public abstract class TestParse
     public static int doTheThing()
     {
         try {
-            Document doc = Jsoup.connect("http://en.wikipedia.org/").get();
+            Document doc = Jsoup.connect("https://www.purezc.net/forums/index.php?showforum=45").get();
             System.out.println(doc.title());
-            Elements newsHeadlines = doc.select("#mp-itn b a");
-            for (Element headline : newsHeadlines) {
-              System.out.println(headline.attr("title"));
-              System.out.println(headline.absUrl("href"));
-            }
+//             Elements newsHeadlines = doc.select("#mp-itn b a");
+//             for (Element headline : newsHeadlines) {
+//               System.out.println(headline.attr("title"));
+//               System.out.println(headline.absUrl("href"));
+//             }
         } catch (java.io.IOException e) {
+            System.out.println(e.toString());
             return 1;
         }
         
