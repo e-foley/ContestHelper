@@ -57,6 +57,7 @@ bluej.pkh
 doc/resources/inherit.gif
 doc/logfile.txt
 *.jar
+!lib/jsoup-1.11.3.jar
 temp.txt
 README.TXT
 __SHELL*.java
