@@ -23,7 +23,10 @@ public abstract class TestParse
     public static int doTheThing()
     {
         try {
-            Document doc = Jsoup.connect("https://www.purezc.net/forums/index.php?showforum=45").get();
+            Document doc = Jsoup.connect("https://www.purezc.net")
+                .timeout(10000)
+                .validateTLSCertificates(false)
+                .get();
             System.out.println(doc.title());
 //             Elements newsHeadlines = doc.select("#mp-itn b a");
 //             for (Element headline : newsHeadlines) {
