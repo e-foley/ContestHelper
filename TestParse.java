@@ -9,6 +9,8 @@ public abstract class TestParse
 {
     public static int doTheThing()
     {
+        ArrayList<SotwTopic> sotw_topics = new ArrayList<SotwTopic>();
+        
         try {
             // Set up our certificates and such.
             System.setProperty("javax.net.ssl.trustStore", "cert/wwwpurezcnet.jks");
@@ -18,7 +20,6 @@ public abstract class TestParse
             // Look at all the contest numbers in the threads.
             // (https://jsoup.org/apidocs/org/jsoup/select/Selector.html is a good resource for this syntax.)
             Elements showtopic_links = doc.select("a[href*=showtopic]");
-            ArrayList<SotwTopic> sotw_topics = new ArrayList<SotwTopic>();
             
             for (Element elem : showtopic_links) {
                 // All our SotW topic names are in a <span itemprop="name"></span> sequence.
@@ -47,36 +48,15 @@ public abstract class TestParse
                 SotwTopic topic = new SotwTopic();
                 topic.number = contest_number;
                 topic.url = url;
-                
-                System.out.print(contest_number);
-                System.out.print(": ");
-                System.out.println(url);
-                
-//                 Element candidate = have_span.get(0);
-//                 if (candidate.
-//                 
-//                 
-//                 
-//                 for (Element has_span : have_span) {
-//                     Elements are_sotw_topic = has_span.getElementsMatchingText("Screenshot of the Week \\d+");
-//                 }
-                
-                //String html = elem.html();
-//                 System.out.print(topic_title);
-// //                 if (html.matches("")) {
-// //                     System.out.print("<span itemprop=\"name\" YES!!!!!!!!!!!!!!!");
-// //                 }
-//                 
-//                 System.out.println();
+                sotw_topics.add(topic);
             }
-//             Elements newsHeadlines = doc.select("#mp-itn b a");
-//             for (Element headline : newsHeadlines) {
-//               System.out.println(headline.attr("title"));
-//               System.out.println(headline.absUrl("href"));
-//             }
         } catch (java.io.IOException e) {
             System.out.println(e.toString());
             return 1;
+        }
+        
+        for (SotwTopic topic : sotw_topics) {
+            System.out.println(topic.number + ": " + topic.url);
         }
         
         return 42;
