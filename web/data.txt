@@ -4490,7 +4490,8 @@ Dimentio; png; 6
 Anthus; png; 28
 Joelmacool; png; 8
 Shoshon the Elegant; Shoshon%20the%20Elegant; png; 2
-EnnonFenom; gif; 0
+EnnonFenom; 0
+// EnnonFenom's shot was removed at some point, perhaps because it contained nudity.
 
 #664 @ 74036
 Shane; png; 28
