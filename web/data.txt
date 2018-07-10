@@ -4516,9 +4516,16 @@ Shoshon the Elegant; Shoshon%20the%20Elegant; png; 5
 MarinaraSauce; png; 16
 Shoshon the Elegant; Shoshon%20the%20Elegant; png; 8
 Orithan; png; 21
+
+#668 @ 74150
+Shoshon the Elegant; Shoshon%20the%20Elegant; png; 1
+klop422; png; 20
+Orithan; png; 18
 /*
-#668 @ FILL ME IN AND CHECK KLOP FILE TYPE
+#669 @ 74177
+Cukeman; jpg; 
 Shoshon the Elegant; Shoshon%20the%20Elegant; png; 
-klop422; jpg; 
-Orithan; png; 
+klop422; png; 
+trudatman; jpg; 
+Chris; png; 
 /*
