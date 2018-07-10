@@ -4509,7 +4509,7 @@ Lüt; Lut; gif; 6
 Jared; png; 5
 klop422; png; 7
 Orithan; png; 13
-Lüt; Lut; png; 6
+Lüt; Lut; gif; 6
 Shoshon the Elegant; Shoshon%20the%20Elegant; png; 5
 
 #667 @ 74129
