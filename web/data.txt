@@ -4521,11 +4521,22 @@ Orithan; png; 21
 Shoshon the Elegant; Shoshon%20the%20Elegant; png; 1
 klop422; png; 20
 Orithan; png; 18
-/*
+
 #669 @ 74177
-Cukeman; jpg; 
-Shoshon the Elegant; Shoshon%20the%20Elegant; png; 
-klop422; png; 
-trudatman; jpg; 
-Chris; png; 
+Cukeman; jpg; 11
+Shoshon the Elegant; Shoshon%20the%20Elegant; png; 13
+klop422; png; 1
+trudatman; jpg; 3
+Chris; png; 12
+
+#670 @ 74205
+Shoshon the Elegant; Shoshon%20the%20Elegant; png; 7
+Jared; png; 20
+MarinaraSauce; png; 5
+klop422; png; 4
+/*
+#671 @ 74231
+klop422; png; 22
+Shoshon the Elegant; Shoshon%20the%20Elegant; png; 5
+Shane; png; 15
 /*
