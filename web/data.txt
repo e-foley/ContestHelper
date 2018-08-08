@@ -4534,9 +4534,19 @@ Shoshon the Elegant; Shoshon%20the%20Elegant; png; 7
 Jared; png; 20
 MarinaraSauce; png; 5
 klop422; png; 4
-/*
+
 #671 @ 74231
 klop422; png; 22
-Shoshon the Elegant; Shoshon%20the%20Elegant; png; 5
-Shane; png; 15
+Shoshon the Elegant; Shoshon%20the%20Elegant; png; 6
+Shane; png; 16
+
+#672 @ 74254
+Shoshon the Elegant; Shoshon%20the%20Elegant; png; 20
+klop422; png; 10
+Binx; png; 5
+/*
+#673 @ 74283
+Shoshon the Elegant; Shoshon%20the%20Elegant; png; 11
+klop422; png; 6
+Orithan; png; 9
 /*
