@@ -351,7 +351,8 @@ Hero Link; 1
 #46 @ 5087
 codelinker8705; SOTW46-codelinker8705; gif; 1
 PolygonX8; SOTW46-PolygonX8; gif; 4
-Hero Link; SOTW46-HeroLink; gif; 10
+// It appears this shot name and the topic were edited well after the contest (~2015?) to swap Hero Link for Rydia.
+Hero Link; SOTW46-Rydia; gif; 10
 Nick; SOTW46-Nick; gif; 4
 Mr. Z; SOTW46-MrZ; gif; 2
 Wild Bill; SOTW46-WildBill; gif; 2
