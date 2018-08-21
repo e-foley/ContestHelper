@@ -4545,9 +4545,19 @@ Shane; png; 16
 Shoshon the Elegant; Shoshon%20the%20Elegant; png; 20
 klop422; png; 10
 Binx; png; 5
-/*
+
 #673 @ 74283
-Shoshon the Elegant; Shoshon%20the%20Elegant; png; 11
+Shoshon the Elegant; Shoshon%20the%20Elegant; png; 13
 klop422; png; 6
-Orithan; png; 9
+Orithan; png; 12
+
+#674 @ 74314
+Sheik; png; 24
+klop422; png; 8
+Shoshon the Elegant; Shoshon%20the%20Elegant; png; 3
+/*
+#675 @ 74337
+Sheik; png; 15
+Spawn; png; 16
+Shoshon the Elegant; Shoshon%20the%20Elegant; png; 1
 /*
