@@ -43,14 +43,14 @@ public abstract class Master
         String strLine = new String();
         
         stamps.add(new NamedStamp("Populating members"));
-        if (!history.populateMembersFromFile("web/associations.txt"))
+        if (!history.populateMembersFromFile("input/associations.txt"))
         {
             System.err.println("Error while parsing associations.txt.  Perhaps data aren't delimited correctly.");
             return;
         }
         
         stamps.add(new NamedStamp("Populating entries"));
-        if (!history.populateEntriesFromFile("web/data.txt"))
+        if (!history.populateEntriesFromFile("input/data.txt"))
         {
             System.err.println("Error while parsing data.txt.  Perhaps data aren't delimited correctly or a numeric value is misplaced.");
             return;
@@ -65,12 +65,14 @@ public abstract class Master
         {
             stamps.add(new NamedStamp("Copying input files"));
             // make backups of input
-            Master.copyFile(new File("web/data.txt"),new File("backup/data-" + history.getLastPollName() + ".txt"));
-            Master.copyFile(new File("web/associations.txt"),new File("backup/associations-" + history.getLastPollName() + ".txt"));
+            Master.copyFile(new File("input/data.txt"), new File("backup/data-" + history.getLastPollName() + ".txt"));
+            Master.copyFile(new File("input/data.txt"), new File("docs/data.txt"));
+            Master.copyFile(new File("input/associations.txt"), new File("backup/associations-" + history.getLastPollName() + ".txt"));
+            Master.copyFile(new File("input/associations.txt"), new File("docs/associations.txt"));
             
             // ARCHIVES
             stamps.add(new NamedStamp("Preparing archive generation"));
-            fstream = new FileOutputStream("web/archives" + testText + ".html");
+            fstream = new FileOutputStream("docs/archives" + testText + ".html");
             out = new BufferedWriter(new OutputStreamWriter(fstream, StandardCharsets.UTF_8));
             
             addFileToBuffer("config/archives_header.txt", out, swaps);
@@ -88,7 +90,7 @@ public abstract class Master
             for (int e = num_polls - 1; e >= 0; e -= CONTESTS_PER_PAGE) {
                 final int poll_end = e;
                 final int poll_start = Math.max(poll_end - CONTESTS_PER_PAGE + 1, 0);
-                fstream = new FileOutputStream("web/archives-page" + Integer.toString(p + 1) + ".html");
+                fstream = new FileOutputStream("docs/archives-page" + Integer.toString(p + 1) + ".html");
                 out = new BufferedWriter(new OutputStreamWriter(fstream, StandardCharsets.UTF_8));
                 addFileToBuffer("config/archives_header.txt", out, swaps);
                 archivesGenerator.insertNavigationBar(out, history, p + 1, num_pages, CONTESTS_PER_PAGE);
@@ -143,7 +145,7 @@ public abstract class Master
             
             // Now begin to write these pages
             stamps.add(new NamedStamp("Writing big leaderboards page"));
-            fstream = new FileOutputStream("web/leaderboards" + testText + ".html");
+            fstream = new FileOutputStream("docs/leaderboards" + testText + ".html");
             out = new BufferedWriter(new OutputStreamWriter(fstream, StandardCharsets.UTF_8));
             addFileToBuffer("config/leaderboard_header.txt", out, swaps);
             for (int i = 0; i < leaderboards_full.size(); ++i) {
@@ -154,7 +156,7 @@ public abstract class Master
             out.close();
             
             stamps.add(new NamedStamp("Writing leaderboards digest page"));
-            fstream = new FileOutputStream("web/leaderboards-digest" + testText + ".html");
+            fstream = new FileOutputStream("docs/leaderboards-digest" + testText + ".html");
             out = new BufferedWriter(new OutputStreamWriter(fstream, StandardCharsets.UTF_8));
             addFileToBuffer("config/leaderboard_header.txt", out, swaps);
             for (int i = 0; i < leaderboards_brief.size(); ++i) {
@@ -183,7 +185,7 @@ public abstract class Master
             
             // PROFILE INDEX
             stamps.add(new NamedStamp("Generating profile index"));
-            fstream = new FileOutputStream("web/profile_index.html");
+            fstream = new FileOutputStream("docs/profile_index.html");
             out = new BufferedWriter(new OutputStreamWriter(fstream, StandardCharsets.UTF_8));
             addFileToBuffer("config/profile_index_header.txt", out, swaps);
             ProfileIndexGenerator.generate(history, out);
