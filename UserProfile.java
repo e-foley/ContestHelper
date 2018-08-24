@@ -112,7 +112,7 @@ abstract class UserProfile
     
     public static String getProfilePath(Member mem)
     {
-        return "web/" + getProfileUrl(mem);
+        return "docs/" + getProfileUrl(mem);
     }
     
     // I don't remember why I have this method.
