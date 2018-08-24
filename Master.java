@@ -65,8 +65,10 @@ public abstract class Master
         {
             stamps.add(new NamedStamp("Copying input files"));
             // make backups of input
-            Master.copyFile(new File("input/data.txt"),new File("docs/data-" + history.getLastPollName() + ".txt"));
-            Master.copyFile(new File("input/associations.txt"),new File("docs/associations-" + history.getLastPollName() + ".txt"));
+            Master.copyFile(new File("input/data.txt"), new File("backup/data-" + history.getLastPollName() + ".txt"));
+            Master.copyFile(new File("input/data.txt"), new File("docs/data.txt"));
+            Master.copyFile(new File("input/associations.txt"), new File("backup/associations-" + history.getLastPollName() + ".txt"));
+            Master.copyFile(new File("input/associations.txt"), new File("docs/associations.txt"));
             
             // ARCHIVES
             stamps.add(new NamedStamp("Preparing archive generation"));
