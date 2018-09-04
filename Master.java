@@ -23,9 +23,20 @@ public abstract class Master
     public static final int CONTESTS_PER_PAGE = 12;
     public static final int DELTA = 10;
     public static final int WIN_RATIO_MIN_ENTRIES = 5;
+    public static final boolean OVERWRITE_IDENTICAL_PROFILES = true;
     
+    // arg0 is input origin
+    // arg1 is output origin
     public static void main(String[] args)
     {
+        if (args.length < 2) {
+            System.err.println("Not enough arguments.");
+            return;
+        }
+        
+        String input_origin = args[0] + "/";
+        String output_origin = args[1] + "/";
+        
         ArrayList<NamedStamp> stamps = new ArrayList<NamedStamp>();
         stamps.add(new NamedStamp("Begin"));
         
@@ -43,14 +54,14 @@ public abstract class Master
         String strLine = new String();
         
         stamps.add(new NamedStamp("Populating members"));
-        if (!history.populateMembersFromFile("input/associations.txt"))
+        if (!history.populateMembersFromFile(input_origin + "input/associations.txt"))
         {
             System.err.println("Error while parsing associations.txt.  Perhaps data aren't delimited correctly.");
             return;
         }
         
         stamps.add(new NamedStamp("Populating entries"));
-        if (!history.populateEntriesFromFile("input/data.txt"))
+        if (!history.populateEntriesFromFile(input_origin + "input/data.txt"))
         {
             System.err.println("Error while parsing data.txt.  Perhaps data aren't delimited correctly or a numeric value is misplaced.");
             return;
@@ -65,21 +76,21 @@ public abstract class Master
         {
             stamps.add(new NamedStamp("Copying input files"));
             // make backups of input
-            Master.copyFile(new File("input/data.txt"), new File("backup/data-" + history.getLastPollName() + ".txt"));
-            Master.copyFile(new File("input/data.txt"), new File("docs/data.txt"));
-            Master.copyFile(new File("input/associations.txt"), new File("backup/associations-" + history.getLastPollName() + ".txt"));
-            Master.copyFile(new File("input/associations.txt"), new File("docs/associations.txt"));
+            Master.copyFile(new File(input_origin + "input/data.txt"), new File(input_origin + "backup/data-" + history.getLastPollName() + ".txt"));
+            Master.copyFile(new File(input_origin + "input/data.txt"), new File(output_origin + "data.txt"));
+            Master.copyFile(new File(input_origin + "input/associations.txt"), new File(input_origin + "backup/associations-" + history.getLastPollName() + ".txt"));
+            Master.copyFile(new File(input_origin + "input/associations.txt"), new File(output_origin + "associations.txt"));
             
             // ARCHIVES
             stamps.add(new NamedStamp("Preparing archive generation"));
-            fstream = new FileOutputStream("docs/archives" + testText + ".html");
+            fstream = new FileOutputStream(output_origin + "archives" + testText + ".html");
             out = new BufferedWriter(new OutputStreamWriter(fstream, StandardCharsets.UTF_8));
             
-            addFileToBuffer("config/archives_header.txt", out, swaps);
+            addFileToBuffer(input_origin + "config/archives_header.txt", out, swaps);
             stamps.add(new NamedStamp("Generating archives"));
             archivesGenerator.generate(history, out);
             stamps.add(new NamedStamp("Writing archives"));
-            addFileToBuffer("config/archives_footer.txt", out, swaps);
+            addFileToBuffer(input_origin + "config/archives_footer.txt", out, swaps);
             out.close();
             stamps.add(new NamedStamp("Done writing archives"));
             
@@ -90,13 +101,13 @@ public abstract class Master
             for (int e = num_polls - 1; e >= 0; e -= CONTESTS_PER_PAGE) {
                 final int poll_end = e;
                 final int poll_start = Math.max(poll_end - CONTESTS_PER_PAGE + 1, 0);
-                fstream = new FileOutputStream("docs/archives-page" + Integer.toString(p + 1) + ".html");
+                fstream = new FileOutputStream(output_origin + "archives-page" + Integer.toString(p + 1) + ".html");
                 out = new BufferedWriter(new OutputStreamWriter(fstream, StandardCharsets.UTF_8));
-                addFileToBuffer("config/archives_header.txt", out, swaps);
+                addFileToBuffer(input_origin + "config/archives_header.txt", out, swaps);
                 archivesGenerator.insertNavigationBar(out, history, p + 1, num_pages, CONTESTS_PER_PAGE);
                 archivesGenerator.generate(history, out, poll_start, poll_end);
                 archivesGenerator.insertNavigationBar(out, history, p + 1, num_pages, CONTESTS_PER_PAGE);
-                addFileToBuffer("config/archives_footer.txt", out, swaps);
+                addFileToBuffer(input_origin + "config/archives_footer.txt", out, swaps);
                 out.close();
                 ++p;
             }
@@ -145,29 +156,29 @@ public abstract class Master
             
             // Now begin to write these pages
             stamps.add(new NamedStamp("Writing big leaderboards page"));
-            fstream = new FileOutputStream("docs/leaderboards" + testText + ".html");
+            fstream = new FileOutputStream(output_origin + "leaderboards" + testText + ".html");
             out = new BufferedWriter(new OutputStreamWriter(fstream, StandardCharsets.UTF_8));
-            addFileToBuffer("config/leaderboard_header.txt", out, swaps);
+            addFileToBuffer(input_origin + "config/leaderboard_header.txt", out, swaps);
             for (int i = 0; i < leaderboards_full.size(); ++i) {
                 stamps.add(new NamedStamp("Leaderboard: " + leaderboards_full.get(i).getTitle()));
                 leaderboards_full.get(i).addToFile(DELTA, out, true, false, false, i + 1);
             }
-            addFileToBuffer("config/leaderboard_footer.txt", out, swaps);
+            addFileToBuffer(input_origin + "config/leaderboard_footer.txt", out, swaps);
             out.close();
             
             stamps.add(new NamedStamp("Writing leaderboards digest page"));
-            fstream = new FileOutputStream("docs/leaderboards-digest" + testText + ".html");
+            fstream = new FileOutputStream(output_origin + "leaderboards-digest" + testText + ".html");
             out = new BufferedWriter(new OutputStreamWriter(fstream, StandardCharsets.UTF_8));
-            addFileToBuffer("config/leaderboard_header.txt", out, swaps);
+            addFileToBuffer(input_origin + "config/leaderboard_header.txt", out, swaps);
             for (int i = 0; i < leaderboards_brief.size(); ++i) {
                 leaderboards_brief.get(i).addToFile(DELTA, out, false, false, false, i + 1, DIGEST_LIST_LENGTH);
             }
-            addFileToBuffer("config/leaderboard_footer.txt", out, swaps);
+            addFileToBuffer(input_origin + "config/leaderboard_footer.txt", out, swaps);
             out.close();
             
             // MEMBER LIST
             stamps.add(new NamedStamp("Generating member list"));
-            fstream = new FileOutputStream("members/members-" + history.getLastPollName() + ".txt");
+            fstream = new FileOutputStream(input_origin + "members/members-" + history.getLastPollName() + ".txt");  // TODO: Does this really belong in "input"?
             out = new BufferedWriter(new OutputStreamWriter(fstream, StandardCharsets.UTF_8));
             ArrayList<Member> member_list = new ArrayList<Member>(history.getMembers());
             Collections.sort(member_list, new MemberSortAlphabetical());
@@ -185,11 +196,11 @@ public abstract class Master
             
             // PROFILE INDEX
             stamps.add(new NamedStamp("Generating profile index"));
-            fstream = new FileOutputStream("docs/profile_index.html");
+            fstream = new FileOutputStream(output_origin + "profile_index.html");
             out = new BufferedWriter(new OutputStreamWriter(fstream, StandardCharsets.UTF_8));
-            addFileToBuffer("config/profile_index_header.txt", out, swaps);
+            addFileToBuffer(input_origin + "config/profile_index_header.txt", out, swaps);
             ProfileIndexGenerator.generate(history, out);
-            addFileToBuffer("config/profile_index_footer.txt", out, swaps);
+            addFileToBuffer(input_origin + "config/profile_index_footer.txt", out, swaps);
             out.close();
             
             
@@ -198,8 +209,8 @@ public abstract class Master
             if (generate_user_galleries) {
                 ArrayList<Member> mems = member_list;
                 for (int i=0; i<mems.size(); i++) {
-                    System.out.println("Attempting to write file " + UserProfile.getProfilePath(mems.get(i)) + "...");
-                    UserProfile.createProfilePage(mems.get(i), false, leaderboards_full);
+                    System.out.println("Attempting to write file " + output_origin + getProfilePath(mems.get(i)) + "...");
+                    UserProfile.createProfilePage(mems.get(i), OVERWRITE_IDENTICAL_PROFILES, leaderboards_full, input_origin, output_origin + getProfilePath(mems.get(i)));
                 }
             }
 
@@ -253,7 +264,7 @@ public abstract class Master
         catch (Exception e)
         {
             System.err.println("Error caught in Master: " + e.getMessage());
-            System.err.println("Error adding" + filename + " to buffer.  Is it missing?");
+            System.err.println("Error adding " + filename + " to buffer. Is it missing?");
         }
     }
     
@@ -291,7 +302,7 @@ public abstract class Master
         }
     }
     
-        // Borrowed from http://stackoverflow.com/questions/27379059/determine-if-two-files-store-the-same-content
+    // Borrowed from http://stackoverflow.com/questions/27379059/determine-if-two-files-store-the-same-content
     public static boolean fileEquals(File file1, File file2) {
         byte[] f1;
         byte[] f2;
@@ -302,5 +313,10 @@ public abstract class Master
             return false;
         }
         return Arrays.equals(f1, f2);
+    }
+    
+    // TODO: Move getProfileUrl out of UserProfile.
+    public static String getProfilePath(Member mem) {
+        return UserProfile.getProfileUrl(mem);
     }
 }
