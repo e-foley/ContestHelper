@@ -29,6 +29,11 @@ public abstract class Master
     // arg1 is output origin
     public static void main(String[] args)
     {
+        if (args.length < 2) {
+            System.err.println("Not enough arguments.");
+            return;
+        }
+        
         String input_origin = args[0] + "/";
         String output_origin = args[1] + "/";
         
@@ -205,7 +210,7 @@ public abstract class Master
                 ArrayList<Member> mems = member_list;
                 for (int i=0; i<mems.size(); i++) {
                     System.out.println("Attempting to write file " + output_origin + getProfilePath(mems.get(i)) + "...");
-                    UserProfile.createProfilePage(mems.get(i), OVERWRITE_IDENTICAL_PROFILES, leaderboards_full, output_origin + getProfilePath(mems.get(i)));
+                    UserProfile.createProfilePage(mems.get(i), OVERWRITE_IDENTICAL_PROFILES, leaderboards_full, input_origin, output_origin + getProfilePath(mems.get(i)));
                 }
             }
 
@@ -259,7 +264,7 @@ public abstract class Master
         catch (Exception e)
         {
             System.err.println("Error caught in Master: " + e.getMessage());
-            System.err.println("Error adding" + filename + " to buffer.  Is it missing?");
+            System.err.println("Error adding " + filename + " to buffer. Is it missing?");
         }
     }
     
