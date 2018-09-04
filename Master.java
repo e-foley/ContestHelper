@@ -23,6 +23,7 @@ public abstract class Master
     public static final int CONTESTS_PER_PAGE = 12;
     public static final int DELTA = 10;
     public static final int WIN_RATIO_MIN_ENTRIES = 5;
+    public static final boolean OVERWRITE_IDENTICAL_PROFILES = true;
     
     public static void main(String[] args)
     {
@@ -199,7 +200,7 @@ public abstract class Master
                 ArrayList<Member> mems = member_list;
                 for (int i=0; i<mems.size(); i++) {
                     System.out.println("Attempting to write file " + UserProfile.getProfilePath(mems.get(i)) + "...");
-                    UserProfile.createProfilePage(mems.get(i), false, leaderboards_full);
+                    UserProfile.createProfilePage(mems.get(i), OVERWRITE_IDENTICAL_PROFILES, leaderboards_full);
                 }
             }
 
