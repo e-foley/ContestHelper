@@ -11,7 +11,7 @@ abstract class UserProfile
 {
     public static final String TEMP_PATH = "temp.txt";
 
-    public static void createProfilePage(Member mem, boolean explicit, ArrayList<FormattedLeaderboard> stats)
+    public static void createProfilePage(Member mem, boolean explicit, ArrayList<FormattedLeaderboard> stats, String path)
     {
         String recent_name = mem.getMostRecentName();
         //String safe_name = getSafeName(recent_name);
@@ -20,7 +20,7 @@ abstract class UserProfile
         
         String initial_target;
         if (explicit) {
-            initial_target = getProfilePath(mem);
+            initial_target = path;
         } else {
             initial_target = TEMP_PATH;
         }
@@ -89,7 +89,7 @@ abstract class UserProfile
             return;
         } else {
             File temp_file = new File(TEMP_PATH);
-            File profile_file = new File(getProfilePath(mem));
+            File profile_file = new File(path);
             if (Master.fileEquals(temp_file, profile_file)) {
                 try {
                     Files.deleteIfExists(temp_file.toPath());
@@ -108,11 +108,6 @@ abstract class UserProfile
     public static String getSafeName(String orig)
     {
         return orig.replaceAll("[^a-zA-Z0-9]", "");
-    }
-    
-    public static String getProfilePath(Member mem)
-    {
-        return "../e-foley.github.io/" + getProfileUrl(mem);
     }
     
     // I don't remember why I have this method.
