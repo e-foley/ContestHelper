@@ -107,6 +107,7 @@ Billy Ronald > billy ronald > BillPzc > Old Inactive Member
 Dekadx2 > Daiv > Fausch > Jaghnus > fausch > SpikeReynolds
 Bombos > Ecruteak > Castelia
 Lineas > Binx
+Twilight_Knight > Twilight Knight
 
 // Tagged members: refer to these tags in data.txt when a member's username has been used by a different person
 //   Shared "Ben"
@@ -117,7 +118,7 @@ Lineas > Binx
 294314: FlameCursed > Chungus > FlameCursed > Matthew > Midnight_Queen > Matthew
 //   Shared "Yoshi"
 1245: Yoshi > Tails > Pikachu > Fluttershy
-48320: Yoshidude > Dragonite > Tingle > Jacques > Duck > Homura > Can Dogs Eat Kiwi? > Yoshi > Eddy finish AR3
+48320: Yoshidude > Dragonite > Tingle > Jacques > Duck > Homura > Can Dogs Eat Kiwi? > Yoshi > Eddy finish AR3 > Yoshi
 
 // EDUCATED GUESSES
 DarkSFK > Bob
