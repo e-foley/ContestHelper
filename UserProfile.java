@@ -51,7 +51,8 @@ abstract class UserProfile
             
             addStatsTableToFile(mem, stats, true, true, out);
             
-            out.write("<div class='picture-large-list'>\n");
+            out.write("<div class='picture-large-list'>");
+            out.newLine();
             
             ArrayList<Member.EntryStakePair> pairs = mem.getEntries();
             // Note: this assumes that the entries have been ordered chronologically
@@ -71,10 +72,12 @@ abstract class UserProfile
                 } else {
                     out.write("#" + poll.getName());
                 }
-                out.write("</div></div>\n");
+                out.write("</div></div>");
+                out.newLine();
             }
             
-            out.write("</div>\n");
+            out.write("</div>");
+            out.newLine();
             
             Master.addFileToBuffer(input_origin + "config/profile_footer.txt", out, swaps);
             out.close();
@@ -124,8 +127,10 @@ abstract class UserProfile
         try {
             out.write("<div class='member-details-div'><table class='member-details-table'><tr class='member-details-header-row'><td colspan='");
             out.write(details ? "4" : "3");
-            out.write("'>" + member.getMostRecentName() + "&rsquo;s stats</td></tr>\n");
-            out.write("<tr class='member-details-subheader-row'><td class='member-details-subheader-cell'>Category</td><td class='member-details-subheader-cell'>Value</td><td class='member-details-subheader-cell'>Rank</td><td class='member-details-subheader-cell'>Details</td></tr>\n");
+            out.write("'>" + member.getMostRecentName() + "&rsquo;s stats</td></tr>");
+            out.newLine();
+            out.write("<tr class='member-details-subheader-row'><td class='member-details-subheader-cell'>Category</td><td class='member-details-subheader-cell'>Value</td><td class='member-details-subheader-cell'>Rank</td><td class='member-details-subheader-cell'>Details</td></tr>");
+            out.newLine();
         
             for (FormattedLeaderboard stat : stats) {
                 Leaderboard leaderboard = stat.getLeaderboard();
@@ -142,10 +147,12 @@ abstract class UserProfile
                     out.write("<td class='member-details-cell value-cell'>N/A</td>");
                     out.write("<td class='member-details-cell rank-cell'>&#8210;&nbsp;<span class='num-qualifiers'>/&nbsp;" + leaderboard.countQualifiers() + "</span></td>");
                 }
-                out.write("<td class='member-details-cell details'>" + metric.getDetails(member, true) + "</td></tr>\n");
+                out.write("<td class='member-details-cell details'>" + metric.getDetails(member, true) + "</td></tr>");
+                out.newLine();
             }
             
-            out.write("</table></div>\n");
+            out.write("</table></div>");
+            out.newLine();
         } catch (Exception e) {
             System.err.println("Error caught in UserProfile: " + e.getMessage());
         }
