@@ -206,7 +206,8 @@ public class ArchivesGenerator {
             }
             // We can always declare the current page...
             //out.write("<td class='navtable-cell'><span class='current-page'>Page " + current_page + "</span></td>");
-            out.write("<td class='navtable-cell'><div class='page-selector'><label><select onChange='window.location.href=\"archives-page\" + this.value + \".html\"'>\n");
+            out.write("<td class='navtable-cell'><div class='page-selector'><label><select onChange='window.location.href=\"archives-page\" + this.value + \".html\"'>");
+            out.newLine();
             // Dropbown
             for (int i = 0; i < num_pages; ++i) {
                 ContestBounds bounds = getPageBounds(history, contests_per_page, i + 1);
@@ -215,7 +216,8 @@ public class ArchivesGenerator {
                     if ((i + 1) == current_page) {
                         out.write(" selected='selected'");
                     }
-                    out.write(">Page " + (i + 1) + " (#" + bounds.getStart().getName() + "&ndash;#" + bounds.getEnd().getName() + ")</option>\n");
+                    out.write(">Page " + (i + 1) + " (#" + bounds.getStart().getName() + "&ndash;#" + bounds.getEnd().getName() + ")</option>");
+                    out.newLine();
                 }
             }
             out.write("</select></label></div></td>");

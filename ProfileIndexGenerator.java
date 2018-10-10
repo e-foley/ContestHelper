@@ -70,11 +70,15 @@ public abstract class ProfileIndexGenerator {
                 char starting_char = line.name.toUpperCase().charAt(0);
                 if (starting_char != last_starting_char) {
                     if (table_active) {
-                        out.write("</tr></table>\n");
+                        out.write("</tr></table>");
+                        out.newLine();
                     }
-                    out.write("<div class='character-heading'>" + starting_char + "</div>\n");
-                    out.write("<table class='profile-index-table'>\n");
-                    out.write("<tr class='profile-index-header-row'><td>Name</td><td>Entries</td><td>First</td><td>Most recent</td></tr>\n");
+                    out.write("<div class='character-heading'>" + starting_char + "</div>");
+                    out.newLine();
+                    out.write("<table class='profile-index-table'>");
+                    out.newLine();
+                    out.write("<tr class='profile-index-header-row'><td>Name</td><td>Entries</td><td>First</td><td>Most recent</td></tr>");
+                    out.newLine();
                     last_starting_char = starting_char;
                     table_active = true;
                 }
@@ -88,11 +92,13 @@ public abstract class ProfileIndexGenerator {
                 out.write("<td>" + (new DecimalFormat("#.##")).format(line.num_entries) + "</td>");
                 out.write("<td>" + line.first_contest + "</td>");
                 out.write("<td>" + line.most_recent_contest + "</td>");
-                out.write("</tr>\n");
+                out.write("</tr>");
+                out.newLine();
             }
             
             if (table_active) {
-                out.write("</tr></table>\n");
+                out.write("</tr></table>");
+                out.newLine();
             }
         } catch (Exception e) {
             System.err.println("Error caught in ProfileIndexGenerator: " + e.getMessage());
