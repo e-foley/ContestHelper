@@ -131,10 +131,10 @@ public class ArchivesGenerator {
                             }
                             EloEvaluator.RatingCalc calc = elo_evaluator.getRatingDetails(entry.getMemberNameCouples().get(0).member.getId(), poll.getSynch());
                             if (entry.numMembers() == 1) {
-                                out.write("</td><td class='points'>");
                                 long old_int = Math.round(calc.rating_before);
                                 long new_int = Math.round(calc.rating_after);
                                 long difference = new_int - old_int;
+                                out.write("</td><td class='points'>" + new_int + " (");
                                 if (difference > 0) {
                                     out.write("+" + difference);
                                 } else if (difference < 0) {
