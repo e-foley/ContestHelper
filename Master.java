@@ -24,6 +24,10 @@ public abstract class Master
     public static final int DELTA = 10;
     public static final int WIN_RATIO_MIN_ENTRIES = 5;
     public static final boolean OVERWRITE_IDENTICAL_PROFILES = true;
+    public static final double ELO_STARTING_RATING = 1000.0f;
+    public static final double ELO_BASE = 10.0;
+    public static final double ELO_DIVISOR = 400.0;
+    public static final double ELO_AGGRESSIVENESS = 20.0;
     
     // arg0 is input origin
     // arg1 is output origin
@@ -67,6 +71,11 @@ public abstract class Master
             return;
         }
         
+        // Calculate ratings
+        // TODO: The EloEvaluator is like a parallel array right now... See if we can get this info inside history, or something clever...
+        EloEvaluator elo_evaluator = new EloEvaluator(ELO_STARTING_RATING, ELO_BASE, ELO_DIVISOR, ELO_AGGRESSIVENESS);
+        elo_evaluator.evaluate(history);
+        
         FileOutputStream fstream;
         BufferedWriter out;
         
@@ -88,7 +97,7 @@ public abstract class Master
             
             addFileToBuffer(input_origin + "config/archives_header.txt", out, swaps);
             stamps.add(new NamedStamp("Generating archives"));
-            archivesGenerator.generate(history, out);
+            archivesGenerator.generate(history, elo_evaluator, out);
             stamps.add(new NamedStamp("Writing archives"));
             addFileToBuffer(input_origin + "config/archives_footer.txt", out, swaps);
             out.close();
@@ -105,7 +114,7 @@ public abstract class Master
                 out = new BufferedWriter(new OutputStreamWriter(fstream, StandardCharsets.UTF_8));
                 addFileToBuffer(input_origin + "config/archives_header.txt", out, swaps);
                 archivesGenerator.insertNavigationBar(out, history, p + 1, num_pages, CONTESTS_PER_PAGE);
-                archivesGenerator.generate(history, out, poll_start, poll_end);
+                archivesGenerator.generate(history, elo_evaluator, out, poll_start, poll_end);
                 archivesGenerator.insertNavigationBar(out, history, p + 1, num_pages, CONTESTS_PER_PAGE);
                 addFileToBuffer(input_origin + "config/archives_footer.txt", out, swaps);
                 out.close();

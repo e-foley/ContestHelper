@@ -7,15 +7,15 @@ public class ArchivesGenerator {
 
     }
 
-    public void generate(History history, BufferedWriter out) {
-        generate(history, out, 1, history.getPolls().size());
+    public void generate(History history, EloEvaluator elo_evaluator, BufferedWriter out) {
+        generate(history, elo_evaluator, out, 1, history.getPolls().size());
     }
 
-    public void generate(History history, BufferedWriter out, int totalEntriesToShow) {
-        generate(history, out, history.getPolls().size() - totalEntriesToShow, history.getPolls().size() - 1);
+    public void generate(History history, EloEvaluator elo_evaluator, BufferedWriter out, int totalEntriesToShow) {
+        generate(history, elo_evaluator, out, history.getPolls().size() - totalEntriesToShow, history.getPolls().size() - 1);
     }
     
-    public void generate(History history, BufferedWriter out, int pollStart, int pollEnd) {
+    public void generate(History history, EloEvaluator elo_evaluator, BufferedWriter out, int pollStart, int pollEnd) {
         try
         {
             Entry entry;
@@ -129,7 +129,15 @@ public class ArchivesGenerator {
                             } else {
                                 out.write("&mdash;");
                             }
-                            out.write("</td><td class='points'>" + entry.getPoints() + "</td>");
+                            //out.write("</td><td class='points'>" + entry.getPoints() + "</td>");
+                            EloEvaluator.RatingCalc calc = elo_evaluator.getRatingDetails(entry.getMemberNameCouples().get(0).member.getId(), poll.getSynch());
+                            if (entry.numMembers() == 1) {
+                                DecimalFormat df = new DecimalFormat("0.0");
+                                out.write("</td><td class='points'>" + df.format(calc.rating_before) + " to " + df.format(calc.rating_after) + "</td>");
+                            } else {
+                                // TODO: Replace me with something more elegant.
+                                out.write("</td><td class='points'></td>");
+                            }
                         }
                         else
                         {
