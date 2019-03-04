@@ -45,30 +45,34 @@ public class EloEvaluator
                     }
                     
                     int member_id = couple.member.getId();
+                    RatingCalc this_calc = new RatingCalc();
                     
                     // TODO: Do we need to clone this_calc when we add it!?
-                    
+                   
                     if (!rating_history.containsKey(new Integer(member_id))) {
-                        // Member isn't in charts yet
-                        TreeMap<Integer, RatingCalc> inserting = new TreeMap<Integer, RatingCalc>();
+                        // Member isn't in charts yet, so create a row for the member and make "rating before" our default.                        
+                        rating_history.put(member_id, new TreeMap<Integer, RatingCalc>());
                         this_calc.rating_before = starting_rating;
-                        inserting.put(new Integer(poll.getSynch()), this_calc);
-                        rating_history.put(member_id, inserting);
-                    }
-                    
-                    else {
-                        // Member is in charts
+                    } else {
+                        // Member is in charts; set "rating before" to the "rating after" of the prior entry.
                         TreeMap<Integer, RatingCalc> line = rating_history.get(new Integer(member_id));
                         RatingCalc last_calc = line.get(line.lastKey());
                         this_calc.rating_before = last_calc.rating_after;
-                        line.put(new Integer(poll.getSynch()), this_calc);
                     }
                     
-                    // Look through all pairs of competitors in this contest and adjust rating accourdingly.
-                    for (int m = 0; 
-                    
+                    rating_history.get(new Integer(member_id)).put(poll.getSynch(), this_calc);
                 }
             }
+                
+            // By this point, we have a provisional RatingCalc for this contest in every member's row.
+            // This RatingCalc has the correct "rating_before" field.
+            
+            // Next, we want to calculate an expected result for every head-to-head matchup in this poll.
+            for (int j = 0; j < entries.size(); ++j) {
+                
+            }
+            
+                
         }
         
     }
