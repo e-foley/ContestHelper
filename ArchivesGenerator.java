@@ -72,8 +72,9 @@ public class ArchivesGenerator {
                     out.write("</td></tr>");
                     
                     out.newLine();
-                    out.write("<tr class='header-row'><td></td><td class='left'>Name</td><td class='center'>Votes</td><td class='center'>Pct</td><td class='center'>Points");
-                    out.write("<span class='tooltip' title='Votes plus sum of vote margins over lower-ranking shots'>[?]</span>");
+                    out.write("<tr class='header-row'><td></td><td class='left'>Name</td><td class='center'>Votes</td><td class='center'>Pct</td><td class='center'>Rating");
+                    //out.write("<span class='tooltip' title='Votes plus sum of vote margins over lower-ranking shots'>[?]</span>");
+                    out.write("<span class='tooltip' title='Elo-based determination of entrant&rsquo;s historical performance. Incorporates contest results. (Change from prior value is in parentheses.)'>[?]</span>");
                     out.write("</td></tr>");
                     out.newLine();
 
@@ -170,7 +171,8 @@ public class ArchivesGenerator {
                     out.write(""+poll.numVotes());
                     out.write("</td><td>");  // percentage doesn't need a total
                     out.write("</td><td class='points'>");
-                    out.write(""+poll.numPoints());
+                    //out.write(""+poll.numPoints());
+                    out.write("");
                     out.write("</td></tr>");
 
                     if (poll.numNotes() > 0) {
