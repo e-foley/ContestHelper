@@ -129,18 +129,25 @@ public class ArchivesGenerator {
                             } else {
                                 out.write("&mdash;");
                             }
-                            //out.write("</td><td class='points'>" + entry.getPoints() + "</td>");
                             EloEvaluator.RatingCalc calc = elo_evaluator.getRatingDetails(entry.getMemberNameCouples().get(0).member.getId(), poll.getSynch());
                             if (entry.numMembers() == 1) {
-                                DecimalFormat df = new DecimalFormat("0.0");
-                                out.write("</td><td class='points'>" + df.format(calc.rating_before) + " to " + df.format(calc.rating_after) + "</td>");
+                                out.write("</td><td class='points'>");
+                                long old_int = Math.round(calc.rating_before);
+                                long new_int = Math.round(calc.rating_after);
+                                long difference = new_int - old_int;
+                                if (difference > 0) {
+                                    out.write("+" + difference);
+                                } else if (difference < 0) {
+                                    out.write("" + difference);
+                                } else {
+                                    out.write("&#177;0");
+                                }
+                                out.write(")</td>");
                             } else {
-                                // TODO: Replace me with something more elegant.
+                                // TODO: Replace me with something more elegant, may
                                 out.write("</td><td class='points'></td>");
                             }
-                        }
-                        else
-                        {
+                        } else {
                             out.write("<td class='votes'>&mdash;</td><td class='percentage'>&mdash;</td><td class='points'>&mdash;</td>");
                         }
                         out.newLine();

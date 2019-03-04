@@ -38,6 +38,7 @@ public class EloEvaluator
         // Run through all polls... add member IDs to master tree as they enter the picture.
         ArrayList<Poll> polls = history.getPolls();
         
+        // TODO: I have no idea how the system would handle cases where the same member enters two simultaneous contests...
         for (int i = 0; i < polls.size(); ++i) {
             Poll poll = polls.get(i);
             ArrayList<Entry> entries = poll.getEntries();
@@ -96,12 +97,12 @@ public class EloEvaluator
                     // But it would be sweet if this took into account all other opponents and all other votes at the same time somehow.
                     RatingCalc j_details = getRatingDetails(entries.get(j).getMemberNameCouples().get(0).member.getId(), poll.getSynch());
                     RatingCalc k_details = getRatingDetails(entries.get(k).getMemberNameCouples().get(0).member.getId(), poll.getSynch());
-                    double q_j = Math.pow(base, (k_details.rating_before - j_details.rating_before) / divisor);
-                    double q_k = 1.0 - q_j;
+                    double q_j = Math.pow(base, j_details.rating_before / divisor);
+                    double q_k = Math.pow(base, k_details.rating_before / divisor);
                     double s_j = entries.get(j).getVotes();
                     double s_k = entries.get(k).getVotes();
-                    double e_j = q_j * (s_j + s_k);
-                    double e_k = q_k * (s_j + s_k);
+                    double e_j = (q_j / (q_j + q_k)) * (s_j + s_k);
+                    double e_k = (q_k / (q_j + q_k)) * (s_j + s_k);
                     j_details.rating_after += aggressiveness * (s_j - e_j);
                     k_details.rating_after += aggressiveness * (s_k - e_k);
                 }
