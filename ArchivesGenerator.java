@@ -74,7 +74,7 @@ public class ArchivesGenerator {
                     out.newLine();
                     out.write("<tr class='header-row'><td></td><td class='left'>Name</td><td class='center'>Votes</td><td class='center'>Pct</td><td class='center'>Rating");
                     //out.write("<span class='tooltip' title='Votes plus sum of vote margins over lower-ranking shots'>[?]</span>");
-                    out.write("<span class='tooltip' title='Elo-based determination of entrant&rsquo;s historical performance. Incorporates contest results. (Change from prior value is in parentheses.)'>[?]</span>");
+                    out.write("<span class='tooltip' title='[BETA FEATURE SUBJECT TO CHANGE] Elo-based determination of entrant&rsquo;s historical performance. Incorporates contest results. (Change from prior value is in parentheses.)'>[?]</span>");
                     out.write("</td></tr>");
                     out.newLine();
 
