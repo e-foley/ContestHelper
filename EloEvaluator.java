@@ -88,11 +88,6 @@ public class EloEvaluator
                         continue;
                     }
                     
-                    if (entries.get(j).getVotes() == 0 && entries.get(k).getVotes() == 0) {
-                        // Skip matchups with no information.
-                        continue;
-                    }
-                    
                     // TODO: Our method treats the pool of votes available to be those that the two members collect together...
                     // But it would be sweet if this took into account all other opponents and all other votes at the same time somehow.
                     RatingCalc j_details = getRatingDetails(entries.get(j).getMemberNameCouples().get(0).member.getId(), poll.getSynch());
@@ -125,4 +120,18 @@ public class EloEvaluator
         return rating_history.get(member_id).get(poll_id);
     }
    
+    // Grabs most recent one
+    public RatingCalc getRatingDetails(int member_id) {
+        if (!rating_history.containsKey(member_id)) {
+            return new RatingCalc();
+        }
+        
+        TreeMap<Integer, RatingCalc> line = rating_history.get(member_id);
+        
+        if (line.isEmpty()) {
+            return new RatingCalc();
+        }
+        
+        return line.lastEntry().getValue();
+    }
 }

@@ -126,6 +126,7 @@ public abstract class Master
             // Define all boards
             stamps.add(new NamedStamp("Defining leaderboards"));
             FormattedLeaderboard weighted_formidable_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortWeightedFormidable(), new MemberSortRecent()), "Most formidable opponents", "Rating", "", "", " Rating");
+            FormattedLeaderboard elo_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortElo(elo_evaluator), new MemberSortRecent()), "Most formidable opponents [BETA]", "Rating", "", "", " Rating");
             FormattedLeaderboard votes_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortVotes(), new MemberSortRecent()), "Most votes (all-time)", "Total votes", "", " vote", " Votes");
             FormattedLeaderboard points_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortPoints(), new MemberSortRecent()), "Most points (all-time)", "Total points", "", " point", " Points");
             FormattedLeaderboard votes_single_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortVotesSingle(), new MemberSortRecent()), "Most votes (single contest, by member)", "Most votes in one contest", "", " votes", " Votes");
@@ -143,10 +144,11 @@ public abstract class Master
             stamps.add(new NamedStamp("Claiming leaderboards for individual pages"));
             ArrayList<FormattedLeaderboard> leaderboards_full = new ArrayList<FormattedLeaderboard>();
             leaderboards_full.add(weighted_formidable_board);
+            leaderboards_full.add(elo_board);
             leaderboards_full.add(votes_board);
-            leaderboards_full.add(points_board);
+            //leaderboards_full.add(points_board);
             leaderboards_full.add(votes_single_board);
-            leaderboards_full.add(points_single_board);
+            //leaderboards_full.add(points_single_board);
             leaderboards_full.add(victories_board);
             leaderboards_full.add(entries_board);
             leaderboards_full.add(consecutive_strict_board);
@@ -158,6 +160,7 @@ public abstract class Master
             
             ArrayList<FormattedLeaderboard> leaderboards_brief = new ArrayList<FormattedLeaderboard>();
             leaderboards_brief.add(weighted_formidable_board);
+            leaderboards_full.add(elo_board);
             leaderboards_brief.add(votes_board);
             leaderboards_brief.add(votes_single_board);
             leaderboards_brief.add(victories_board);
