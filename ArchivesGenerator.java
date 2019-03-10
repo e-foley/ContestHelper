@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.text.DecimalFormat;
 
 public class ArchivesGenerator {
+    private static final boolean POWER_USER_MODE = false;
+    
     public ArchivesGenerator() {
 
     }
@@ -76,7 +78,7 @@ public class ArchivesGenerator {
                     out.newLine();
                     out.write("<tr class='header-row'><td></td><td class='left'>Name</td><td class='center'>Votes</td><td class='center'>Pct</td><td class='center'>Rating");
                     //out.write("<span class='tooltip' title='Votes plus sum of vote margins over lower-ranking shots'>[?]</span>");
-                    out.write("<span class='tooltip' title='[BETA FEATURE SUBJECT TO CHANGE] Elo-based determination of entrant&rsquo;s historical performance. Incorporates contest results. (Change from prior value is in parentheses.)'>[?]</span>");
+                    out.write("<span class='tooltip' title='[BETA] Elo-based determination of entrant&rsquo;s historical performance. Incorporates contest results. (Change from prior value is in parentheses.)'>[?]</span>");
                     out.write("</td></tr>");
                     out.newLine();
 
@@ -147,13 +149,16 @@ public class ArchivesGenerator {
                                 }
                                 out.write(")");
                                 
-                                out.write(" ");
-                                out.write(new DecimalFormat("0.00").format(calc.e_before));
-                                out.write("->");
-                                out.write(new DecimalFormat("0.00").format(calc.e_after));
-                                out.write(" ");
-                                out.write(new DecimalFormat("0.0").format(calc.boost));
-                                out.write("x");
+                                if (POWER_USER_MODE) {
+                                    out.write(" ");
+                                    out.write(new DecimalFormat("0.00").format(calc.e_before));
+                                    out.write("->");
+                                    out.write(new DecimalFormat("0.00").format(calc.e_after));
+                                    out.write(" ");
+                                    out.write(new DecimalFormat("0.0").format(calc.boost));
+                                    out.write("x");
+                                }
+                                
                                 out.write("</td>");
                             } else {
                                 // TODO: Replace me with something more elegant
