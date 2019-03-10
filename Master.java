@@ -25,10 +25,10 @@ public abstract class Master
     public static final int WIN_RATIO_MIN_ENTRIES = 5;
     public static final boolean OVERWRITE_IDENTICAL_PROFILES = true;
     // Note: Normal Elo is 1000, 10, 400, 20
-    public static final double ELO_STARTING_RATING = 1000.0f;
+    public static final double ELO_STARTING_RATING = 1500.0f;
     public static final double ELO_BASE = 2.0;
-    public static final double ELO_DIVISOR = 1000.0;
-    public static final double ELO_AGGRESSIVENESS = 3.0;
+    public static final double ELO_DIVISOR = 500.0;
+    public static final double ELO_AGGRESSIVENESS = 10.0;
     
     // arg0 is input origin
     // arg1 is output origin
