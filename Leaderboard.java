@@ -22,6 +22,8 @@ public class Leaderboard
         metric = metric_set;
         tiebreakers = new ArrayList<Comparator<Member>>();
         is_sorted = false;
+        
+        metric.precalculate(history);
     }
     
     public Leaderboard(History history_set, MemberDataRetriever metric_set, Comparator<Member> tiebreaker_set) {
@@ -31,6 +33,8 @@ public class Leaderboard
         tiebreakers = new ArrayList<Comparator<Member>>();
         tiebreakers.add(tiebreaker_set);
         is_sorted = false;
+        
+        metric.precalculate(history);
     }
     
     public Leaderboard(History history_set, MemberDataRetriever metric_set, ArrayList<Comparator<Member>> tiebreakers_set) {
@@ -39,6 +43,8 @@ public class Leaderboard
         metric = metric_set;
         tiebreakers = tiebreakers_set;
         is_sorted = false;
+        
+        metric.precalculate(history);
     }
     
     private void sort() {
