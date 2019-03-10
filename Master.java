@@ -162,7 +162,7 @@ public abstract class Master
             
             ArrayList<FormattedLeaderboard> leaderboards_brief = new ArrayList<FormattedLeaderboard>();
             leaderboards_brief.add(weighted_formidable_board);
-            leaderboards_full.add(elo_board);
+            leaderboards_brief.add(elo_board);
             leaderboards_brief.add(votes_board);
             leaderboards_brief.add(votes_single_board);
             leaderboards_brief.add(victories_board);
