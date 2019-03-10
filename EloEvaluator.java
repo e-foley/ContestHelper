@@ -10,9 +10,14 @@ import java.util.ArrayList;
 public class EloEvaluator implements Cloneable
 {
     class RatingCalc {       
-        double rating_before = 0.0f;
-        double rating_after = 0.0f;
-        double stake = 0.0f;
+        double rating_before = 0.0;
+        double rating_after = 0.0;
+        double stake = 0.0;
+        double q_before = 0.0;
+        double e_before = 0.0;
+        double s = 0.0;
+        double q_after = 0.0;
+        double e_after = 0.0;
     }
     
     // TODO: Rethink the inner container. There may be a better choice.
@@ -42,6 +47,7 @@ public class EloEvaluator implements Cloneable
         for (int i = 0; i < polls.size(); ++i) {
             Poll poll = polls.get(i);
             ArrayList<Entry> entries = poll.getEntries();
+            double q_before_sum = 0.0;
             for (int j = 0; j < entries.size(); ++j) {
                 Entry entry = entries.get(j);
                 ArrayList<Entry.MemberNameCouple> couples = entry.getMemberNameCouples();
@@ -71,6 +77,13 @@ public class EloEvaluator implements Cloneable
                     // TODO: There's already a notion of "stake" in Member.EntryStakePair... Maybe these could be linked somehow.
                     this_calc.rating_after = this_calc.rating_before;  // (temp value)
                     this_calc.stake = 1.0 / couples.size();
+                    this_calc.q_before = Math.pow(base, this_calc.rating_before / divisor);
+                    
+                    // Ignore shared entries for total q calculation.
+                    // TODO: Change this.
+                    if (couples.size() == 1) {
+                        q_before_sum += this_calc.q_before;
+                    }
                     
                     rating_history.get(new Integer(member_id)).put(poll.getSynch(), this_calc);
                 }
@@ -78,30 +91,38 @@ public class EloEvaluator implements Cloneable
                 
             // By this point, we have a provisional RatingCalc for this contest in every member's row.
             // This RatingCalc has the correct "rating_before" field and a temporary "rating_after" value to match.
-            
-            // Next, we want to calculate an expected result for every head-to-head matchup in this poll.
-            for (int j = 0; j < entries.size() - 1; ++j) {                
-                for (int k = j + 1; k < entries.size(); ++k) {
-                    if (entries.get(j).numMembers() != 1 || entries.get(k).numMembers() != 1) {
-                        // Skip entries with multiple members contributing.
-                        // TODO: Change this.
-                        continue;
-                    }
-                    
-                    // TODO: Our method treats the pool of votes available to be those that the two members collect together...
-                    // But it would be sweet if this took into account all other opponents and all other votes at the same time somehow.
-                    RatingCalc j_details = getRatingDetails(entries.get(j).getMemberNameCouples().get(0).member.getId(), poll.getSynch());
-                    RatingCalc k_details = getRatingDetails(entries.get(k).getMemberNameCouples().get(0).member.getId(), poll.getSynch());
-                    double q_j = Math.pow(base, j_details.rating_before / divisor);
-                    double q_k = Math.pow(base, k_details.rating_before / divisor);
-                    double s_j = entries.get(j).getVotes();
-                    double s_k = entries.get(k).getVotes();
-                    double e_j = (q_j / (q_j + q_k)) * (s_j + s_k);
-                    double e_k = (q_k / (q_j + q_k)) * (s_j + s_k);
-                    j_details.rating_after += aggressiveness * (s_j - e_j);
-                    k_details.rating_after += aggressiveness * (s_k - e_k);
+
+            for (int j = 0; j < entries.size(); ++j) {
+                // Ignore shared entries for ratings. (See also earlier logic when populating `this_calc`.)
+                // TODO: Change this.
+                if (entries.get(j).numMembers() != 1) {
+                    continue;
                 }
-            }  
+                
+                RatingCalc details = getRatingDetails(entries.get(j).getMemberNameCouples().get(0).member.getId(), poll.getSynch());
+                details.e_before = (details.q_before / q_before_sum) * poll.numVotes();  // Expected achievement
+                details.s = entries.get(j).getVotes();  // Actual achievement
+                details.rating_after += aggressiveness * (details.s - details.e_before);
+            }
+            
+            // Two more loops to calculate q_after and e_after
+            double q_after_sum = 0.0;
+            for (int j = 0; j < entries.size(); ++j) {
+                if (entries.get(j).numMembers() != 1) {
+                    continue;
+                }
+                RatingCalc details = getRatingDetails(entries.get(j).getMemberNameCouples().get(0).member.getId(), poll.getSynch());
+                details.q_after = Math.pow(base, details.rating_after / divisor);
+                q_after_sum += details.q_after;
+            }
+            for (int j = 0; j < entries.size(); ++j) {
+                if (entries.get(j).numMembers() != 1) {
+                    continue;
+                }
+                RatingCalc details = getRatingDetails(entries.get(j).getMemberNameCouples().get(0).member.getId(), poll.getSynch());
+                details.e_after = (details.q_after / q_after_sum) * poll.numVotes();                
+            }
+            
         }
         
     }
