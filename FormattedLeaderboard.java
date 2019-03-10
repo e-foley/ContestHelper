@@ -57,7 +57,8 @@ public class FormattedLeaderboard {
         History history = leaderboard_.getHistory();
         int subhistory_start = 0;
         int subhistory_end = Math.max(0, history.getPolls().size() - delta - 1);
-        Leaderboard comparison = new Leaderboard(history.getSubhistory(subhistory_start, subhistory_end), metric);
+        // Because (as of 3/9/19) some MemberDataRetrievers have state, we need to clone them in order for subhistory evaluations to avoid affecting the current evaluation
+        Leaderboard comparison = new Leaderboard(history.getSubhistory(subhistory_start, subhistory_end), (MemberDataRetriever)(metric.clone()));
         
         try
         {
@@ -181,7 +182,7 @@ public class FormattedLeaderboard {
                         comparison.getHistory().getMemberMap().get(member.getId()).getTotalEntries() > 0 &&
                         comparison.getPlaceOfMember(member.getId()) != Leaderboard.NO_PLACE) {
                         // Record old and new values for future use...
-                        float old_value = metric.getValue(comparison.getHistory().getMemberById(member.getId()));
+                        float old_value = comparison.getMetric().getValue(comparison.getHistory().getMemberById(member.getId()));
                         float new_value = metric.getValue(member);
                         if (new_value == old_value) {
                             // Nothing?

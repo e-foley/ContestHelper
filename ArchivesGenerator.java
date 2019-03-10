@@ -3,19 +3,23 @@ import java.util.ArrayList;
 import java.text.DecimalFormat;
 
 public class ArchivesGenerator {
+    private static final boolean POWER_USER_MODE = false;
+    
     public ArchivesGenerator() {
 
     }
 
-    public void generate(History history, BufferedWriter out) {
-        generate(history, out, 1, history.getPolls().size());
+    public void generate(History history, EloEvaluator elo_evaluator, BufferedWriter out) {
+        generate(history, elo_evaluator, out, 1, history.getPolls().size());
     }
 
-    public void generate(History history, BufferedWriter out, int totalEntriesToShow) {
-        generate(history, out, history.getPolls().size() - totalEntriesToShow, history.getPolls().size() - 1);
+    public void generate(History history, EloEvaluator elo_evaluator, BufferedWriter out, int totalEntriesToShow) {
+        generate(history, elo_evaluator, out, history.getPolls().size() - totalEntriesToShow, history.getPolls().size() - 1);
     }
     
-    public void generate(History history, BufferedWriter out, int pollStart, int pollEnd) {
+    public void generate(History history, EloEvaluator elo_evaluator, BufferedWriter out, int pollStart, int pollEnd) {
+        elo_evaluator.evaluate(history);
+        
         try
         {
             Entry entry;
@@ -72,8 +76,9 @@ public class ArchivesGenerator {
                     out.write("</td></tr>");
                     
                     out.newLine();
-                    out.write("<tr class='header-row'><td></td><td class='left'>Name</td><td class='center'>Votes</td><td class='center'>Pct</td><td class='center'>Points");
-                    out.write("<span class='tooltip' title='Votes plus sum of vote margins over lower-ranking shots'>[?]</span>");
+                    out.write("<tr class='header-row'><td></td><td class='left'>Name</td><td class='center'>Votes</td><td class='center'>Pct</td><td class='center'>Rating");
+                    //out.write("<span class='tooltip' title='Votes plus sum of vote margins over lower-ranking shots'>[?]</span>");
+                    out.write("<span class='tooltip' title='[BETA] Elo-based determination of entrant&rsquo;s historical performance. Incorporates contest results. (Change from prior value is in parentheses.)'>[?]</span>");
                     out.write("</td></tr>");
                     out.newLine();
 
@@ -129,10 +134,37 @@ public class ArchivesGenerator {
                             } else {
                                 out.write("&mdash;");
                             }
-                            out.write("</td><td class='points'>" + entry.getPoints() + "</td>");
-                        }
-                        else
-                        {
+                            EloEvaluator.RatingCalc calc = elo_evaluator.getRatingDetails(entry.getMemberNameCouples().get(0).member.getId(), poll.getSynch());
+                            if (entry.numMembers() == 1) {
+                                long old_int = Math.round(calc.rating_before);
+                                long new_int = Math.round(calc.rating_after);
+                                long difference = new_int - old_int;
+                                out.write("</td><td class='points'>" + new_int + " (");
+                                if (difference > 0) {
+                                    out.write("+" + difference);
+                                } else if (difference < 0) {
+                                    out.write("" + difference);
+                                } else {
+                                    out.write("&#177;0");  // Plus/minus sign
+                                }
+                                out.write(")");
+                                
+                                if (POWER_USER_MODE) {
+                                    out.write(" ");
+                                    out.write(new DecimalFormat("0.00").format(calc.e_before));
+                                    out.write("->");
+                                    out.write(new DecimalFormat("0.00").format(calc.e_after));
+                                    out.write(" ");
+                                    out.write(new DecimalFormat("0.0").format(calc.boost));
+                                    out.write("x");
+                                }
+                                
+                                out.write("</td>");
+                            } else {
+                                // TODO: Replace me with something more elegant
+                                out.write("</td><td class='points'></td>");
+                            }
+                        } else {
                             out.write("<td class='votes'>&mdash;</td><td class='percentage'>&mdash;</td><td class='points'>&mdash;</td>");
                         }
                         out.newLine();
@@ -155,7 +187,8 @@ public class ArchivesGenerator {
                     out.write(""+poll.numVotes());
                     out.write("</td><td>");  // percentage doesn't need a total
                     out.write("</td><td class='points'>");
-                    out.write(""+poll.numPoints());
+                    //out.write(""+poll.numPoints());
+                    out.write("");
                     out.write("</td></tr>");
 
                     if (poll.numNotes() > 0) {

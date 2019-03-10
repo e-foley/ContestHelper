@@ -24,6 +24,13 @@ public abstract class Master
     public static final int DELTA = 10;
     public static final int WIN_RATIO_MIN_ENTRIES = 5;
     public static final boolean OVERWRITE_IDENTICAL_PROFILES = true;
+    // Note: Normal Elo is 1000, 10, 400, 20
+    public static final double ELO_STARTING_RATING = 1500.0f;
+    public static final double ELO_BASE = 2.0;
+    public static final double ELO_DIVISOR = 500.0;
+    public static final double ELO_AGGRESSIVENESS = 10.0;
+    public static final double ELO_STARTING_BOOST = 1.0;  // Note that boost changes this from a zero-sum algorithm to something else. ({3.0, 0.5} seems about right.)
+    public static final double ELO_BOOST_DECAY = 0.0;
     
     // arg0 is input origin
     // arg1 is output origin
@@ -67,6 +74,13 @@ public abstract class Master
             return;
         }
         
+        // Calculate ratings
+        // TODO: The EloEvaluator is like a parallel array right now... See if we can get this info inside history, or something clever...
+        EloEvaluator elo_evaluator = new EloEvaluator(ELO_STARTING_RATING, ELO_BASE, ELO_DIVISOR, ELO_AGGRESSIVENESS, ELO_STARTING_BOOST, ELO_BOOST_DECAY);
+        
+        // Shouldn't be necessary to evaluate history here anymore since evaluation *should* happen as part of Leaderboard's call to metric's precalculate...
+        // elo_evaluator.evaluate(history);
+        
         FileOutputStream fstream;
         BufferedWriter out;
         
@@ -88,7 +102,7 @@ public abstract class Master
             
             addFileToBuffer(input_origin + "config/archives_header.txt", out, swaps);
             stamps.add(new NamedStamp("Generating archives"));
-            archivesGenerator.generate(history, out);
+            archivesGenerator.generate(history, elo_evaluator, out);
             stamps.add(new NamedStamp("Writing archives"));
             addFileToBuffer(input_origin + "config/archives_footer.txt", out, swaps);
             out.close();
@@ -105,7 +119,7 @@ public abstract class Master
                 out = new BufferedWriter(new OutputStreamWriter(fstream, StandardCharsets.UTF_8));
                 addFileToBuffer(input_origin + "config/archives_header.txt", out, swaps);
                 archivesGenerator.insertNavigationBar(out, history, p + 1, num_pages, CONTESTS_PER_PAGE);
-                archivesGenerator.generate(history, out, poll_start, poll_end);
+                archivesGenerator.generate(history, elo_evaluator, out, poll_start, poll_end);
                 archivesGenerator.insertNavigationBar(out, history, p + 1, num_pages, CONTESTS_PER_PAGE);
                 addFileToBuffer(input_origin + "config/archives_footer.txt", out, swaps);
                 out.close();
@@ -115,7 +129,8 @@ public abstract class Master
             // LEADERBOARD
             // Define all boards
             stamps.add(new NamedStamp("Defining leaderboards"));
-            FormattedLeaderboard weighted_formidable_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortWeightedFormidable(), new MemberSortRecent()), "Most formidable opponents", "Rating", "", "", " Rating");
+            //FormattedLeaderboard weighted_formidable_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortWeightedFormidable(), new MemberSortRecent()), "Most formidable opponents", "Rating", "", "", " Rating");
+            FormattedLeaderboard elo_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortElo(elo_evaluator), new MemberSortRecent()), "Most formidable opponents [BETA]", "Rating", "", "", " Rating");
             FormattedLeaderboard votes_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortVotes(), new MemberSortRecent()), "Most votes (all-time)", "Total votes", "", " vote", " Votes");
             FormattedLeaderboard points_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortPoints(), new MemberSortRecent()), "Most points (all-time)", "Total points", "", " point", " Points");
             FormattedLeaderboard votes_single_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortVotesSingle(), new MemberSortRecent()), "Most votes (single contest, by member)", "Most votes in one contest", "", " votes", " Votes");
@@ -132,11 +147,12 @@ public abstract class Master
             // Associate select boards with pages
             stamps.add(new NamedStamp("Claiming leaderboards for individual pages"));
             ArrayList<FormattedLeaderboard> leaderboards_full = new ArrayList<FormattedLeaderboard>();
-            leaderboards_full.add(weighted_formidable_board);
+            //leaderboards_full.add(weighted_formidable_board);
+            leaderboards_full.add(elo_board);
             leaderboards_full.add(votes_board);
-            leaderboards_full.add(points_board);
+            //leaderboards_full.add(points_board);
             leaderboards_full.add(votes_single_board);
-            leaderboards_full.add(points_single_board);
+            //leaderboards_full.add(points_single_board);
             leaderboards_full.add(victories_board);
             leaderboards_full.add(entries_board);
             leaderboards_full.add(consecutive_strict_board);
@@ -147,7 +163,8 @@ public abstract class Master
             //leaderboards_full.add(formidable_board);
             
             ArrayList<FormattedLeaderboard> leaderboards_brief = new ArrayList<FormattedLeaderboard>();
-            leaderboards_brief.add(weighted_formidable_board);
+            //leaderboards_brief.add(weighted_formidable_board);
+            leaderboards_brief.add(elo_board);
             leaderboards_brief.add(votes_board);
             leaderboards_brief.add(votes_single_board);
             leaderboards_brief.add(victories_board);
