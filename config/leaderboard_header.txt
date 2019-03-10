@@ -48,7 +48,7 @@ All deltas calculated over last <span style='font-weight:bold;'>10</span> contes
 
 <tr><td class='intro'>
 <div class='faq-you'>What the heck is this?</div>
-<div class='answer-you'>You&rsquo;ve found the Screenshot of the Week leaderboards. Each leaderboard ranks everybody who has entered the contest based on different criteria, such as votes, points, victories, and total entries.</div>
+<div class='answer-you'>You&rsquo;ve found the Screenshot of the Week leaderboards. Each leaderboard ranks everybody who has entered the contest based on different criteria, such as votes, victories, and participation.</div>
 <p/>
 <div class='faq-you'>What is a member&rsquo;s &ldquo;formidable&rdquo; rating?</div>
 <div class='answer-you'>The formidable rating measures Screenshot of the Week dominance. It is based on the <a class='green' href='https://en.wikipedia.org/wiki/Elo_rating_system'>Elo rating system</a> and has these properties:
@@ -58,7 +58,7 @@ All deltas calculated over last <span style='font-weight:bold;'>10</span> contes
 <li>Your rating increases when you receive more votes in a contest than the algorithm expects you to receive given your rating and your opponents&rsquo; ratings. Inversely, you lose points when the algorithm thinks you underperform.</li>
 <li>Rating points always move from one member to another. This means that the average rating always sticks at 1,500.</li>
 <li>A two-to-one vote ratio corresponds to a rating difference of 500. This means that if your rating is 2,000, the algorithm expects you to receive twice as many votes as an average contestant. If your rating is 1,000, it expects you to receive half as many votes as an average contestant. (Don&rsquo;t take it personally!)</li>
-<li>Because the algorithm only looks at votes rather than wins, it&rsquo;s possible for your rating to drop despite winning a contest, or rise despite finishing last.</li>
+<li>Because the algorithm only looks at votes rather than wins, it&rsquo;s possible for your rating to drop despite winning a contest or rise despite finishing last.</li>
 <li>Ratings change quickly.</li>
 </ul></div>
 <p/>
