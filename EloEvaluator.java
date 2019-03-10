@@ -137,7 +137,8 @@ public class EloEvaluator implements Cloneable
     
     public Object clone() {
         EloEvaluator returning = new EloEvaluator(starting_rating, base, divisor, aggressiveness);
-        returning.rating_history = (TreeMap<Integer, TreeMap<Integer, RatingCalc>>)(rating_history.clone());
+        // TODO: UGH, cloning a TreeMap makes a shallow clone rather than a deep one. I believe that's why the line below triggers a compiler warning.
+        // returning.rating_history = (TreeMap<Integer, TreeMap<Integer, RatingCalc>>)(rating_history.clone());
         return returning;
     }
 }

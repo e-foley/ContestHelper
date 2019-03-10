@@ -182,7 +182,7 @@ public class FormattedLeaderboard {
                         comparison.getHistory().getMemberMap().get(member.getId()).getTotalEntries() > 0 &&
                         comparison.getPlaceOfMember(member.getId()) != Leaderboard.NO_PLACE) {
                         // Record old and new values for future use...
-                        float old_value = metric.getValue(comparison.getHistory().getMemberById(member.getId()));
+                        float old_value = comparison.getMetric().getValue(comparison.getHistory().getMemberById(member.getId()));
                         float new_value = metric.getValue(member);
                         if (new_value == old_value) {
                             // Nothing?
