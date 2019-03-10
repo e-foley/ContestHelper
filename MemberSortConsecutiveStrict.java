@@ -73,4 +73,6 @@ public class MemberSortConsecutiveStrict implements MemberDataRetriever
     public boolean qualifies(Member mem) {
         return true;
     }
+    
+    public void precalculate(History history) {}
 }

@@ -17,9 +17,6 @@ public class MemberSortElo implements MemberDataRetriever
     
     public int compare(Member m1, Member m2) {
         int result = new Float(getValue(m2)).compareTo(getValue(m1));
-        if (result == 0) {
-            result = (new MemberSortUncertainty()).compare(m1, m2);
-        }
         return result;
     }
     
@@ -39,5 +36,9 @@ public class MemberSortElo implements MemberDataRetriever
     
     public boolean qualifies(Member mem) {
         return true;
+    }
+    
+    public void precalculate(History history) {
+        evaluator.evaluate(history);
     }
 }

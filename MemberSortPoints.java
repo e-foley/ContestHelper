@@ -62,4 +62,6 @@ public class MemberSortPoints implements MemberDataRetriever
     public boolean qualifies(Member mem) {
         return true;
     }
+    
+    public void precalculate(History history) {}
 }

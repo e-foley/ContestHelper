@@ -50,5 +50,7 @@ public class MemberSortWinRatio implements MemberDataRetriever
         return mem.getTotalEntries() >= min_entries_;
     }
     
+    public void precalculate(History history) {}
+    
     private int min_entries_;
 }

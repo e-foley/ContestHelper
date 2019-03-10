@@ -9,4 +9,5 @@ public interface MemberDataRetriever extends Comparator<Member>
     String getDetails(Member member, boolean linkTopics);
     NumberFormat getFormat();
     boolean qualifies(Member mem);
+    void precalculate(History history);
 }

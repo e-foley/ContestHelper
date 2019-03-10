@@ -75,7 +75,9 @@ public abstract class Master
         // Calculate ratings
         // TODO: The EloEvaluator is like a parallel array right now... See if we can get this info inside history, or something clever...
         EloEvaluator elo_evaluator = new EloEvaluator(ELO_STARTING_RATING, ELO_BASE, ELO_DIVISOR, ELO_AGGRESSIVENESS);
-        elo_evaluator.evaluate(history);
+        
+        // Shouldn't be necessary to evaluate history here anymore since evaluation *should* happen as part of Leaderboard's call to metric's precalculate...
+        // elo_evaluator.evaluate(history);
         
         FileOutputStream fstream;
         BufferedWriter out;

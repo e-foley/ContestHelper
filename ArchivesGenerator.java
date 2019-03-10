@@ -16,6 +16,8 @@ public class ArchivesGenerator {
     }
     
     public void generate(History history, EloEvaluator elo_evaluator, BufferedWriter out, int pollStart, int pollEnd) {
+        elo_evaluator.evaluate(history);
+        
         try
         {
             Entry entry;
