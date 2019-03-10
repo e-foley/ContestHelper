@@ -143,11 +143,11 @@ public class ArchivesGenerator {
                                 } else if (difference < 0) {
                                     out.write("" + difference);
                                 } else {
-                                    out.write("&#177;0");
+                                    out.write("&#177;0");  // Plus/minus sign
                                 }
                                 out.write(")</td>");
                             } else {
-                                // TODO: Replace me with something more elegant, may
+                                // TODO: Replace me with something more elegant
                                 out.write("</td><td class='points'></td>");
                             }
                         } else {
