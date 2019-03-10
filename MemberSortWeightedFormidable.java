@@ -31,4 +31,8 @@ public class MemberSortWeightedFormidable implements MemberDataRetriever
     }
     
     public void precalculate(History history) {}
+    
+    public Object clone() {
+        return this;
+    }
 }

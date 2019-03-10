@@ -71,4 +71,8 @@ public class MemberSortVictories implements MemberDataRetriever
     }
     
     public void precalculate(History history) {}
+    
+    public Object clone() {
+        return this;
+    }
 }

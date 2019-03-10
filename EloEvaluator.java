@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class EloEvaluator
+public class EloEvaluator implements Cloneable
 {
     class RatingCalc {       
         double rating_before = 0.0f;
@@ -133,5 +133,11 @@ public class EloEvaluator
         }
         
         return line.lastEntry().getValue();
+    }
+    
+    public Object clone() {
+        EloEvaluator returning = new EloEvaluator(starting_rating, base, divisor, aggressiveness);
+        returning.rating_history = (TreeMap<Integer, TreeMap<Integer, RatingCalc>>)(rating_history.clone());
+        return returning;
     }
 }

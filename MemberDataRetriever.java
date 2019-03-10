@@ -1,7 +1,8 @@
 import java.util.Comparator;
 import java.text.NumberFormat;
+import java.lang.Cloneable;
 
-public interface MemberDataRetriever extends Comparator<Member>
+public interface MemberDataRetriever extends Comparator<Member>, Cloneable
 {
     float getValue(Member member);
     String getData(Member member);
@@ -10,4 +11,5 @@ public interface MemberDataRetriever extends Comparator<Member>
     NumberFormat getFormat();
     boolean qualifies(Member mem);
     void precalculate(History history);
+    public Object clone();
 }

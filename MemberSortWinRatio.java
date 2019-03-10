@@ -52,5 +52,9 @@ public class MemberSortWinRatio implements MemberDataRetriever
     
     public void precalculate(History history) {}
     
+    public Object clone() {
+        return new MemberSortWinRatio(min_entries_);
+    }
+    
     private int min_entries_;
 }

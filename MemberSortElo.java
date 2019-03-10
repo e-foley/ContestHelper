@@ -41,4 +41,8 @@ public class MemberSortElo implements MemberDataRetriever
     public void precalculate(History history) {
         evaluator.evaluate(history);
     }
+    
+    public Object clone() {
+        return new MemberSortElo((EloEvaluator)(evaluator.clone()));
+    }
 }
