@@ -145,7 +145,16 @@ public class ArchivesGenerator {
                                 } else {
                                     out.write("&#177;0");  // Plus/minus sign
                                 }
-                                out.write(")</td>");
+                                out.write(")");
+                                
+                                out.write(" ");
+                                out.write(new DecimalFormat("0.00").format(calc.e_before));
+                                out.write("->");
+                                out.write(new DecimalFormat("0.00").format(calc.e_after));
+                                out.write(" ");
+                                out.write(new DecimalFormat("0.0").format(calc.boost));
+                                out.write("x");
+                                out.write("</td>");
                             } else {
                                 // TODO: Replace me with something more elegant
                                 out.write("</td><td class='points'></td>");

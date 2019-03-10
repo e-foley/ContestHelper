@@ -18,6 +18,7 @@ public class EloEvaluator implements Cloneable
         double s = 0.0;
         double q_after = 0.0;
         double e_after = 0.0;
+        double boost = 0.0;
     }
     
     // TODO: Rethink the inner container. There may be a better choice.
@@ -26,14 +27,18 @@ public class EloEvaluator implements Cloneable
     double base;
     double divisor;
     double aggressiveness;
+    double starting_boost;
+    double boost_decay;
 
-    public EloEvaluator(double starting_rating, double base, double divisor, double aggressiveness)
+    public EloEvaluator(double starting_rating, double base, double divisor, double aggressiveness, double starting_boost, double boost_decay)
     {
         rating_history = new TreeMap<Integer, TreeMap<Integer, RatingCalc>>();
         this.starting_rating = starting_rating;
         this.base = base;
         this.divisor = divisor;
         this.aggressiveness = aggressiveness;
+        this.starting_boost = starting_boost;
+        this.boost_decay = boost_decay;
     }
 
     public void evaluate(History history) {
@@ -67,11 +72,13 @@ public class EloEvaluator implements Cloneable
                         // Member isn't in charts yet, so create a row for the member and make "rating before" our default.                        
                         rating_history.put(member_id, new TreeMap<Integer, RatingCalc>());
                         this_calc.rating_before = starting_rating;
+                        this_calc.boost = starting_boost;
                     } else {
                         // Member is in charts; set "rating before" to the "rating after" of the prior entry.
                         TreeMap<Integer, RatingCalc> line = rating_history.get(new Integer(member_id));
                         RatingCalc last_calc = line.get(line.lastKey());
                         this_calc.rating_before = last_calc.rating_after;
+                        this_calc.boost = Math.max(last_calc.boost + (1.0 - last_calc.boost) * boost_decay, 1.0);
                     }
                     
                     // TODO: There's already a notion of "stake" in Member.EntryStakePair... Maybe these could be linked somehow.
@@ -102,7 +109,7 @@ public class EloEvaluator implements Cloneable
                 RatingCalc details = getRatingDetails(entries.get(j).getMemberNameCouples().get(0).member.getId(), poll.getSynch());
                 details.e_before = (details.q_before / q_before_sum) * poll.numVotes();  // Expected achievement
                 details.s = entries.get(j).getVotes();  // Actual achievement
-                details.rating_after += aggressiveness * (details.s - details.e_before);
+                details.rating_after += details.boost * aggressiveness * (details.s - details.e_before);
             }
             
             // Two more loops to calculate q_after and e_after
@@ -157,7 +164,7 @@ public class EloEvaluator implements Cloneable
     }
     
     public Object clone() {
-        EloEvaluator returning = new EloEvaluator(starting_rating, base, divisor, aggressiveness);
+        EloEvaluator returning = new EloEvaluator(starting_rating, base, divisor, aggressiveness, starting_boost, boost_decay);
         // TODO: UGH, cloning a TreeMap makes a shallow clone rather than a deep one. I believe that's why the line below triggers a compiler warning.
         // returning.rating_history = (TreeMap<Integer, TreeMap<Integer, RatingCalc>>)(rating_history.clone());
         return returning;
