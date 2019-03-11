@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class ShowAll implements FilterStrategy {
     public ShowAll() {}
 
-    public ArrayList<Poll> filterContests(ArrayList<Poll> contests) {
-        return contests;
+    public ArrayList<Poll> filterPolls(ArrayList<Poll> polls) {
+        return polls;
     }
 }

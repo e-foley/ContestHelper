@@ -7,7 +7,7 @@ public class ShowMember implements FilterStrategy {
         member_ = member;
     }
 
-    public ArrayList<Poll> filterContests(ArrayList<Poll> contests) {
+    public ArrayList<Poll> filterPolls(ArrayList<Poll> polls) {
         // TODO: FILTER
         return new ArrayList<Poll>();
     }

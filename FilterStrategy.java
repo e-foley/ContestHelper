@@ -1,5 +1,5 @@
 import java.util.ArrayList;
 
 public interface FilterStrategy {
-    ArrayList<Poll> filterContests(ArrayList<Poll> contests);
+    ArrayList<Poll> filterPolls(ArrayList<Poll> polls);
 }
