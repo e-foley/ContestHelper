@@ -227,7 +227,7 @@ public abstract class Master
                 ArrayList<Member> mems = member_list;
                 for (int i=0; i<mems.size(); i++) {
                     System.out.println("Attempting to write file " + output_origin + getProfilePath(mems.get(i)) + "...");
-                    UserProfile.createProfilePage(mems.get(i), OVERWRITE_IDENTICAL_PROFILES, leaderboards_full, input_origin, output_origin + getProfilePath(mems.get(i)));
+                    UserProfile.createProfilePage(mems.get(i), history, elo_evaluator, OVERWRITE_IDENTICAL_PROFILES, leaderboards_full, input_origin, output_origin + getProfilePath(mems.get(i)));
                 }
             }
 
