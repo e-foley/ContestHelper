@@ -5,16 +5,10 @@ import java.text.DecimalFormat;
 public class ArchivesGenerator {
     private static final boolean POWER_USER_MODE = false;
     
-    public ArchivesGenerator() {
-
-    }
+    public ArchivesGenerator() {}
 
     public void generate(History history, EloEvaluator elo_evaluator, BufferedWriter out) {
-        generate(history, elo_evaluator, out, 1, history.getPolls().size());
-    }
-
-    public void generate(History history, EloEvaluator elo_evaluator, BufferedWriter out, int totalEntriesToShow) {
-        generate(history, elo_evaluator, out, history.getPolls().size() - totalEntriesToShow, history.getPolls().size() - 1);
+        generate(history, elo_evaluator, out, 0, history.getPolls().size() - 1);
     }
     
     public void generate(History history, EloEvaluator elo_evaluator, BufferedWriter out, int pollStart, int pollEnd) {
