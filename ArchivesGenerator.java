@@ -139,7 +139,7 @@ public class ArchivesGenerator {
                                 long old_int = Math.round(calc.rating_before);
                                 long new_int = Math.round(calc.rating_after);
                                 long difference = new_int - old_int;
-                                out.write("</td><td class='points'>" + new_int + " (");
+                                out.write("</td><td class='points'>" + (new DecimalFormat("#,##0")).format(new_int) + " (");
                                 if (difference > 0) {
                                     out.write("+" + difference);
                                 } else if (difference < 0) {
