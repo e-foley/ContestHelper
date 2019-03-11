@@ -8,7 +8,7 @@ public class ArchivesGenerator {
     public ArchivesGenerator() {}
 
     public void generate(History history, EloEvaluator elo_evaluator, BufferedWriter out) {
-        generate(history, elo_evaluator, out, 0, history.getPolls().size() - 1);
+        generate(history, elo_evaluator, out, new ShowAll(), new HighlightWinners());
     }
     
     public void generate(History history, EloEvaluator elo_evaluator, BufferedWriter out, int pollStart, int pollEnd) {
