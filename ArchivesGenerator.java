@@ -18,6 +18,10 @@ public class ArchivesGenerator {
     }
     
     public void generate(History history, EloEvaluator elo_evaluator, BufferedWriter out, int pollStart, int pollEnd) {
+        generate(history, elo_evaluator, out, pollStart, pollEnd, new HighlightWinners());
+    }
+        
+    public void generate(History history, EloEvaluator elo_evaluator, BufferedWriter out, int pollStart, int pollEnd, HighlightStrategy highlight_strategy) {
         elo_evaluator.evaluate(history);
         
         try
@@ -25,7 +29,7 @@ public class ArchivesGenerator {
             Entry entry;
             Poll poll;
             boolean isWinner;
-            ArrayList<Entry> winners;
+            ArrayList<Entry> highlights;
             
             // Big board used to be a table whose cells contained individual polls; now it is just one big cell
             out.write("<table class='big-board'><tr><td style='text-align: center;'><span>");
@@ -37,27 +41,26 @@ public class ArchivesGenerator {
                 poll = history.getPolls().get(i);
                 if (i >= pollStart && i <= pollEnd)
                 {
-                    winners = poll.getWinners();
+                    highlights = highlight_strategy.getHighlights(poll);
                     out.write("<table class='results-table'>");
                     out.newLine();
                     
-                    // If there are no winners in the poll, don't create a cell for the winners' pictures lest we accumulate borders.
-                    if (!winners.isEmpty()) {
+                    // If there is nothing to highlight (e.g. a split contest's poll that doesn't contain the contest's winner), don't create a cell lest we accumulate borders.
+                    if (!highlights.isEmpty()) {
                         out.write("<tr><td class='picture-cell' colspan=5>");
-                        for (int j=0; j<winners.size(); j++)
-                        {
-                            if (!winners.get(j).hasURL()) {
-                                out.write("<img class='picture-picture' title='The winner&#8217;s image is missing from the archives. Sorry.' src='images/no_image.png'/>");
+                        for (int j = 0; j < highlights.size(); ++j) {
+                            if (!highlights.get(j).hasURL()) {
+                                out.write("<img class='picture-picture' title='The image is missing from the archives. Sorry.' src='images/no_image.png'/>");
                             } else {
-                                out.write("<a href='" + winners.get(j).getURL() + "'>");
+                                out.write("<a href='" + highlights.get(j).getURL() + "'>");
                                 out.write("<img class='picture-picture' title='");
-                                for (int k = 0; k < winners.get(j).getMemberNameCouples().size(); ++k) {
+                                for (int k = 0; k < highlights.get(j).getMemberNameCouples().size(); ++k) {
                                     if (k != 0) {
                                         out.write(" + ");
                                     }
-                                    out.write(winners.get(j).getMemberNameCouples().get(k).member.getMostRecentName());
+                                    out.write(highlights.get(j).getMemberNameCouples().get(k).member.getMostRecentName());
                                 }
-                                out.write("' src='" + winners.get(j).getURL() + "'/>");
+                                out.write("' src='" + highlights.get(j).getURL() + "'/>");
                                 out.write("</a>");
                             }
                         }
