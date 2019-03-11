@@ -1,33 +1,20 @@
+import java.util.ArrayList;
 
-/**
- * Write a description of class HighlightMember here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class HighlightMember implements HighlightStrategy
 {
-    // instance variables - replace the example below with your own
-    private int x;
+    private Member member_;
 
-    /**
-     * Constructor for objects of class HighlightMember
-     */
-    public HighlightMember()
-    {
-        // initialise instance variables
-        x = 0;
+    public HighlightMember(Member member) {
+        member_ = member;
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
+    public ArrayList<Entry> getHighlights(Poll poll) {
+        ArrayList<Entry> returning = new ArrayList<Entry>();
+        for (Entry entry : poll.getEntries()) {
+            if (entry.getMemberNameCouples().contains(member_)) {
+                returning.add(entry);
+            }
+        }
+        return returning;
     }
 }
