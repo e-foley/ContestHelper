@@ -18,14 +18,13 @@ public class ArchivesGenerator {
     }
     
     public void generate(History history, EloEvaluator elo_evaluator, BufferedWriter out, int pollStart, int pollEnd) {
-        generate(history, elo_evaluator, out, pollStart, pollEnd, new HighlightWinners());
+        generate(history, elo_evaluator, out, new ShowRange(pollStart, pollEnd), new HighlightWinners());
     }
         
-    public void generate(History history, EloEvaluator elo_evaluator, BufferedWriter out, int pollStart, int pollEnd, HighlightStrategy highlight_strategy) {
+    public void generate(History history, EloEvaluator elo_evaluator, BufferedWriter out, FilterStrategy filter_strategy, HighlightStrategy highlight_strategy) {
         elo_evaluator.evaluate(history);
         
-        try
-        {
+        try {
             Entry entry;
             Poll poll;
             boolean isWinner;
@@ -35,186 +34,184 @@ public class ArchivesGenerator {
             out.write("<table class='big-board'><tr><td style='text-align: center;'><span>");
             out.newLine();
             int countUp = 0;
-            //for (int i=0; i<polls.size(); i++)
-            for (int i=history.getPolls().size()-1; i>=0; i--)
-            {
-                poll = history.getPolls().get(i);
-                if (i >= pollStart && i <= pollEnd)
-                {
-                    highlights = highlight_strategy.getHighlights(poll);
-                    out.write("<table class='results-table'>");
-                    out.newLine();
-                    
-                    // If there is nothing to highlight (e.g. a split contest's poll that doesn't contain the contest's winner), don't create a cell lest we accumulate borders.
-                    if (!highlights.isEmpty()) {
-                        out.write("<tr><td class='picture-cell' colspan=5>");
-                        for (int j = 0; j < highlights.size(); ++j) {
-                            if (!highlights.get(j).hasURL()) {
-                                out.write("<img class='picture-picture' title='The image is missing from the archives. Sorry.' src='images/no_image.png'/>");
-                            } else {
-                                out.write("<a href='" + highlights.get(j).getURL() + "'>");
-                                out.write("<img class='picture-picture' title='");
-                                for (int k = 0; k < highlights.get(j).getMemberNameCouples().size(); ++k) {
-                                    if (k != 0) {
-                                        out.write(" + ");
-                                    }
-                                    out.write(highlights.get(j).getMemberNameCouples().get(k).member.getMostRecentName());
-                                }
-                                out.write("' src='" + highlights.get(j).getURL() + "'/>");
-                                out.write("</a>");
-                            }
-                        }
-                        out.write("</td></tr>");
-                        out.newLine();
-                    }
-
-                    // Poll title
-                    out.write("<tr><td class='contest-title' colspan=5>");
-                    if (poll.hasTopic())
-                        out.write("<a class='contest' href='http://www.purezc.net/forums/index.php?showtopic=" + poll.getTopic() + "'>");
-                    //out.write("(" + poll.getSynch() + ") "); // TEMPORARY!
-                    out.write("Screenshot of the Week " + poll.getName());
-                    if (poll.hasTopic())
-                        out.write("</a>");
-                    out.write("</td></tr>");
-                    
-                    out.newLine();
-                    out.write("<tr class='header-row'><td></td><td class='left'>Name</td><td class='center'>Votes</td><td class='center'>Pct</td><td class='center'>Rating");
-                    //out.write("<span class='tooltip' title='Votes plus sum of vote margins over lower-ranking shots'>[?]</span>");
-                    out.write("<span class='tooltip' title='[BETA] Elo-based determination of entrant&rsquo;s historical performance. Incorporates contest results. (Change from prior value is in parentheses.)'>[?]</span>");
-                    out.write("</td></tr>");
-                    out.newLine();
-
-                    for (int j=0; j<history.getPolls().get(i).numEntries(); j++)
-                    {
-                        entry = poll.getEntryByIndex(j);
-                        isWinner = (entry.isWinner());
-
-                        if (isWinner)
-                            out.write("<tr class='entry winner'>");
-                        else
-                            out.write("<tr class='entry'>");
-
-                        out.write("<td class='center has-shot-icon-cell'>");
-                        if (entry.hasURL()) {
-                            out.write("<a href='" + entry.getURL() + "'>");
-                            out.write("<img class='has-shot-icon' title='Click to view this shot' src='images/camera.png' onmouseenter='enterCamera(\"" + entry.getURL() + "\")' onmousemove='hover(event)' onmouseout='exitCamera()'/>");
-                            out.write("</a>");
-                        }
-                        out.write("</td>");
-                        
-                        out.write("<td class='name'>");
-                        // TODO: Rename 'image' class.  It's a holdover from a much older version of the page.
-                        for (int k = 0; k < entry.getMemberNameCouples().size(); ++k) {
-                            if (k != 0) {
-                                out.write(" + ");
-                            }
-                            Entry.MemberNameCouple couple = entry.getMemberNameCouples().get(k);
-                            out.write("<div class='archiveprofilelinkdiv'><a class='image' href='" + UserProfile.getProfileUrl(couple.member) + "'>");
-                            out.write(couple.member.getMostRecentName());
-                            out.write("</a>");
-                            // List the member's old name if they use a different name now
-                            if (!couple.member.getMostRecentName().equals(couple.name_submitted_under)) {
-                                out.write("<br/><span class='old-name'>(as " + couple.name_submitted_under + ")</span>");
-                            }
-                            out.write("</div>");
-                        }
-                        
-                        // Add an icon if the shot won the poll
-                        if (isWinner) {
-                            out.write(" <img class='winnericon' title='Winner!' src='images/star.png'/>");
-                        }
-                        
-                        out.write("</span></td>");
-
-                        if (entry.hasVotes())
-                        {
-                            out.write("<td class='votes'>"+ entry.getVotes() + "</td>");
-                            out.write("<td class='percentage'>");
-                            if (poll.numVotes() > 0) {
-                                DecimalFormat df = new DecimalFormat("##0.00%");
-                                out.write(df.format((double)(entry.getVotes()) / poll.numVotes()));
-                            } else {
-                                out.write("&mdash;");
-                            }
-                            EloEvaluator.RatingCalc calc = elo_evaluator.getRatingDetails(entry.getMemberNameCouples().get(0).member.getId(), poll.getSynch());
-                            if (entry.numMembers() == 1) {
-                                long old_int = Math.round(calc.rating_before);
-                                long new_int = Math.round(calc.rating_after);
-                                long difference = new_int - old_int;
-                                out.write("</td><td class='points'>" + (new DecimalFormat("#,##0")).format(new_int) + " (");
-                                if (difference > 0) {
-                                    out.write("+" + difference);
-                                } else if (difference < 0) {
-                                    out.write("" + difference);
-                                } else {
-                                    out.write("&#177;0");  // Plus/minus sign
-                                }
-                                out.write(")");
-                                
-                                if (POWER_USER_MODE) {
-                                    out.write(" ");
-                                    out.write(new DecimalFormat("0.00").format(calc.e_before));
-                                    out.write("->");
-                                    out.write(new DecimalFormat("0.00").format(calc.e_after));
-                                    out.write(" ");
-                                    out.write(new DecimalFormat("0.0").format(calc.boost));
-                                    out.write("x");
-                                }
-                                
-                                out.write("</td>");
-                            } else {
-                                // TODO: Replace me with something more elegant
-                                out.write("</td><td class='points'></td>");
-                            }
+            ArrayList<Poll> to_show = filter_strategy.filterPolls(history.getPolls());
+            
+            for (int i = to_show.size() - 1; i >= 0; --i) {
+                poll = to_show.get(i);
+                highlights = highlight_strategy.getHighlights(poll);
+                out.write("<table class='results-table'>");
+                out.newLine();
+                
+                // If there is nothing to highlight (e.g. a split contest's poll that doesn't contain the contest's winner), don't create a cell lest we accumulate borders.
+                if (!highlights.isEmpty()) {
+                    out.write("<tr><td class='picture-cell' colspan=5>");
+                    for (int j = 0; j < highlights.size(); ++j) {
+                        if (!highlights.get(j).hasURL()) {
+                            out.write("<img class='picture-picture' title='The image is missing from the archives. Sorry.' src='images/no_image.png'/>");
                         } else {
-                            out.write("<td class='votes'>&mdash;</td><td class='percentage'>&mdash;</td><td class='points'>&mdash;</td>");
+                            out.write("<a href='" + highlights.get(j).getURL() + "'>");
+                            out.write("<img class='picture-picture' title='");
+                            for (int k = 0; k < highlights.get(j).getMemberNameCouples().size(); ++k) {
+                                if (k != 0) {
+                                    out.write(" + ");
+                                }
+                                out.write(highlights.get(j).getMemberNameCouples().get(k).member.getMostRecentName());
+                            }
+                            out.write("' src='" + highlights.get(j).getURL() + "'/>");
+                            out.write("</a>");
                         }
-                        out.newLine();
-                        out.write("</tr>");
                     }
-                    //                     if (winners.size() >= 2)
-                    //                     {
-                    //                         out.write("<br/>");
-                    //                         out.newLine();
-                    //                         out.write("<span class='tie-note'>Screenshot of the Week " + poll.getName() + " ended in a draw.</span>");
-                    //                     }
-
-                    out.write("<tr class='info-row'><td></td><td class='numentries'>");
-                    out.write(poll.numEntries() + " entr");
-                    if (poll.numEntries() != 1)
-                        out.write("ies");
-                    else
-                        out.write("y");
-                    out.write("</td><td class='votes'>");
-                    out.write(""+poll.numVotes());
-                    out.write("</td><td>");  // percentage doesn't need a total
-                    out.write("</td><td class='points'>");
-                    //out.write(""+poll.numPoints());
-                    out.write("");
                     out.write("</td></tr>");
-
-                    if (poll.numNotes() > 0) {
-                        out.write("<tr><td class='contest-notes-cell' colspan=5><ul class='contest-notes-list'>");
-                        for (int j = 0; j < poll.numNotes(); ++j) {
-                            out.write("<li class='poll-notes-item'>" + poll.getNote(j) + "</li>");
+                    out.newLine();
+                }
+    
+                // Poll title
+                out.write("<tr><td class='contest-title' colspan=5>");
+                if (poll.hasTopic())
+                    out.write("<a class='contest' href='http://www.purezc.net/forums/index.php?showtopic=" + poll.getTopic() + "'>");
+                //out.write("(" + poll.getSynch() + ") "); // TEMPORARY!
+                out.write("Screenshot of the Week " + poll.getName());
+                if (poll.hasTopic())
+                    out.write("</a>");
+                out.write("</td></tr>");
+                
+                out.newLine();
+                out.write("<tr class='header-row'><td></td><td class='left'>Name</td><td class='center'>Votes</td><td class='center'>Pct</td><td class='center'>Rating");
+                //out.write("<span class='tooltip' title='Votes plus sum of vote margins over lower-ranking shots'>[?]</span>");
+                out.write("<span class='tooltip' title='[BETA] Elo-based determination of entrant&rsquo;s historical performance. Incorporates contest results. (Change from prior value is in parentheses.)'>[?]</span>");
+                out.write("</td></tr>");
+                out.newLine();
+    
+                for (int j = 0; j < poll.numEntries(); j++) {
+                    entry = poll.getEntryByIndex(j);
+                    isWinner = (entry.isWinner());
+    
+                    if (isWinner)
+                        out.write("<tr class='entry winner'>");
+                    else
+                        out.write("<tr class='entry'>");
+    
+                    out.write("<td class='center has-shot-icon-cell'>");
+                    if (entry.hasURL()) {
+                        out.write("<a href='" + entry.getURL() + "'>");
+                        out.write("<img class='has-shot-icon' title='Click to view this shot' src='images/camera.png' onmouseenter='enterCamera(\"" + entry.getURL() + "\")' onmousemove='hover(event)' onmouseout='exitCamera()'/>");
+                        out.write("</a>");
+                    }
+                    out.write("</td>");
+                    
+                    out.write("<td class='name'>");
+                    // TODO: Rename 'image' class.  It's a holdover from a much older version of the page.
+                    for (int k = 0; k < entry.getMemberNameCouples().size(); ++k) {
+                        if (k != 0) {
+                            out.write(" + ");
                         }
-                        out.write("</ul>");
-                        out.write("</td></tr>");
+                        Entry.MemberNameCouple couple = entry.getMemberNameCouples().get(k);
+                        out.write("<div class='archiveprofilelinkdiv'><a class='image' href='" + UserProfile.getProfileUrl(couple.member) + "'>");
+                        out.write(couple.member.getMostRecentName());
+                        out.write("</a>");
+                        // List the member's old name if they use a different name now
+                        if (!couple.member.getMostRecentName().equals(couple.name_submitted_under)) {
+                            out.write("<br/><span class='old-name'>(as " + couple.name_submitted_under + ")</span>");
+                        }
+                        out.write("</div>");
                     }
                     
-                    out.write("</table>");
-                    out.newLine();
-                    out.newLine();
+                    // Add an icon if the shot won the poll
+                    if (isWinner) {
+                        out.write(" <img class='winnericon' title='Winner!' src='images/star.png'/>");
+                    }
                     
-                    countUp++;
+                    out.write("</span></td>");
+    
+                    if (entry.hasVotes())
+                    {
+                        out.write("<td class='votes'>"+ entry.getVotes() + "</td>");
+                        out.write("<td class='percentage'>");
+                        if (poll.numVotes() > 0) {
+                            DecimalFormat df = new DecimalFormat("##0.00%");
+                            out.write(df.format((double)(entry.getVotes()) / poll.numVotes()));
+                        } else {
+                            out.write("&mdash;");
+                        }
+                        EloEvaluator.RatingCalc calc = elo_evaluator.getRatingDetails(entry.getMemberNameCouples().get(0).member.getId(), poll.getSynch());
+                        if (entry.numMembers() == 1) {
+                            long old_int = Math.round(calc.rating_before);
+                            long new_int = Math.round(calc.rating_after);
+                            long difference = new_int - old_int;
+                            out.write("</td><td class='points'>" + (new DecimalFormat("#,##0")).format(new_int) + " (");
+                            if (difference > 0) {
+                                out.write("+" + difference);
+                            } else if (difference < 0) {
+                                out.write("" + difference);
+                            } else {
+                                out.write("&#177;0");  // Plus/minus sign
+                            }
+                            out.write(")");
+                            
+                            if (POWER_USER_MODE) {
+                                out.write(" ");
+                                out.write(new DecimalFormat("0.00").format(calc.e_before));
+                                out.write("->");
+                                out.write(new DecimalFormat("0.00").format(calc.e_after));
+                                out.write(" ");
+                                out.write(new DecimalFormat("0.0").format(calc.boost));
+                                out.write("x");
+                            }
+                            
+                            out.write("</td>");
+                        } else {
+                            // TODO: Replace me with something more elegant
+                            out.write("</td><td class='points'></td>");
+                        }
+                    } else {
+                        out.write("<td class='votes'>&mdash;</td><td class='percentage'>&mdash;</td><td class='points'>&mdash;</td>");
+                    }
+                    out.newLine();
+                    out.write("</tr>");
                 }
+                //                     if (winners.size() >= 2)
+                //                     {
+                //                         out.write("<br/>");
+                //                         out.newLine();
+                //                         out.write("<span class='tie-note'>Screenshot of the Week " + poll.getName() + " ended in a draw.</span>");
+                //                     }
+    
+                out.write("<tr class='info-row'><td></td><td class='numentries'>");
+                out.write(poll.numEntries() + " entr");
+                if (poll.numEntries() != 1)
+                    out.write("ies");
+                else
+                    out.write("y");
+                out.write("</td><td class='votes'>");
+                out.write(""+poll.numVotes());
+                out.write("</td><td>");  // percentage doesn't need a total
+                out.write("</td><td class='points'>");
+                //out.write(""+poll.numPoints());
+                out.write("");
+                out.write("</td></tr>");
+    
+                if (poll.numNotes() > 0) {
+                    out.write("<tr><td class='contest-notes-cell' colspan=5><ul class='contest-notes-list'>");
+                    for (int j = 0; j < poll.numNotes(); ++j) {
+                        out.write("<li class='poll-notes-item'>" + poll.getNote(j) + "</li>");
+                    }
+                    out.write("</ul>");
+                    out.write("</td></tr>");
+                }
+                
+                out.write("</table>");
+                out.newLine();
+                out.newLine();
+                
+                countUp++;
             }
 
             // Closing 'big-board'-class table
             out.write("</span></td></tr></table>");
-        }
-        catch (Exception e)
+        } catch (IndexOutOfBoundsException e) {
+            //System.err.println("Bad array index in ArchivesGenerator: " + e.getLocalizedMessage());
+            e.printStackTrace();
+        } catch (Exception e)
         {
             //Catch exception if any
             System.err.println("Error caught in ArchivesGenerator: " + e.getMessage());

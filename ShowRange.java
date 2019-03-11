@@ -12,7 +12,7 @@ public class ShowRange implements FilterStrategy {
     public ArrayList<Poll> filterPolls(ArrayList<Poll> polls) {
         ArrayList<Poll> returning = new ArrayList<Poll>();
         
-        for (int i = polls.size() - 1; i >= 0; --i) {
+        for (int i = 0; i < polls.size(); ++i) {
             if (i >= start_ && i <= end_) {
                 returning.add(polls.get(i));
             }
