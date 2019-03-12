@@ -52,7 +52,7 @@ abstract class UserProfile
             addStatsTableToFile(mem, stats, true, true, out);
             
             ArchivesGenerator archives_generator = new ArchivesGenerator();
-            archives_generator.generate(history, elo_evaluator, out, new ShowMember(mem), new HighlightMember(mem), "../images");
+            archives_generator.generate(history, elo_evaluator, out, new ShowMember(mem), new HighlightMember(mem), "./", "../images");
             
 //             out.write("<div class='picture-large-list'>");
 //             out.newLine();
@@ -123,7 +123,7 @@ abstract class UserProfile
         if (mem.hasTag()) {
             body += ("-" + mem.getTag());
         }
-        return "profiles/" + body + ".html";
+        return body + ".html";
     }
     
     public static void addStatsTableToFile(Member member, ArrayList<FormattedLeaderboard> stats, boolean details, boolean links_in_details, BufferedWriter out) {

@@ -7,15 +7,15 @@ public class ArchivesGenerator {
     
     public ArchivesGenerator() {}
 
-    public void generate(History history, EloEvaluator elo_evaluator, BufferedWriter out, String images_relative_path) {
-        generate(history, elo_evaluator, out, new ShowAll(), new HighlightWinners(), images_relative_path);
+    public void generate(History history, EloEvaluator elo_evaluator, BufferedWriter out, String profiles_relative_path, String images_relative_path) {
+        generate(history, elo_evaluator, out, new ShowAll(), new HighlightWinners(), profiles_relative_path, images_relative_path);
     }
     
-    public void generate(History history, EloEvaluator elo_evaluator, BufferedWriter out, int pollStart, int pollEnd, String images_relative_path) {
-        generate(history, elo_evaluator, out, new ShowRange(pollStart, pollEnd), new HighlightWinners(), images_relative_path);
+    public void generate(History history, EloEvaluator elo_evaluator, BufferedWriter out, int pollStart, int pollEnd, String profiles_relative_path, String images_relative_path) {
+        generate(history, elo_evaluator, out, new ShowRange(pollStart, pollEnd), new HighlightWinners(), profiles_relative_path, images_relative_path);
     }
         
-    public void generate(History history, EloEvaluator elo_evaluator, BufferedWriter out, FilterStrategy filter_strategy, HighlightStrategy highlight_strategy, String images_relative_path) {
+    public void generate(History history, EloEvaluator elo_evaluator, BufferedWriter out, FilterStrategy filter_strategy, HighlightStrategy highlight_strategy, String profiles_relative_path, String images_relative_path) {
         elo_evaluator.evaluate(history);
         
         try {
@@ -115,7 +115,7 @@ public class ArchivesGenerator {
                             out.write(" + ");
                         }
                         Entry.MemberNameCouple couple = entry.getMemberNameCouples().get(k);
-                        out.write("<div class='archiveprofilelinkdiv'><a class='image' href='" + UserProfile.getProfileUrl(couple.member) + "'>");
+                        out.write("<div class='archiveprofilelinkdiv'><a class='image' href='" + profiles_relative_path + UserProfile.getProfileUrl(couple.member) + "'>");
                         out.write(couple.member.getMostRecentName());
                         out.write("</a>");
                         // List the member's old name if they use a different name now
