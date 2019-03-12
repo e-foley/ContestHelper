@@ -22,6 +22,7 @@ public class ArchivesGenerator {
             Entry entry;
             Poll poll;
             boolean isWinner;
+            boolean isHighlighted;
             ArrayList<Entry> highlights;
             
             // Big board used to be a table whose cells contained individual polls; now it is just one big cell
@@ -79,11 +80,25 @@ public class ArchivesGenerator {
                 for (int j = 0; j < poll.numEntries(); j++) {
                     entry = poll.getEntryByIndex(j);
                     isWinner = (entry.isWinner());
+                    isHighlighted = false;
+                    for (Entry highlight : highlights) {
+                        if (highlight == entry) {
+                            isHighlighted = true;
+                            break;
+                        }
+                    }
     
-                    if (isWinner)
-                        out.write("<tr class='entry winner'>");
-                    else
-                        out.write("<tr class='entry'>");
+                    out.write("<tr class='entry");
+                    
+                    if (isWinner) {
+                        out.write(" winner");
+                    }
+                    
+                    if (isHighlighted) {
+                        out.write(" highlight");
+                    }
+                    
+                    out.write("'>");
     
                     out.write("<td class='center has-shot-icon-cell'>");
                     if (entry.hasURL()) {
