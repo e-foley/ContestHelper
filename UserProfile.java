@@ -52,7 +52,7 @@ abstract class UserProfile
             addStatsTableToFile(mem, stats, true, true, out);
             
             ArchivesGenerator archives_generator = new ArchivesGenerator();
-            archives_generator.generate(history, elo_evaluator, out, new ShowMember(mem), new HighlightMember(mem));
+            archives_generator.generate(history, elo_evaluator, out, new ShowMember(mem), new HighlightMember(mem), "../images");
             
 //             out.write("<div class='picture-large-list'>");
 //             out.newLine();

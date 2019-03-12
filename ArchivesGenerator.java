@@ -7,15 +7,15 @@ public class ArchivesGenerator {
     
     public ArchivesGenerator() {}
 
-    public void generate(History history, EloEvaluator elo_evaluator, BufferedWriter out) {
-        generate(history, elo_evaluator, out, new ShowAll(), new HighlightWinners());
+    public void generate(History history, EloEvaluator elo_evaluator, BufferedWriter out, String images_relative_path) {
+        generate(history, elo_evaluator, out, new ShowAll(), new HighlightWinners(), images_relative_path);
     }
     
-    public void generate(History history, EloEvaluator elo_evaluator, BufferedWriter out, int pollStart, int pollEnd) {
-        generate(history, elo_evaluator, out, new ShowRange(pollStart, pollEnd), new HighlightWinners());
+    public void generate(History history, EloEvaluator elo_evaluator, BufferedWriter out, int pollStart, int pollEnd, String images_relative_path) {
+        generate(history, elo_evaluator, out, new ShowRange(pollStart, pollEnd), new HighlightWinners(), images_relative_path);
     }
         
-    public void generate(History history, EloEvaluator elo_evaluator, BufferedWriter out, FilterStrategy filter_strategy, HighlightStrategy highlight_strategy) {
+    public void generate(History history, EloEvaluator elo_evaluator, BufferedWriter out, FilterStrategy filter_strategy, HighlightStrategy highlight_strategy, String images_relative_path) {
         elo_evaluator.evaluate(history);
         
         try {
@@ -42,7 +42,7 @@ public class ArchivesGenerator {
                     out.write("<tr><td class='picture-cell' colspan=5>");
                     for (int j = 0; j < highlights.size(); ++j) {
                         if (!highlights.get(j).hasURL()) {
-                            out.write("<img class='picture-picture' title='The image is missing from the archives. Sorry.' src='images/no_image.png'/>");
+                            out.write("<img class='picture-picture' title='The image is missing from the archives. Sorry.' src='" + images_relative_path + "/no_image.png'/>");
                         } else {
                             out.write("<a href='" + highlights.get(j).getURL() + "'>");
                             out.write("<img class='picture-picture' title='");
@@ -103,7 +103,7 @@ public class ArchivesGenerator {
                     out.write("<td class='center has-shot-icon-cell'>");
                     if (entry.hasURL()) {
                         out.write("<a href='" + entry.getURL() + "'>");
-                        out.write("<img class='has-shot-icon' title='Click to view this shot' src='images/camera.png' onmouseenter='enterCamera(\"" + entry.getURL() + "\")' onmousemove='hover(event)' onmouseout='exitCamera()'/>");
+                        out.write("<img class='has-shot-icon' title='Click to view this shot' src='" + images_relative_path + "/camera.png' onmouseenter='enterCamera(\"" + entry.getURL() + "\")' onmousemove='hover(event)' onmouseout='exitCamera()'/>");
                         out.write("</a>");
                     }
                     out.write("</td>");
@@ -127,7 +127,7 @@ public class ArchivesGenerator {
                     
                     // Add an icon if the shot won the poll
                     if (isWinner) {
-                        out.write(" <img class='winnericon' title='Winner!' src='images/star.png'/>");
+                        out.write(" <img class='winnericon' title='Winner!' src='" + images_relative_path + "/star.png'/>");
                     }
                     
                     out.write("</span></td>");
