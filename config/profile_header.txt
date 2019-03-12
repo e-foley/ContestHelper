@@ -47,6 +47,6 @@ function exitCamera()
 </head>
 <body>
 <img id='hoverimg' onload='hoverLoad()' src='images/blank.png'/>
-<div class='big-block'>
+<div class='big-block archives'>
 <div class='grand-title'>#NAME&rsquo;s Screenshot of the Week Profile</div>
 <!--<div class='updated-text'>Last updated with the results of Screenshot of the Week <span style='font-weight:bold;'>###</span></div>-->
