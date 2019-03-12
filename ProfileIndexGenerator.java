@@ -40,7 +40,7 @@ public abstract class ProfileIndexGenerator {
                 data.id = member.getId();
                 data.has_id = member.hasId();
                 data.most_recent_name = member.getMostRecentName();
-                data.link = UserProfile.getProfileUrl(member);
+                data.link = "profiles/" + UserProfile.getProfileUrl(member);
                 data.num_entries = member.getTotalEntries();
                 ArrayList<Member.EntryStakePair> pairs = member.getEntries();
                 if (!pairs.isEmpty()) {

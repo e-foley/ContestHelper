@@ -102,7 +102,7 @@ public abstract class Master
             
             addFileToBuffer(input_origin + "config/archives_header.txt", out, swaps);
             stamps.add(new NamedStamp("Generating archives"));
-            archivesGenerator.generate(history, elo_evaluator, out);
+            archivesGenerator.generate(history, elo_evaluator, out, "profiles/", "images/");
             stamps.add(new NamedStamp("Writing archives"));
             addFileToBuffer(input_origin + "config/archives_footer.txt", out, swaps);
             out.close();
@@ -119,7 +119,7 @@ public abstract class Master
                 out = new BufferedWriter(new OutputStreamWriter(fstream, StandardCharsets.UTF_8));
                 addFileToBuffer(input_origin + "config/archives_header.txt", out, swaps);
                 archivesGenerator.insertNavigationBar(out, history, p + 1, num_pages, CONTESTS_PER_PAGE);
-                archivesGenerator.generate(history, elo_evaluator, out, poll_start, poll_end);
+                archivesGenerator.generate(history, elo_evaluator, out, poll_start, poll_end, "profiles/", "images");
                 archivesGenerator.insertNavigationBar(out, history, p + 1, num_pages, CONTESTS_PER_PAGE);
                 addFileToBuffer(input_origin + "config/archives_footer.txt", out, swaps);
                 out.close();
@@ -227,7 +227,7 @@ public abstract class Master
                 ArrayList<Member> mems = member_list;
                 for (int i=0; i<mems.size(); i++) {
                     System.out.println("Attempting to write file " + output_origin + getProfilePath(mems.get(i)) + "...");
-                    UserProfile.createProfilePage(mems.get(i), OVERWRITE_IDENTICAL_PROFILES, leaderboards_full, input_origin, output_origin + getProfilePath(mems.get(i)));
+                    UserProfile.createProfilePage(mems.get(i), history, elo_evaluator, OVERWRITE_IDENTICAL_PROFILES, leaderboards_full, input_origin, output_origin + getProfilePath(mems.get(i)));
                 }
             }
 
@@ -334,6 +334,6 @@ public abstract class Master
     
     // TODO: Move getProfileUrl out of UserProfile.
     public static String getProfilePath(Member mem) {
-        return UserProfile.getProfileUrl(mem);
+        return "profiles/" + UserProfile.getProfileUrl(mem);
     }
 }

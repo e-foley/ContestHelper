@@ -11,7 +11,7 @@ abstract class UserProfile
 {
     public static final String TEMP_PATH = "temp.txt";
 
-    public static void createProfilePage(Member mem, boolean explicit, ArrayList<FormattedLeaderboard> stats, String input_origin, String path)
+    public static void createProfilePage(Member mem, History history, EloEvaluator elo_evaluator, boolean explicit, ArrayList<FormattedLeaderboard> stats, String input_origin, String path)
     {
         String recent_name = mem.getMostRecentName();
         //String safe_name = getSafeName(recent_name);
@@ -51,33 +51,36 @@ abstract class UserProfile
             
             addStatsTableToFile(mem, stats, true, true, out);
             
-            out.write("<div class='picture-large-list'>");
-            out.newLine();
+            ArchivesGenerator archives_generator = new ArchivesGenerator();
+            archives_generator.generate(history, elo_evaluator, out, new ShowMember(mem), new HighlightMember(mem), "./", "../images");
             
-            ArrayList<Member.EntryStakePair> pairs = mem.getEntries();
-            // Note: this assumes that the entries have been ordered chronologically
-            for (int i = pairs.size()-1; i >= 0; i--) {
-                Entry ent = pairs.get(i).entry;
-                Poll poll = ent.getPoll();
-                
-                out.write("<div class='picture-large-div'>");
-                if (ent.hasURL()) {
-                    out.write("<img class='picture-large' title='" + ent.getPoll().getName() + "' src='" + ent.getURL() + "'/>");
-                } else {
-                    out.write("<img class='picture-large' title='" + ent.getPoll().getName() + "' src='../images/no_image.png'/>");
-                }
-                out.write("<div class='picture-large-caption'>");
-                if (poll.hasTopic()) {
-                    out.write("<a class='alt' href='" + poll.getURL() + "'>#" + poll.getName() + "</a>");
-                } else {
-                    out.write("#" + poll.getName());
-                }
-                out.write("</div></div>");
-                out.newLine();
-            }
-            
-            out.write("</div>");
-            out.newLine();
+//             out.write("<div class='picture-large-list'>");
+//             out.newLine();
+//             
+//             ArrayList<Member.EntryStakePair> pairs = mem.getEntries();
+//             // Note: this assumes that the entries have been ordered chronologically
+//             for (int i = pairs.size()-1; i >= 0; i--) {
+//                 Entry ent = pairs.get(i).entry;
+//                 Poll poll = ent.getPoll();
+//                 
+//                 out.write("<div class='picture-large-div'>");
+//                 if (ent.hasURL()) {
+//                     out.write("<img class='picture-large' title='" + ent.getPoll().getName() + "' src='" + ent.getURL() + "'/>");
+//                 } else {
+//                     out.write("<img class='picture-large' title='" + ent.getPoll().getName() + "' src='../images/no_image.png'/>");
+//                 }
+//                 out.write("<div class='picture-large-caption'>");
+//                 if (poll.hasTopic()) {
+//                     out.write("<a class='alt' href='" + poll.getURL() + "'>#" + poll.getName() + "</a>");
+//                 } else {
+//                     out.write("#" + poll.getName());
+//                 }
+//                 out.write("</div></div>");
+//                 out.newLine();
+//             }
+//  
+//             out.write("</div>");
+//             out.newLine();
             
             Master.addFileToBuffer(input_origin + "config/profile_footer.txt", out, swaps);
             out.close();
@@ -120,7 +123,7 @@ abstract class UserProfile
         if (mem.hasTag()) {
             body += ("-" + mem.getTag());
         }
-        return "profiles/" + body + ".html";
+        return body + ".html";
     }
     
     public static void addStatsTableToFile(Member member, ArrayList<FormattedLeaderboard> stats, boolean details, boolean links_in_details, BufferedWriter out) {
