@@ -159,9 +159,9 @@ public class ArchivesGenerator {
                             
                             if (POWER_USER_MODE) {
                                 out.write(" ");
-                                out.write(new DecimalFormat("0.00").format(calc.e_before));
+                                out.write(new DecimalFormat("0.000").format(calc.e_before));
                                 out.write("->");
-                                out.write(new DecimalFormat("0.00").format(calc.e_after));
+                                out.write(new DecimalFormat("0.000").format(calc.e_after));
                                 out.write(" ");
                                 out.write(new DecimalFormat("0.0").format(calc.boost));
                                 out.write("x");
