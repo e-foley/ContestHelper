@@ -16,7 +16,8 @@ public class ArchivesGenerator {
     }
         
     public void generate(History history, EloEvaluator elo_evaluator, BufferedWriter out, FilterStrategy filter_strategy, HighlightStrategy highlight_strategy, String profiles_relative_path, String images_relative_path) {
-        elo_evaluator.evaluate(history);
+        // Elo is evaluated in Master and passed to this method, so no need to recalculate for every member.
+        // elo_evaluator.evaluate(history);
         
         try {
             Entry entry;
@@ -159,9 +160,9 @@ public class ArchivesGenerator {
                             
                             if (POWER_USER_MODE) {
                                 out.write(" ");
-                                out.write(new DecimalFormat("0.00").format(calc.e_before));
+                                out.write(new DecimalFormat("0.000").format(calc.e_before));
                                 out.write("->");
-                                out.write(new DecimalFormat("0.00").format(calc.e_after));
+                                out.write(new DecimalFormat("0.000").format(calc.e_after));
                                 out.write(" ");
                                 out.write(new DecimalFormat("0.0").format(calc.boost));
                                 out.write("x");
