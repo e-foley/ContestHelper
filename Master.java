@@ -28,7 +28,7 @@ public abstract class Master
     public static final double ELO_STARTING_RATING = 1500.0f;
     public static final double ELO_BASE = 2.0;
     public static final double ELO_DIVISOR = 500.0;
-    public static final double ELO_AGGRESSIVENESS = 10.0;
+    public static final double ELO_AGGRESSIVENESS = 11.0;
     public static final double ELO_STARTING_BOOST = 1.0;  // Note that boost changes this from a zero-sum algorithm to something else. ({3.0, 0.5} seems about right.)
     public static final double ELO_BOOST_DECAY = 0.0;
     
@@ -79,7 +79,8 @@ public abstract class Master
         EloEvaluator elo_evaluator = new EloEvaluator(ELO_STARTING_RATING, ELO_BASE, ELO_DIVISOR, ELO_AGGRESSIVENESS, ELO_STARTING_BOOST, ELO_BOOST_DECAY);
         
         // Shouldn't be necessary to evaluate history here anymore since evaluation *should* happen as part of Leaderboard's call to metric's precalculate...
-        // elo_evaluator.evaluate(history);
+        // BUT, if we calculate here, we don't have to re-calculate for every member profile page that gets passed this elo_evaluator object.
+        elo_evaluator.evaluate(history);
         
         FileOutputStream fstream;
         BufferedWriter out;

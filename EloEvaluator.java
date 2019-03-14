@@ -9,16 +9,22 @@ import java.util.ArrayList;
  */
 public class EloEvaluator implements Cloneable
 {
-    class RatingCalc {       
-        double rating_before = 0.0;
-        double rating_after = 0.0;
+    class RatingCalc {  
+        // Information available from start
         double stake = 0.0;
+        double boost = 0.0;
+        double rating_before = 0.0;
         double q_before = 0.0;
         double e_before = 0.0;
+        // Information available for intermediate calculations
         double s = 0.0;
+        double rating_temp = 0.0;
+        double q_temp = 0.0;
+        double e_temp = 0.0;
+        // Information available afterward
+        double rating_after = 0.0;
         double q_after = 0.0;
         double e_after = 0.0;
-        double boost = 0.0;
     }
     
     // TODO: Rethink the inner container. There may be a better choice.
@@ -82,9 +88,10 @@ public class EloEvaluator implements Cloneable
                     }
                     
                     // TODO: There's already a notion of "stake" in Member.EntryStakePair... Maybe these could be linked somehow.
-                    this_calc.rating_after = this_calc.rating_before;  // (temp value)
+                    this_calc.rating_temp = this_calc.rating_before;  // (temp value)
                     this_calc.stake = 1.0 / couples.size();
                     this_calc.q_before = Math.pow(base, this_calc.rating_before / divisor);
+                    this_calc.q_temp = this_calc.q_before;
                     
                     // Ignore shared entries for total q calculation.
                     // TODO: Change this.
@@ -99,6 +106,7 @@ public class EloEvaluator implements Cloneable
             // By this point, we have a provisional RatingCalc for this contest in every member's row.
             // This RatingCalc has the correct "rating_before" field and a temporary "rating_after" value to match.
 
+            // Figure out achievement (s)
             for (int j = 0; j < entries.size(); ++j) {
                 // Ignore shared entries for ratings. (See also earlier logic when populating `this_calc`.)
                 // TODO: Change this.
@@ -107,9 +115,46 @@ public class EloEvaluator implements Cloneable
                 }
                 
                 RatingCalc details = getRatingDetails(entries.get(j).getMemberNameCouples().get(0).member.getId(), poll.getSynch());
-                details.e_before = (details.q_before / q_before_sum) * poll.numVotes();  // Expected achievement
-                details.s = entries.get(j).getVotes();  // Actual achievement
-                details.rating_after += details.boost * aggressiveness * (details.s - details.e_before);
+                details.e_before = details.q_before / q_before_sum;  // Expected achievemet (ratio of all votes)
+                if (poll.numVotes() == 0) {
+                    details.s = 0.0;
+                } else {
+                    details.s = (double)(entries.get(j).getVotes()) / poll.numVotes();  // Actual achievement (ratio of all votes)
+                }
+            }
+            
+            // Now, we need to iterate (based on the number of votes) to determine new ratings, calculating intermediate values.
+            for (int v = 0; v < poll.numVotes(); ++v) {
+                double q_temp_sum = 0.0;
+                
+                // Calculate q_temp_sum
+                for (int j = 0; j < entries.size(); ++j) {
+                    if (entries.get(j).numMembers() != 1) {
+                        continue;
+                    }
+                    RatingCalc details = getRatingDetails(entries.get(j).getMemberNameCouples().get(0).member.getId(), poll.getSynch());
+                    details.q_temp = Math.pow(base, details.rating_temp / divisor);
+                    q_temp_sum += details.q_temp;
+                }
+                
+                for (int j = 0; j < entries.size(); ++j) {
+                    if (entries.get(j).numMembers() != 1) {
+                        continue;
+                    }
+                    RatingCalc details = getRatingDetails(entries.get(j).getMemberNameCouples().get(0).member.getId(), poll.getSynch());
+                    details.e_temp = (details.q_temp / q_temp_sum);
+                    details.rating_temp += details.boost * aggressiveness * (details.s - details.e_temp);
+                }
+            }
+            
+            // Loop to assign rating_after
+            for (int j = 0; j < entries.size(); ++j) {
+                Entry entry = entries.get(j);
+                ArrayList<Entry.MemberNameCouple> couples = entry.getMemberNameCouples();
+                for (int k = 0; k < couples.size(); ++k) {
+                    RatingCalc details = getRatingDetails(entries.get(j).getMemberNameCouples().get(k).member.getId(), poll.getSynch());
+                    details.rating_after = details.rating_temp;
+                }
             }
             
             // Two more loops to calculate q_after and e_after
@@ -127,7 +172,7 @@ public class EloEvaluator implements Cloneable
                     continue;
                 }
                 RatingCalc details = getRatingDetails(entries.get(j).getMemberNameCouples().get(0).member.getId(), poll.getSynch());
-                details.e_after = (details.q_after / q_after_sum) * poll.numVotes();                
+                details.e_after = details.q_after / q_after_sum;                
             }
             
         }
