@@ -148,13 +148,14 @@ public class ArchivesGenerator {
                             long old_int = Math.round(calc.rating_before);
                             long new_int = Math.round(calc.rating_after);
                             long difference = new_int - old_int;
-                            out.write("</td><td class='rating'>" + (new DecimalFormat("#,##0")).format(new_int) + " (");
+                            DecimalFormat rating_format = new DecimalFormat("#,##0");
+                            out.write("</td><td class='rating'>" + rating_format.format(new_int) + " (");
                             if (difference > 0) {
-                                out.write("+" + difference);
+                                out.write("+" + rating_format.format(difference));
                             } else if (difference < 0) {
-                                out.write("" + difference);
+                                out.write("" + rating_format.format(difference));
                             } else {
-                                out.write("&#177;0");  // Plus/minus sign
+                                out.write("&#177;" + rating_format.format(0));  // Plus/minus sign
                             }
                             out.write(")");
                             
