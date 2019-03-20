@@ -59,6 +59,7 @@ public class EloEvaluator implements Cloneable
             Poll poll = polls.get(i);
             ArrayList<Entry> entries = poll.getEntries();
             double q_before_sum = 0.0;
+            int qualified_vote_sum = 0;  // We do this because we ignore votes from shared entries
             for (int j = 0; j < entries.size(); ++j) {
                 Entry entry = entries.get(j);
                 ArrayList<Entry.MemberNameCouple> couples = entry.getMemberNameCouples();
@@ -97,6 +98,7 @@ public class EloEvaluator implements Cloneable
                     // TODO: Change this.
                     if (couples.size() == 1) {
                         q_before_sum += this_calc.q_before;
+                        qualified_vote_sum += entry.getVotes();
                     }
                     
                     rating_history.get(new Integer(member_id)).put(poll.getSynch(), this_calc);
@@ -116,15 +118,15 @@ public class EloEvaluator implements Cloneable
                 
                 RatingCalc details = getRatingDetails(entries.get(j).getMemberNameCouples().get(0).member.getId(), poll.getSynch());
                 details.e_before = details.q_before / q_before_sum;  // Expected achievemet (ratio of all votes)
-                if (poll.numVotes() == 0) {
+                if (qualified_vote_sum == 0) {
                     details.s = 0.0;
                 } else {
-                    details.s = (double)(entries.get(j).getVotes()) / poll.numVotes();  // Actual achievement (ratio of all votes)
+                    details.s = (double)(entries.get(j).getVotes()) / qualified_vote_sum;  // Actual achievement (ratio of all qualified votes)
                 }
             }
             
             // Now, we need to iterate (based on the number of votes) to determine new ratings, calculating intermediate values.
-            for (int v = 0; v < poll.numVotes(); ++v) {
+            for (int v = 0; v < qualified_vote_sum; ++v) {
                 double q_temp_sum = 0.0;
                 
                 // Calculate q_temp_sum
