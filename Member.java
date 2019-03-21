@@ -20,10 +20,12 @@ public class Member
     private float total_plus_minus_points = 0;
     private float total_plus_minus_heads = 0;
     private float total_winningness = 0.0f;
+    private ArrayList<ArrayList<EntryStakePair>> entry_streak = new ArrayList<ArrayList<EntryStakePair>>();
     private ArrayList<ArrayList<EntryStakePair>> winning_streak_loose = new ArrayList<ArrayList<EntryStakePair>>();
     private ArrayList<ArrayList<EntryStakePair>> winning_streak_strict = new ArrayList<ArrayList<EntryStakePair>>();
-    private float longest_streak_loose = 0.0f;
-    private float longest_streak_strict = 0.0f;
+    private float longest_win_streak_loose = 0.0f;
+    private float longest_win_streak_strict = 0.0f;
+    private float longest_entry_streak = 0.0f;
     private int formidable_rating = 0;
     
     private float weighted_plus_minus_points = 0.0f;
@@ -309,20 +311,83 @@ public class Member
         return false;
     }
     
-    public int getNumberOfLongestStreaks(boolean strict) {
+    public int getNumberOfLongestEntryStreaks() {
+        refreshStats();
+        return entry_streak.size();
+    }
+    
+    public float getLongestEntryStreak() {
+        refreshStats();
+        return longest_entry_streak;
+    }
+    
+    public float calcLongestEntryStreak() {
+        ArrayList<ArrayList<EntryStakePair>> list = calcEntriesInLongestEntryStreak();
+        if (list.size() <= 0) {
+            return 0.0f;
+        }
+        
+        float sum = 0.0f;
+        for (int i = 0; i < list.get(0).size(); ++i) {
+            EntryStakePair pair = list.get(0).get(i);
+            sum += pair.stake;
+        }
+        
+        return sum;
+    }
+    
+    public ArrayList<ArrayList<EntryStakePair>> getEntriesInLongestEntryStreak() {
+        refreshStats();
+        return entry_streak;
+    }
+    
+    public ArrayList<ArrayList<EntryStakePair>> calcEntriesInLongestEntryStreak() {
+        float current = 0.0f;
+        float max = 0.0f;
+        ArrayList<EntryStakePair> currentList = new ArrayList<EntryStakePair>();
+        ArrayList<ArrayList<EntryStakePair>> maxList = new ArrayList<ArrayList<EntryStakePair>>();
+        int last_entry_synch = 0;
+        EntryStakePair pair;
+        for (int i = 0; i < entries.size(); ++i) {
+            pair = entries.get(i);
+            
+            if (pair.entry.getPoll().getSynch() - last_entry_synch <= 1) {
+                current += pair.stake;
+                currentList.add(pair);
+            } else {
+                current = pair.stake;
+                currentList = new ArrayList<EntryStakePair>();
+                currentList.add(pair);
+            }
+            
+            last_entry_synch = pair.entry.getPoll().getSynch();
+            
+            if (current == max && max >= 0.0f) {
+                maxList.add(currentList);
+            } else if (current > max) {
+                max = current;
+                maxList = new ArrayList<ArrayList<EntryStakePair>>();
+                maxList.add(currentList);
+            }
+        }
+            
+        return maxList; 
+    }
+    
+    public int getNumberOfLongestWinStreaks(boolean strict) {
         refreshStats();
         return strict ? winning_streak_strict.size() : winning_streak_loose.size();
     }
     
-    public float getLongestStreak(boolean strict) {
+    public float getLongestWinStreak(boolean strict) {
         refreshStats();
-        return strict ? longest_streak_strict : longest_streak_loose;
+        return strict ? longest_win_streak_strict : longest_win_streak_loose;
     }
     
-    private float calcLongestStreak(boolean strict)
+    private float calcLongestWinStreak(boolean strict)
     {
-        //ArrayList<ArrayList<Entry>> list = getEntriesInLongestStreak(strict);
-        ArrayList<ArrayList<EntryStakePair>> list = calcEntriesInLongestStreak(strict);  // IS IT PROPER TO FORCE A CALCULATION HERE VIA CALC?
+        //ArrayList<ArrayList<Entry>> list = getEntriesInLongestWinStreak(strict);
+        ArrayList<ArrayList<EntryStakePair>> list = calcEntriesInLongestWinStreak(strict);  // IS IT PROPER TO FORCE A CALCULATION HERE VIA CALC?
         
         if (list.size() <= 0)
             return 0.0f;
@@ -335,12 +400,12 @@ public class Member
         return sum;
     }
     
-    public ArrayList<ArrayList<EntryStakePair>> getEntriesInLongestStreak(boolean strict) {
+    public ArrayList<ArrayList<EntryStakePair>> getEntriesInLongestWinStreak(boolean strict) {
         refreshStats();
         return strict ? winning_streak_strict : winning_streak_loose;
     }
     
-    private ArrayList<ArrayList<EntryStakePair>> calcEntriesInLongestStreak(boolean strict)
+    private ArrayList<ArrayList<EntryStakePair>> calcEntriesInLongestWinStreak(boolean strict)
     {
         //System.out.println("Getting for member " + getMostRecentName());
         float current = 0.0f;
@@ -520,10 +585,12 @@ public class Member
         total_plus_minus_points = calcTotalPlusMinusPoints();
         total_plus_minus_heads = calcTotalPlusMinusHeads();
         total_winningness = calcTotalWinningness();
-        winning_streak_strict = calcEntriesInLongestStreak(true);
-        winning_streak_loose = calcEntriesInLongestStreak(false);
-        longest_streak_strict = calcLongestStreak(true);
-        longest_streak_loose = calcLongestStreak(false);
+        entry_streak = calcEntriesInLongestEntryStreak();
+        longest_entry_streak = calcLongestEntryStreak();
+        winning_streak_strict = calcEntriesInLongestWinStreak(true);
+        winning_streak_loose = calcEntriesInLongestWinStreak(false);
+        longest_win_streak_strict = calcLongestWinStreak(true);
+        longest_win_streak_loose = calcLongestWinStreak(false);
         formidable_rating = calcNewFormidableRating();
         
         // Experiments
