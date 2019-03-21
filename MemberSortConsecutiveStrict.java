@@ -6,30 +6,30 @@ import java.util.ArrayList;
 public class MemberSortConsecutiveStrict implements MemberDataRetriever
 {
     public float getValue(Member member) {
-        return member.getLongestStreak(true);
+        return member.getLongestWinStreak(true);
     }
     
     public int compare(Member m1, Member m2) {
-        int result = new Float(m2.getLongestStreak(true)).compareTo(m1.getLongestStreak(true));
+        int result = new Float(m2.getLongestWinStreak(true)).compareTo(m1.getLongestWinStreak(true));
         if (result == 0) {
-            result = m2.getNumberOfLongestStreaks(true) - m1.getNumberOfLongestStreaks(true);
+            result = m2.getNumberOfLongestWinStreaks(true) - m1.getNumberOfLongestWinStreaks(true);
         }
         return result;
     }
     
     public String getData(Member m)
     {        
-        if (m.getNumberOfLongestStreaks(true) > 1) {
-            return "(" + (NumberFormat.getInstance()).format(m.getNumberOfLongestStreaks(true)) + "&times;)&nbsp;" + getFormat().format(m.getLongestStreak(true));
+        if (m.getNumberOfLongestWinStreaks(true) > 1) {
+            return "(" + (NumberFormat.getInstance()).format(m.getNumberOfLongestWinStreaks(true)) + "&times;)&nbsp;" + getFormat().format(m.getLongestWinStreak(true));
         } else {
-            return getFormat().format(m.getLongestStreak(true));
+            return getFormat().format(m.getLongestWinStreak(true));
         }
     }
     
     public String getDetails(Member m, boolean linkTopics)
     {
         String building = new String();
-        ArrayList<ArrayList<Member.EntryStakePair>> winners = m.getEntriesInLongestStreak(true);
+        ArrayList<ArrayList<Member.EntryStakePair>> winners = m.getEntriesInLongestWinStreak(true);
         
         if (winners == null || winners.size() == 0)
         {
