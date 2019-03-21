@@ -138,6 +138,7 @@ public abstract class Master
             //FormattedLeaderboard points_single_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortPointsSingle(), new MemberSortRecent()), "Most points (single contest, by member)", "Most points in one contest", "", " points", " Points");
             FormattedLeaderboard victories_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortVictories(), new MemberSortRecent()), "Most victories", "Wins", "", " victory", " Wins");
             FormattedLeaderboard entries_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortEntries(), new MemberSortRecent()), "Most participation", "Entries", "", " entry", " Entries");
+            FormattedLeaderboard entry_streak_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortEntryStreak(), new MemberSortRecent()), "Longest participation streaks", "Most consecutive contests entered", "", " entry", " Entries");
             FormattedLeaderboard consecutive_strict_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortConsecutiveStrict(), new MemberSortRecent()), "Longest winning streaks (in consecutive contests, by member)", "Most consecutive contests won", "", " streak", " Streak");
             FormattedLeaderboard consecutive_loose_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortConsecutiveLoose(), new MemberSortRecent()), "Longest winning streaks (in consecutive attempts, by member)", "Most consecutive attempts won", "", " streak", " Streak");
             FormattedLeaderboard win_ratio_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortWinRatio(WIN_RATIO_MIN_ENTRIES), new MemberSortRecent()), "Best win ratios (minimum " + WIN_RATIO_MIN_ENTRIES + " entries)", "Win ratio (" + WIN_RATIO_MIN_ENTRIES + "-entry minimum)", "", "", " Ratio");
@@ -156,6 +157,7 @@ public abstract class Master
             //leaderboards_full.add(points_single_board);
             leaderboards_full.add(victories_board);
             leaderboards_full.add(entries_board);
+            leaderboards_full.add(entry_streak_board);
             leaderboards_full.add(consecutive_strict_board);
             leaderboards_full.add(consecutive_loose_board);
             leaderboards_full.add(win_ratio_board);
