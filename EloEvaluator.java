@@ -60,6 +60,7 @@ public class EloEvaluator implements Cloneable
             ArrayList<Entry> entries = poll.getEntries();
             double q_before_sum = 0.0;
             int qualified_vote_sum = 0;  // We do this because we ignore votes from shared entries
+            int qualified_entry_sum = 0;  // Same here
             for (int j = 0; j < entries.size(); ++j) {
                 Entry entry = entries.get(j);
                 ArrayList<Entry.MemberNameCouple> couples = entry.getMemberNameCouples();
@@ -99,6 +100,7 @@ public class EloEvaluator implements Cloneable
                     if (couples.size() == 1) {
                         q_before_sum += this_calc.q_before;
                         qualified_vote_sum += entry.getVotes();
+                        ++qualified_entry_sum;
                     }
                     
                     rating_history.get(new Integer(member_id)).put(poll.getSynch(), this_calc);
@@ -156,7 +158,7 @@ public class EloEvaluator implements Cloneable
                 for (int k = 0; k < couples.size(); ++k) {
                     RatingCalc details = getRatingDetails(entries.get(j).getMemberNameCouples().get(k).member.getId(), poll.getSynch());
                     // details.rating_after = details.rating_temp;
-                    details.rating_after = details.rating_before + details.boost * aggressiveness * (details.s - details.e_before) * poll.numEntries();
+                    details.rating_after = details.rating_before + details.boost * aggressiveness * (details.s - details.e_before) * (qualified_entry_sum - 1);
                 }
             }
             
