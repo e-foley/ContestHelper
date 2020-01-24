@@ -156,7 +156,7 @@ public class EloEvaluator implements Cloneable
                 for (int k = 0; k < couples.size(); ++k) {
                     RatingCalc details = getRatingDetails(entries.get(j).getMemberNameCouples().get(k).member.getId(), poll.getSynch());
                     // details.rating_after = details.rating_temp;
-                    details.rating_after = details.rating_before + details.boost * aggressiveness * (details.s - details.e_before); 
+                    details.rating_after = details.rating_before + details.boost * aggressiveness * (details.s - details.e_before) * poll.numEntries();
                 }
             }
             

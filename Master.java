@@ -28,7 +28,7 @@ public abstract class Master
     public static final double ELO_STARTING_RATING = 1500.0f;
     public static final double ELO_BASE = 2.0;
     public static final double ELO_DIVISOR = 500.0;
-    public static final double ELO_AGGRESSIVENESS = 500.0;
+    public static final double ELO_AGGRESSIVENESS = 80.0;
     public static final double ELO_STARTING_BOOST = 1.0;  // Note that boost changes this from a zero-sum algorithm to something else. ({3.0, 0.5} seems about right.)
     public static final double ELO_BOOST_DECAY = 0.0;
     
