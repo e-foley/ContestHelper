@@ -1,14 +1,13 @@
 import java.util.TreeMap;
 import java.util.ArrayList;
 
-/**
- * Write a description of class EloEvaluator here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class EloEvaluator implements Cloneable
 {
+    public static final String VERSION_STRING = "0.4.1";
+    
+    // q is effectively the member's power level--a relative weight of how many votes they'd be expected to get (q = BASE^(rating/DIVISOR))
+    // e is the expected proportion of votes the member will receive: e = q / (sum of all q)
+    // s is the proportion of votes actually won in the contest
     class RatingCalc {  
         // Information available from start
         double stake = 0.0;
@@ -157,8 +156,12 @@ public class EloEvaluator implements Cloneable
                 ArrayList<Entry.MemberNameCouple> couples = entry.getMemberNameCouples();
                 for (int k = 0; k < couples.size(); ++k) {
                     RatingCalc details = getRatingDetails(entries.get(j).getMemberNameCouples().get(k).member.getId(), poll.getSynch());
-                    // details.rating_after = details.rating_temp;
-                    details.rating_after = details.rating_before + details.boost * aggressiveness * (details.s - details.e_before) * (qualified_entry_sum - 1);
+                    if (qualified_vote_sum == 0) {
+                        // Don't penalize anyone for participating in a contest that had zero votes!
+                        details.rating_after = details.rating_before;
+                    } else {
+                        details.rating_after = details.rating_before + details.boost * aggressiveness * (details.s - details.e_before) * (qualified_entry_sum - 1);
+                    }
                 }
             }
             

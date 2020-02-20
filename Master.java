@@ -131,7 +131,7 @@ public abstract class Master
             // Define all boards
             stamps.add(new NamedStamp("Defining leaderboards"));
             //FormattedLeaderboard weighted_formidable_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortWeightedFormidable(), new MemberSortRecent()), "Most formidable opponents", "Rating", "", "", " Rating");
-            FormattedLeaderboard elo_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortElo(elo_evaluator), new MemberSortRecent()), "Most formidable opponents [v0.4]", "Rating", "", "", " Rating");
+            FormattedLeaderboard elo_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortElo(elo_evaluator), new MemberSortRecent()), "Most formidable opponents [v" + EloEvaluator.VERSION_STRING + "]", "Rating", "", "", " Rating");
             FormattedLeaderboard votes_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortVotes(), new MemberSortRecent()), "Most votes (all-time)", "Total votes", "", " vote", " Votes");
             //FormattedLeaderboard points_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortPoints(), new MemberSortRecent()), "Most points (all-time)", "Total points", "", " point", " Points");
             FormattedLeaderboard votes_single_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortVotesSingle(), new MemberSortRecent()), "Most votes (single contest, by member)", "Most votes in one contest", "", " votes", " Votes");
