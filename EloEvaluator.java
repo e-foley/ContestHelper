@@ -1,12 +1,6 @@
 import java.util.TreeMap;
 import java.util.ArrayList;
 
-/**
- * Write a description of class EloEvaluator here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class EloEvaluator implements Cloneable
 {
     public static final String VERSION_STRING = "0.4.1";
