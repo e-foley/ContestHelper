@@ -9,6 +9,11 @@ import java.util.ArrayList;
  */
 public class EloEvaluator implements Cloneable
 {
+    public static final String VERSION_STRING = "0.4.1";
+    
+    // q is effectively the member's power level--a relative weight of how many votes they'd be expected to get (q = BASE^(rating/DIVISOR))
+    // e is the expected proportion of votes the member will receive: e = q / (sum of all q)
+    // s is the proportion of votes actually won in the contest
     class RatingCalc {  
         // Information available from start
         double stake = 0.0;
