@@ -157,8 +157,12 @@ public class EloEvaluator implements Cloneable
                 ArrayList<Entry.MemberNameCouple> couples = entry.getMemberNameCouples();
                 for (int k = 0; k < couples.size(); ++k) {
                     RatingCalc details = getRatingDetails(entries.get(j).getMemberNameCouples().get(k).member.getId(), poll.getSynch());
-                    // details.rating_after = details.rating_temp;
-                    details.rating_after = details.rating_before + details.boost * aggressiveness * (details.s - details.e_before) * (qualified_entry_sum - 1);
+                    if (qualified_vote_sum == 0) {
+                        // Don't penalize anyone for participating in a contest that had zero votes!
+                        details.rating_after = details.rating_before;
+                    } else {
+                        details.rating_after = details.rating_before + details.boost * aggressiveness * (details.s - details.e_before) * (qualified_entry_sum - 1);
+                    }
                 }
             }
             
