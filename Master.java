@@ -223,6 +223,21 @@ public abstract class Master
             addFileToBuffer(input_origin + "config/profile_index_footer.txt", out, swaps);
             out.close();
             
+            // RANDOM SHOT SCRIPT
+            stamps.add(new NamedStamp("Generating random shot script"));
+            fstream = new FileOutputStream(output_origin + "random_shot.js");
+            out = new BufferedWriter(new OutputStreamWriter(fstream, StandardCharsets.UTF_8));
+            RandomShotScriptGenerator.generate(history, out);
+            out.close();
+            
+            // RANDOM SHOT PAGE
+            stamps.add(new NamedStamp("Generating random shot page"));
+            fstream = new FileOutputStream(output_origin + "random_shot.html");
+            out = new BufferedWriter(new OutputStreamWriter(fstream, StandardCharsets.UTF_8));
+            addFileToBuffer(input_origin + "config/random_shot_header.txt", out, swaps);
+            RandomShotPageGenerator.generate(history, out);
+            addFileToBuffer(input_origin + "config/random_shot_footer.txt", out, swaps);
+            out.close();
             
             // PROFILES
             stamps.add(new NamedStamp("Generating user profiles"));
