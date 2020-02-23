@@ -42,9 +42,13 @@ public abstract class RandomShotScriptGenerator
                         }
                         out.write(couples.get(i).member.getMostRecentName());
                     }
-                    out.write("'");
-                        
-                    out.write("}");
+                    out.write("', 'contest': '");
+                    out.write(poll.getName());
+                    out.write("', 'hasTopic': '");
+                    out.write(poll.hasTopic() ? "true" : "false");
+                    out.write("', 'topicUrl': '");
+                    out.write(poll.getURL());
+                    out.write("'}");
                 }
             }
             //out.write("    {'name': 'Shane', 'url': 'https://sotw.purezc.net/SOTW719/Shane.png', 'contest': 719}");
