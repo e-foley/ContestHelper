@@ -232,11 +232,7 @@ public abstract class Master
             
             // RANDOM SHOT PAGE
             stamps.add(new NamedStamp("Generating random shot page"));
-            fstream = new FileOutputStream(output_origin + "random_shot_gen.html");
-            out = new BufferedWriter(new OutputStreamWriter(fstream, StandardCharsets.UTF_8));
-            addFileToBuffer(input_origin + "config/random_shot_header.txt", out, swaps);
-            RandomShotPageGenerator.generate(history, out);
-            addFileToBuffer(input_origin + "config/random_shot_footer.txt", out, swaps);
+            copyFile(new File(input_origin + "config/random_shot.html"), new File(output_origin + "random_shot.html"));
             out.close();
             
             // PROFILES
