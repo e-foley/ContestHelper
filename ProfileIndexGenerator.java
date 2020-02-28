@@ -70,7 +70,7 @@ public abstract class ProfileIndexGenerator {
                 char starting_char = line.name.toUpperCase().charAt(0);
                 if (starting_char != last_starting_char) {
                     if (table_active) {
-                        out.write("</tr></table>");
+                        out.write("</table>");
                         out.newLine();
                     }
                     out.write("<div class='character-heading'>" + starting_char + "</div>");
@@ -97,7 +97,7 @@ public abstract class ProfileIndexGenerator {
             }
             
             if (table_active) {
-                out.write("</tr></table>");
+                out.write("</table>");
                 out.newLine();
             }
         } catch (Exception e) {
