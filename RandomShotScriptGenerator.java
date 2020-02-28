@@ -65,7 +65,14 @@ public abstract class RandomShotScriptGenerator
             out.newLine();
             out.write("}");
             out.newLine();
-            //out.write("document.write(getRandomShot().url);");
+            out.newLine();
+            out.write("function getNumShotsString() {");
+            out.newLine();
+            out.write("  var temp = all_shots.length;");
+            out.newLine();
+            out.write("  return String(temp).replace(/(.)(?=(\\d{3})+$)/g,'$1,');");
+            out.write("}");
+            out.newLine();
         } catch (Exception e) {
             System.err.println("Error caught in RandomShotGenerator: " + e.getMessage());
         }
