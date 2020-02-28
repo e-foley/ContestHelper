@@ -68,3 +68,4 @@ function exitCamera()
 <div class='big-block archives'>
 <div class='grand-title'>Screenshot of the Week Archives</div>
 <div class='updated-text'>Last updated with the results of Screenshot of the Week <span style='font-weight:bold;'>###</span></div>
+<!--navbar code--><script src='generate_navbar.js'></script><div id='navbar' class='navtablediv'></div><script>document.getElementById('navbar').innerHTML = generateNavbar('archives', 0);</script><!--end navbar code-->
