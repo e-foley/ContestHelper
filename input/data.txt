@@ -1750,10 +1750,11 @@ EnnonFenom; Ennon; gif; 15
 Molten Onyx; MO; gif; 26
 T. Platinum; TP; jpg; 4
 
+// noleafxclover's shot was removed during the contest, so I've removed them from the poll
 #246 @ 39752
 LostInHyru1e; LostinHyru1e; jpg; 9
 blue_knight; jpg; 3
-noleafxclover; 2
+// noleafxclover; 2
 blaman; Blaman; png; 3
 Migokalle; png; 4
 Joe123; png; 15
@@ -1808,7 +1809,7 @@ Joe123; png; 20
 Sheik; gif; 15
 Prospekt; png; 0
 SerpitaX; png; 10
-Midnight_King; jpg; 6
+Midnight_King[29458]; jpg; 6
 
 #256 @ 40967
 Dawnlight; gif; 21
@@ -1825,7 +1826,7 @@ Deviance; png; 8
 Migokalle; png; 28
 hinsburg; png; 3
 Rem; png; 2
-Midnight_King; jpg; 3
+Midnight_King[29458]; jpg; 3
 Prophecy Face; Prophecy_Face; png; 7
 
 #259 @ 41303
@@ -1847,7 +1848,7 @@ Xiion; jpg; 6
 #262 @ 41617
 Migokalle; png; 21
 Prophecy Face; Prophecy_Face; gif; 3
-Midnight_King; jpg; 4
+Midnight_King[29458]; jpg; 4
 T. Platinum; T_Platinum; png; 0
 Beta Link; Beta_Link; gif; 8
 
@@ -2196,7 +2197,7 @@ SpacemanDan; http://sotw.purezc.net/SOTW315A/SpacemanDan.png; 20
 * Due to a large volume of entrants, SotW 315 was split into two polls.  Each poll's top finisher was deemed a winner, and no follow-up round was held.
 
 &315C @ 49343
-Midnight_King; http://sotw.purezc.net/SOTW315C/Midnight_King.png; 9
+Midnight_King[29458]; http://sotw.purezc.net/SOTW315C/Midnight_King.png; 9
 Lynker; http://sotw.purezc.net/SOTW315C/Lynker.png; 1
 William; http://sotw.purezc.net/SOTW315C/William.jpg; 8
 Russ; http://sotw.purezc.net/SOTW315C/Russ.jpg; 4
@@ -2397,7 +2398,7 @@ Shane; png; 2
 Fireblast124; png; 3
 Koh; png; 3
 Yoshidude; png; 7
-Pokemonmaster64; png; 2
+Pokemonmaster64; Pokemonmaster64-OriginalScreen; png; 2
 William; png; 10
 Feenicks; png; 13
 Twilight_Knight; png; 4
@@ -3406,7 +3407,7 @@ Dwarlen; png; 6
 Nekoishi; gif; 9
 joelmacool12; png; 17
 ZeldaPlayer; png; 4
-Zehalfor; png; 5
+Zahalfor; png; 5
 Dwarlen; png; 7
 
 #491 @ 65973
@@ -4858,11 +4859,37 @@ HeroOfFire; png; 5
 Jared; png; 8
 Joelmacool; png; 4
 Shane; png; 12
-/*
+
 #723 @ 75770
-Avaro; png; 
+Avaro; png; 9
+Joelmacool; png; 4
+Mani Kanina; ManiKanina; png; 3
+Shane; png; 9
+Yoshot; png; 19
+
+#724 @ 75806
+HeroOfFire; png; 3
+Joelmacool; png; 6
+Mani Kanina; ManiKanina; png; 8
+Shane; png; 7
+Yoshot; png; 5
+
+#725 @ 75848
+Joelmacool; png; 23
+Shane; png; 18
+TheRock; png; 1
+
+#726 @ 75874
+Joelmacool; png; 17
+Mani Kanina; ManiKanina; png; 6
+Yoshi[29458]; png; 14
+/*
+#727 @ 75904
+Demonlink; png; 
+Haritiro; png; 
 Joelmacool; png; 
-Mani Kanina; ManiKanina; png; 
-Shane; png; 
-Yoshot; png; 
+klop422; png; 
+Matthew; png; 
+Yoshi[29458]; png; 
+ywkls; png; 
 /*
