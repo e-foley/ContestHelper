@@ -74,7 +74,7 @@ function populateNumShots() {
   document.getElementById('numshots').innerHTML = getNumShotsString();
 }
 
-document.onkeydown = function(evt) {
+function processKeyboardInput(evt) {
   evt = evt || window.event;
   var char_code = evt.keyCode || evt.which;
   // 13 is enter; 32 is space.
@@ -92,7 +92,7 @@ document.onkeydown = function(evt) {
 <!--navbar code--><script src='generate_navbar.js'></script><div id='navbar' class='navtablediv'></div><script>document.getElementById('navbar').innerHTML = generateNavbar('random_shot', 0);</script><!--end navbar code-->
 <div class='randoshotdiv' id='randoshotdiv'><img class='randoshot pixelated' id='randoshot' onload='adjustSize()' src='' /></div>
 <div class='randoshotcaption' id='randoshotcaption'></div>
-<button class='randoshotbutton' onmousedown='nextShot()'>Another random shot, please.</button>
+<button type='button' class='randoshotbutton' onmousedown='nextShot()' onkeydown='processKeyboardInput()' autofocus>Another shot, please.</button>
 <script>init();</script>
 <div class='notes'>Background shots by Ebola Zaire, link3505, NoeL, Pabru, PrinceMSC, and Sheik. Table style adapted from a design &#169; by Wild Bill. All code available on <a class='alt' href='https://github.com/e-foley/ContestHelper'>GitHub</a>.</div>
 </div>
