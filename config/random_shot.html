@@ -18,7 +18,7 @@ function init() {
   for (var i = 0; i < buffer_length; ++i) {
     assignBufferEntry(i, getRandomShot());
   }
-  displayBufferedImage(display_index);
+  prepareAndHideBufferedImage(display_index);
   populateNumShots();
 }
 
@@ -41,7 +41,9 @@ function assignBufferEntry(index, shot_info) {
   document.getElementById(buffer_map[index]).src = shot_info.url;
 }
 
-function displayBufferedImage(index) {
+function prepareAndHideBufferedImage(index) {
+  // Briefly hide the image while we figure out client size, etc.
+  document.getElementById('randoshot').style.visibility = 'hidden';
   document.getElementById('randoshot').src = buffer[index].url;
   document.getElementById('randoshotcaption').innerHTML = buffer[index].names + " (#" + buffer[index].contest + ")";
 }
@@ -49,7 +51,7 @@ function displayBufferedImage(index) {
 function nextShot() {
   // Update the display image, then immediately replace the buffered image.
   display_index = (display_index + 1) % buffer_length;
-  displayBufferedImage(display_index);
+  prepareAndHideBufferedImage(display_index);
   assignBufferEntry(display_index, getRandomShot());
 }
 
@@ -68,6 +70,8 @@ function adjustSize() {
   }
 
   randoimg.style.height = (pixelScale * randoimg.naturalHeight).toString() + "px";
+  // Unhide image (see prepareAndHideBufferedImage())
+  document.getElementById('randoshot').style.visibility = 'visible';
 }
 
 function populateNumShots() {
