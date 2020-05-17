@@ -73,6 +73,15 @@ function adjustSize() {
 function populateNumShots() {
   document.getElementById('numshots').innerHTML = getNumShotsString();
 }
+
+document.onkeydown = function(evt) {
+  evt = evt || window.event;
+  var char_code = evt.keyCode || evt.which;
+  // 13 is enter; 32 is space.
+  if (!evt.repeat && (char_code == 13 || char_code == 32)) {
+    nextShot();
+  }
+};
 </script>
 <title>Random Screenshot</title>
 </head>
