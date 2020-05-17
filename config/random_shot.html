@@ -6,6 +6,8 @@
 <script src='random_shot.js'></script>
 <script>
 
+var display_buffered_shots = false;  // For debugging only.
+var buffered_shot_width = "100px";  // For debugging only.
 var display_index = 0;  // Index of element currently displayed on the site.
 var buffer_length = 5;
 var buffer_map = [];  // Relates image IDs to indices.
@@ -18,6 +20,7 @@ function init() {
     assignBufferEntry(i, getRandomShot());
   }
   displayBufferedImage(display_index);
+  populateNumShots();
 }
 
 function initializeBufferMap() {
@@ -27,8 +30,9 @@ function initializeBufferMap() {
 }
 
 function generateBufferImages() {
+  var style_string = "display:" + (display_buffered_shots ? "inline" : "none") + "; width:" + buffered_shot_width + ";";
   for (var i = 0; i < buffer_length; ++i) {
-    document.write("<img id='" + buffer_map[i] + "' src='https://sotw.purezc.net/SOTW681/MarinaraSauce.png' style='width:100px; height:100px;' />\n");
+    document.write("<img id='" + buffer_map[i] + "' src='https://sotw.purezc.net/SOTW681/MarinaraSauce.png' style='" + style_string + "' />\n");
   }
 }
 
@@ -84,7 +88,7 @@ function populateNumShots() {
 <button class='randoshotbutton' onclick='nextShot()'>Another random shot, please.</button>
 <!-- Buffered shots -->
 
-<script>init(); populateNumShots(); /*assignBufferEntry(0, getRandomShot()); assignBufferEntry(1, getRandomShot()); assignBufferEntry(2, getRandomShot());*/</script>
+<script>init();</script>
 <div class='notes'>Background shots by Ebola Zaire, link3505, NoeL, Pabru, PrinceMSC, and Sheik. Table style adapted from a design &#169; by Wild Bill. All code available on <a class='alt' href='https://github.com/e-foley/ContestHelper'>GitHub</a>.</div>
 </div>
 </body>
