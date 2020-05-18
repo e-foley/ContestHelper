@@ -11,14 +11,18 @@ var display_index = 0;  // Index of element currently displayed on the site.
 var buffer_length = 5;
 var buffer_map = [];  // Relates image IDs to indices.
 var buffer = [];  // Contains shot information itself.
+var random_sequence = [];  // Randomly ordered indices.
+var shot_index = 0;
 
 function init() {
   initializeBufferMap();
   generateBufferImages();
+  random_sequence = getRandomSequence(getNumShots());
   for (var i = 0; i < buffer_length; ++i) {
-    assignBufferEntry(i, getRandomShot());
+    assignBufferEntry(i, getShot(random_sequence[display_index % getNumShots()]));
+    ++display_index;
   }
-  prepareAndHideBufferedImage(display_index);
+  prepareAndHideBufferedImage(display_index % buffer_length);
   populateNumShots();
 }
 
@@ -31,28 +35,28 @@ function initializeBufferMap() {
 function generateBufferImages() {
   var style_string = "display:" + (display_buffered_shots ? "inline" : "none") + "; width:" + buffered_shot_width + ";";
   for (var i = 0; i < buffer_length; ++i) {
-    document.write("<img id='" + buffer_map[i] + "' src='https://sotw.purezc.net/SOTW681/MarinaraSauce.png' style='" + style_string + "' />\n");
+    document.write("<img id='" + buffer_map[i] + "' src='' style='" + style_string + "' />\n");
   }
 }
 
-function assignBufferEntry(index, shot_info) {
+function assignBufferEntry(buffer_index, shot_info) {
   // Assiging means updating the buffer[] element and loading the image.
-  buffer[index] = shot_info;
-  document.getElementById(buffer_map[index]).src = shot_info.url;
+  buffer[buffer_index] = shot_info;
+  document.getElementById(buffer_map[buffer_index]).src = shot_info.url;
 }
 
-function prepareAndHideBufferedImage(index) {
+function prepareAndHideBufferedImage(buffer_index) {
   // Briefly hide the image while we figure out client size, etc.
   document.getElementById('randoshot').style.visibility = 'hidden';
-  document.getElementById('randoshot').src = buffer[index].url;
-  document.getElementById('randoshotcaption').innerHTML = buffer[index].names + " (#" + buffer[index].contest + ")";
+  document.getElementById('randoshot').src = buffer[buffer_index].url;
+  document.getElementById('randoshotcaption').innerHTML = buffer[buffer_index].names + " (#" + buffer[buffer_index].contest + ")";
 }
 
 function nextShot() {
   // Update the display image, then immediately replace the buffered image.
-  display_index = (display_index + 1) % buffer_length;
-  prepareAndHideBufferedImage(display_index);
-  assignBufferEntry(display_index, getRandomShot());
+  ++display_index;
+  prepareAndHideBufferedImage(display_index % buffer_length);
+  assignBufferEntry(display_index % buffer_length, getShot(random_sequence[display_index % getNumShots()]));
 }
 
 // Until SotW 418, images were stored at their original size. They're now stored
@@ -86,6 +90,20 @@ function processKeyboardInput(evt) {
     nextShot();
   }
 };
+
+function getRandomSequence(length) {
+  var indices = [];
+  for (var i = 0; i < length; ++i) {
+    indices[i] = i;
+  }
+  var returning = [];
+  for (var i = 0; i < length; ++i) {
+    var next_index = Math.floor(Math.random() * indices.length);
+    returning[i] = indices[next_index];
+    indices.splice(next_index, 1);
+  }
+  return returning;
+}
 </script>
 <title>Random Screenshot</title>
 </head>

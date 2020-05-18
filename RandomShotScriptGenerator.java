@@ -51,17 +51,21 @@ public abstract class RandomShotScriptGenerator
                     out.write("'}");
                 }
             }
-            //out.write("    {'name': 'Shane', 'url': 'https://sotw.purezc.net/SOTW719/Shane.png', 'contest': 719}");
             
             out.newLine();
             out.write("];");
             out.newLine();
             out.newLine();
-            out.write("function getRandomShot() {");
+            out.write("function getShot(index) {");
             out.newLine();
-            out.write("  var rando = Math.random() * all_shots.length;");
+            out.write("  return all_shots[index];");
             out.newLine();
-            out.write("  return all_shots[Math.floor(rando)];");
+            out.write("}");
+            out.newLine();
+            out.newLine();
+            out.write("function getNumShots() {");
+            out.newLine();
+            out.write("  return all_shots.length;");
             out.newLine();
             out.write("}");
             out.newLine();
