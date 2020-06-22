@@ -6,7 +6,7 @@
 // Some entries have a second name for URL compatibility purposes,
 //   but this shouldn't be necessary for any recent entry as long
 //   as a consistent file naming convention is used.
-// Plus symbols (+} separate members contributing jointly to one entry.
+// Plus symbols (+) separate members contributing jointly to one entry.
 // Contact Ed (nicklegends) with any questions.
 
 // One parameter:	username [assumes 0 votes and no link; will not show votes in archive] SHOULD NEVER USE THIS
@@ -4900,9 +4900,27 @@ Lordkronos; png; 4
 Orithan; png; 6
 xanadude; png; 8
 Yoshi[29458]; Shane; png; 2
-/*
+
 #729 @ 75951
-HeroOfFire; png; 
+HeroOfFire; png; 9
+Joelmacool; png; 24
+shuji; png; 8
+
+#730 @ 75992
+Eddy; png; 4
+Haritiro; png; 8
+Jared; png; 13
+xanadude; png; 4
+
+#731 @ 76038
+Anthus; png; 6
+Joelmacool; png; 8
+Orithan; png; 0
+Yoshi[29458]; png; 23
+/*
+#732 @ 76091
+Anthus; png; 
+Haritiro; png; 
 Joelmacool; png; 
-shuji; png; 
+Mani Kanina; Mani_Kanina; png; 
 /*
