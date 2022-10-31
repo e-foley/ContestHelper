@@ -85,15 +85,15 @@ public abstract class Master
         FileOutputStream fstream;
         BufferedWriter out;
         
-        String[][] swaps = new String[][] {{"###",""+history.getLastPollName()}};
+        String[][] swaps = new String[][] {{"###",""+history.getLastPollLongName()}};
         
         try
         {
             stamps.add(new NamedStamp("Copying input files"));
             // make backups of input
-            Master.copyFile(new File(input_origin + "input/data.txt"), new File(input_origin + "backup/data-" + history.getLastPollName() + ".txt"));
+            Master.copyFile(new File(input_origin + "input/data.txt"), new File(input_origin + "backup/data-" + history.getLastPollShortName() + ".txt"));
             Master.copyFile(new File(input_origin + "input/data.txt"), new File(output_origin + "data.txt"));
-            Master.copyFile(new File(input_origin + "input/associations.txt"), new File(input_origin + "backup/associations-" + history.getLastPollName() + ".txt"));
+            Master.copyFile(new File(input_origin + "input/associations.txt"), new File(input_origin + "backup/associations-" + history.getLastPollShortName() + ".txt"));
             Master.copyFile(new File(input_origin + "input/associations.txt"), new File(output_origin + "associations.txt"));
             
             // ARCHIVES
@@ -198,7 +198,7 @@ public abstract class Master
             
             // MEMBER LIST
             stamps.add(new NamedStamp("Generating member list"));
-            fstream = new FileOutputStream(input_origin + "members/members-" + history.getLastPollName() + ".txt");  // TODO: Does this really belong in "input"?
+            fstream = new FileOutputStream(input_origin + "members/members-" + history.getLastPollShortName() + ".txt");  // TODO: Does this really belong in "input"?
             out = new BufferedWriter(new OutputStreamWriter(fstream, StandardCharsets.UTF_8));
             ArrayList<Member> member_list = new ArrayList<Member>(history.getMembers());
             Collections.sort(member_list, new MemberSortAlphabetical());
@@ -248,8 +248,8 @@ public abstract class Master
             stamps.add(new NamedStamp("Pretty much done!"));
             long endTime = System.nanoTime();
             long duration = endTime - startTime;
-            System.out.println("Archive output saved to archives\\archive-" + history.getLastPollName() + testText + ".html.");
-            System.out.println("Leaderboard output saved to leaderboards\\leaderboards-" + history.getLastPollName() + testText + ".html.");
+            System.out.println("Archive output saved to archives\\archive-" + history.getLastPollShortName() + testText + ".html.");
+            System.out.println("Leaderboard output saved to leaderboards\\leaderboards-" + history.getLastPollShortName() + testText + ".html.");
             System.out.println("Time elapsed: " + ((double)(duration))/1000000000.0 + " seconds.");
             
             if (!stamps.isEmpty()) {

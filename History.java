@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.io.FileInputStream;
@@ -18,13 +19,16 @@ public class History {
     
     private ArrayList<Poll> polls;
     private HashMap<Integer, Member> members;  // Key is member ID, which should also be held by the Members themselves
-    String lastPollName;
+    // TODO: The polls maintain their own names. Can't we just return a Poll where we need its names?
+    String lastPollLongName;
+    String lastPollShortName;
 
     public History()
     {
         members = new HashMap<Integer, Member>();
         polls = new ArrayList<Poll>();
-        lastPollName = "";
+        lastPollLongName = "";
+        lastPollShortName = "";
     }
 
 //     public void addEntry(Entry entry_adding, boolean requestId, int memberId) {
@@ -138,7 +142,9 @@ public class History {
         }
 
         if (!returning.polls.isEmpty()) {
-            returning.lastPollName = returning.polls.get(returning.polls.size() - 1).getShortName();
+            Poll lastPoll = returning.polls.get(returning.polls.size() - 1);
+            returning.lastPollShortName = lastPoll.getShortName();            
+            returning.lastPollLongName = lastPoll.getLongName();
         }
 
         return returning;
@@ -251,6 +257,7 @@ public class History {
 
             String[] splits; // array for the output of the regex split
             String currentPollShortName = "";
+            String currentPollLongName = "";
             int currentSynch = 0;
             Poll pollRetrieved = null;
 
@@ -274,6 +281,7 @@ public class History {
                 if (parse.hasPollInfo && !blockComment)
                 {
                     currentPollShortName = parse.pollShortName; // will change this
+                    currentPollLongName = parse.pollLongName;
 
                     if ((pollRetrieved = getPollByShortName(currentPollShortName)) == null)
                     {
@@ -300,7 +308,7 @@ public class History {
 
                 blockComment &= !strLine.endsWith(blockClose);
             }
-            lastPollName = currentPollShortName;   // this is so we can name the output files intelligently
+            lastPollLongName = currentPollLongName;   // this is so we can name the output files intelligently
             //Close the input stream
             in.close();
         }
@@ -346,12 +354,13 @@ public class History {
         return polls.get(index);
     }
 
-    public String getLastPollName()
+    public String getLastPollShortName()
     {
-        return lastPollName;
+        return lastPollShortName;
     }
-
-    private void setLastPollName(String lastPollNameSetting) {
-        lastPollName = lastPollNameSetting;
+    
+    public String getLastPollLongName()
+    {
+        return lastPollLongName;
     }
 }
