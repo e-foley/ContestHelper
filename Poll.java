@@ -5,6 +5,7 @@ public class Poll
     public static final int DEFAULT_SYNCH = -1;
     
     private String shortName;
+    private String longName;
     private ArrayList<Entry> entries;
     boolean hasTopic;
     private int topic;
@@ -15,6 +16,7 @@ public class Poll
     {
         // initialise instance variables
         shortName = "";
+        longName = "";
         entries = new ArrayList<Entry>();
         topic = -1;
         hasTopic = false;
@@ -25,6 +27,7 @@ public class Poll
     public Poll(String myShortName)
     {
         shortName = myShortName;
+        longName = "";
         entries = new ArrayList<Entry>();
         topic = -1;
         hasTopic = false;
@@ -35,6 +38,7 @@ public class Poll
     public Poll(String myShortName, int mySynch)
     {
         shortName = myShortName;
+        longName = "";
         entries = new ArrayList<Entry>();
         topic = -1;
         hasTopic = false;
@@ -45,6 +49,7 @@ public class Poll
     public Poll(String myShortName, boolean myHasTopic, int myTopic)
     {
         shortName = myShortName;
+        longName = "";
         entries = new ArrayList<Entry>();
         topic = myTopic;
         hasTopic = myHasTopic;
@@ -55,6 +60,18 @@ public class Poll
     public Poll(String myShortName, boolean myHasTopic, int myTopic, int mySynch)
     {
         shortName = myShortName;
+        longName = "";
+        entries = new ArrayList<Entry>();
+        topic = myTopic;
+        hasTopic = myHasTopic;
+        synch = mySynch;
+        notes = new ArrayList<String>();
+    }
+    
+    public Poll(String myShortName, String myLongName, boolean myHasTopic, int myTopic, int mySynch)
+    {
+        shortName = myShortName;
+        longName = myLongName;
         entries = new ArrayList<Entry>();
         topic = myTopic;
         hasTopic = myHasTopic;
@@ -100,6 +117,11 @@ public class Poll
     public String getShortName()
     {
         return shortName;
+    }
+    
+    public String getLongName()
+    {
+        return longName;
     }
     
     public ArrayList<Entry> getWinners()
