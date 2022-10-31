@@ -49,7 +49,7 @@ public class History {
         // check if the poll being requested hasn't been formed yet
         if ((pollRetrieved = getPollByShortName(pollShortName)) == null) {
             // if it hasn't, add it
-            pollRetrieved = new Poll(pollShortName, hasTopicInfo, topic, currentSynch);
+            pollRetrieved = new Poll(pollShortName, /*temp*/ pollShortName, hasTopicInfo, topic, currentSynch);
             polls.add(pollRetrieved);
         }
 
@@ -281,9 +281,9 @@ public class History {
                             currentSynch++;
 
                         if (parse.hasTopicInfo)
-                            pollRetrieved = new Poll(currentPollShortName, parse.hasTopicInfo, parse.topic, currentSynch);
+                            pollRetrieved = new Poll(currentPollShortName, /*temp*/ currentPollShortName, parse.hasTopicInfo, parse.topic, currentSynch);
                         else
-                            pollRetrieved = new Poll(currentPollShortName, currentSynch);
+                            pollRetrieved = new Poll(currentPollShortName, /*temp*/ currentPollShortName, currentSynch);
                         polls.add(pollRetrieved);
                     }
                 }

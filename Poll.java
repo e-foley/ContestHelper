@@ -11,59 +11,14 @@ public class Poll
     private int topic;
     private int synch;
     private ArrayList<String> notes;
-    
-    public Poll()
-    {
-        // initialise instance variables
-        shortName = "";
-        longName = "";
-        entries = new ArrayList<Entry>();
-        topic = -1;
-        hasTopic = false;
-        synch = DEFAULT_SYNCH;
-        notes = new ArrayList<String>();
-    }
-    
-    public Poll(String myShortName)
-    {
-        shortName = myShortName;
-        longName = "";
-        entries = new ArrayList<Entry>();
-        topic = -1;
-        hasTopic = false;
-        synch = DEFAULT_SYNCH;
-        notes = new ArrayList<String>();
-    }
       
-    public Poll(String myShortName, int mySynch)
+    public Poll(String myShortName, String myLongName, int mySynch)
     {
         shortName = myShortName;
-        longName = "";
+        longName = myLongName;
         entries = new ArrayList<Entry>();
         topic = -1;
         hasTopic = false;
-        synch = mySynch;
-        notes = new ArrayList<String>();
-    }
-    
-    public Poll(String myShortName, boolean myHasTopic, int myTopic)
-    {
-        shortName = myShortName;
-        longName = "";
-        entries = new ArrayList<Entry>();
-        topic = myTopic;
-        hasTopic = myHasTopic;
-        synch = DEFAULT_SYNCH;
-        notes = new ArrayList<String>();
-    }
-    
-    public Poll(String myShortName, boolean myHasTopic, int myTopic, int mySynch)
-    {
-        shortName = myShortName;
-        longName = "";
-        entries = new ArrayList<Entry>();
-        topic = myTopic;
-        hasTopic = myHasTopic;
         synch = mySynch;
         notes = new ArrayList<String>();
     }
