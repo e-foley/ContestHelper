@@ -152,7 +152,8 @@ public class ParsedLine
                         pollIDString = "0" + pollIDString;
                      
                     hasURL = true;
-                    URL = "http://sotw.purezc.net/SOTW" + pollIDString + "/" + member_infos.get(0).member_name.replace(" ","%20").replace("'","%27") + "." + splits[1]; // TODO: Do we want to include other members here by default?
+                    String contestTypeString = currentPollShortName.startsWith("M") ? "SOTM" : "SOTW";  // This is ugly and everyone knows it.
+                    URL = "http://sotw.purezc.net/" + contestTypeString + pollIDString + "/" + member_infos.get(0).member_name.replace(" ","%20").replace("'","%27") + "." + splits[1]; // TODO: Do we want to include other members here by default?
                 }
             }
             
@@ -165,7 +166,8 @@ public class ParsedLine
                 while (pollIDString.length() < URL_DIGITS)    // note: this check should use a constant
                     pollIDString = "0" + pollIDString;
                 
-                URL = "http://sotw.purezc.net/SOTW" + pollIDString + "/" + splits[1].replace(" ","%20").replace("'","%27") + "." + splits[2];
+                String contestTypeString = currentPollShortName.startsWith("M") ? "SOTM" : "SOTW";  // This is ugly and everyone knows it.
+                URL = "http://sotw.purezc.net/" + contestTypeString + pollIDString + "/" + splits[1].replace(" ","%20").replace("'","%27") + "." + splits[2];
             }
 
             String voteString = new String();
