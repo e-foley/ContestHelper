@@ -44,8 +44,8 @@ public abstract class ProfileIndexGenerator {
                 data.num_entries = member.getTotalEntries();
                 ArrayList<Member.EntryStakePair> pairs = member.getEntries();
                 if (!pairs.isEmpty()) {
-                    data.first_contest = "#" + pairs.get(0).entry.getPoll().getName();
-                    data.most_recent_contest = "#" + pairs.get(pairs.size() - 1).entry.getPoll().getName();
+                    data.first_contest = "#" + pairs.get(0).entry.getPoll().getShortName();
+                    data.most_recent_contest = "#" + pairs.get(pairs.size() - 1).entry.getPoll().getShortName();
                 } else {
                     data.first_contest = "N/A";
                     data.most_recent_contest = "N/A";

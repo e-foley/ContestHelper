@@ -65,8 +65,7 @@ public class ArchivesGenerator {
                 out.write("<tr><td class='contest-title' colspan=5>");
                 if (poll.hasTopic())
                     out.write("<a class='contest' href='http://www.purezc.net/forums/index.php?showtopic=" + poll.getTopic() + "'>");
-                //out.write("(" + poll.getSynch() + ") "); // TEMPORARY!
-                out.write("Screenshot of the Week " + poll.getName());
+                out.write(poll.getLongName());
                 if (poll.hasTopic())
                     out.write("</a>");
                 out.write("</td></tr>");
@@ -180,12 +179,6 @@ public class ArchivesGenerator {
                     out.newLine();
                     out.write("</tr>");
                 }
-                //                     if (winners.size() >= 2)
-                //                     {
-                //                         out.write("<br/>");
-                //                         out.newLine();
-                //                         out.write("<span class='tie-note'>Screenshot of the Week " + poll.getName() + " ended in a draw.</span>");
-                //                     }
     
                 out.write("<tr class='info-row'><td></td><td class='numentries'>");
                 out.write(poll.numEntries() + " entr");
@@ -260,7 +253,7 @@ public class ArchivesGenerator {
                     if ((i + 1) == current_page) {
                         out.write(" selected='selected'");
                     }
-                    out.write(">Page " + (i + 1) + " (#" + bounds.getStart().getName() + "&ndash;#" + bounds.getEnd().getName() + ")</option>");
+                    out.write(">Page " + (i + 1) + " (#" + bounds.getStart().getShortName() + "&ndash;#" + bounds.getEnd().getShortName() + ")</option>");
                     out.newLine();
                 }
             }

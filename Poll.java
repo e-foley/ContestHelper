@@ -3,42 +3,19 @@ import java.util.ArrayList;
 public class Poll
 {
     public static final int DEFAULT_SYNCH = -1;
-    // instance variables - replace the example below with your own
-    //private int ID;
-    private String name;
+    
+    private String shortName;
+    private String longName;
     private ArrayList<Entry> entries;
     boolean hasTopic;
     private int topic;
     private int synch;
     private ArrayList<String> notes;
-    
-    /**
-     * Constructor for objects of class Member
-     */
-    public Poll()
-    {
-        // initialise instance variables
-        name = "";
-        entries = new ArrayList<Entry>();
-        topic = -1;
-        hasTopic = false;
-        synch = DEFAULT_SYNCH;
-        notes = new ArrayList<String>();
-    }
-    
-    public Poll(String myName)
-    {
-        name = myName;
-        entries = new ArrayList<Entry>();
-        topic = -1;
-        hasTopic = false;
-        synch = DEFAULT_SYNCH;
-        notes = new ArrayList<String>();
-    }
       
-    public Poll(String myName, int mySynch)
+    public Poll(String myShortName, String myLongName, int mySynch)
     {
-        name = myName;
+        shortName = myShortName;
+        longName = myLongName;
         entries = new ArrayList<Entry>();
         topic = -1;
         hasTopic = false;
@@ -46,19 +23,10 @@ public class Poll
         notes = new ArrayList<String>();
     }
     
-    public Poll(String myName, boolean myHasTopic, int myTopic)
+    public Poll(String myShortName, String myLongName, boolean myHasTopic, int myTopic, int mySynch)
     {
-        name = myName;
-        entries = new ArrayList<Entry>();
-        topic = myTopic;
-        hasTopic = myHasTopic;
-        synch = DEFAULT_SYNCH;
-        notes = new ArrayList<String>();
-    }
-    
-    public Poll(String myName, boolean myHasTopic, int myTopic, int mySynch)
-    {
-        name = myName;
+        shortName = myShortName;
+        longName = myLongName;
         entries = new ArrayList<Entry>();
         topic = myTopic;
         hasTopic = myHasTopic;
@@ -76,23 +44,10 @@ public class Poll
         return synch;
     }
     
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
     public void addEntry(Entry entryAdding)
     {
         entries.add(entryAdding);
     }
-    
-    /*public void addEntry(Entry entryAdding, boolean incrementSynch)
-    {
-        if (incrementSynch)
-            synch++;            // this is pretty sloppy :(
-        entries.add(entryAdding);
-    }*/
     
     public Entry getEntryByIndex(int index)
     {
@@ -114,9 +69,14 @@ public class Poll
         return topic;
     }
     
-    public String getName()
+    public String getShortName()
     {
-        return name;
+        return shortName;
+    }
+    
+    public String getLongName()
+    {
+        return longName;
     }
     
     public ArrayList<Entry> getWinners()
@@ -161,12 +121,6 @@ public class Poll
         return winners;
     }
     
-    /** TERRIBLE, TERRIBLE, SUPER-KLUDGY METHOD. BEWARE. */
-    public float getApparentPollNumber()
-    {
-        return Float.parseFloat(name.replaceAll("[^0-9.]",""));
-    }
-    
     public int numVotes()
     {
         int sum=0;
@@ -185,6 +139,7 @@ public class Poll
     
     public String getURL()
     {
+        // TODO: Consider architectural benefit of having topics be explicitly assigned.
         if (hasTopic) {
             return "http://www.purezc.net/forums/index.php?showtopic=" + topic;
         } else {

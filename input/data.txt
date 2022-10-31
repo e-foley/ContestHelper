@@ -6,7 +6,7 @@
 // Some entries have a second name for URL compatibility purposes,
 //   but this shouldn't be necessary for any recent entry as long
 //   as a consistent file naming convention is used.
-// Plus symbols (+} separate members contributing jointly to one entry.
+// Plus symbols (+) separate members contributing jointly to one entry.
 // Contact Ed (nicklegends) with any questions.
 
 // One parameter:	username [assumes 0 votes and no link; will not show votes in archive] SHOULD NEVER USE THIS
@@ -827,7 +827,7 @@ IaN; gif; 31
 Lecayle; gif; 1
 Linkus Mastii; gif; 0
 XdragonSB; png; 2
-ZC-Ninja; Zc-Ninja; png; 7
+ZC-Ninja; ZC-Ninja; png; 7
 
 #104 @ 15565
 Jonathan; gif; 30
@@ -1750,10 +1750,11 @@ EnnonFenom; Ennon; gif; 15
 Molten Onyx; MO; gif; 26
 T. Platinum; TP; jpg; 4
 
+// noleafxclover's shot was removed during the contest, so I've removed them from the poll
 #246 @ 39752
 LostInHyru1e; LostinHyru1e; jpg; 9
 blue_knight; jpg; 3
-noleafxclover; 2
+// noleafxclover; 2
 blaman; Blaman; png; 3
 Migokalle; png; 4
 Joe123; png; 15
@@ -1808,7 +1809,7 @@ Joe123; png; 20
 Sheik; gif; 15
 Prospekt; png; 0
 SerpitaX; png; 10
-Midnight_King; jpg; 6
+Midnight_King[29458]; jpg; 6
 
 #256 @ 40967
 Dawnlight; gif; 21
@@ -1825,7 +1826,7 @@ Deviance; png; 8
 Migokalle; png; 28
 hinsburg; png; 3
 Rem; png; 2
-Midnight_King; jpg; 3
+Midnight_King[29458]; jpg; 3
 Prophecy Face; Prophecy_Face; png; 7
 
 #259 @ 41303
@@ -1847,7 +1848,7 @@ Xiion; jpg; 6
 #262 @ 41617
 Migokalle; png; 21
 Prophecy Face; Prophecy_Face; gif; 3
-Midnight_King; jpg; 4
+Midnight_King[29458]; jpg; 4
 T. Platinum; T_Platinum; png; 0
 Beta Link; Beta_Link; gif; 8
 
@@ -2196,7 +2197,7 @@ SpacemanDan; http://sotw.purezc.net/SOTW315A/SpacemanDan.png; 20
 * Due to a large volume of entrants, SotW 315 was split into two polls.  Each poll's top finisher was deemed a winner, and no follow-up round was held.
 
 &315C @ 49343
-Midnight_King; http://sotw.purezc.net/SOTW315C/Midnight_King.png; 9
+Midnight_King[29458]; http://sotw.purezc.net/SOTW315C/Midnight_King.png; 9
 Lynker; http://sotw.purezc.net/SOTW315C/Lynker.png; 1
 William; http://sotw.purezc.net/SOTW315C/William.jpg; 8
 Russ; http://sotw.purezc.net/SOTW315C/Russ.jpg; 4
@@ -2397,7 +2398,7 @@ Shane; png; 2
 Fireblast124; png; 3
 Koh; png; 3
 Yoshidude; png; 7
-Pokemonmaster64; png; 2
+Pokemonmaster64; Pokemonmaster64-OriginalScreen; png; 2
 William; png; 10
 Feenicks; png; 13
 Twilight_Knight; png; 4
@@ -3406,7 +3407,7 @@ Dwarlen; png; 6
 Nekoishi; gif; 9
 joelmacool12; png; 17
 ZeldaPlayer; png; 4
-Zehalfor; png; 5
+Zahalfor; png; 5
 Dwarlen; png; 7
 
 #491 @ 65973
@@ -4858,11 +4859,311 @@ HeroOfFire; png; 5
 Jared; png; 8
 Joelmacool; png; 4
 Shane; png; 12
-/*
+
 #723 @ 75770
-Avaro; png; 
-Joelmacool; png; 
-Mani Kanina; ManiKanina; png; 
-Shane; png; 
-Yoshot; png; 
+Avaro; png; 9
+Joelmacool; png; 4
+Mani Kanina; ManiKanina; png; 3
+Shane; png; 9
+Yoshot; png; 19
+
+#724 @ 75806
+HeroOfFire; png; 3
+Joelmacool; png; 6
+Mani Kanina; ManiKanina; png; 8
+Shane; png; 7
+Yoshot; png; 5
+
+#725 @ 75848
+Joelmacool; png; 23
+Shane; png; 18
+TheRock; png; 1
+
+#726 @ 75874
+Joelmacool; png; 17
+Mani Kanina; ManiKanina; png; 6
+Yoshi[29458]; png; 14
+
+#727 @ 75904
+Demonlink; gif; 2
+Haritiro; png; 1
+Joelmacool; png; 0
+klop422; Klop422; png; 0
+Matthew[294314]; png; 35
+Yoshi[29458]; Shane; png; 2
+ywkls; png; 5
+
+#728 @ 75932
+HeroOfFire; png; 3
+Joelmacool; png; 11
+Lordkronos; png; 4
+Orithan; png; 6
+xanadude; png; 8
+Yoshi[29458]; Shane; png; 2
+
+#729 @ 75951
+HeroOfFire; png; 9
+Joelmacool; png; 24
+shuji; png; 8
+
+#730 @ 75992
+Eddy; png; 4
+Haritiro; png; 8
+Jared; png; 13
+xanadude; png; 4
+
+#731 @ 76038
+Anthus; png; 6
+Joelmacool; png; 8
+Orithan; png; 0
+Yoshi[29458]; png; 23
+
+#732 @ 76091
+Anthus; png; 18
+Haritiro; png; 11
+Joelmacool; png; 7
+Mani Kanina; Mani_Kanina; png; 3
+
+#733 @ 76134
+Haritiro; png; 17
+Joelmacool; png; 20
+Russ; png; 8
+
+#734 @ 76165
+Haritiro; png; 28
+Joelmacool; png; 7
+Mani Kanina; ManiKanina; png; 4
+Shoshon the Elegant; Shoshon; png; 7
+
+#735 @ 76213
+Anthus; png; 8
+Haritiro; png; 3
+HeroOfFire; png; 1
+Mani Kanina; ManiKanina; png; 5
+Shane; png; 7
+Tabletpillow; png; 17
+
+#736 @ 76255
+Evan20000; png; 10
+Haritiro; png; 9
+Jared; png; 9
+Joelmacool; png; 9
+Mani Kanina; ManiKanina; png; 0
+Moosh; png; 2
+
+#737 @ 76290
+Buddy; png; 7
+Great Glass; GreatGlass; png; 2
+Haritiro; png; 7
+HeroOfFire; png; 2
+Lynel Richie; LynelRichie; png; 0
+Moosh; png; 1
+Orithan; png; 2
+Twilight Knight; TwilightKnight; png; 24
+
+#738 @ 76327
+Bagu; png; 5
+Eddy; png; 2
+Haritiro; png; 6
+Joelmacool; png; 23
+
+#739 @ 76352
+Buddy; png; 28
+Haritiro; png; 3
+HeroOfFire; png; 3
+
+#740 @ 76389
+FireSeraphim; png; 3
+Geoffrey; png; 10
+Haritiro; png; 14
+Joelmacool; png; 7
+
+#741 @ 76404
+Bagu; png; 16
+Joelmacool; png; 14
+Twilight Knight; TwilightKnight; png; 8
+
+#742 @ 76427
+Bagu; png; 9
+HeroOfFire; png; 8
+Joelmacool; png; 26
+
+#743 @ 76477
+Ephemeral.7; Ephemeral; gif; 21
+IronCreator; png; 2
+Joelmacool; png; 2
+Mani Kanina; ManiKanina; png; 0
+Matthew[294314]; png; 11
+Orithan; png; 2
+
+#744 @ 76501
+Ephemeral.7; Ephemeral7; gif; 24
+Haritiro; png; 22
+HeroOfFire; png; 4
+
+#745 @ 76523
+Bagu; png; 5
+HeroOfFire; png; 0
+Mitchfork; png; 36
+Orithan; png; 1
+
+#746 @ 76565
+Aslion; png; 12
+Bagu; png; 5
+Hubydweyer; png; 2
+Mani Kanina; ManiKanina; png; 0
+Mitchfork; png; 5
+Twilight Knight; TwilightKnight; png; 14
+
+#747 @ 76595
+HeroOfFire; png; 1
+Joelmacool; png; 14
+Mani Kanina; ManiKanina; png; 2
+Moosh; png; 12
+Twilight Knight; TwilightKnight; png; 15
+
+#748 @ 76646
+Aslion; png; 16
+Ephemeral.7; Ephemeral; gif; 15
+Haritiro; png; 9
+HeroOfFire; png; 1
+Jared; png; 3
+ywkls; png; 0
+
+#749 @ 76702
+HeroOfFire; png; 5
+Mitchfork; png; 23
+Sephiroth; png; 9
+Shane; png; 5
+
+#750 @ 76737
+Eddy; png; 6
+HeroOfFire; png; 9
+Orithan; png; 20
+Sheik; png; 8
+
+#751 @ 76766
+Demonlink; png; 16
+Hergiswi; png; 7
+Joelmacool; png; 26
+
+#752 @ 76810
+Aslion; png; 16
+Demonlink; png; 9
+Einsiety; png; 15
+
+#753 @ 76853
+Aslion; png; 6
+Haritiro; png; 21
+Joelmacool; png; 5
+Valerie; png; 6
+
+#754 @ 76885
+Jared; png; 12
+Mani Kanina; ManiKanina; png; 3
+TheManHimself; png; 22
+Valerie; png; 9
+
+#755 @ 76912
+Joelmacool; png; 9
+Lordkronos; png; 1
+TheManHimself; Themanhimself; png; 30
+Valerie; png; 8
+
+#756 @ 76941
+Moosh; png; 9
+TheManHimself; png; 15
+ywkls; png; 14
+
+#757 @ 76970
+Joelmacool; png; 15
+TheManHimself; png; 14
+Valerie; png; 9
+
+#758 @ 77002
+Jared; png; 27
+TheManHimself; png; 10
+Zephvan; png; 1
+
+#759 @ 77030
+Jenny; png; 4
+P-Tux7; png; 5
+Mitchfork; png; 21
+Valerie; png; 8
+
+#760 @ 77094
+Aslion; png; 12
+Demonlink; png; 11
+Rambly; png; 8
+TheManHimself; png; 7
+Twilight Knight; Twilight%20Knight; png; 3
+
+#761 @ 77120
+Aslion; png; 11
+Demonlink; png; 24
+Rambly; png; 4
+Twilight Knight; Twilight%20Knight; png; 4
+Valerie; png; 3
+
+#762 @ 77174
+Bagu; png; 14
+Jared; png; 3
+TheManHimself; png; 19
+Twilight Knight; Twilight%20Knight; png; 1
+
+#763 @ 77217
+ANC; png; 4
+Bagu; png; 28
+I AM ERROR; I%20AM%20ERROR; png; 4
+Valerie; png; 7
+
+#764 @ 77276
+Blackpaintbowser; png; 1
+Geoffrey; png; 28
+Orithan; png; 6
+Shoshon the Elegant; Shoshon%20the%20Elegant; png; 1
+Valerie; png; 2
+
+#765 @ 77316
+Bagu; png; 9
+Geoffrey; png; 18
+HeroOfFire; png; 2
+Sheik; png; 16
+
+#766 @ 77411
+Aroten; png; 14
+HeroOfFire; png; 1
+Joelmacool; png; 9
+Orithan; png; 3
+Taco Chopper; Taco%20Chopper; png; 2
+
+#767 @ 77438
+BigJoe; png; 5
+Jared; png; 24
+Zaxarone; png; 5
+
+#768 @ 77478
+Jenny; png; 17
+Orithan; png; 4
+Twilight Knight; png; 18
+
+#769 @ 77573
+Blackpaintbowser; png; 3
+Hergiswi; png; 3
+Jenny; png; 10
+Joelmacool; png; 6
+Nightmare; png; 1
+Orithan; png; 6
+Twilight Knight; Twilight%20Knight; png; 13
+
+#M190 @ 77652
+Aefre; png; 21
+Einsiety; png; 5
+Majora; png; 4
+Taco Chopper; Taco%20Chopper; png; 8
+/*
+#M191 @ 77699
+Aroten; png; 28
+Ether; png; 12
+Orithan; png; 8
 /*

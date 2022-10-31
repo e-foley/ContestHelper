@@ -28,7 +28,7 @@ public class History {
     }
 
 //     public void addEntry(Entry entry_adding, boolean requestId, int memberId) {
-//         addEntry(entry_adding.getPoll().getName(),
+//         addEntry(entry_adding.getPoll().getShortName(),
 //                  entry_adding.getPoll().hasTopic(),
 //                  entry_adding.getPoll().getTopic(),
 //                  entry_adding.getPoll().getSynch(),
@@ -44,12 +44,12 @@ public class History {
 //                  entry_adding.getOverrideCode());
 //     }
 
-    public void addEntry(String pollName, boolean hasTopicInfo, int topic, int currentSynch, ArrayList<MemberInfo> member_infos, boolean requestId, boolean myHasURL, String URL, boolean myHasVotes, int myVotes, boolean myHasUncertainty, int overrideCode) {
+    public void addEntry(String pollShortName, String pollLongName, boolean hasTopicInfo, int topic, int currentSynch, ArrayList<MemberInfo> member_infos, boolean requestId, boolean myHasURL, String URL, boolean myHasVotes, int myVotes, boolean myHasUncertainty, int overrideCode) {
         Poll pollRetrieved;
         // check if the poll being requested hasn't been formed yet
-        if ((pollRetrieved = getPollByName(pollName)) == null) {
+        if ((pollRetrieved = getPollByShortName(pollShortName)) == null) {
             // if it hasn't, add it
-            pollRetrieved = new Poll(pollName, hasTopicInfo, topic, currentSynch);
+            pollRetrieved = new Poll(pollShortName, pollLongName, hasTopicInfo, topic, currentSynch);
             polls.add(pollRetrieved);
         }
 
@@ -138,7 +138,7 @@ public class History {
         }
 
         if (!returning.polls.isEmpty()) {
-            returning.lastPollName = returning.polls.get(returning.polls.size() - 1).getName();
+            returning.lastPollName = returning.polls.get(returning.polls.size() - 1).getShortName();
         }
 
         return returning;
@@ -167,11 +167,12 @@ public class History {
         return members.get(id);
     }
 
-    public Poll getPollByName(String nameGetting)
+    public Poll getPollByShortName(String shortNameGetting)
     {
+        // Why isn't this just a map lookup?
         for (int i=0; i<polls.size(); i++)
         {
-            if (polls.get(i).getName().equals(nameGetting))
+            if (polls.get(i).getShortName().equals(shortNameGetting))
                 return polls.get(i);
         }
         return null;
@@ -238,7 +239,7 @@ public class History {
     }
 
     public boolean populateEntriesFromFile(String filename)
-    {   //IT might be possible in this method to pass references to individual polls instead of "current poll names" and so forth
+    {   //It might be possible in this method to pass references to individual polls instead of "current poll names" and so forth
         try
         {
             // allocate new stream object
@@ -249,7 +250,7 @@ public class History {
             String strLine; // String in which to place new lines as they are read
 
             String[] splits; // array for the output of the regex split
-            String currentPollName = "";
+            String currentPollShortName = "";
             int currentSynch = 0;
             Poll pollRetrieved = null;
 
@@ -268,21 +269,21 @@ public class History {
                     continue;
                 }
                 blockComment |= strLine.startsWith(blockOpen);
-                parse = new ParsedLine(strLine, currentPollName);
+                parse = new ParsedLine(strLine, currentPollShortName);
 
                 if (parse.hasPollInfo && !blockComment)
                 {
-                    currentPollName = parse.pollName; // will change this
+                    currentPollShortName = parse.pollShortName; // will change this
 
-                    if ((pollRetrieved = getPollByName(currentPollName)) == null)
+                    if ((pollRetrieved = getPollByShortName(currentPollShortName)) == null)
                     {
                         if (!parse.synchronous)
                             currentSynch++;
 
                         if (parse.hasTopicInfo)
-                            pollRetrieved = new Poll(currentPollName, parse.hasTopicInfo, parse.topic, currentSynch);
+                            pollRetrieved = new Poll(currentPollShortName, parse.pollLongName, parse.hasTopicInfo, parse.topic, currentSynch);
                         else
-                            pollRetrieved = new Poll(currentPollName, currentSynch);
+                            pollRetrieved = new Poll(currentPollShortName, parse.pollLongName, currentSynch);
                         polls.add(pollRetrieved);
                     }
                 }
@@ -290,7 +291,7 @@ public class History {
                 if (parse.hasMemberInfo && !blockComment)
                 {
                     // addEntry(currentPollName, parse.hasTopicInfo, parse.topic, currentSynch, parse.member_infos, true, -1, parse.hasURL, parse.URL, parse.hasVotes, parse.votes, !parse.hasVotes, parse.overrideCode);
-                    addEntry(currentPollName, parse.hasTopicInfo, parse.topic, currentSynch, parse.member_infos, true, parse.hasURL, parse.URL, parse.hasVotes, parse.votes, !parse.hasVotes, parse.overrideCode);
+                    addEntry(currentPollShortName, parse.pollLongName, parse.hasTopicInfo, parse.topic, currentSynch, parse.member_infos, true, parse.hasURL, parse.URL, parse.hasVotes, parse.votes, !parse.hasVotes, parse.overrideCode);
                  }
 
                 if (parse.isPollNote && !blockComment && pollRetrieved != null) {
@@ -299,7 +300,7 @@ public class History {
 
                 blockComment &= !strLine.endsWith(blockClose);
             }
-            lastPollName = currentPollName;   // this is so we can name the output files intelligently
+            lastPollName = currentPollShortName;   // this is so we can name the output files intelligently
             //Close the input stream
             in.close();
         }

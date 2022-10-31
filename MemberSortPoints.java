@@ -39,9 +39,9 @@ public class MemberSortPoints implements MemberDataRetriever
             else
                 building += ""+getFormat().format(entry.getPoints() * stake);  // Mention stake... later?
             if (linkTopics && entry.getPoll().hasTopic())
-                building += (" in <a class='green' href='http://www.purezc.net/forums/index.php?showtopic=" + entry.getPoll().getTopic() + "'>#" + entry.getPoll().getName() + "</a>");
+                building += (" in <a class='green' href='http://www.purezc.net/forums/index.php?showtopic=" + entry.getPoll().getTopic() + "'>#" + entry.getPoll().getShortName() + "</a>");
             else
-                building += (" in #" + entry.getPoll().getName());
+                building += (" in #" + entry.getPoll().getShortName());
             if (i < entries.size()-2)
                 building += ", ";
             else if (i == entries.size()-2)
