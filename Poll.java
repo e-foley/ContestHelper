@@ -184,6 +184,7 @@ public class Poll
     
     public String getURL()
     {
+        // TODO: Consider architectural benefit of having topics be explicitly assigned.
         if (hasTopic) {
             return "http://www.purezc.net/forums/index.php?showtopic=" + topic;
         } else {
