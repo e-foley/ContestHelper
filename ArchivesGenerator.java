@@ -65,8 +65,7 @@ public class ArchivesGenerator {
                 out.write("<tr><td class='contest-title' colspan=5>");
                 if (poll.hasTopic())
                     out.write("<a class='contest' href='http://www.purezc.net/forums/index.php?showtopic=" + poll.getTopic() + "'>");
-                //out.write("(" + poll.getSynch() + ") "); // TEMPORARY!
-                out.write("Screenshot of the Week " + poll.getShortName());
+                out.write(poll.getLongName());
                 if (poll.hasTopic())
                     out.write("</a>");
                 out.write("</td></tr>");
