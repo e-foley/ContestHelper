@@ -180,12 +180,6 @@ public class ArchivesGenerator {
                     out.newLine();
                     out.write("</tr>");
                 }
-                //                     if (winners.size() >= 2)
-                //                     {
-                //                         out.write("<br/>");
-                //                         out.newLine();
-                //                         out.write("<span class='tie-note'>Screenshot of the Week " + poll.getShortName() + " ended in a draw.</span>");
-                //                     }
     
                 out.write("<tr class='info-row'><td></td><td class='numentries'>");
                 out.write(poll.numEntries() + " entr");
