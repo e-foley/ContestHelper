@@ -161,12 +161,6 @@ public class Poll
         return winners;
     }
     
-    /** TERRIBLE, TERRIBLE, SUPER-KLUDGY METHOD. BEWARE. */
-    public float getApparentPollNumber()
-    {
-        return Float.parseFloat(name.replaceAll("[^0-9.]",""));
-    }
-    
     public int numVotes()
     {
         int sum=0;
