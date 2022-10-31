@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ParsedLine
 {
@@ -7,6 +9,7 @@ public class ParsedLine
     
     public boolean hasPollInfo;
     public String pollShortName;
+    public String pollLongName;
     public boolean hasTopicInfo;
     public int topic;
     
@@ -31,7 +34,7 @@ public class ParsedLine
         //System.out.println("Starting parse of \"" + line + "\"");
         
         String regexMember = "(\\s+)?;(\\s+)?";   // regular expression to divide associations file
-        String regexPoll = "(\\s+)?@(\\s+)?";    // regular expression for the poll number and topic
+        String regexPoll = "(\\s+)?@(\\s+)?";    // regular expression for the poll short name and topic
         // Regular expression that divides names and tags.  Note that both [ and ] are treated the same way, so tags
         // don't strictly need to be enclosed by brackets as long as there is at least one present.  For example, the
         // strings "nicklegends[2237]" and "nicklegends[2237" and "nicklegends  ]2237 [" are all treated the same way.
@@ -45,6 +48,7 @@ public class ParsedLine
         
         hasPollInfo = false;
         pollShortName = "";
+        pollLongName = "";
         hasTopicInfo = false;
         topic = -1;
         hasMemberInfo = false;
@@ -74,7 +78,10 @@ public class ParsedLine
             if (splits.length >= 1)
             {
                 hasPollInfo = true;
-                pollShortName = (splits[0].substring(1));  // this will be changed as soon poll names are implemented
+                pollShortName = (splits[0].substring(1));
+                // TODO: If we introduce a mechanism for encoding long names directly in the input file, then
+                // the below should be used only as a default.
+                pollLongName = suggestLongName(pollShortName);
             }
             if (splits.length >= 2)
             {
@@ -187,6 +194,35 @@ public class ParsedLine
             }
         }
     }
+    
+    private String suggestLongName(String shortName)
+    {
+        Pattern shortNamePattern = Pattern.compile("(\\D*)([\\d.]+)(.*)");  // prefix, number, suffix
+        Matcher shortNameComponents = shortNamePattern.matcher(shortName);
+        if (!shortNameComponents.find()) {
+          return shortName;   
+        }
+         
+        String prefix = shortNameComponents.group(1);
+        String number = shortNameComponents.group(2);
+        String suffix = shortNameComponents.group(3);
+         
+        String returning = new String();
+        if (prefix.equals("")) {
+          returning = "Screenshot of the Week " + number;    
+        } else if (prefix.equals("M")) {
+          returning = "Screenshot of the Month " + number;    
+        } else {
+          // Include the prefix in the printed contest number since we don't recognize it.
+          returning = "Screenshot of the Week " + prefix + number;
+        }
+         
+        if (!suffix.equals("")) {
+          returning += "  (Poll " + suffix + ")";    
+        }
+         
+        return returning;
+    }   
     
     private boolean isInteger(String testing)  
     {

@@ -44,12 +44,12 @@ public class History {
 //                  entry_adding.getOverrideCode());
 //     }
 
-    public void addEntry(String pollShortName, boolean hasTopicInfo, int topic, int currentSynch, ArrayList<MemberInfo> member_infos, boolean requestId, boolean myHasURL, String URL, boolean myHasVotes, int myVotes, boolean myHasUncertainty, int overrideCode) {
+    public void addEntry(String pollShortName, String pollLongName, boolean hasTopicInfo, int topic, int currentSynch, ArrayList<MemberInfo> member_infos, boolean requestId, boolean myHasURL, String URL, boolean myHasVotes, int myVotes, boolean myHasUncertainty, int overrideCode) {
         Poll pollRetrieved;
         // check if the poll being requested hasn't been formed yet
         if ((pollRetrieved = getPollByShortName(pollShortName)) == null) {
             // if it hasn't, add it
-            pollRetrieved = new Poll(pollShortName, /*temp*/ pollShortName, hasTopicInfo, topic, currentSynch);
+            pollRetrieved = new Poll(pollShortName, pollLongName, hasTopicInfo, topic, currentSynch);
             polls.add(pollRetrieved);
         }
 
@@ -281,9 +281,9 @@ public class History {
                             currentSynch++;
 
                         if (parse.hasTopicInfo)
-                            pollRetrieved = new Poll(currentPollShortName, /*temp*/ currentPollShortName, parse.hasTopicInfo, parse.topic, currentSynch);
+                            pollRetrieved = new Poll(currentPollShortName, parse.pollLongName, parse.hasTopicInfo, parse.topic, currentSynch);
                         else
-                            pollRetrieved = new Poll(currentPollShortName, /*temp*/ currentPollShortName, currentSynch);
+                            pollRetrieved = new Poll(currentPollShortName, parse.pollLongName, currentSynch);
                         polls.add(pollRetrieved);
                     }
                 }
@@ -291,7 +291,7 @@ public class History {
                 if (parse.hasMemberInfo && !blockComment)
                 {
                     // addEntry(currentPollName, parse.hasTopicInfo, parse.topic, currentSynch, parse.member_infos, true, -1, parse.hasURL, parse.URL, parse.hasVotes, parse.votes, !parse.hasVotes, parse.overrideCode);
-                    addEntry(currentPollShortName, parse.hasTopicInfo, parse.topic, currentSynch, parse.member_infos, true, parse.hasURL, parse.URL, parse.hasVotes, parse.votes, !parse.hasVotes, parse.overrideCode);
+                    addEntry(currentPollShortName, parse.pollLongName, parse.hasTopicInfo, parse.topic, currentSynch, parse.member_infos, true, parse.hasURL, parse.URL, parse.hasVotes, parse.votes, !parse.hasVotes, parse.overrideCode);
                  }
 
                 if (parse.isPollNote && !blockComment && pollRetrieved != null) {
