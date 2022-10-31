@@ -120,11 +120,15 @@ Hero Link > Angeal > Pinkie Pie > Rydia > Angeal > Rydia > Lana > Linkle > Neptu
 Ovasity > Smiles the Death Bringer
 SerpitaX > BitZero
 skipper > Skipper
-Nuvo > Strato > Nuvo
 Sylph > Dream Illusionist
 coolgamer012345 > Coolgamer012345 > TheBlueTophat > TheBlueTopay'za > Midnight_King_II > TheBlueTophat > coolgamer012345
-BigJoe > Big Wig Big Joe > BigJoe > No one > BigJoe > IronCreator
-
+Ebola Zaire > Mitchfork
+Zagut > Zephvan
+FanofSMBX > P-Tux7
+Nuvo > Strato > Nuvo > Colin
+ANC > Blackpaintbowser
+shuji > Aroten
+BigJoe > Big Wig Big Joe > BigJoe > No one > BigJoe > IronCreator > BigJoe > Deft War > BigJoe > Adamantium > BigJoe
 
 // Tagged members: refer to these tags in data.txt when a member's username has been used by a different person
 //   Shared "Ben"
@@ -136,8 +140,8 @@ BigJoe > Big Wig Big Joe > BigJoe > No one > BigJoe > IronCreator
 //   Shared "Yoshi"
 1245: Yoshi > Tails > Pikachu > Fluttershy
 29458: Midnight_King > Shane > Charizard > Shane > Polaris > Shane > Midnight King > Shane > Yoshi > Shane
-48320: Yoshidude > Dragonite > Tingle > Jacques > Duck > Homura > Can Dogs Eat Kiwi? > Yoshi > Eddy finish AR3 > Yoshi > Buddy
-// The below also "Midnight_King" with 29458 for April Fools' 2018
+48320: Yoshidude > Dragonite > Tingle > Jacques > Duck > Homura > Can Dogs Eat Kiwi? > Yoshi > Eddy finish AR3 > Yoshi > Buddy > Jenny
+// The below also shared "Midnight_King" with 29458 for April Fools' 2018
 294248: arceusplayer11 > Arceus > Dimentio > Midnight_King > Dimentio > Dimi
 
 // Banned members whose profiles may be harder to find
