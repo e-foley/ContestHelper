@@ -35,9 +35,9 @@ public class MemberSortEntries implements MemberDataRetriever
             float stake = pair.stake;
             // The below will strip contests of their letters in the case of multi-thread contests
             if (linkTopics && entry.getPoll().hasTopic()) {
-                building += ("<a class='green' href='http://www.purezc.net/forums/index.php?showtopic=" + entry.getPoll().getTopic() + "'>#" + entry.getPoll().getName() + "</a>");
+                building += ("<a class='green' href='http://www.purezc.net/forums/index.php?showtopic=" + entry.getPoll().getTopic() + "'>#" + entry.getPoll().getShortName() + "</a>");
             } else {
-                building += ("#" + entry.getPoll().getName());
+                building += ("#" + entry.getPoll().getShortName());
             }
             if (stake != 1.0f)
             {

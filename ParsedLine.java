@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ParsedLine
 {
@@ -6,7 +8,8 @@ public class ParsedLine
     public boolean isComment;
     
     public boolean hasPollInfo;
-    public String pollName;
+    public String pollShortName;
+    public String pollLongName;
     public boolean hasTopicInfo;
     public int topic;
     
@@ -26,12 +29,12 @@ public class ParsedLine
     
     private static final double URL_DIGITS = 2;
     
-    public ParsedLine(String line, String currentPollName)
+    public ParsedLine(String line, String currentPollShortName)
     {
         //System.out.println("Starting parse of \"" + line + "\"");
         
         String regexMember = "(\\s+)?;(\\s+)?";   // regular expression to divide associations file
-        String regexPoll = "(\\s+)?@(\\s+)?";    // regular expression for the poll number and topic
+        String regexPoll = "(\\s+)?@(\\s+)?";    // regular expression for the poll short name and topic
         // Regular expression that divides names and tags.  Note that both [ and ] are treated the same way, so tags
         // don't strictly need to be enclosed by brackets as long as there is at least one present.  For example, the
         // strings "nicklegends[2237]" and "nicklegends[2237" and "nicklegends  ]2237 [" are all treated the same way.
@@ -44,7 +47,8 @@ public class ParsedLine
         isPollNote = line.startsWith("*");
         
         hasPollInfo = false;
-        pollName = "";
+        pollShortName = "";
+        pollLongName = "";
         hasTopicInfo = false;
         topic = -1;
         hasMemberInfo = false;
@@ -74,7 +78,10 @@ public class ParsedLine
             if (splits.length >= 1)
             {
                 hasPollInfo = true;
-                pollName = (splits[0].substring(1));  // this will be changed as soon poll names are implemented
+                pollShortName = (splits[0].substring(1));
+                // TODO: If we introduce a mechanism for encoding long names directly in the input file, then
+                // the below should be used only as a default.
+                pollLongName = suggestLongName(pollShortName);
             }
             if (splits.length >= 2)
             {
@@ -140,12 +147,13 @@ public class ParsedLine
                 else
                 {
                      // treat as extension
-                     String pollIDString = currentPollName.replaceAll("\\D","");  /** REVIEW ME!!!*/
+                     String pollIDString = currentPollShortName.replaceAll("\\D","");  /** REVIEW ME!!!*/
                      while (pollIDString.length() < URL_DIGITS)    // note: this check should use a constant
                         pollIDString = "0" + pollIDString;
                      
                     hasURL = true;
-                    URL = "http://sotw.purezc.net/SOTW" + pollIDString + "/" + member_infos.get(0).member_name.replace(" ","%20").replace("'","%27") + "." + splits[1]; // TODO: Do we want to include other members here by default?
+                    String contestTypeString = currentPollShortName.startsWith("M") ? "SOTM" : "SOTW";  // This is ugly and everyone knows it.
+                    URL = "http://sotw.purezc.net/" + contestTypeString + pollIDString + "/" + member_infos.get(0).member_name.replace(" ","%20").replace("'","%27") + "." + splits[1]; // TODO: Do we want to include other members here by default?
                 }
             }
             
@@ -154,11 +162,12 @@ public class ParsedLine
                 voteIndex = 3;
                 hasURL = true;
                 
-                String pollIDString = currentPollName.replaceAll("\\D","");
+                String pollIDString = currentPollShortName.replaceAll("\\D","");
                 while (pollIDString.length() < URL_DIGITS)    // note: this check should use a constant
                     pollIDString = "0" + pollIDString;
                 
-                URL = "http://sotw.purezc.net/SOTW" + pollIDString + "/" + splits[1].replace(" ","%20").replace("'","%27") + "." + splits[2];
+                String contestTypeString = currentPollShortName.startsWith("M") ? "SOTM" : "SOTW";  // This is ugly and everyone knows it.
+                URL = "http://sotw.purezc.net/" + contestTypeString + pollIDString + "/" + splits[1].replace(" ","%20").replace("'","%27") + "." + splits[2];
             }
 
             String voteString = new String();
@@ -187,6 +196,35 @@ public class ParsedLine
             }
         }
     }
+    
+    private String suggestLongName(String shortName)
+    {
+        Pattern shortNamePattern = Pattern.compile("(\\D*)([\\d.]+)(.*)");  // prefix, number, suffix
+        Matcher shortNameComponents = shortNamePattern.matcher(shortName);
+        if (!shortNameComponents.find()) {
+          return shortName;   
+        }
+         
+        String prefix = shortNameComponents.group(1);
+        String number = shortNameComponents.group(2);
+        String suffix = shortNameComponents.group(3);
+         
+        String returning = new String();
+        if (prefix.equals("")) {
+          returning = "Screenshot of the Week " + number;    
+        } else if (prefix.equals("M")) {
+          returning = "Screenshot of the Month " + number;    
+        } else {
+          // Include the prefix in the printed contest number since we don't recognize it.
+          returning = "Screenshot of the Week " + prefix + number;
+        }
+         
+        if (!suffix.equals("")) {
+          returning += "  (Poll " + suffix + ")";    
+        }
+         
+        return returning;
+    }   
     
     private boolean isInteger(String testing)  
     {
