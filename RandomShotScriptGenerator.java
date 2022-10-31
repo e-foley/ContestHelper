@@ -43,7 +43,7 @@ public abstract class RandomShotScriptGenerator
                         out.write(couples.get(i).member.getMostRecentName());
                     }
                     out.write("', 'contest': '");
-                    out.write(poll.getName());
+                    out.write(poll.getShortName());
                     out.write("', 'hasTopic': '");
                     out.write(poll.hasTopic() ? "true" : "false");
                     out.write("', 'topicUrl': '");

@@ -42,9 +42,9 @@ public class MemberSortEntryStreak implements MemberDataRetriever
                 Member.EntryStakePair pair = entries.get(h).get(i);
                 
                 if (linkTopics && pair.entry.getPoll().hasTopic()) // NOTE: The below should strip the A and B designations from multi-thread contests
-                    building += ("<a class='green' href='http://www.purezc.net/forums/index.php?showtopic=" + pair.entry.getPoll().getTopic() + "'>#" + pair.entry.getPoll().getName() + "</a>");
+                    building += ("<a class='green' href='http://www.purezc.net/forums/index.php?showtopic=" + pair.entry.getPoll().getTopic() + "'>#" + pair.entry.getPoll().getShortName() + "</a>");
                 else
-                    building += ("#" + pair.entry.getPoll().getName());
+                    building += ("#" + pair.entry.getPoll().getShortName());
                 if (pair.stake < 1.0f)
                 {
                     building += " (" + getFormat().format(pair.stake) + ")";

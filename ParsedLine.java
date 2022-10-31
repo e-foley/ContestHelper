@@ -6,7 +6,7 @@ public class ParsedLine
     public boolean isComment;
     
     public boolean hasPollInfo;
-    public String pollName;
+    public String pollShortName;
     public boolean hasTopicInfo;
     public int topic;
     
@@ -44,7 +44,7 @@ public class ParsedLine
         isPollNote = line.startsWith("*");
         
         hasPollInfo = false;
-        pollName = "";
+        pollShortName = "";
         hasTopicInfo = false;
         topic = -1;
         hasMemberInfo = false;
@@ -74,7 +74,7 @@ public class ParsedLine
             if (splits.length >= 1)
             {
                 hasPollInfo = true;
-                pollName = (splits[0].substring(1));  // this will be changed as soon poll names are implemented
+                pollShortName = (splits[0].substring(1));  // this will be changed as soon poll names are implemented
             }
             if (splits.length >= 2)
             {

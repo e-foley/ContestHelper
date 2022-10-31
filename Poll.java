@@ -5,7 +5,7 @@ public class Poll
     public static final int DEFAULT_SYNCH = -1;
     // instance variables - replace the example below with your own
     //private int ID;
-    private String name;
+    private String shortName;
     private ArrayList<Entry> entries;
     boolean hasTopic;
     private int topic;
@@ -18,7 +18,7 @@ public class Poll
     public Poll()
     {
         // initialise instance variables
-        name = "";
+        shortName = "";
         entries = new ArrayList<Entry>();
         topic = -1;
         hasTopic = false;
@@ -26,9 +26,9 @@ public class Poll
         notes = new ArrayList<String>();
     }
     
-    public Poll(String myName)
+    public Poll(String myShortName)
     {
-        name = myName;
+        shortName = myShortName;
         entries = new ArrayList<Entry>();
         topic = -1;
         hasTopic = false;
@@ -36,9 +36,9 @@ public class Poll
         notes = new ArrayList<String>();
     }
       
-    public Poll(String myName, int mySynch)
+    public Poll(String myShortName, int mySynch)
     {
-        name = myName;
+        shortName = myShortName;
         entries = new ArrayList<Entry>();
         topic = -1;
         hasTopic = false;
@@ -46,9 +46,9 @@ public class Poll
         notes = new ArrayList<String>();
     }
     
-    public Poll(String myName, boolean myHasTopic, int myTopic)
+    public Poll(String myShortName, boolean myHasTopic, int myTopic)
     {
-        name = myName;
+        shortName = myShortName;
         entries = new ArrayList<Entry>();
         topic = myTopic;
         hasTopic = myHasTopic;
@@ -56,9 +56,9 @@ public class Poll
         notes = new ArrayList<String>();
     }
     
-    public Poll(String myName, boolean myHasTopic, int myTopic, int mySynch)
+    public Poll(String myShortName, boolean myHasTopic, int myTopic, int mySynch)
     {
-        name = myName;
+        shortName = myShortName;
         entries = new ArrayList<Entry>();
         topic = myTopic;
         hasTopic = myHasTopic;
@@ -114,9 +114,9 @@ public class Poll
         return topic;
     }
     
-    public String getName()
+    public String getShortName()
     {
-        return name;
+        return shortName;
     }
     
     public ArrayList<Entry> getWinners()

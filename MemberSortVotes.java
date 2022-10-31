@@ -39,9 +39,9 @@ public class MemberSortVotes implements MemberDataRetriever
             else
                 building += ""+getFormat().format(entry.getVotes() * stake);  // Could mention stake here... later?
             if (linkTopics && entry.getPoll().hasTopic())
-                building += (" in <a class='green' href='http://www.purezc.net/forums/index.php?showtopic=" + entry.getPoll().getTopic() + "'>#" + entry.getPoll().getName() + "</a>");
+                building += (" in <a class='green' href='http://www.purezc.net/forums/index.php?showtopic=" + entry.getPoll().getTopic() + "'>#" + entry.getPoll().getShortName() + "</a>");
             else
-                building += (" in #" + entry.getPoll().getName());
+                building += (" in #" + entry.getPoll().getShortName());
             if (i < entries.size()-2)
                 building += ", ";
             else if (i == entries.size()-2)
