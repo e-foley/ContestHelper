@@ -26,7 +26,7 @@ public class ParsedLine
     
     private static final double URL_DIGITS = 2;
     
-    public ParsedLine(String line, String currentPollName)
+    public ParsedLine(String line, String currentPollShortName)
     {
         //System.out.println("Starting parse of \"" + line + "\"");
         
@@ -140,7 +140,7 @@ public class ParsedLine
                 else
                 {
                      // treat as extension
-                     String pollIDString = currentPollName.replaceAll("\\D","");  /** REVIEW ME!!!*/
+                     String pollIDString = currentPollShortName.replaceAll("\\D","");  /** REVIEW ME!!!*/
                      while (pollIDString.length() < URL_DIGITS)    // note: this check should use a constant
                         pollIDString = "0" + pollIDString;
                      
@@ -154,7 +154,7 @@ public class ParsedLine
                 voteIndex = 3;
                 hasURL = true;
                 
-                String pollIDString = currentPollName.replaceAll("\\D","");
+                String pollIDString = currentPollShortName.replaceAll("\\D","");
                 while (pollIDString.length() < URL_DIGITS)    // note: this check should use a constant
                     pollIDString = "0" + pollIDString;
                 
