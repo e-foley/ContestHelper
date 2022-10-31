@@ -3,8 +3,7 @@ import java.util.ArrayList;
 public class Poll
 {
     public static final int DEFAULT_SYNCH = -1;
-    // instance variables - replace the example below with your own
-    //private int ID;
+    
     private String shortName;
     private ArrayList<Entry> entries;
     boolean hasTopic;
@@ -12,9 +11,6 @@ public class Poll
     private int synch;
     private ArrayList<String> notes;
     
-    /**
-     * Constructor for objects of class Member
-     */
     public Poll()
     {
         // initialise instance variables
@@ -76,23 +72,10 @@ public class Poll
         return synch;
     }
     
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
     public void addEntry(Entry entryAdding)
     {
         entries.add(entryAdding);
     }
-    
-    /*public void addEntry(Entry entryAdding, boolean incrementSynch)
-    {
-        if (incrementSynch)
-            synch++;            // this is pretty sloppy :(
-        entries.add(entryAdding);
-    }*/
     
     public Entry getEntryByIndex(int index)
     {
