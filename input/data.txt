@@ -5156,14 +5156,48 @@ Nightmare; png; 1
 Orithan; png; 6
 Twilight Knight; Twilight%20Knight; png; 13
 
-#M190 @ 77652
+#770 @ 77652
 Aefre; png; 21
 Einsiety; png; 5
 Majora; png; 4
 Taco Chopper; Taco%20Chopper; png; 8
+* SotW 770 was originally held as SotM 190 but was renamed retroactively.
+
+#771 @ 77699
+Aroten; png; 31
+Ether; png; 13
+Orithan; png; 9
+* SotW 771 was originally held as SotM 191 but was renamed retroactively.
+
+#772 @ 77947
+Feenicks; png; 2
+Huge Bedwetter; Huge_Bedwetter; png; 5
+Mitchfork; png; 8
+Naldrag; png; 1
+THEMDODO; png; 2
+xanadude; png; 14
+
+#773 @ 78010
+Anthus; png; 11
+Feenicks; png; 3
+HeroOfFire; png; 1
+Jenny; png; 9
+Sheik; png; 9
+THEMDODO; png; 2
+
+#774 @ 78037
+Architect Abdiel; ArchitectAbidel; png; 4
+Feenicks; png; 4
+Mitchfork; png; 4
+Taco Chopper; TacoChopper; png; 10
+Twilight Knight; TwilightKnight; png; 6
 /*
-#M191 @ 77699
-Aroten; png; 28
-Ether; png; 12
-Orithan; png; 8
+#775 @ 78076
+Architect Abdiel; ArchitectAbdiel; png; 
+Aslion; png; 
+Feenicks; png; 
+Joelmacool; png; 
+Mitchfork; png; 
+Taco Chopper; TacoChopper; png; 
+xanadude; png; 
 /*
