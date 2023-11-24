@@ -5186,18 +5186,183 @@ Sheik; png; 9
 THEMDODO; png; 2
 
 #774 @ 78037
-Architect Abdiel; ArchitectAbidel; png; 4
+Architect Abdiel; ArchitectAbdiel; png; 4
 Feenicks; png; 4
 Mitchfork; png; 4
 Taco Chopper; TacoChopper; png; 10
 Twilight Knight; TwilightKnight; png; 6
-/*
+
 #775 @ 78076
-Architect Abdiel; ArchitectAbdiel; png; 
-Aslion; png; 
-Feenicks; png; 
-Joelmacool; png; 
-Mitchfork; png; 
-Taco Chopper; TacoChopper; png; 
-xanadude; png; 
+Architect Abdiel; ArchitectAbdiel; png; 3
+Aslion; gif; 11
+Feenicks; png; 1
+Joelmacool; png; 6
+Mitchfork; png; 5
+Taco Chopper; TacoChopper; png; 3
+xanadude; png; 1
+
+#776 @ 78094
+Architect Abdiel; ArchitectAbdiel; png; 4
+Blackpaintbowser; png; 7
+Orithan; png; 2
+Twilight Knight; TwilightKnight; png; 3
+xanadude; png; 14
+
+#777 @ 78114
+Architect Abdiel; ArchitectAbdiel; png; 11
+Anthus; png; 5
+BigJoe; png; 4
+Feenicks; png; 8
+
+#778 @ 78131
+Architect Abdiel; ArchitectAbdiel; png; 4
+Anthus; png; 15
+Feenicks; png; 2
+Twilight Knight; TwilightKnight; png; 3
+
+#779 @ 78162
+Deathrider; png; 13
+Eddy; png; 1
+PixElvis; png; 7
+Shane; png; 9
+
+#780 @ 78189
+Deedee; png; 4
+Jenny; gif; 6
+Joelmacool; png; 8
+Matthew[294314]; png; 4
+
+#781 @ 78203
+Architect Abdiel; ArchitectAbdiel; png; 1
+Mitchfork; png; 9
+Taco Chopper; TacoChopper; png; 12
+Twilight Knight; TwilightKnight; png; 4
+
+#782 @ 78218
+Architect Abdiel; ArchitectAbdiel; png; 0
+Joelmacool; png; 13
+Phosphor; png; 4
+xanadude; png; 10
+
+#783 @ 78230
+Feenicks; png; 5
+Mitchfork; png; 12
+Taco Chopper; TacoChopper; png; 1
+THEMDODO; png; 2
+
+#784 @ 78237
+Architect Abdiel; ArchitectAbdiel; png; 3
+Feenicks; png; 5
+Twilight Knight; TwilightKnight; png; 17
+
+#785 @ 78248
+Architect Abdiel; ArchitectAbdiel; png; 3
+Joelmacool; png; 22
+notmichaeljfox; png; 1
+THEMDODO; png; 4
+
+#786 @ 78260
+Aefre; png; 17
+Architect Abdiel; ArchitectAbdiel; png; 3
+Twilight Knight; TwilightKnight; png; 5
+
+#787 @ 78273
+Architect Abdiel; ArchitectAbdiel; png; 1
+Feenicks; png; 2
+Matthew[294314]; png; 13
+Twilight Knight; TwilightKnight; png; 11
+
+#788 @ 78293
+Architect Abdiel; ArchitectAbdiel; png; 1
+Orithan; png; 12
+Twilight Knight; TwilightKnight; png; 7
+
+#789 @ 78310
+Bagel Meister; BagelMeister; png; 0
+Feenicks; png; 1
+Joelmacool; png; 3
+Moosh; gif; 18
+Russ; png; 8
+
+#790 @ 78320
+Architect Abdiel; ArchitectAbdiel; png; 1
+Feenicks; png; 3
+Russ; png; 8
+Taco Chopper; TacoChopper; png; 13
+
+#791 @ 78332
+Architect Abdiel; ArchitectAbdiel; png; 2
+Joelmacool; png; 10
+Shane; png; 12
+
+#792 @ 78338
+Anthus; gif; 12
+Architect Abdiel; ArchitectAbdiel; png; 2
+Mitchfork; png; 11
+Taco Chopper; TacoChopper; png; 4
+
+#793 @ 78373
+Architect Abdiel; Abdiel; png; 1
+Feenicks; png; 3
+Joelmacool; Joel; png; 11
+Orithan; png; 10
+
+#794 @ 78385
+Anthus; gif; 20
+Architect Abdiel; ArchitectAbdiel; png; 2
+Mitchfork; png; 9
+
+#795 @ 78392
+Anthus; gif; 16
+Architect Abdiel; ArchitectAbdiel; png; 0
+Sheik; png; 16
+* SotW 795 ended in a tie.
+
+#796 @ 78404
+Anthus; gif; 7
+Architect Abdiel; ArchitectAbdiel; png; 2
+Bagu; png; 11
+Taco Chopper; TacoChopper; png; 5
+
+#797 @ 78422
+Architect Abdiel; ArchitectAbdiel; png; 1
+Bagu; png; 10
+Rambly; png; 5
+Sheik; png; 16
+
+#798 @ 78440
+Architect Abdiel; ArchitectAbdiel; png; 2
+Bagu; png; 5
+Taco Chopper; TacoChopper; png; 17
+
+#799 @ 78449
+Architect Abdiel; ArchitectAbdiel; png; 9
+Colin; png; 9
+Gennyvere217; png; 4
+* SotW 799 ended in a tie.
+
+#800 @ 78468
+Alucard648; png; 3
+Anthus; gif; 9
+Architect Abdiel; ArchitectAbdiel; png; 0
+Colin; png; 6
+FireSeraphim; png; 3
+HeroOfFire; png; 0
+Orithan; png; 3
+Phosphor; png; 5
+Rambly; png; 1
+RedTribeLink; png; 4
+Taco Chopper; TacoChopper; gif; 2
+
+#801 @ 78503
+Architect Abdiel; ArchitectAbdiel; png; 3
+Jenny; png; 14
+Joelmacool; png; 5
+Twilight Knight; TwilightKnight; png; 2
+/*
+#802 @ 78515
+Architect Abdiel; ArchitectAbdiel; png; 5
+Joelmacool; png; 3
+Taco Chopper; TacoChopper; png; 6
+Twilight Knight; TwilightKnight; png; 9
 /*
