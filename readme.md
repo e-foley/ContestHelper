@@ -2,7 +2,7 @@
 
 ### Introduction ###
 This code generates a suite of webpages that contains image galleries, statistics, and more based on input files that describe user labels, image URLs, and votes.
-The code is somewhat specialized for the [Screenshot of the Week](http://www.purezc.net/forums/index.php?showforum=45) competitions held on [PureZC](http://www.purezc.net), but the principles behind it can be extended to other contexts.
+The code is somewhat specialized for the [Screenshot of the Week](http://www.purezc.net/forums/index.php?showforum=343) competitions held on [PureZC](http://www.purezc.net), but the principles behind it can be extended to other contexts.
 
 ### Creation ###
 In August 2012, Ed Foley started this project in Excel for use with the [Map of the Month](http://www.purezc.net/forums/index.php?showforum=196) competition.
