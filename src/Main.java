@@ -90,9 +90,11 @@ public abstract class Main
         try
         {
             stamps.add(new NamedStamp("Copying input files"));
-            // make backups of input
-            Main.copyFile(new File(input_origin + "input/data.txt"), new File(input_origin + "backup/data-" + history.getLastPollShortName() + ".txt"));
-            Main.copyFile(new File(input_origin + "input/associations.txt"), new File(input_origin + "backup/associations-" + history.getLastPollShortName() + ".txt"));
+            // Create cache directory if it doesn't exist.
+            new File(input_origin + "/input_cache").mkdirs();
+            // Cache input files. (The resulting files can serve as backups if something goes wrong.)
+            Main.copyFile(new File(input_origin + "input/data.txt"), new File(input_origin + "input_cache/data-" + history.getLastPollShortName() + ".txt"));
+            Main.copyFile(new File(input_origin + "input/associations.txt"), new File(input_origin + "input_cache/associations-" + history.getLastPollShortName() + ".txt"));
             
             // ARCHIVES
             stamps.add(new NamedStamp("Preparing archive generation"));
