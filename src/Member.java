@@ -13,6 +13,7 @@ public class Member
     private boolean isTagged;
     private boolean hasId;
     private int id;
+    private boolean hideNameChanges;
 
     private boolean dirty;  // Whether stats need to be calculated anew.  We COULD change this to do dirty flags for each stat, maybe with a fancy class...
     private float total_votes = 0;
@@ -43,6 +44,7 @@ public class Member
         isTagged = false;
         hasId = false;
         id = 0;
+        hideNameChanges = false;
         dirty = true;
     }
     
@@ -54,6 +56,7 @@ public class Member
         isTagged = mem.isTagged;
         hasId = mem.hasId;
         id = mem.id;
+        hideNameChanges = mem.hideNameChanges;
         dirty = true;  // MAYBE this can be mem.dirty, but I don't want to risk it.
     }
     
@@ -66,6 +69,7 @@ public class Member
         isTagged = false;
         hasId = false;
         id = 0;
+        hideNameChanges = false;
         dirty = true;
     }
     
@@ -78,10 +82,11 @@ public class Member
         isTagged = true;
         hasId = false;
         id = 0;
+        hideNameChanges = false;
         dirty = true;
     }
     
-    public Member(ArrayList<String> myNames)
+    public Member(ArrayList<String> myNames, boolean myHideNameChanges)
     {
         names = myNames;
         entries = new ArrayList<EntryStakePair>();
@@ -89,16 +94,18 @@ public class Member
         isTagged = false;
         hasId = false;
         id = 0;
+        hideNameChanges = myHideNameChanges;
         dirty = true;
     }
     
-    public Member(String myTag, ArrayList<String> myNames) {
+    public Member(String myTag, ArrayList<String> myNames, boolean myHideNameChanges) {
         names = myNames;
         entries = new ArrayList<EntryStakePair>();
         tag = myTag;
         isTagged = true;
         hasId = false;
         id = 0;
+        hideNameChanges = myHideNameChanges;
         dirty = true;
     }
 
@@ -188,6 +195,10 @@ public class Member
     
     public boolean hasId() {
         return hasId;
+    }
+    
+    public boolean getHideNameChanges() {
+        return hideNameChanges;
     }
     
     public float getTotalVotes() {

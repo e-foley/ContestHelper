@@ -119,7 +119,7 @@ public class ArchivesGenerator {
                         out.write(couple.member.getMostRecentName());
                         out.write("</a>");
                         // List the member's old name if they use a different name now
-                        if (!couple.member.getMostRecentName().equals(couple.name_submitted_under)) {
+                        if (!couple.member.getHideNameChanges() && !couple.member.getMostRecentName().equals(couple.name_submitted_under)) {
                             out.write("<br/><span class='old-name'>(as " + couple.name_submitted_under + ")</span>");
                         }
                         out.write("</div>");
