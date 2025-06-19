@@ -91,10 +91,10 @@ public abstract class Main
         {
             stamps.add(new NamedStamp("Copying input files"));
             // Create cache directory if it doesn't exist.
-            new File(input_origin + "/input_cache").mkdirs();
+            new File(input_origin + "/input/cache").mkdirs();
             // Cache input files. (The resulting files can serve as backups if something goes wrong.)
-            Main.copyFile(new File(input_origin + "input/data.txt"), new File(input_origin + "input_cache/data-" + history.getLastPollShortName() + ".txt"));
-            Main.copyFile(new File(input_origin + "input/associations.txt"), new File(input_origin + "input_cache/associations-" + history.getLastPollShortName() + ".txt"));
+            Main.copyFile(new File(input_origin + "input/data.txt"), new File(input_origin + "input/cache/data-" + history.getLastPollShortName() + ".txt"));
+            Main.copyFile(new File(input_origin + "input/associations.txt"), new File(input_origin + "input/cache/associations-" + history.getLastPollShortName() + ".txt"));
             
             // ARCHIVES
             stamps.add(new NamedStamp("Preparing archive generation"));
