@@ -4,29 +4,19 @@
 This code generates a suite of webpages that contains image galleries, statistics, and more based on input files that describe user labels, image URLs, and votes.
 The code is somewhat specialized for the [Screenshot of the Week](http://www.purezc.net/forums/index.php?showforum=343) competitions held on [PureZC](http://www.purezc.net), but the principles behind it can be extended to other contexts.
 
-### Creation ###
-In August 2012, Ed Foley started this project in Excel for use with the [Map of the Month](http://www.purezc.net/forums/index.php?showforum=196) competition.
-He later transferred the project to Java in December 2012 and began adapting it to Screenshot of the Week.
-
 ### Setting up the project ###
-The following directories and files should exist before attempting to run the program.
-* backup
-* config
-  * config\archives_footer.txt
-  * config\archives_header.txt
-  * config\leaderboard_footer.txt
-  * config\leaderboard_header.txt
-  * config\profile_footer.txt
-  * config\profile_header.txt
-* members
-* web
-  * web\images
-    * web\images\no_image.png
-  * web\profiles
-  * web\associations.txt
-  * web\data.txt
-  * web\style.css
+The program depends on access to three directories:
+* A **configuration directory** containing webpage templates and other shared web resources that the program incorporates into the complete pages it builds.
+  * The top-level **config** directory within this repository is a suitable choice.
+* An **input** directory containing raw contest and username data.
+  * This directory must contain **data.txt**, which describes contest results, and **associations.txt**, which describes member name changes.
+  * The author will provide example files and syntax documentation in a future update.
+* An **output** directory in which generated webpages are placed.
+  * For the moment, the directory must exist before running the program. It will not be created automatically.
 
-Files have their own formatting conventions that warrant future documentation.
+### Running the program ###
+Compile the program targeting Main and invoke the resulting JAR executable with three arguments, separated by a space. The call might resemble the following if you choose to have your **input** and **output** directories at the same level as this repository's **config**.
 
-The author plans to make this directory structure and sample files available automatically in future updates.
+```bat
+java -jar "run_archive_generator.jar" "config" "input" "output"
+```
