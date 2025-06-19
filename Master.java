@@ -196,24 +196,6 @@ public abstract class Master
             addFileToBuffer(input_origin + "config/leaderboard_footer.txt", out, swaps);
             out.close();
             
-            // MEMBER LIST
-            stamps.add(new NamedStamp("Generating member list"));
-            fstream = new FileOutputStream(input_origin + "members/members-" + history.getLastPollShortName() + ".txt");  // TODO: Does this really belong in "input"?
-            out = new BufferedWriter(new OutputStreamWriter(fstream, StandardCharsets.UTF_8));
-            ArrayList<Member> member_list = new ArrayList<Member>(history.getMembers());
-            Collections.sort(member_list, new MemberSortAlphabetical());
-            for (int i=0; i<member_list.size(); i++)
-            {
-                out.write(member_list.get(i).getMostRecentName());
-                if (member_list.get(i).hasTag()) {
-                    out.write(" [" + member_list.get(i).getTag() + "]");
-                }
-                out.newLine();
-            }
-            out.newLine();
-            out.write(member_list.size() + " unique members in all.");
-            out.close();
-            
             // PROFILE INDEX
             stamps.add(new NamedStamp("Generating profile index"));
             fstream = new FileOutputStream(output_origin + "profile_index.html");
