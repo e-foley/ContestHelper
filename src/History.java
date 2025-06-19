@@ -308,7 +308,11 @@ public class History {
 
                 blockComment &= !strLine.endsWith(blockClose);
             }
-            lastPollLongName = currentPollLongName;   // this is so we can name the output files intelligently
+            
+            // Update cached names so that we can title output files intelligently.
+            lastPollShortName = currentPollShortName;
+            lastPollLongName = currentPollLongName;
+            
             //Close the input stream
             in.close();
         }
