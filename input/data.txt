@@ -5579,14 +5579,14 @@ Twilight Knight; TwilightKnight; png; 2
 xanadude; png; 16
 
 #841 @ 79422
-Matthew; Matthew1; png; 5
+Matthew[294314]; Matthew1; png; 5
 Moon; Moon1; png; 9
 Shane; Shane1; png; 2
 Taco Chopper; TacoChopper1; png; 11
-/*
+
 #842 @ 79426
-Cobgoblin; png; 
-Jared; png; 
-Phosphor; gif; 
-xanadude; png; 
+Cobgoblin; png; 20
+Jared; png; 1
+Phosphor; gif; 9
+xanadude; png; 2
 /*
