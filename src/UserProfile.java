@@ -11,7 +11,7 @@ abstract class UserProfile
 {
     public static final String TEMP_PATH = "temp.txt";
 
-    public static void createProfilePage(Member mem, History history, EloEvaluator elo_evaluator, boolean explicit, ArrayList<FormattedLeaderboard> stats, String input_origin, String path)
+    public static void createProfilePage(Member mem, History history, EloEvaluator elo_evaluator, boolean explicit, ArrayList<FormattedLeaderboard> stats, String config_origin, String path)
     {
         String recent_name = mem.getMostRecentName();
         //String safe_name = getSafeName(recent_name);
@@ -29,7 +29,7 @@ abstract class UserProfile
         {
             FileOutputStream fstream = new FileOutputStream(initial_target);
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fstream, StandardCharsets.UTF_8));
-            Main.addFileToBuffer(input_origin + "config/profile_header.txt", out, swaps);
+            Main.addFileToBuffer(config_origin + "profile_header.txt", out, swaps);
             
             ArrayList<String> unique_names = mem.getUniqueNames();
             if (unique_names.size() > 1) {
@@ -82,7 +82,7 @@ abstract class UserProfile
 //             out.write("</div>");
 //             out.newLine();
             
-            Main.addFileToBuffer(input_origin + "config/profile_footer.txt", out, swaps);
+            Main.addFileToBuffer(config_origin + "profile_footer.txt", out, swaps);
             out.close();
         }
         catch (Exception e)

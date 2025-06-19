@@ -32,17 +32,19 @@ public abstract class Main
     public static final double ELO_STARTING_BOOST = 1.0;  // Note that boost changes this from a zero-sum algorithm to something else. ({3.0, 0.5} seems about right.)
     public static final double ELO_BOOST_DECAY = 0.0;
     
-    // arg0 is input origin
-    // arg1 is output origin
+    // arg0 is path to config dir (within which one would expect to see template webpages).
+    // arg1 is path to input dir (within which one would expect to see data.txt and associations.txt).
+    // arg2 is path to output dir (where webpages will be placed).
     public static void main(String[] args)
     {
-        if (args.length < 2) {
-            System.err.println("Not enough arguments.");
+        if (args.length < 3 || args.length > 3) {
+            System.err.println("Expected exactly 3 arguments: config path, input path, output path.");
             return;
         }
         
-        String input_origin = args[0] + "/";
-        String output_origin = args[1] + "/";
+        String config_origin = args[0] + "/";
+        String input_origin = args[1] + "/";
+        String output_origin = args[2] + "/";
         
         ArrayList<NamedStamp> stamps = new ArrayList<NamedStamp>();
         stamps.add(new NamedStamp("Begin"));
@@ -61,14 +63,14 @@ public abstract class Main
         String strLine = new String();
         
         stamps.add(new NamedStamp("Populating members"));
-        if (!history.populateMembersFromFile(input_origin + "input/associations.txt"))
+        if (!history.populateMembersFromFile(input_origin + "associations.txt"))
         {
             System.err.println("Error while parsing associations.txt.  Perhaps data aren't delimited correctly.");
             return;
         }
         
         stamps.add(new NamedStamp("Populating entries"));
-        if (!history.populateEntriesFromFile(input_origin + "input/data.txt"))
+        if (!history.populateEntriesFromFile(input_origin + "data.txt"))
         {
             System.err.println("Error while parsing data.txt.  Perhaps data aren't delimited correctly or a numeric value is misplaced.");
             return;
@@ -91,21 +93,21 @@ public abstract class Main
         {
             stamps.add(new NamedStamp("Copying input files"));
             // Create cache directory if it doesn't exist.
-            new File(input_origin + "/input/cache").mkdirs();
+            new File(input_origin + "cache").mkdirs();
             // Cache input files. (The resulting files can serve as backups if something goes wrong.)
-            Main.copyFile(new File(input_origin + "input/data.txt"), new File(input_origin + "input/cache/data-" + history.getLastPollShortName() + ".txt"));
-            Main.copyFile(new File(input_origin + "input/associations.txt"), new File(input_origin + "input/cache/associations-" + history.getLastPollShortName() + ".txt"));
+            Main.copyFile(new File(input_origin + "data.txt"), new File(input_origin + "cache/data-" + history.getLastPollShortName() + ".txt"));
+            Main.copyFile(new File(input_origin + "associations.txt"), new File(input_origin + "cache/associations-" + history.getLastPollShortName() + ".txt"));
             
             // ARCHIVES
             stamps.add(new NamedStamp("Preparing archive generation"));
             fstream = new FileOutputStream(output_origin + "archives" + testText + ".html");
             out = new BufferedWriter(new OutputStreamWriter(fstream, StandardCharsets.UTF_8));
             
-            addFileToBuffer(input_origin + "config/archives_header.txt", out, swaps);
+            addFileToBuffer(config_origin + "archives_header.txt", out, swaps);
             stamps.add(new NamedStamp("Generating archives"));
             archivesGenerator.generate(history, elo_evaluator, out, "profiles/", "images/");
             stamps.add(new NamedStamp("Writing archives"));
-            addFileToBuffer(input_origin + "config/archives_footer.txt", out, swaps);
+            addFileToBuffer(config_origin + "archives_footer.txt", out, swaps);
             out.close();
             stamps.add(new NamedStamp("Done writing archives"));
             
@@ -118,11 +120,11 @@ public abstract class Main
                 final int poll_start = Math.max(poll_end - CONTESTS_PER_PAGE + 1, 0);
                 fstream = new FileOutputStream(output_origin + "archives-page" + Integer.toString(p + 1) + ".html");
                 out = new BufferedWriter(new OutputStreamWriter(fstream, StandardCharsets.UTF_8));
-                addFileToBuffer(input_origin + "config/archives_header.txt", out, swaps);
+                addFileToBuffer(config_origin + "archives_header.txt", out, swaps);
                 archivesGenerator.insertNavigationBar(out, history, p + 1, num_pages, CONTESTS_PER_PAGE);
                 archivesGenerator.generate(history, elo_evaluator, out, poll_start, poll_end, "profiles/", "images");
                 archivesGenerator.insertNavigationBar(out, history, p + 1, num_pages, CONTESTS_PER_PAGE);
-                addFileToBuffer(input_origin + "config/archives_footer.txt", out, swaps);
+                addFileToBuffer(config_origin + "archives_footer.txt", out, swaps);
                 out.close();
                 ++p;
             }
@@ -178,31 +180,31 @@ public abstract class Main
             stamps.add(new NamedStamp("Writing big leaderboards page"));
             fstream = new FileOutputStream(output_origin + "leaderboards" + testText + ".html");
             out = new BufferedWriter(new OutputStreamWriter(fstream, StandardCharsets.UTF_8));
-            addFileToBuffer(input_origin + "config/leaderboard_header.txt", out, swaps);
+            addFileToBuffer(config_origin + "leaderboard_header.txt", out, swaps);
             for (int i = 0; i < leaderboards_full.size(); ++i) {
                 stamps.add(new NamedStamp("Leaderboard: " + leaderboards_full.get(i).getTitle()));
                 leaderboards_full.get(i).addToFile(DELTA, out, true, false, false, i + 1);
             }
-            addFileToBuffer(input_origin + "config/leaderboard_footer.txt", out, swaps);
+            addFileToBuffer(config_origin + "leaderboard_footer.txt", out, swaps);
             out.close();
             
             stamps.add(new NamedStamp("Writing leaderboards digest page"));
             fstream = new FileOutputStream(output_origin + "leaderboards-digest" + testText + ".html");
             out = new BufferedWriter(new OutputStreamWriter(fstream, StandardCharsets.UTF_8));
-            addFileToBuffer(input_origin + "config/leaderboard_header.txt", out, swaps);
+            addFileToBuffer(config_origin + "leaderboard_header.txt", out, swaps);
             for (int i = 0; i < leaderboards_brief.size(); ++i) {
                 leaderboards_brief.get(i).addToFile(DELTA, out, false, false, false, i + 1, DIGEST_LIST_LENGTH);
             }
-            addFileToBuffer(input_origin + "config/leaderboard_footer.txt", out, swaps);
+            addFileToBuffer(config_origin + "leaderboard_footer.txt", out, swaps);
             out.close();
             
             // PROFILE INDEX
             stamps.add(new NamedStamp("Generating profile index"));
             fstream = new FileOutputStream(output_origin + "profile_index.html");
             out = new BufferedWriter(new OutputStreamWriter(fstream, StandardCharsets.UTF_8));
-            addFileToBuffer(input_origin + "config/profile_index_header.txt", out, swaps);
+            addFileToBuffer(config_origin + "profile_index_header.txt", out, swaps);
             ProfileIndexGenerator.generate(history, out);
-            addFileToBuffer(input_origin + "config/profile_index_footer.txt", out, swaps);
+            addFileToBuffer(config_origin + "profile_index_footer.txt", out, swaps);
             out.close();
             
             // RANDOM SHOT SCRIPT
@@ -214,7 +216,7 @@ public abstract class Main
             
             // RANDOM SHOT PAGE
             stamps.add(new NamedStamp("Generating random shot page"));
-            copyFile(new File(input_origin + "config/random_shot.html"), new File(output_origin + "random_shot.html"));
+            copyFile(new File(config_origin + "random_shot.html"), new File(output_origin + "random_shot.html"));
             out.close();
             
             // PROFILES
@@ -223,7 +225,7 @@ public abstract class Main
                 ArrayList<Member> mems = new ArrayList<Member>(history.getMembers());
                 for (int i=0; i<mems.size(); i++) {
                     System.out.println("Attempting to write file " + output_origin + getProfilePath(mems.get(i)) + "...");
-                    UserProfile.createProfilePage(mems.get(i), history, elo_evaluator, OVERWRITE_IDENTICAL_PROFILES, leaderboards_full, input_origin, output_origin + getProfilePath(mems.get(i)));
+                    UserProfile.createProfilePage(mems.get(i), history, elo_evaluator, OVERWRITE_IDENTICAL_PROFILES, leaderboards_full, config_origin, output_origin + getProfilePath(mems.get(i)));
                 }
             }
 
