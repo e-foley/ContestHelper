@@ -32,7 +32,7 @@ abstract class UserProfile
             Main.addFileToBuffer(config_origin + "profile_header.txt", out, swaps);
             
             ArrayList<String> unique_names = mem.getUniqueNames();
-            if (unique_names.size() > 1) {
+            if (!mem.getHideNameChanges() && unique_names.size() > 1) {
                 out.write("<div class='former-names'>Other names used: ");
                 ListIterator<String> li = unique_names.listIterator(unique_names.size());
                 boolean first_written = false;
