@@ -29,7 +29,7 @@ abstract class UserProfile
         {
             FileOutputStream fstream = new FileOutputStream(initial_target);
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fstream, StandardCharsets.UTF_8));
-            Master.addFileToBuffer(input_origin + "config/profile_header.txt", out, swaps);
+            Main.addFileToBuffer(input_origin + "config/profile_header.txt", out, swaps);
             
             ArrayList<String> unique_names = mem.getUniqueNames();
             if (unique_names.size() > 1) {
@@ -82,7 +82,7 @@ abstract class UserProfile
 //             out.write("</div>");
 //             out.newLine();
             
-            Master.addFileToBuffer(input_origin + "config/profile_footer.txt", out, swaps);
+            Main.addFileToBuffer(input_origin + "config/profile_footer.txt", out, swaps);
             out.close();
         }
         catch (Exception e)
@@ -96,14 +96,14 @@ abstract class UserProfile
         } else {
             File temp_file = new File(TEMP_PATH);
             File profile_file = new File(path);
-            if (Master.fileEquals(temp_file, profile_file)) {
+            if (Main.fileEquals(temp_file, profile_file)) {
                 try {
                     Files.deleteIfExists(temp_file.toPath());
                 } catch (Exception e) {}
                 return;
             } else {
                 try {
-                    Master.copyFile(temp_file, profile_file);
+                    Main.copyFile(temp_file, profile_file);
                 } catch (Exception e) {
                     System.err.println("Could not copy file...");
                 }

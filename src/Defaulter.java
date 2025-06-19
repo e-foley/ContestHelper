@@ -3,6 +3,6 @@ public abstract class Defaulter {
         String[] arguments =
             {"C:\\Users\\edism\\Documents\\SpiderOak Hive\\Creations\\Websites\\ContestHelper",
              "C:\\Users\\edism\\Documents\\SpiderOak Hive\\Creations\\Websites\\e-foley.github.io"};
-        Master.main(arguments);
+        Main.main(arguments);
     }
 }

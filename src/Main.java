@@ -14,7 +14,7 @@ import java.nio.file.Files;
 import java.util.Arrays;
 import java.nio.charset.StandardCharsets;
 
-public abstract class Master
+public abstract class Main
 {
     public static final int PAGE_LENGTH = 50;
     public static final int STARTING_INDEX = 1;
@@ -91,10 +91,10 @@ public abstract class Master
         {
             stamps.add(new NamedStamp("Copying input files"));
             // make backups of input
-            Master.copyFile(new File(input_origin + "input/data.txt"), new File(input_origin + "backup/data-" + history.getLastPollShortName() + ".txt"));
-            Master.copyFile(new File(input_origin + "input/data.txt"), new File(output_origin + "data.txt"));
-            Master.copyFile(new File(input_origin + "input/associations.txt"), new File(input_origin + "backup/associations-" + history.getLastPollShortName() + ".txt"));
-            Master.copyFile(new File(input_origin + "input/associations.txt"), new File(output_origin + "associations.txt"));
+            Main.copyFile(new File(input_origin + "input/data.txt"), new File(input_origin + "backup/data-" + history.getLastPollShortName() + ".txt"));
+            Main.copyFile(new File(input_origin + "input/data.txt"), new File(output_origin + "data.txt"));
+            Main.copyFile(new File(input_origin + "input/associations.txt"), new File(input_origin + "backup/associations-" + history.getLastPollShortName() + ".txt"));
+            Main.copyFile(new File(input_origin + "input/associations.txt"), new File(output_origin + "associations.txt"));
             
             // ARCHIVES
             stamps.add(new NamedStamp("Preparing archive generation"));
@@ -247,7 +247,7 @@ public abstract class Master
         }
         catch (Exception e)
         {
-            System.err.println("Error caught in Master: " + e.getMessage());
+            System.err.println("Error caught in Main: " + e.getMessage());
             System.err.println("A strange problem occurred.  Talk to nicklegends about it.");
         }
     }
@@ -276,7 +276,7 @@ public abstract class Master
         }
         catch (Exception e)
         {
-            System.err.println("Error caught in Master: " + e.getMessage());
+            System.err.println("Error caught in Main: " + e.getMessage());
             System.err.println("Error adding " + filename + " to buffer. Is it missing?");
         }
     }
