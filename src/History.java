@@ -219,14 +219,14 @@ public class History {
                         // Place the split-up names in an array.
                         namesRead = tagSplit[1].split(nameRegex);
                         // Incorporate the tag and names into a new Member object.  (Not pretty.)
-                        Member memberAdding = new Member(tagSplit[0], new ArrayList<String>(Arrays.asList(namesRead)));
+                        Member memberAdding = new Member(tagSplit[0], new ArrayList<String>(Arrays.asList(namesRead)), false);
                         memberAdding.setId(members.size());
                         members.put(memberAdding.getId(), memberAdding);
                     } else {
                         // Place the split-up names in an array.
                         namesRead = strLine.split(nameRegex);
                         // Incorporate these names into a new untagged Member object. (Not pretty.)
-                        Member memberAdding = new Member(new ArrayList<String>(Arrays.asList(namesRead)));
+                        Member memberAdding = new Member(new ArrayList<String>(Arrays.asList(namesRead)), false);
                         memberAdding.setId(members.size());
                         members.put(memberAdding.getId(), memberAdding);
                     }
