@@ -194,8 +194,9 @@ public class History {
             DataInputStream in = new DataInputStream(fstream);
             BufferedReader br = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
             String strLine; // String in which to place new lines as they are read
-            String nameRegex = "(\\s+)?>(\\s+)?";   // regular expression to divide associations file
-            String tagRegex = "(\\s+)?\\:(\\s+)?";  // Regular expression that divides lines into a tag section and a names section
+            String nameRegex = "(\\s*)?>(\\s*)?";   // regular expression to divide associations file
+            String tagRegex = "(\\s*)?\\:(\\s*)?";  // Regular expression that divides lines into a tag section and a names section
+            String hideChangesRegex = "(\\s*)?\\$(\\s*)?";
             String[] namesRead; // array for the output of the regex split
 
             //Read File Line By Line
@@ -211,6 +212,14 @@ public class History {
                 // Ignore empty lines and those starting with two slashes
                 if (!strLine.equals("")  &&  !strLine.startsWith("//"))
                 {
+                    boolean hideNameChanges = false;
+                    // We use "$" at the start of the line to denote that a user's name history should be hidden from the generated pages.
+                    if (strLine.startsWith("$")) {
+                        String[] tagSplit = strLine.split(hideChangesRegex);
+                        hideNameChanges = true;
+                        // Now that we've set this flag, pretend that the string is actually everything after the $ for the purposes of future processing.
+                        strLine = tagSplit[1];
+                    }
                     // If the line contains a colon, we treat all before it as the "tag" for that member.
                     // If there are multiple colons, everything at and beyond the second colon is ignored.
                     if (strLine.contains(":")) {
@@ -219,14 +228,14 @@ public class History {
                         // Place the split-up names in an array.
                         namesRead = tagSplit[1].split(nameRegex);
                         // Incorporate the tag and names into a new Member object.  (Not pretty.)
-                        Member memberAdding = new Member(tagSplit[0], new ArrayList<String>(Arrays.asList(namesRead)), false);
+                        Member memberAdding = new Member(tagSplit[0], new ArrayList<String>(Arrays.asList(namesRead)), hideNameChanges);
                         memberAdding.setId(members.size());
                         members.put(memberAdding.getId(), memberAdding);
                     } else {
                         // Place the split-up names in an array.
                         namesRead = strLine.split(nameRegex);
                         // Incorporate these names into a new untagged Member object. (Not pretty.)
-                        Member memberAdding = new Member(new ArrayList<String>(Arrays.asList(namesRead)), false);
+                        Member memberAdding = new Member(new ArrayList<String>(Arrays.asList(namesRead)), hideNameChanges);
                         memberAdding.setId(members.size());
                         members.put(memberAdding.getId(), memberAdding);
                     }
