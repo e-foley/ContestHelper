@@ -1,5 +1,4 @@
-<div class='notes'>Background shots by Ebola Zaire, link3505, NoeL, Pabru, PrinceMSC, and Sheik. Table style adapted from a design &#169; by Wild Bill. All code available on <a class='alt' href='https://github.com/e-foley/ContestHelper'>GitHub</a>.</div>
-
+<div class='notes'>Background shots by link3505, Mitchfork, NoeL, Pabru, PrinceMSC, and Sheik.<br/><a class='alt' href='http://www.purezc.net/forums/index.php?app=members&module=messaging&section=send&do=form&fromMemberID=2237'>Send a private message to nicklegends</a> if you find an error or to request that your username change history be hidden.</div>
 </div>
 </body>
 </html>
