@@ -220,7 +220,7 @@ public abstract class Master
             // PROFILES
             stamps.add(new NamedStamp("Generating user profiles"));
             if (generate_user_galleries) {
-                ArrayList<Member> mems = member_list;
+                ArrayList<Member> mems = new ArrayList<Member>(history.getMembers());
                 for (int i=0; i<mems.size(); i++) {
                     System.out.println("Attempting to write file " + output_origin + getProfilePath(mems.get(i)) + "...");
                     UserProfile.createProfilePage(mems.get(i), history, elo_evaluator, OVERWRITE_IDENTICAL_PROFILES, leaderboards_full, input_origin, output_origin + getProfilePath(mems.get(i)));
