@@ -32,7 +32,15 @@ public abstract class ProfileIndexGenerator {
         // Start off with list of all Members...
         Collection<Member> members = history.getMembers();
         for (Member member : members) {
-            ArrayList<String> names = member.getUniqueNames();
+            ArrayList<String> names = new ArrayList<String>();
+            if (member.getHideNameChanges()) {
+                // If a user doesn't want their name history to be shown, only include their most recent name in the listing...
+                names.add(member.getMostRecentName());
+            } else {
+                // ...otherwise, include all their names.
+                names = member.getUniqueNames();
+            }
+            
             // Add all names to the list we're building.
             for (String name : names) {
                 NameLinkData data = new NameLinkData();
