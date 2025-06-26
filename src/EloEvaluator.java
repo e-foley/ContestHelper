@@ -15,6 +15,10 @@ public class EloEvaluator implements Cloneable
         double rating_before = 0.0;
         double q_before = 0.0;
         double e_before = 0.0;
+        boolean has_had_rating_drop_before = false;
+        boolean has_had_rating_rise_before = false;
+        double peak_rating_before = 0.0;
+        double valley_rating_before = 0.0;
         // Information available for intermediate calculations
         double s = 0.0;
         //double rating_temp = 0.0;
@@ -24,6 +28,10 @@ public class EloEvaluator implements Cloneable
         double rating_after = 0.0;
         double q_after = 0.0;
         double e_after = 0.0;
+        boolean has_had_rating_drop_after = false;
+        boolean has_had_rating_rise_after = false;
+        double peak_rating_after = 0.0;
+        double valley_rating_after = 0.0;
     }
     
     // TODO: Rethink the inner container. There may be a better choice.
@@ -78,14 +86,20 @@ public class EloEvaluator implements Cloneable
                     if (!rating_history.containsKey(new Integer(member_id))) {
                         // Member isn't in charts yet, so create a row for the member and make "rating before" our default.                        
                         rating_history.put(member_id, new TreeMap<Integer, RatingCalc>());
-                        this_calc.rating_before = starting_rating;
                         this_calc.boost = starting_boost;
+                        this_calc.rating_before = starting_rating;
+                        this_calc.peak_rating_before = -1.0;
+                        this_calc.peak_rating_after = -1.0;  
                     } else {
                         // Member is in charts; set "rating before" to the "rating after" of the prior entry.
                         TreeMap<Integer, RatingCalc> line = rating_history.get(new Integer(member_id));
                         RatingCalc last_calc = line.get(line.lastKey());
-                        this_calc.rating_before = last_calc.rating_after;
                         this_calc.boost = Math.max(last_calc.boost + (1.0 - last_calc.boost) * boost_decay, 1.0);
+                        this_calc.rating_before = last_calc.rating_after;
+                        this_calc.has_had_rating_drop_before = last_calc.has_had_rating_drop_after;
+                        this_calc.has_had_rating_rise_before = last_calc.has_had_rating_rise_after;
+                        this_calc.peak_rating_before = last_calc.peak_rating_after;
+                        this_calc.valley_rating_before = last_calc.valley_rating_after;
                     }
                     
                     // TODO: There's already a notion of "stake" in Member.EntryStakePair... Maybe these could be linked somehow.
@@ -161,6 +175,30 @@ public class EloEvaluator implements Cloneable
                         details.rating_after = details.rating_before;
                     } else {
                         details.rating_after = details.rating_before + details.boost * aggressiveness * (details.s - details.e_before) * (qualified_entry_sum - 1);
+                    }
+                    
+                    // Update min and max rating terms.
+                    // Note that we're comparing doubles here, but the scores are displayed as integers.
+                    // This means that a score could appear not to change but still be counted as a peak/valley.
+                    // TODO: Apply the same rounding that the leaderboard does before making this comparison to avoid the issue.
+                    if (details.rating_after > details.rating_before) {
+                        details.has_had_rating_rise_after = true;
+                        // If we're seeing the member's first rating rise, set the result as their peak for future comparison.
+                        // (Otherwise, if a member has never been above their starting rating, it would be treated as their peak even though they didn't earn their way up to that rating.)
+                        details.peak_rating_after = details.has_had_rating_rise_before ? Math.max(details.peak_rating_before, details.rating_after) : details.rating_after;
+                    } else {
+                        details.has_had_rating_rise_after = details.has_had_rating_rise_before;
+                        details.peak_rating_after = details.peak_rating_before;
+                    }
+                    
+                    if (details.rating_after < details.rating_before) {
+                        details.has_had_rating_drop_after = true;
+                        // If we're seeing the member's first rating drop, set the result as their valley for future comparison.
+                        // (Otherwise, if a member has never been below their starting rating, it would be treated as their valley even though they didn't fall down to that rating.)
+                        details.valley_rating_after = details.has_had_rating_drop_before ? Math.min(details.valley_rating_before, details.rating_after) : details.rating_after;
+                    } else {
+                        details.has_had_rating_drop_after = details.has_had_rating_drop_before;
+                        details.valley_rating_after = details.valley_rating_before;
                     }
                 }
             }
