@@ -134,10 +134,10 @@ public abstract class Main
             stamps.add(new NamedStamp("Defining leaderboards"));
             //FormattedLeaderboard weighted_formidable_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortWeightedFormidable(), new MemberSortRecent()), "Most formidable opponents", "Rating", "", "", " Rating");
             FormattedLeaderboard elo_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortElo(elo_evaluator), new MemberSortRecent()), "Most formidable opponents [v" + EloEvaluator.VERSION_STRING + "]", "Rating", "", "", " Rating");
+            FormattedLeaderboard peak_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortPeakElo(elo_evaluator), new MemberSortRecent()), "Peak rating (following initial gain/loss chain)", "Peak rating", "", "", " Rating");
+            FormattedLeaderboard nadir_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortValleyElo(elo_evaluator), new MemberSortRecent()), "Rating nadir (following initial gain/loss chain)", "Rating nadir", "", "", " Rating");
             FormattedLeaderboard votes_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortVotes(), new MemberSortRecent()), "Most votes (all-time)", "Total votes", "", " vote", " Votes");
-            //FormattedLeaderboard points_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortPoints(), new MemberSortRecent()), "Most points (all-time)", "Total points", "", " point", " Points");
             FormattedLeaderboard votes_single_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortVotesSingle(), new MemberSortRecent()), "Most votes (single contest, by member)", "Most votes in one contest", "", " votes", " Votes");
-            //FormattedLeaderboard points_single_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortPointsSingle(), new MemberSortRecent()), "Most points (single contest, by member)", "Most points in one contest", "", " points", " Points");
             FormattedLeaderboard victories_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortVictories(), new MemberSortRecent()), "Most victories", "Wins", "", " victory", " Wins");
             FormattedLeaderboard entries_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortEntries(), new MemberSortRecent()), "Most participation", "Entries", "", " entry", " Entries");
             FormattedLeaderboard entry_streak_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortEntryStreak(), new MemberSortRecent()), "Longest participation streaks", "Most consecutive contests entered", "", " entry", " Entries");
@@ -146,17 +146,15 @@ public abstract class Main
             FormattedLeaderboard win_ratio_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortWinRatio(WIN_RATIO_MIN_ENTRIES), new MemberSortRecent()), "Best win ratios (minimum " + WIN_RATIO_MIN_ENTRIES + " entries)", "Win ratio (" + WIN_RATIO_MIN_ENTRIES + "-entry minimum)", "", "", " Ratio");
             FormattedLeaderboard plus_minus_points_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortPlusMinusPoints(), new MemberSortRecent()), "Best plus/minus records (head-to-head vote basis)", "Plus/minus votes", "", "", " +/- votes");
             FormattedLeaderboard plus_minus_wins_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortPlusMinusHeads(), new MemberSortRecent()), "Best plus/minus records (head-to-head victory basis)", "Plus/minus wins", "", "", " +/- wins");
-            //FormattedLeaderboard formidable_board = new FormattedLeaderboard(new Leaderboard(history, new MemberSortNewFormidable(), new MemberSortRecent()), "Most formidable opponents", "Rating", "", "", " Rating");
             
             // Associate select boards with pages
             stamps.add(new NamedStamp("Claiming leaderboards for individual pages"));
             ArrayList<FormattedLeaderboard> leaderboards_full = new ArrayList<FormattedLeaderboard>();
-            //leaderboards_full.add(weighted_formidable_board);
             leaderboards_full.add(elo_board);
+            leaderboards_full.add(peak_board);
+            //leaderboards_full.add(nadir_board);
             leaderboards_full.add(votes_board);
-            //leaderboards_full.add(points_board);
             leaderboards_full.add(votes_single_board);
-            //leaderboards_full.add(points_single_board);
             leaderboards_full.add(victories_board);
             leaderboards_full.add(entries_board);
             leaderboards_full.add(entry_streak_board);
@@ -165,16 +163,28 @@ public abstract class Main
             leaderboards_full.add(win_ratio_board);
             leaderboards_full.add(plus_minus_points_board);
             leaderboards_full.add(plus_minus_wins_board);
-            //leaderboards_full.add(formidable_board);
+            
+            ArrayList<FormattedLeaderboard> leaderboards_member = new ArrayList<FormattedLeaderboard>();
+            leaderboards_member.add(elo_board);
+            leaderboards_member.add(peak_board);
+            //leaderboards_member.add(nadir_board);
+            leaderboards_member.add(votes_board);
+            leaderboards_member.add(votes_single_board);
+            leaderboards_member.add(victories_board);
+            leaderboards_member.add(entries_board);
+            leaderboards_member.add(entry_streak_board);
+            leaderboards_member.add(consecutive_strict_board);
+            leaderboards_member.add(consecutive_loose_board);
+            leaderboards_member.add(win_ratio_board);
+            leaderboards_member.add(plus_minus_points_board);
+            leaderboards_member.add(plus_minus_wins_board);
             
             ArrayList<FormattedLeaderboard> leaderboards_brief = new ArrayList<FormattedLeaderboard>();
-            //leaderboards_brief.add(weighted_formidable_board);
             leaderboards_brief.add(elo_board);
             leaderboards_brief.add(votes_board);
             leaderboards_brief.add(votes_single_board);
             leaderboards_brief.add(victories_board);
             leaderboards_brief.add(entries_board);
-            //leaderboards_brief.add(formidable_board);
             
             // Now begin to write these pages
             stamps.add(new NamedStamp("Writing big leaderboards page"));
@@ -225,7 +235,7 @@ public abstract class Main
                 ArrayList<Member> mems = new ArrayList<Member>(history.getMembers());
                 for (int i=0; i<mems.size(); i++) {
                     System.out.println("Attempting to write file " + output_origin + getProfilePath(mems.get(i)) + "...");
-                    UserProfile.createProfilePage(mems.get(i), history, elo_evaluator, OVERWRITE_IDENTICAL_PROFILES, leaderboards_full, config_origin, output_origin + getProfilePath(mems.get(i)));
+                    UserProfile.createProfilePage(mems.get(i), history, elo_evaluator, OVERWRITE_IDENTICAL_PROFILES, leaderboards_member, config_origin, output_origin + getProfilePath(mems.get(i)));
                 }
             }
 
